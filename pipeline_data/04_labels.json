@@ -1,0 +1,568 @@
+{
+  "optimal_k": 23,
+  "total_tickets": 1575,
+  "clusters": [
+    {
+      "nome": "Gestão de Nuvem Pública",
+      "descricao": "Provisionamento, configuração de permissões IAM e suporte a serviços escaláveis em ambientes AWS, Azure ou GCP. Inclui gestão de redes, bancos de dados gerenciados e serviços de IA/ML em nuvem.",
+      "quando_usar": "Quando houver necessidade de recursos em nuvem pública, configuração de acessos (IAM), redes (VPC) ou serviços específicos (S3, EC2, Bedrock, etc.) mediante orçamento aprovado.",
+      "informacoes_necessarias": [
+        "Número da Solicitação de Investimento (SI) aprovada",
+        "Serviços e recursos desejados (ex: EC2, S3, IAM, Lambda)",
+        "Período de uso pretendido",
+        "E-mails dos usuários que necessitam de acesso"
+      ],
+      "sla_sugerido": "3 dias uteis",
+      "complexidade": "alta",
+      "volume_percentual": 7.2,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 7,
+      "total_tickets": 114,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 47,
+        "Não encontrou o que procurava?": 34,
+        "Persona de acesso a nuvem": 13,
+        "Solicitar suporte para ambiente de pesquisa": 5,
+        "Dúvidas sobre produtos da nuvem": 3,
+        "Acessar pastas de dados de pesquisa": 2
+      }
+    },
+    {
+      "nome": "Suporte a Ambientes de Pesquisa",
+      "descricao": "Atendimento de incidentes e restabelecimento de acesso a servidores acadêmicos, VMs do Portal do Pesquisador e cluster HPC. Inclui correção de falhas de conexão (SSH/RDP), indisponibilidade de máquinas e recuperação de serviços.",
+      "quando_usar": "Quando um ambiente computacional existente (Servidor Acadêmico, HPC ou VM) apresentar falhas de acesso, erros de conexão ou indisponibilidade técnica.",
+      "informacoes_necessarias": [
+        "Identificação do servidor, VM ou recurso afetado (ex: hostname ou IP)",
+        "Descrição detalhada do erro ou comportamento observado",
+        "Tipo de acesso interrompido (SSH, RDP, VPN ou local)",
+        "Horário de início da indisponibilidade"
+      ],
+      "sla_sugerido": "4h",
+      "complexidade": "media",
+      "volume_percentual": 7.0,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 9,
+      "total_tickets": 111,
+      "distribuicao_categorias_atuais": {
+        "Atendimento de Incidentes": 52,
+        "Solicitar suporte para ambiente de pesquisa": 29,
+        "Não encontrou o que procurava?": 9,
+        "Solicitar recursos computacionais para pesquisas": 8,
+        "Solicitar suporte em software acadêmico": 4,
+        "Reportar incidentes em plataformas tecnológicas": 3
+      }
+    },
+    {
+      "nome": "Instalação e Atualização de Softwares",
+      "descricao": "Gestão de instalação, ativação, renovação e suporte a softwares acadêmicos, ferramentas e bibliotecas de programação.",
+      "quando_usar": "Para solicitar a instalação de programas, atualização de versões ou inclusão de pacotes e bibliotecas (como R, Python ou Stata) em ambientes de pesquisa.",
+      "informacoes_necessarias": [
+        "Ferramenta ou pacote necessário",
+        "Equipamento ou servidor de instalação",
+        "Finalidade do uso",
+        "Versão do interpretador e lista de pacotes/bibliotecas"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "baixa",
+      "volume_percentual": 6.8,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 10,
+      "total_tickets": 107,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte em software acadêmico": 33,
+        "Solicitar suporte para ambiente de pesquisa": 29,
+        "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)": 17,
+        "Não encontrou o que procurava?": 16,
+        "Solicitar recursos computacionais para pesquisas": 7,
+        "Atendimento de Incidentes": 3
+      }
+    },
+    {
+      "nome": "Acesso a Nuvem Pública",
+      "descricao": "Gestão de permissões, grupos de acesso e utilização de serviços em ambientes AWS, Azure ou GCP. Inclui provisionamento de usuários para ferramentas como SageMaker, S3, EC2 e bancos de dados gerenciados.",
+      "quando_usar": "Quando o pesquisador já possui orçamento aprovado (SI) e precisa de permissão para utilizar recursos, serviços ou grupos específicos em contas de nuvem pública.",
+      "informacoes_necessarias": [
+        "Número da Solicitação de Investimento (SI) aprovada",
+        "Serviços desejados (ex: SageMaker, S3, EC2)",
+        "E-mails dos usuários que necessitam de acesso",
+        "Nome do grupo de acesso ou conta específica (ex: AWS IBRE DEV)"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "baixa",
+      "volume_percentual": 6.1,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 21,
+      "total_tickets": 96,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 60,
+        "Persona de acesso a nuvem": 19,
+        "Não encontrou o que procurava?": 5,
+        "Acessar pastas de dados de pesquisa": 5,
+        "Solicitação de Acesso a Bases de Dados": 3,
+        "Solicitar suporte para ambiente de pesquisa": 2
+      }
+    },
+    {
+      "nome": "Acesso a Servidores Acadêmicos",
+      "descricao": "Gestão de permissões de usuários, acesso remoto via RDP/VPN e permissões de pastas em ambientes de pesquisa on-premises.",
+      "quando_usar": "Quando precisar incluir pesquisadores em um servidor existente, solicitar acesso remoto ou permissão de leitura em pastas de projetos.",
+      "informacoes_necessarias": [
+        "Finalidade do acesso",
+        "Identificação do servidor ou projeto",
+        "E-mails dos usuários",
+        "Tipo de acesso necessário (RDP, VPN ou pastas)"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "baixa",
+      "volume_percentual": 5.3,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 15,
+      "total_tickets": 83,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte para ambiente de pesquisa": 21,
+        "Não encontrou o que procurava?": 16,
+        "Solicitar recursos computacionais para pesquisas": 14,
+        "Solicitação de Acesso a Bases de Dados": 12,
+        "Acessar pastas de dados de pesquisa": 9,
+        "Tutoria em demandas computacionais para pesquisa": 8
+      }
+    },
+    {
+      "nome": "Manutenção de Espaço em Disco",
+      "descricao": "Correção de alertas de falta de armazenamento e gestão de volumes em servidores acadêmicos ou HPC. Atendimento focado em resolver indisponibilidade por limite de capacidade.",
+      "quando_usar": "Quando houver alertas de baixo espaço livre ou erro de escrita por falta de armazenamento em servidores de pesquisa ou clusters.",
+      "informacoes_necessarias": [
+        "Identificação do servidor afetado (hostname/nome)",
+        "Volume ou partição com problema (ex: C:, /home, /data)",
+        "Descrição do erro ou alerta observado",
+        "E-mail do solicitante"
+      ],
+      "sla_sugerido": "4h",
+      "complexidade": "baixa",
+      "volume_percentual": 5.2,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 4,
+      "total_tickets": 82,
+      "distribuicao_categorias_atuais": {
+        "Atendimento de Incidentes": 56,
+        "Reportar incidentes em plataformas tecnológicas": 13,
+        "Tutoria em demandas computacionais para pesquisa": 9,
+        "Não encontrou o que procurava?": 2,
+        "Solicitar recursos computacionais para pesquisas": 1,
+        "Solicitar suporte para ambiente de pesquisa": 1
+      }
+    },
+    {
+      "nome": "Gestão de Servidores Acadêmicos",
+      "descricao": "Solicitação de novos ambientes computacionais dedicados ou ajustes de recursos (disco, RAM, acesso) em servidores de pesquisa existentes.",
+      "quando_usar": "Quando precisar de um ambiente persistente para trabalho em equipe, armazenamento centralizado ou expansão de recursos de um servidor já existente.",
+      "informacoes_necessarias": [
+        "Finalidade do projeto ou justificativa da expansão",
+        "Identificação do servidor ou projeto de pesquisa",
+        "Recurso desejado (capacidade de disco, memória RAM ou novos usuários)",
+        "E-mails dos usuários que necessitam do acesso ou alteração"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "baixa",
+      "volume_percentual": 5.2,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 18,
+      "total_tickets": 82,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 36,
+        "Não encontrou o que procurava?": 21,
+        "Solicitar suporte para ambiente de pesquisa": 7,
+        "Tutoria em demandas computacionais para pesquisa": 6,
+        "Atendimento de Incidentes": 5,
+        "Solicitar suporte para laboratório virtual": 2
+      }
+    },
+    {
+      "nome": "Acesso à Sala de Sigilo",
+      "descricao": "Encaminhamento de solicitações para agendamento, acesso, extração de dados ou instalação de softwares no ambiente isolado da Sala de Sigilo.",
+      "quando_usar": "Quando a demanda envolver tratamento de dados sigilosos (ex: RAIS, CAGED, INEP) ou uso do ambiente físico/lógico sem internet.",
+      "informacoes_necessarias": [
+        "Nome do pesquisador e projeto",
+        "Base de dados ou recurso sigiloso envolvido",
+        "Tipo de demanda (agendamento, acesso, extração, instalação, upload ou compartilhamento)"
+      ],
+      "sla_sugerido": "1 dia util (para encaminhamento)",
+      "complexidade": "baixa",
+      "volume_percentual": 5.1,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 6,
+      "total_tickets": 81,
+      "distribuicao_categorias_atuais": {
+        "Solicitação de Acesso a Bases de Dados": 80,
+        "Tutoria em demandas computacionais para pesquisa": 1
+      }
+    },
+    {
+      "nome": "Gestão de Acessos e SharePoint",
+      "descricao": "Gerenciamento de permissões, criação de sites e administração de ambientes de colaboração no SharePoint Online. Inclui controle de usuários, administração de permissões de grupos e restabelecimento de acessos.",
+      "quando_usar": "Quando precisar criar novos sites, alterar permissões de acesso, incluir ou remover usuários de pastas/sites ou resolver problemas de acesso ao SharePoint.",
+      "informacoes_necessarias": [
+        "URL do site ou pasta do SharePoint",
+        "Nome completo e e-mail dos usuários (inclusão ou remoção)",
+        "Nível de permissão desejado (leitura, edição ou administração)",
+        "Justificativa ou projeto relacionado"
+      ],
+      "sla_sugerido": "1 dia util",
+      "complexidade": "baixa",
+      "volume_percentual": 5.1,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 2,
+      "total_tickets": 80,
+      "distribuicao_categorias_atuais": {
+        "Não encontrou o que procurava?": 23,
+        "Solicitação de Acesso a Bases de Dados": 12,
+        "Solicitar Suporte Ético": 10,
+        "Atendimento de Incidentes": 8,
+        "Solicitar suporte em software acadêmico": 6,
+        "Tutoria em demandas computacionais para pesquisa": 5
+      }
+    },
+    {
+      "nome": "Suporte a Softwares Acadêmicos",
+      "descricao": "Gestão de licenças, instalação, ativação e correção de erros de funcionamento de softwares e ferramentas de pesquisa.",
+      "quando_usar": "Quando houver erros de licenciamento, necessidade de instalação, renovação de assinaturas ou falhas em ferramentas acadêmicas.",
+      "informacoes_necessarias": [
+        "Ferramenta necessária",
+        "Equipamento ou servidor de instalação",
+        "Finalidade do uso",
+        "E-mails dos usuários"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "baixa",
+      "volume_percentual": 5.1,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 12,
+      "total_tickets": 80,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte em software acadêmico": 26,
+        "Não encontrou o que procurava?": 14,
+        "Atendimento de Incidentes": 13,
+        "Solicitar recursos computacionais para pesquisas": 13,
+        "Solicitar suporte para ambiente de pesquisa": 7,
+        "Acessar pastas de dados de pesquisa": 2
+      }
+    },
+    {
+      "nome": "Acesso e Permissões Nuvem Pública",
+      "descricao": "Gestão de permissões, criação de grupos de acesso e liberação de recursos em serviços de nuvem (AWS, Azure ou GCP), como buckets S3, Athena e Glue.",
+      "quando_usar": "Quando o pesquisador já possui projeto aprovado em nuvem e precisa de permissões de leitura, escrita ou gestão de serviços específicos.",
+      "informacoes_necessarias": [
+        "SI (Solicitação de Investimento) aprovada",
+        "Serviços desejados (ex: S3, Athena, Glue)",
+        "Recursos específicos (nome do bucket ou ARN)",
+        "E-mails dos usuários que necessitam de acesso"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "baixa",
+      "volume_percentual": 4.8,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 22,
+      "total_tickets": 76,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 48,
+        "Persona de acesso a nuvem": 12,
+        "Não encontrou o que procurava?": 7,
+        "Acessar pastas de dados de pesquisa": 6,
+        "Solicitar suporte para ambiente de pesquisa": 3
+      }
+    },
+    {
+      "nome": "Portal do Pesquisador (VMs)",
+      "descricao": "Acesso ao serviço de autosserviço para criação de máquinas virtuais temporárias via VMware Aria. Ideal para testes, provas de conceito e experimentos iniciais isolados.",
+      "quando_usar": "Quando precisar criar VMs individuais para testes, validações técnicas ou experimentos de curto prazo sem necessidade de backup ou colaboração.",
+      "informacoes_necessarias": [
+        "Sistema Operacional desejado (Ubuntu ou Windows Server 2022)",
+        "Perfil de máquina (vCPU, RAM e disco)",
+        "Finalidade do uso"
+      ],
+      "sla_sugerido": "1 dia util",
+      "complexidade": "baixa",
+      "volume_percentual": 3.8,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 3,
+      "total_tickets": 60,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 54,
+        "Acesso à plataforma de autosserviço do pesquisador (beta)": 2,
+        "Tutoria em demandas computacionais para pesquisa": 1,
+        "Solicitar suporte para ambiente de pesquisa": 1,
+        "Solicitar suporte em software acadêmico": 1,
+        "Não encontrou o que procurava?": 1
+      }
+    },
+    {
+      "nome": "Gestão de Softwares e Licenças",
+      "descricao": "Gerenciamento de assinaturas, ativação, renovação e suporte para acesso a ferramentas acadêmicas e licenças de software.",
+      "quando_usar": "Para solicitar acesso, inclusão de usuários, reset de senha, correção de licenciamento ou instalação de softwares específicos.",
+      "informacoes_necessarias": [
+        "Ferramenta necessária",
+        "E-mails dos usuários",
+        "Finalidade do uso"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "baixa",
+      "volume_percentual": 3.7,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 17,
+      "total_tickets": 58,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte para ambiente de pesquisa": 18,
+        "Tutoria em demandas computacionais para pesquisa": 17,
+        "Solicitar suporte em software acadêmico": 9,
+        "Solicitar recursos computacionais para pesquisas": 6,
+        "Atendimento de Incidentes": 4,
+        "Não encontrou o que procurava?": 3
+      }
+    },
+    {
+      "nome": "Serviços de Nuvem Pública",
+      "descricao": "Provisionamento e governança de recursos em ambientes de nuvem (AWS, Azure ou GCP). Inclui acesso a instâncias, storage, bancos de dados, containers e serviços de IA/ML.",
+      "quando_usar": "Quando houver necessidade de computação escalável, serviços gerenciados ou infraestrutura em nuvem mediante aprovação de investimento (SI).",
+      "informacoes_necessarias": [
+        "Solicitação de Investimento (SI) aprovada",
+        "Serviços e recursos desejados (ex: Azure VM, S3, BigQuery)",
+        "Período de uso previsto",
+        "E-mails dos usuários que necessitam de acesso"
+      ],
+      "sla_sugerido": "5 dias úteis",
+      "complexidade": "alta",
+      "volume_percentual": 3.6,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 0,
+      "total_tickets": 56,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 24,
+        "Não encontrou o que procurava?": 13,
+        "Solicitar suporte para ambiente de pesquisa": 6,
+        "Acessar pastas de dados de pesquisa": 3,
+        "Solicitar serviços em nuvem": 2,
+        "Dúvidas sobre produtos da nuvem": 2
+      }
+    },
+    {
+      "nome": "Incidentes em Servidores Acadêmicos",
+      "descricao": "Tratamento de falhas, alertas de monitoramento e instabilidades de performance em servidores de pesquisa. Focado na correção de erros de funcionamento e consumo excessivo de recursos.",
+      "quando_usar": "Quando houver alertas de alto consumo de CPU/memória, indisponibilidade de servidores ou erros técnicos em ambientes de pesquisa já existentes.",
+      "informacoes_necessarias": [
+        "Identificação do servidor ou plataforma afetada",
+        "Descrição do erro, alerta ou comportamento observado",
+        "Horário de início e impacto na pesquisa",
+        "E-mail do solicitante"
+      ],
+      "sla_sugerido": "4h",
+      "complexidade": "media",
+      "volume_percentual": 3.6,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 1,
+      "total_tickets": 56,
+      "distribuicao_categorias_atuais": {
+        "Atendimento de Incidentes": 42,
+        "Reportar incidentes em plataformas tecnológicas": 11,
+        "Solicitar recursos computacionais para pesquisas": 2,
+        "Solicitar suporte para laboratório virtual": 1
+      }
+    },
+    {
+      "nome": "Recursos de Nuvem Pública",
+      "descricao": "Provisionamento e gestão de serviços em ambientes AWS, Azure ou GCP, incluindo computação, storage e analytics.",
+      "quando_usar": "Quando houver necessidade de serviços escaláveis em nuvem, como BigQuery, instâncias EC2, buckets S3 ou serviços de IA/ML.",
+      "informacoes_necessarias": [
+        "Número da SI (Solicitação de Investimento) aprovada",
+        "Serviços e recursos desejados (ex: BigQuery, EC2, S3)",
+        "Período de uso pretendido",
+        "E-mails dos usuários que necessitam de acesso"
+      ],
+      "sla_sugerido": "3 dias úteis",
+      "complexidade": "alta",
+      "volume_percentual": 3.4,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 14,
+      "total_tickets": 54,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 14,
+        "Solicitar suporte para ambiente de pesquisa": 13,
+        "Não encontrou o que procurava?": 6,
+        "Solicitação de Acesso a Bases de Dados": 6,
+        "Persona de acesso a nuvem": 6,
+        "Acessar pastas de dados de pesquisa": 3
+      }
+    },
+    {
+      "nome": "Gestão de Servidores Acadêmicos",
+      "descricao": "Gerenciamento de ambientes computacionais dedicados, incluindo criação de pastas compartilhadas e controle de permissões de acesso.",
+      "quando_usar": "Para solicitar acesso, permissões de leitura/escrita ou criação de diretórios em servidores de pesquisa existentes.",
+      "informacoes_necessarias": [
+        "Identificação do servidor acadêmico ou projeto",
+        "E-mails dos usuários que necessitam de acesso",
+        "Tipo de permissão desejada (leitura, escrita ou edição)",
+        "Caminho ou nome da pasta específica"
+      ],
+      "sla_sugerido": "1 dia útil",
+      "complexidade": "baixa",
+      "volume_percentual": 3.4,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 8,
+      "total_tickets": 53,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte para ambiente de pesquisa": 20,
+        "Acessar pastas de dados de pesquisa": 16,
+        "Não encontrou o que procurava?": 9,
+        "Tutoria em demandas computacionais para pesquisa": 3,
+        "Atendimento de Incidentes": 3,
+        "Solicitar recursos computacionais para pesquisas": 1
+      }
+    },
+    {
+      "nome": "Acesso ao Cluster HPC e GPU",
+      "descricao": "Solicitação de uso do cluster de alto desempenho para processamento intensivo, paralelização e treinamento de modelos de IA/ML com uso de GPUs.",
+      "quando_usar": "Quando houver necessidade de alto poder computacional, uso de CUDA, simulações pesadas ou treinamento de modelos (LLMs/Deep Learning) que exijam GPUs.",
+      "informacoes_necessarias": [
+        "Finalidade do uso (ex: treinamento de modelo, simulação, paralelização)",
+        "Tipo de recurso desejado (ex: GPU específica, uso de CUDA, número de nós)",
+        "E-mails dos usuários que necessitam de acesso",
+        "Necessidade de acesso externo via VPN"
+      ],
+      "sla_sugerido": "3 dias úteis",
+      "complexidade": "media",
+      "volume_percentual": 3.4,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 19,
+      "total_tickets": 53,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 39,
+        "Solicitar suporte para ambiente de pesquisa": 6,
+        "Tutoria em demandas computacionais para pesquisa": 3,
+        "Solicitar suporte em software acadêmico": 3,
+        "Atendimento de Incidentes": 2
+      }
+    },
+    {
+      "nome": "Submissão e Avaliação de PGD",
+      "descricao": "Fluxo de governança para submissão, análise e classificação de dados de pesquisa. O processo define a infraestrutura de pesquisa adequada conforme a sensibilidade dos dados.",
+      "quando_usar": "Quando o pesquisador precisa submeter o Plano de Gestão de Dados para avaliação de governança, classificação de dados ou para viabilizar o uso de infraestrutura de pesquisa.",
+      "informacoes_necessarias": [
+        "Nome e código do projeto de pesquisa",
+        "Agência de fomento associada (FAPESP, CNPq, CAPES, etc.)",
+        "Prazo para entrega do PGD",
+        "Fase da pesquisa (proposta, em andamento, finalização)",
+        "Contato do pesquisador responsável"
+      ],
+      "sla_sugerido": "5 dias úteis",
+      "complexidade": "media",
+      "volume_percentual": 3.2,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 11,
+      "total_tickets": 50,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 45,
+        "Solicitação de Acesso a Bases de Dados": 2,
+        "Solicitar recursos computacionais para pesquisas": 2,
+        "Não encontrou o que procurava?": 1
+      }
+    },
+    {
+      "nome": "Gestão de Softwares e Licenças",
+      "descricao": "Solicitação de instalação, ativação, renovação ou suporte a licenças de softwares acadêmicos e ferramentas de pesquisa.",
+      "quando_usar": "Quando precisar instalar um software, resolver erros de licenciamento ou renovar assinaturas de ferramentas para pesquisa.",
+      "informacoes_necessarias": [
+        "Ferramenta necessária",
+        "Equipamento ou servidor de instalação",
+        "Finalidade do uso",
+        "E-mails dos usuários"
+      ],
+      "sla_sugerido": "3 dias úteis",
+      "complexidade": "baixa",
+      "volume_percentual": 3.0,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 13,
+      "total_tickets": 47,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte em software acadêmico": 24,
+        "Tutoria em demandas computacionais para pesquisa": 10,
+        "Não encontrou o que procurava?": 4,
+        "Solicitar recursos computacionais para pesquisas": 4,
+        "Solicitar suporte para ambiente de pesquisa": 2,
+        "Solicitar suporte para laboratório virtual": 1
+      }
+    },
+    {
+      "nome": "Gestão de Arquivos e Servidores",
+      "descricao": "Serviços de movimentação, extração, upload e recuperação de dados em servidores acadêmicos on-premises.",
+      "quando_usar": "Quando precisar copiar, extrair, transferir ou restaurar arquivos e pastas de um servidor acadêmico existente.",
+      "informacoes_necessarias": [
+        "Identificação do servidor ou projeto",
+        "Caminho da pasta ou nome dos arquivos",
+        "Ação desejada (extração, upload, cópia ou restauração via backup)",
+        "E-mail do usuário ou destinatário"
+      ],
+      "sla_sugerido": "1 dia útil",
+      "complexidade": "baixa",
+      "volume_percentual": 2.9,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 5,
+      "total_tickets": 45,
+      "distribuicao_categorias_atuais": {
+        "Não encontrou o que procurava?": 18,
+        "Acessar pastas de dados de pesquisa": 12,
+        "Solicitar suporte para ambiente de pesquisa": 4,
+        "Solicitação de Acesso a Bases de Dados": 4,
+        "Solicitar recursos computacionais para pesquisas": 3,
+        "Atendimento de Incidentes": 2
+      }
+    },
+    {
+      "nome": "Incidentes em Servidores e Plataformas",
+      "descricao": "Atendimento de falhas técnicas, indisponibilidades de servidores, erros de monitoramento ou problemas de conectividade em ambientes de pesquisa.",
+      "quando_usar": "Quando um serviço, servidor (acadêmico, HPC ou VM) ou ferramenta de monitoramento apresentar erro, queda ou comportamento inesperado.",
+      "informacoes_necessarias": [
+        "Identificação do servidor, serviço ou plataforma afetada",
+        "Descrição detalhada do erro ou comportamento observado",
+        "Horário de início e impacto na pesquisa",
+        "E-mail do solicitante"
+      ],
+      "sla_sugerido": "4h",
+      "complexidade": "media",
+      "volume_percentual": 2.3,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 16,
+      "total_tickets": 37,
+      "distribuicao_categorias_atuais": {
+        "Atendimento de Incidentes": 25,
+        "Reportar incidentes em plataformas tecnológicas": 9,
+        "Dúvidas sobre produtos da nuvem": 1,
+        "Solicitar recursos computacionais para pesquisas": 1,
+        "Solicitar suporte para ambiente de pesquisa": 1
+      }
+    },
+    {
+      "nome": "Informações Insuficientes ou Sem Demanda",
+      "descricao": "Categoria para chamados que não apresentam descrição clara, detalhamento de necessidade ou conteúdo identificável.",
+      "quando_usar": "Quando o usuário abre um chamado sem descrever o que precisa ou quando o conteúdo é insuficiente para triagem.",
+      "informacoes_necessarias": [
+        "Descrição detalhada do que o usuário precisa",
+        "Sistema, serviço ou recurso envolvido",
+        "Impacto na atividade de pesquisa ou ensino",
+        "Urgência e prazo"
+      ],
+      "sla_sugerido": "1 dia util",
+      "complexidade": "baixa",
+      "volume_percentual": 0.9,
+      "rotulo_gerado_por_fallback": false,
+      "cluster_id": 20,
+      "total_tickets": 14,
+      "distribuicao_categorias_atuais": {
+        "Solicitação de Acesso a Bases de Dados": 4,
+        "Tutoria em demandas computacionais para pesquisa": 4,
+        "Acessar pastas de dados de pesquisa": 2,
+        "Solicitar recursos computacionais para pesquisas": 2,
+        "Solicitar suporte para ambiente de pesquisa": 1,
+        "Persona de acesso a nuvem": 1
+      }
+    }
+  ]
+}

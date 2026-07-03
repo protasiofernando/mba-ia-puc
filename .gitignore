@@ -1,0 +1,67 @@
+# Dados sensíveis — nunca subir
+data/
+*.csv
+*.db
+*.jsonl
+
+# Exceção: base sintética de exemplo (dados fictícios, sem dados pessoais)
+!data_exemplo/*.csv
+
+# Resultados do pipeline LLM — grandes, sensíveis ou derivados
+pipeline_data/01_tickets.json
+pipeline_data/02_checkpoint.json
+pipeline_data/02_summaries.json
+pipeline_data/03_clusters.json
+pipeline_data/06_classificados.json
+pipeline_data/06_checkpoint.json
+pipeline_data/07_classificados_final.json
+pipeline_data/07_checkpoint.json
+
+# Ambiente Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.claude/
+
+# Arquivos gerados/cacheados a partir dos CSVs
+analise_categorias.json
+
+# Lista de solicitantes (dados pessoais) gerada em plano_comunicacao/ — manter fora do git
+plano_comunicacao/solicitantes_historico.xlsx
+plano_comunicacao/solicitantes_historico.csv
+plano_comunicacao/solicitantes_emails_outlook.txt
+
+# Arquivos gerados pelo pipeline ETL antigo
+rdf_chamados.*
+portfolio_analysis.json
+exploratory_analysis.json
+generated_questions.json
+rlhf_dataset.jsonl
+
+# Snapshots de versões do pipeline (comparação local)
+pipeline_data_rev1/
+pipeline_data_rev2/
+
+# Arquivos avulsos que não pertencem ao repositório
+Logo FGV.png
+Suporte Chamados com IA - Resultados preliminares.pdf
+check_data.py
+guia_hpc/
+kit_identidade_visual/
+orientacoes/
+
+# IDE e OS
+.idea/
+.vscode/
+*.DS_Store
+Thumbs.db
+
+# Logs e outputs PBS
+*.log
+*.o[0-9]*
+*.e[0-9]*
+tmp/
+bin/

@@ -1,0 +1,125 @@
+{
+  "_comentario": "CURADORIA HUMANA DO PORTFOLIO FINAL (insumo do Stage 7). O Stage 7 le este arquivo e reclassifica todos os chamados historicos no catalogo definido em portfolio_final, aplicando as diretrizes e os servicos fora do catalogo.",
+
+  "diretrizes": [
+    "Classifique cada chamado em exatamente UMA categoria do catalogo final abaixo.",
+    "ACESSO (adicionar usuario, conceder permissao, RDP/SSH/VPN/IAM) classifica pelo servico ou ambiente-alvo: servidor academico compartilhado, software/licenca, nuvem publica, HPC ou VM individual.",
+    "SUPORTE, MANUTENCAO, INCIDENTE ou PROBLEMA de funcionamento nao formam categoria propria neste catalogo. Classifique pelo servico ou ambiente afetado: falha em servidor compartilhado -> Servidores Academicos Compartilhados; erro de software/licenca -> Softwares e Licencas Academicas; problema em AWS/Azure/GCP -> Nuvem Publica; problema no HPC -> HPC; problema na VM do Portal -> Maquinas Virtuais Individuais.",
+    "ARMAZENAMENTO, aumento de disco ou memoria, backup, restauracao e organizacao de arquivos entram na categoria do ambiente correspondente. Servidor compartilhado -> Servidores Academicos Compartilhados; VM individual -> Maquinas Virtuais Individuais; bucket/storage em nuvem -> Nuvem Publica.",
+    "PGD, plano de gestao de dados, classificacao de dados, governanca de dados e impacto da classificacao na autorizacao de infraestrutura entram em Submissao do Plano de Gestao de Dados (PGD) de Pesquisa.",
+    "Use Nao encontrou o que procurava? somente quando nenhuma categoria do catalogo servir ou quando o servico for claramente fora do catalogo da DTI Pesquisa."
+  ],
+
+  "fora_do_catalogo": [
+    {
+      "tema": "SharePoint, Microsoft 365, Teams, OneDrive, Outlook, sites de colaboracao corporativa",
+      "acao": "Não encontrou o que procurava?",
+      "mensagem": "Este servico e atendido por outra area e nao faz parte do catalogo da DTI Pesquisa."
+    },
+    {
+      "tema": "Sala de Sigilo, RAIS, CAGED, acesso a bases sigilosas, agendamento da sala, extracao de resultados, upload de script, instalacao de base ou software dentro da Sala de Sigilo",
+      "acao": "Não encontrou o que procurava?",
+      "mensagem": "Demandas operacionais de Sala de Sigilo e bases sigilosas sao atendidas pela equipe responsavel por esse ambiente e nao ficam como categoria propria no catalogo da DTI Pesquisa. Se o chamado for sobre PGD, classificacao ou governanca dos dados, use a categoria de PGD."
+    }
+  ],
+
+  "portfolio_final": [
+    {
+      "nome": "Servidores Acadêmicos Compartilhados",
+      "descricao": "Servidor academico compartilhado para equipe ou projeto de pesquisa, incluindo criacao de ambiente, acesso, suporte, manutencao, recursos, backup, restauracao, arquivos e problemas de funcionamento.",
+      "quando_usar": "Escolha esta opção se você precisa de um servidor acadêmico compartilhado para uma equipe ou projeto de pesquisa, ou se já utiliza um servidor desse tipo e precisa de suporte. Esta categoria atende pedidos de criação de ambiente, acesso de usuários, manutenção, aumento de disco ou memória, backup, restauração, organização de arquivos e problemas de funcionamento no servidor. Antes de abrir o chamado, tenha em mãos a lista de usuários que precisam de acesso, o título da pesquisa e a classificação dos dados utilizados: públicos, restritos ou confidenciais.",
+      "informacoes_obrigatorias": [
+        "Lista de usuarios que precisam de acesso",
+        "Titulo da pesquisa ou identificacao do projeto",
+        "Classificacao dos dados utilizados: publicos, restritos ou confidenciais",
+        "Identificacao do servidor, quando ja existir",
+        "Descricao da necessidade ou problema"
+      ],
+      "sla_sugerido": "2 dias uteis",
+      "complexidade": "media"
+    },
+    {
+      "nome": "Softwares e Licenças Acadêmicas",
+      "descricao": "Instalacao, ativacao, renovacao, acesso, duvidas e problemas relacionados a softwares, ferramentas, licencas academicas, pacotes e bibliotecas quando o foco principal for o software.",
+      "quando_usar": "Escolha esta opção se você precisa instalar, ativar, renovar, acessar ou resolver uma dúvida/problema relacionado a softwares, ferramentas ou licenças acadêmicas. Use esta categoria para ferramentas como Stata, MATLAB, R/RStudio, Python, Tableau, Qualtrics, ArcGIS, Adobe e outras soluções de apoio à pesquisa. Também utilize quando precisar de pacotes ou bibliotecas, desde que o pedido principal seja sobre o software, e não sobre servidor, HPC, VM ou nuvem.",
+      "informacoes_obrigatorias": [
+        "Nome do software, ferramenta, pacote ou biblioteca",
+        "Tipo de demanda: instalacao, ativacao, renovacao, acesso, duvida ou problema",
+        "Ambiente ou equipamento de uso",
+        "Usuarios que precisam de acesso",
+        "Finalidade academica ou de pesquisa"
+      ],
+      "sla_sugerido": "3 dias uteis",
+      "complexidade": "baixa"
+    },
+    {
+      "nome": "Nuvem Pública (AWS, Azure, GCP)",
+      "descricao": "Criacao, acesso, configuracao, expansao, orientacao e suporte para recursos e projetos em AWS, Azure ou GCP.",
+      "quando_usar": "Escolha esta opção se sua demanda envolve recursos em AWS, Azure ou GCP. Esta categoria atende pedidos de criação, acesso, configuração, expansão, orientação ou suporte para contas/projetos em nuvem, VMs, buckets, bancos gerenciados, IAM, BigQuery, SageMaker, Azure OpenAI, Vertex AI, APIs, containers, analytics e outros serviços escaláveis. Normalmente é necessário informar a SI aprovada, orçamento ou centro de custo, serviços desejados e usuários que precisam de acesso.",
+      "informacoes_obrigatorias": [
+        "Provedor: AWS, Azure ou GCP",
+        "SI aprovada, orcamento ou centro de custo",
+        "Servicos ou recursos desejados",
+        "Usuarios que precisam de acesso",
+        "Prazo ou periodo de uso"
+      ],
+      "sla_sugerido": "3 dias uteis",
+      "complexidade": "alta"
+    },
+    {
+      "nome": "HPC e Processamento de Alto Desempenho (GPU)",
+      "descricao": "Uso, acesso e suporte ao cluster HPC e recursos de alto desempenho para GPU, CUDA, PBS, paralelizacao, simulacoes, ML/DL, LLMs locais e cargas cientificas intensivas.",
+      "quando_usar": "Escolha esta opção se você precisa usar, acessar ou receber suporte para o cluster HPC e recursos de processamento de alto desempenho. Esta categoria é indicada para demandas com GPU, CUDA, jobs via PBS, paralelização, simulações pesadas, treinamento de modelos de ML/DL, LLMs locais ou outras cargas científicas intensivas. Use quando a necessidade principal for desempenho computacional elevado. Para VM simples de teste ou servidor persistente compartilhado de projeto, escolha outra categoria.",
+      "informacoes_obrigatorias": [
+        "Finalidade do uso",
+        "Tipo de recurso necessario: GPU, CUDA, PBS, numero de nos ou paralelizacao",
+        "Usuarios que precisam de acesso",
+        "Necessidade de acesso externo ou VPN",
+        "Descricao da carga computacional"
+      ],
+      "sla_sugerido": "3 dias uteis",
+      "complexidade": "media"
+    },
+    {
+      "nome": "Máquinas Virtuais Individuais (Portal do Pesquisador)",
+      "descricao": "Solicitacao, acesso, alteracao e suporte para VM individual e temporaria no Portal do Pesquisador ou VMware Aria, voltada a testes, provas de conceito e experimentos iniciais.",
+      "quando_usar": "Escolha esta opção se você precisa solicitar, acessar, alterar ou receber suporte para uma VM individual e temporária no Portal do Pesquisador/VMware Aria. Esta categoria é indicada para testes, provas de conceito, validações técnicas e experimentos iniciais em ambiente isolado. Não é a opção adequada para ambientes que exigem backup, uso prolongado, alto desempenho ou compartilhamento por uma equipe de pesquisa.",
+      "informacoes_obrigatorias": [
+        "Sistema operacional desejado",
+        "Perfil da maquina: vCPU, RAM e disco",
+        "Finalidade do teste ou experimento",
+        "Usuario responsavel",
+        "Prazo previsto de uso"
+      ],
+      "sla_sugerido": "1 dia util",
+      "complexidade": "baixa"
+    },
+    {
+      "nome": "Submissão do Plano de Gestão de Dados (PGD) de Pesquisa",
+      "descricao": "Elaboracao, revisao, submissao e acompanhamento do Plano de Gestao de Dados de pesquisa, incluindo classificacao de dados, governanca e requisitos de fomento.",
+      "quando_usar": "Escolha esta opção se você precisa elaborar, revisar, submeter ou acompanhar o Plano de Gestão de Dados de uma pesquisa. Esta categoria também atende dúvidas sobre classificação dos dados, governança, requisitos de agências de fomento, dados sensíveis, restritos ou confidenciais, e impactos do PGD na autorização de infraestrutura para o projeto.",
+      "informacoes_obrigatorias": [
+        "Titulo ou codigo do projeto de pesquisa",
+        "Pesquisador responsavel",
+        "Agencia de fomento, quando houver",
+        "Prazo para submissao ou revisao",
+        "Classificacao conhecida ou prevista dos dados"
+      ],
+      "sla_sugerido": "5 dias uteis",
+      "complexidade": "media"
+    },
+    {
+      "nome": "Não encontrou o que procurava?",
+      "descricao": "Categoria excepcional para demandas sem categoria adequada ou servicos que parecem nao fazer parte do catalogo da DTI Pesquisa.",
+      "quando_usar": "Escolha esta opção somente se você não encontrou uma categoria adequada para a sua necessidade ou se o serviço desejado parece não fazer parte do catálogo da DTI Pesquisa.",
+      "informacoes_obrigatorias": [
+        "Descricao detalhada da necessidade",
+        "Sistema, servico ou recurso envolvido",
+        "Impacto e urgencia",
+        "Unidade ou area relacionada, se conhecida"
+      ],
+      "sla_sugerido": "1 dia util para triagem",
+      "complexidade": "baixa"
+    }
+  ]
+}

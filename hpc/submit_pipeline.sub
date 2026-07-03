@@ -1,0 +1,43 @@
+#!/bin/bash
+# =============================================================
+# submit_pipeline.sub — Job PBS para o no V100 (fila gpu)
+#
+# Como submeter (do head node):
+#   cd ~/triagem-chamados
+#   qsub hpc/submit_pipeline.sub
+#
+# Para monitorar:
+#   qstat -as
+#   tail -f ~/triagem-chamados/pipeline_data/pipeline.log
+#
+# Para rodar do zero (apaga checkpoint):
+#   rm -f ~/triagem-chamados/pipeline_data/02_checkpoint.json
+#   qsub hpc/submit_pipeline.sub
+# =============================================================
+
+#PBS -N triagem-portfolio
+#PBS -j oe
+#PBS -m abe
+#PBS -M <seu.usuario>@fgv.br
+#PBS -l walltime=12:00:00
+#PBS -l mem=128gb
+#PBS -q gpu
+
+PROJETO_DIR="$HOME/triagem-chamados"
+LOG="$PROJETO_DIR/pipeline_data/pipeline.log"
+
+cd ${PBS_O_WORKDIR}
+mkdir -p "$PROJETO_DIR/pipeline_data"
+
+echo "=============================================" > "$LOG"
+echo " Pipeline: Analise de Portfolio de Chamados" >> "$LOG"
+echo " Inicio: $(date)"                             >> "$LOG"
+echo " Head node: $(hostname)"                      >> "$LOG"
+echo "=============================================" >> "$LOG"
+echo "[PBS] Despachando para no GPU via mpirun..."  >> "$LOG"
+
+mpirun -np 1 --hostfile /home/nfsmpi/ngpu \
+    bash "$PROJETO_DIR/hpc/run_on_gpu.sh" >> "$LOG" 2>&1
+
+echo "" >> "$LOG"
+echo "[PBS] Job finalizado: $(date)" >> "$LOG"

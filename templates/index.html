@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triagem Inteligente de Chamados — DTI FGV</title>
+  <link rel="stylesheet" href="/static/style.css?v=8">
+</head>
+<body>
+<div class="app-container">
+
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="header-inner">
+      <img src="/static/img/fgv-logo.png" alt="FGV" class="header-logo">
+      <div class="header-divider"></div>
+      <div>
+        <h1 class="header-title">Suporte Inteligente para Abertura de Chamados com IA</h1>
+        <p class="subtitle">Análise de portfólio de chamados</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar">
+    <div class="nav-items">
+      <button class="nav-btn active" onclick="switchTab('dashboard',this)">Dashboard</button>
+      <button class="nav-btn" onclick="switchTab('categorias',this)">Categorias</button>
+      <button class="nav-btn" onclick="switchTab('simulacao',this)">Simulação</button>
+      <button class="nav-btn" onclick="switchTab('analise-ia',this)">Análise IA</button>
+      <button class="nav-btn" onclick="switchTab('historico',this)">Histórico</button>
+      <button class="nav-btn" onclick="switchTab('grupos-naturais',this)">Grupos Naturais</button>
+    </div>
+  </nav>
+
+  <main class="content">
+
+    <!-- ══════════════ DASHBOARD ══════════════ -->
+    <section id="dashboard" class="tab-content active">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;margin-bottom:.5rem;">
+        <div>
+          <h2 style="margin:0;">Dashboard</h2>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem;">
+          <label style="font-size:.8rem;color:var(--text-muted);font-weight:600;">Filtrar por mês</label>
+          <select id="filtroMes" onchange="loadDash()" style="font-size:.82rem;padding:.35rem .75rem;border:1px solid rgba(0,58,121,.18);border-radius:8px;background:#fff;color:var(--navy);font-family:var(--font-body);cursor:pointer;">
+            <option value="">Todos os períodos</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- KPI Row 1 — Volume -->
+      <div class="kpi-row">
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbChamados">—</div>
+          <div class="kpi-label">Chamados no Período</div>
+        </div>
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbCategorias">—</div>
+          <div class="kpi-label">Categorias Atuais</div>
+        </div>
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbFinalizados">—</div>
+          <div class="kpi-label">Finalizados</div>
+        </div>
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbBacklog">—</div>
+          <div class="kpi-label">Backlog em Aberto</div>
+        </div>
+      </div>
+
+      <!-- KPI Row 2 — Qualidade -->
+      <div class="kpi-row" style="margin-top:.75rem;">
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbTaxaResolucao">—</div>
+          <div class="kpi-label">Taxa de Resolução</div>
+        </div>
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbNovasCats">—</div>
+          <div class="kpi-label">Categorias Ativas (IA)</div>
+        </div>
+      </div>
+
+      <!-- Gráficos linha 1 -->
+      <div class="dashboard-grid" style="margin-top:1.25rem;">
+        <div class="card">
+          <h3>Distribuição por Categoria <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">(top 8)</span></h3>
+          <canvas id="chartCategorias" height="200"></canvas>
+        </div>
+        <div class="card">
+          <h3>Tempo Médio de Resolução <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">horas por categoria</span></h3>
+          <canvas id="chartTempos" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- Tendência mensal -->
+      <div class="card" style="margin-top:1.25rem;">
+        <h3>Tendência Mensal <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">volume de abertura por mês</span></h3>
+        <canvas id="chartTendencia" height="100"></canvas>
+      </div>
+
+      <!-- Gráficos linha 2 -->
+      <div class="dashboard-grid" style="margin-top:1.25rem;">
+        <div class="card">
+          <h3>Top 10 Analistas <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">chamados atendidos</span></h3>
+          <canvas id="chartAnalistas" height="220"></canvas>
+        </div>
+        <div class="card">
+          <h3>Top 10 Solicitantes <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">chamados abertos</span></h3>
+          <canvas id="chartSolicitantes" height="220"></canvas>
+        </div>
+      </div>
+
+      <!-- Gráficos linha 3 -->
+      <div class="dashboard-grid" style="margin-top:1.25rem;">
+        <div class="card">
+          <h3>Por Departamento <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">volume por dpto solicitante</span></h3>
+          <canvas id="chartDepartamentos" height="200"></canvas>
+        </div>
+        <div class="card">
+          <h3>Situação dos Chamados</h3>
+          <canvas id="chartSituacoes" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ CATEGORIAS ══════════════ -->
+    <section id="categorias" class="tab-content">
+      <h2>Categorias</h2>
+
+      <!-- Portfólio ativo: curadoria final quando Stage 7 existir; senão, recomendação automática -->
+      <div class="card" id="portfolioAtivoCard" style="margin-bottom:1.5rem;">
+        <h3><span id="portfolioAtivoTitulo">Portfólio Ativo</span> <span id="portfolioAtivoBadge" style="font-size:.65rem;font-weight:700;color:var(--text-muted);background:var(--bg-glass);border:1px solid var(--border);padding:.12rem .5rem;border-radius:999px;vertical-align:middle;">CARREGANDO</span></h3>
+        <p id="portfolioAtivoDescricao" style="color:var(--text-muted);font-size:.8rem;margin:.3rem 0 1rem;">Clique em uma categoria para ver os campos obrigatórios a coletar.</p>
+        <div id="portfolioNovoBody"></div>
+      </div>
+
+      <!-- Portfólio definido (curadoria da área, Stage 7) — oculto até o Stage 7 rodar -->
+      <div class="card" id="portfolioFinalCard" style="margin-bottom:1.5rem;display:none;">
+        <h3>Portfólio Definido <span style="font-size:.65rem;font-weight:700;color:#b45309;background:rgba(180,83,9,.1);border:1px solid rgba(180,83,9,.3);padding:.12rem .5rem;border-radius:999px;vertical-align:middle;">CURADORIA DA ÁREA</span></h3>
+        <p style="color:var(--text-muted);font-size:.8rem;margin:.3rem 0 1rem;">Portfólio final definido pela área (Stage 7), com os chamados reclassificados. Volumes reais; encaminhamentos fora da base de cálculo.</p>
+        <div id="portfolioFinalBody"></div>
+      </div>
+
+      <!-- Tabela das 17 -->
+      <div class="card">
+        <h3>Estatísticas e Mapeamento</h3>
+        <div style="overflow-x:auto;margin-top:1rem;">
+          <table class="rdf-table">
+            <thead>
+              <tr>
+                <th>Categoria Atual</th>
+                <th style="text-align:center;">Chamados</th>
+                <th style="text-align:center;">Interações Médias</th>
+                <th style="text-align:center;">Tempo Médio</th>
+                <th style="text-align:center;">Taxa Resolução</th>
+                <th>Nova Categoria</th>
+                <th style="text-align:center;">Chamados Mapeados</th>
+              </tr>
+            </thead>
+            <tbody id="catBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ SIMULAÇÃO ══════════════ -->
+    <section id="simulacao" class="tab-content">
+      <h2>Simulação de Triagem</h2>
+      <p class="section-subtitle">
+        Descreva um chamado e o modelo identifica em qual categoria do novo portfólio ele se encaixa,
+        com os campos a coletar para atendimento ágil.
+      </p>
+
+      <div class="sim-layout">
+
+        <!-- Input -->
+        <div class="sim-panel">
+          <div class="sim-panel-title">
+            <span class="dot"></span>
+            Descreva o Chamado
+          </div>
+
+          <label class="sim-field-label">Descrição *</label>
+          <textarea id="simDescricao" class="sim-textarea"
+            placeholder="Descreva o que o usuário precisa. Ex: Preciso de acesso ao bucket S3 do projeto PGD para baixar os dados de análise."></textarea>
+
+          <!-- Toggle modo -->
+          <div style="display:flex;align-items:center;gap:.75rem;margin:.75rem 0;flex-wrap:wrap;">
+            <span style="font-size:.8rem;color:var(--text-muted);font-weight:600;">Modo:</span>
+            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.82rem;color:var(--navy);">
+              <input type="radio" name="simModo" value="llm" checked onchange="atualizarModoSim()">
+              LLM Local
+              <span id="llmStatusBadge" style="font-size:.72rem;padding:.1rem .4rem;border-radius:999px;background:#e8f4fb;color:var(--fgv-blue);">verificando…</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.82rem;color:var(--navy);">
+              <input type="radio" name="simModo" value="openai" onchange="atualizarModoSim()">
+              LLM OpenAI
+              <span id="openaiStatusBadge" style="font-size:.72rem;padding:.1rem .4rem;border-radius:999px;background:#e8f4fb;color:var(--fgv-blue);">verificando…</span>
+            </label>
+          </div>
+
+          <div class="sim-actions">
+            <button class="btn-primary" onclick="executarSimulacao()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              Classificar Chamado
+            </button>
+            <button class="btn-ghost" onclick="limparSimulacao()">Limpar</button>
+          </div>
+
+          <div class="sim-examples">
+            <div class="sim-ex-label">Exemplos rápidos</div>
+            <div class="sim-chips">
+              <button class="sim-chip" onclick="simExemplo(1)">Acesso AWS</button>
+              <button class="sim-chip" onclick="simExemplo(2)">Instalar pacote</button>
+              <button class="sim-chip" onclick="simExemplo(3)">Erro em sistema</button>
+              <button class="sim-chip" onclick="simExemplo(4)">Espaço em disco</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="sim-result-wrap" id="simResultWrap">
+          <div class="sim-panel-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="12" r="10"/><path d="M12 17h.01"/></svg>
+            Resultado da Classificação
+          </div>
+          <div id="simResultado" style="flex:1;display:flex;flex-direction:column;">
+            <div class="empty-state">
+              <p>Preencha o título e clique em <strong>Classificar Chamado</strong> para ver a categoria recomendada.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════ ANÁLISE IA ══════════════ -->
+    <section id="analise-ia" class="tab-content">
+      <h2>Análise IA — Portfólio Otimizado</h2>
+      <p class="section-subtitle">
+        Pipeline executado no HPC FGV com modelo local <strong>gemma4:26b-q8</strong>.
+      </p>
+
+      <!-- Hero KPIs -->
+      <div id="iaHeroCards" style="display:none;" class="ia-hero-grid">
+        <div class="ia-kpi" style="border:1px solid var(--border);">
+          <div class="ia-kpi-num" style="color:var(--fgv-navy);" id="iaTickets">—</div>
+          <div class="ia-kpi-label">Chamados Analisados</div>
+        </div>
+        <div class="ia-kpi" style="border:1px solid var(--border);">
+          <div class="ia-kpi-num" style="color:var(--fgv-navy);" id="iaCatAtual">—</div>
+          <div class="ia-kpi-label">Categorias Atuais</div>
+        </div>
+        <div class="ia-kpi" style="border:1px solid var(--border);">
+          <div class="ia-kpi-num" style="color:var(--fgv-navy);" id="iaCatNova">—</div>
+          <div class="ia-kpi-label" id="iaCatNovaLabel">Categorias Recomendadas</div>
+        </div>
+        <div class="ia-kpi" style="border:1px solid var(--border);">
+          <div class="ia-kpi-num" style="color:var(--fgv-navy);" id="iaMultiplas">—</div>
+          <div class="ia-kpi-label">Múltiplas Interações</div>
+          <div style="margin-top:.3rem;font-size:.72rem;color:var(--text-muted);"><span id="iaDireto">—</span> resolução direta</div>
+        </div>
+      </div>
+
+      <div id="iaResultado" style="display:none;">
+
+        <div class="card" style="margin-bottom:1.4rem;border-left:3px solid var(--fgv-navy);">
+          <h3>Diagnóstico</h3>
+          <p id="iaDiagnostico" style="color:var(--text-secondary);line-height:1.8;margin-top:.7rem;font-size:.93rem;"></p>
+        </div>
+
+        <div class="card" style="margin-bottom:1.4rem;">
+          <h3>Comparativo de Portfólio</h3>
+          <div class="portfolio-compare-grid" style="margin-top:1rem;">
+            <div>
+              <h4 style="color:var(--fgv-navy);">Atual — <span id="iaNAtual">?</span> categorias</h4>
+              <div id="iaCatAtualLista"></div>
+            </div>
+            <div>
+              <h4 style="color:var(--green);"><span id="iaPortfolioNovoTitulo">Recomendado</span> — <span id="iaNNova">?</span> categorias</h4>
+              <div id="iaPortfolioNovo"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:1.4rem;">
+          <h3>Interações por Categoria</h3>
+          <p style="color:var(--text-muted);font-size:.8rem;margin:.3rem 0 1rem;">Resolução direta: chamados resolvidos com até 1 interação humana. Múltiplas interações: chamados que exigiram 2 ou mais trocas com o solicitante.</p>
+          <div style="overflow-x:auto;">
+            <table class="rdf-table">
+              <thead>
+                <tr>
+                  <th>Categoria</th>
+                  <th style="text-align:right;">Total</th>
+                  <th style="text-align:right;">Resolução Direta</th>
+                  <th style="text-align:right;">Múltiplas Interações</th>
+                  <th style="text-align:right;">Tempo Médio Direto (h)</th>
+                  <th style="text-align:right;">Tempo Médio Múltiplas (h)</th>
+                  <th style="text-align:right;">% Redução Tempo</th>
+                </tr>
+              </thead>
+              <tbody id="iaInteracoesBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="iaAguardando" style="display:none;">
+        <div class="card">
+          <div class="empty-state">
+            <p>Pipeline ainda não executado no HPC.<br>
+            Submeta o job PBS e copie <code>pipeline_data/</code> para este computador.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ HISTÓRICO ══════════════ -->
+    <section id="historico" class="tab-content">
+      <h2>Histórico de Chamados</h2>
+
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+        <input id="histBusca" class="sim-input" type="text" placeholder="Buscar por chave ou título…"
+          style="max-width:320px;" oninput="loadHistorico(1)">
+        <span id="histTotal" style="font-size:.82rem;color:var(--text-muted);"></span>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="overflow-x:auto;">
+          <table class="rdf-table">
+            <thead>
+              <tr>
+                <th style="width:110px;">Chamado</th>
+                <th>Título</th>
+                <th>Categoria Atual</th>
+                <th>Categoria Nova (LLM)</th>
+                <th style="text-align:center;width:80px;">Confiança</th>
+              </tr>
+            </thead>
+            <tbody id="histBody">
+              <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted);">Carregando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Paginação -->
+      <div id="histPag" style="display:flex;justify-content:center;gap:.5rem;margin-top:1.25rem;flex-wrap:wrap;"></div>
+    </section>
+
+    <!-- ══════════════ GRUPOS NATURAIS ══════════════ -->
+    <section id="grupos-naturais" class="tab-content">
+      <h2>Grupos Naturais de Demanda</h2>
+      <p class="section-subtitle">Padrões descobertos no texto dos chamados pelo pipeline, sem partir das categorias existentes. Uso interno para validação.</p>
+      <div id="gnResultado">
+        <div class="card">
+          <div id="iaClusters"></div>
+        </div>
+      </div>
+      <div id="gnAguardando" style="display:none;">
+        <div class="card">
+          <div class="empty-state">
+            <p>Pipeline ainda não executado.<br>Execute o job no HPC e copie <code>pipeline_data/</code> para este computador.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 — <span class="accent">Triagem Inteligente de Chamados</span> · DTI FGV · IA local · dados protegidos</p>
+  </footer>
+
+</div>
+
+<script src="/static/vendor/chart.umd.min.js"></script>
+<script src="/static/script.js?v=8"></script>
+</body>
+</html>
