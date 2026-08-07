@@ -1,7 +1,7 @@
 # Triagem Inteligente de Chamados de TI com LLM Local
 
 #### Aluno: [Fernando Nóbrega Mendes Protasio](https://github.com/protasiofernando)
-#### Matricula: [241100336]
+#### Matrícula: 241100336
 #### Orientadora: [Manoela Rabello Kohler](https://github.com/manoelakohler)
 
 ---
@@ -531,8 +531,6 @@ chance. *Journal of Machine Learning Research*, v. 11, p. 2837–2854, 2010.
 [https://www.jmlr.org/papers/v11/vinh10a.html](https://www.jmlr.org/papers/v11/vinh10a.html).
 
 ---
-
-Matrícula: 241100336
 
 Pontifícia Universidade Católica do Rio de Janeiro
 
