@@ -1,6 +1,11 @@
 # Manual do Projeto
 
-Referência formal, única e limpa do projeto. Define a **nomenclatura padrão**, a
+Um projeto auditável depende de que a mesma palavra signifique a mesma coisa em
+todos os seus documentos. Quando o vocabulário se desloca entre arquivos, a
+verificação para de ser possível: o leitor não sabe mais se dois textos
+discordam ou se apenas nomeiam de forma diferente a mesma etapa.
+
+Este manual fixa esse vocabulário único. Define a **nomenclatura padrão**, a
 **estrutura de pastas**, o **pipeline e o motivo de cada etapa**, o **desenho do estudo
 comparativo** e a regra **medição × conclusão**. Documentos técnicos e o histórico de
 execução ficam à parte (ver §8).
@@ -208,3 +213,9 @@ validadores diante de rodadas inválidas. Ela constitui evidência de
 reprodutibilidade, mas permanece separada da narrativa formal. O histórico foi
 consolidado em `docs/APENDICE_TECNICO.md`, enquanto o estado estruturado preserva
 os detalhes legíveis por máquina.
+
+A separação entre os dois é deliberada e vale nos dois sentidos. A narrativa
+formal precisa poder ser lida sem as tentativas invalidadas, ou o resultado se
+confunde com o processo. As tentativas invalidadas precisam ser preservadas, ou
+a narrativa formal deixa de ser verificável. Nenhum dos dois documentos
+substitui o outro.

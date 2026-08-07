@@ -1,4 +1,9 @@
-# Protocolo metodológico pré-registrado — v6
+# Protocolo metodológico pré-registrado, v6
+
+Este documento registra as regras de decisão do estudo comparativo tal como
+foram congeladas antes da avaliação final. A nota abaixo corrige uma descrição
+semântica depois da execução, e está no topo em vez de em rodapé porque um
+protocolo pré-registrado não deve carregar emenda escondida.
 
 > **Clarificação editorial pós-execução (07/08/2026).** O único request type
 > que efetivamente casou com a política de exclusão foi o rótulo legado

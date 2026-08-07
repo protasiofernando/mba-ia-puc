@@ -262,3 +262,11 @@ Os detalhes dos incidentes de escopo, IDs fechados, contratos, freeze de código
 e segunda opção opcional foram deslocados para
 `../docs/APENDICE_TECNICO.md`. Os números finais e sua interpretação estão em
 `../docs/RESULTADOS_COMPARACAO.md`.
+
+Vale delimitar o que esta auditoria demonstra e o que ela não alcança. Ela
+demonstra que o escopo foi decidido por campo estruturado, que o insumo foi
+congelado por hash, que os braços receberam cópias byte-idênticas e que cada
+tentativa inválida foi barrada antes de produzir número. Não demonstra que a
+referência automática represente o julgamento de um usuário real. Essa é a
+lacuna que uma replicação com rotulagem humana independente precisaria fechar,
+e é ela que separa o resultado atual de uma medição de acurácia.

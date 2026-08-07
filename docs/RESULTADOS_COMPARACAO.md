@@ -4,6 +4,11 @@ Este documento apresenta o resultado formal do estudo comparativo. Ele separa
 deliberadamente **medição** (o que foi observado) de **conclusão** (o que as
 regras pré-registradas permitem afirmar).
 
+A separação existe porque, neste estudo, as duas coisas não coincidem. A
+medição aponta de forma consistente para um dos métodos, e as regras, aplicadas
+à mesma medição, recusam declará-lo vencedor. Ler as duas partes como se fossem
+uma só produz exatamente a afirmação que o protocolo proíbe.
+
 O estudo não escolhe sozinho o portfólio operacional. O portfólio curado foi
 adotado pela gestão após examinar as recomendações automáticas e aplicar
 critérios estratégicos de responsabilidade, navegação e visibilidade. A
