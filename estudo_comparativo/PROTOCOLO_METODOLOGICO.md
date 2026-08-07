@@ -27,7 +27,7 @@ Não se afirma generalização temporal ou populacional.
 
 ## 2. Universo e Sala de Sigilo
 
-O universo original tinha 1.584 chamados. Antes do Stage 1 foram removidos 128
+O universo original tinha 1.584 chamados. Antes do Estágio 1 foram removidos 128
 registros cujo campo estruturado `Customer Request Type` correspondia exatamente
 ao rótulo legado `Solicitação de Acesso a Bases de Dados` do fluxo de dados
 confidenciais/Sala de Sigilo, atendido fora da DTI Pesquisa pela equipe de Banco
@@ -42,12 +42,12 @@ Regras congeladas:
 - correspondência exata após `strip`, sensível a maiúsculas conforme manifesto;
 - nenhum resumo, descrição ou comentário é lido para decidir escopo;
 - nenhuma LLM decide escopo;
-- o Stage 2 v6 é regenerado do zero em diretório isolado;
+- o Estágio 2 v6 é regenerado do zero em diretório isolado;
 - a máscara interna inclui os 1.456 registros, sem exclusão ou indeterminado;
 - Sala continua visível no portfólio, mas fora de descoberta, métricas e ranking.
 
 Os hashes por CSV e a lista de request types ficam em
-`filtro_sala_sigilo_manifest_v6.json`. O Stage 2 só será pré-registrado pelo seu
+`filtro_sala_sigilo_manifest_v6.json`. O Estágio 2 só será pré-registrado pelo seu
 SHA-256 depois de concluído; o gerador do ZIP final recusa manifesto divergente.
 
 O repositório público foi consolidado após a execução, com regras e resultados
@@ -63,7 +63,7 @@ liberação dos resultados.
 - `m1_legacy_llama`: arquitetura estatística legada mínima, reexecutada;
 - `m2_native`: arquitetura LLM nativa.
 
-O mesmo Stage 2 e alvo são usados, mas mais de um componente downstream muda.
+O mesmo Estágio 2 e alvo são usados, mas mais de um componente downstream muda.
 Logo, a conclusão é descritiva sobre arquiteturas, não causal sobre K-means
 versus LLM.
 
@@ -79,12 +79,12 @@ Nos braços comuns são congelados:
 - modelo de embedding e modelos semânticos;
 - contratos de entrada/saída;
 - normalização intermediária;
-- Stages 4, 5 e 6;
+- Estágios 4, 5 e 6;
 - portfólio-alvo;
 - avaliador;
 - hardware e telemetria.
 
-A variável de interesse é o motor de descoberta no Stage 3.
+A variável de interesse é o motor de descoberta no Estágio 3.
 
 ## 4. Referência automática e portfólio curado
 
@@ -131,7 +131,7 @@ critérios técnicos e estratégicos e congelou
 `formacao_portfolio/decisao_curada/feedback_portfolio.json`. O arquivo
 `formacao_portfolio/decisao_curada/portfolio_referencia.json` é sua projeção
 analítica determinística. Depois do
-congelamento, o estudo reexecutou **ambos** os métodos desde o Stage 3.
+congelamento, o estudo reexecutou **ambos** os métodos desde o Estágio 3.
 
 O repositório comprova uma primeira curadoria de sete categorias no commit
 `a5576c8`. O alvo final foi refinado antes do estudo para acrescentar acesso a
@@ -190,7 +190,7 @@ obrigatório.
 
 ## 7. Custo
 
-O custo primário é tempo de parede dos Stages 3–6. Tokens e GPU são reportados
+O custo primário é tempo de parede dos Estágios 3–6. Tokens e GPU são reportados
 separadamente. Na ablação usa-se a mediana das três réplicas. Falta de medição
 impede desempate por custo; não autoriza imputação.
 
@@ -204,10 +204,10 @@ respostas bem-sucedidas; tempo de parede e GPU incluem também espera e retries.
 
 Antes dos braços:
 
-- identidade exata do Stage 2 v6;
+- identidade exata do Estágio 2 v6;
 - máscara determinística, sem exclusões internas;
 - manifesto do filtro e hashes consistentes;
-- referência vinculada ao mesmo Stage 2 e portfólio;
+- referência vinculada ao mesmo Estágio 2 e portfólio;
 - contextos e código dos métodos sem Sala;
 - ambiente congelado;
 - entradas byte a byte idênticas.

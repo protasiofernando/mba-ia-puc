@@ -44,12 +44,12 @@ FASE A: formação assistida do candidato
 
 CSV Jira
   -> filtro de escopo quando aplicável
-  -> Stage 1: extrair e limpar
-  -> Stage 2: destilar intenção
-  -> Stage 3 estatístico: bge-m3 + K-means
-  -> Stage 4: rotular grupos
-  -> Stage 5: recomendar portfólio
-  -> Stage 6: reclassificar o histórico
+  -> Estágio 1: extrair e limpar
+  -> Estágio 2: destilar intenção
+  -> Estágio 3 estatístico: bge-m3 + K-means
+  -> Estágio 4: rotular grupos
+  -> Estágio 5: recomendar portfólio
+  -> Estágio 6: reclassificar o histórico
   -> candidato automático + evidências
 
 FASE B: decisão operacional
@@ -59,11 +59,11 @@ candidato automático
   -> formacao_portfolio/decisao_curada/feedback_portfolio.json
   -> projeção analítica determinística
   -> formacao_portfolio/decisao_curada/portfolio_referencia.json congelado
-  -> Stage 7: classificação automática no portfólio adotado
+  -> Estágio 7: classificação automática no portfólio adotado
 
 FASE C: contribuição metodológica do MBA
 
-Stage 2 congelado + portfólio curado congelado
+Estágio 2 congelado + portfólio curado congelado
   -> job 00: referência automática independente dos braços
   -> benchmark: arquitetura legada versus arquitetura nativa
   -> ablação: K-means versus LLM com restante comum
@@ -76,8 +76,8 @@ A Fase A produz evidência e um candidato; a Fase B responde “qual solução f
 adotada?”; a Fase C responde “quanto cada abordagem automática reconstrói essa
 decisão, com que estabilidade e custo?”. A comparação não substitui a curadoria.
 
-Essa ordem é comprovável: o commit `a5576c8` já contém o Stage 3 com `bge-m3`
-e K-means, os Stages 4–6 e um Stage 7 que lê a curadoria humana. A versão
+Essa ordem é comprovável: o commit `a5576c8` já contém o Estágio 3 com `bge-m3`
+e K-means, os Estágios 4–6 e um Estágio 7 que lê a curadoria humana. A versão
 mantida do processo está em `../formacao_portfolio/`. O Método Estatístico foi,
 portanto, usado para formar o candidato e depois reexecutado, junto com o Método
 Agêntico, como objeto de avaliação. O alvo é ex post em relação à formação e ex
@@ -87,35 +87,35 @@ O mesmo commit contém a cadeia de artefatos: recomendação automática com dez
 itens, `feedback_portfolio.json` curado para sete e `07_portfolio_final.json`
 materializado. O portfólio vigente evoluiu depois com Acesso a Bases como
 serviço próprio e Sala de Sigilo como encaminhamento fixo. Os totais antigos de
-Stage 5 (1.575) e Stage 7 (1.583) não coincidem; por isso servem como prova da
+Estágio 5 (1.575) e Estágio 7 (1.583) não coincidem; por isso servem como prova da
 cronologia, não como fonte quantitativa do estudo, que usa exclusivamente o
 corpus limpo e congelado de 1.456.
 
-Nesse commit, o candidato do Stage 5 registra 1.575 chamados, 23 grupos naturais
-e 10 itens sugeridos; o Stage 7 materializa 1.583 chamados em sete categorias
+Nesse commit, o candidato do Estágio 5 registra 1.575 chamados, 23 grupos naturais
+e 10 itens sugeridos; o Estágio 7 materializa 1.583 chamados em sete categorias
 da primeira curadoria. O alvo final do estudo é uma evolução gerencial dessa
 versão: inclui “Solicitação de Acesso a Bases de Dados” e mantém Sala de Sigilo
 como encaminhamento fixo fora da análise. Essa evolução fica registrada como
 curadoria estratégica, não como saída automática de um método.
 
-## 3. Stage não é job
+## 3. Estágio não é job
 
-Um **stage** é uma transformação analítica com entrada e saída definidas.
+Um **estágio** é uma transformação analítica com entrada e saída definidas.
 
 Um **job** é um processo submetido ao PBS no HPC. Ele reserva recursos, sobe o
 Ollama, congela ou verifica o ambiente, mede tempo/tokens/GPU, executa um ou
-mais stages e aplica gates.
+mais estágios e aplica gates.
 
 Exemplos:
 
-- `scripts/hpc/job_pipeline.sh` executa os Stages 1 a 6 do pipeline operacional;
+- `scripts/hpc/job_pipeline.sh` executa os Estágios 1 a 6 do pipeline operacional;
 - `formacao_portfolio/hpc/job_formar_candidato_estatistico.sh` reproduz a
   formação do candidato sem escrever a decisão humana;
 - `scripts/hpc/job_stage7_curadoria.sh` aplica automaticamente a decisão
   congelada aos chamados;
-- `job_00_referencia.sh` não é “Stage 0”: ele prepara a referência e valida o
+- `job_00_referencia.sh` não é “Estágio 0”: ele prepara a referência e valida o
   experimento;
-- `job_30_ablacao.sh` executa os Stages 3 a 6 de um braço controlado;
+- `job_30_ablacao.sh` executa os Estágios 3 a 6 de um braço controlado;
 - `job_90_avaliacao.sh` não descobre grupos: ele valida e compara resultados.
 
 ## 4. Entradas e governança dos dados
@@ -137,12 +137,12 @@ Os CSVs exportados do Jira contêm título, descrição, comentários, request t
 situação, datas e quantidade de interações. São dados sensíveis e permanecem na
 infraestrutura institucional.
 
-O Stage 1 remove HTML, URLs e e-mails, mas isso não transforma o conjunto em
+O Estágio 1 remove HTML, URLs e e-mails, mas isso não transforma o conjunto em
 dado público. Artefatos por chamado continuam privados.
 
 ### 4.3 Universo da comparação
 
-O universo original tinha 1.584 chamados. Antes do Stage 1, 128 registros
+O universo original tinha 1.584 chamados. Antes do Estágio 1, 128 registros
 foram removidos por correspondência determinística no campo estruturado
 `Customer Request Type`. Todos os 128 tinham o rótulo legado `Solicitação de
 Acesso a Bases de Dados`, pertencente ao fluxo de dados confidenciais/Sala de
@@ -168,7 +168,7 @@ acesso comum a pastas e bases de pesquisa fora da Sala e substitui o item
 vigente `Acessar pastas de dados de pesquisa`. Por isso, ele permanece no
 portfólio analítico sem contradizer o recorte.
 
-## 5. Pipeline operacional, Stage por Stage
+## 5. Pipeline operacional, Estágio por Estágio
 
 ### 5.1 Estágio 1: extração e limpeza determinística
 
@@ -241,7 +241,7 @@ catálogo e cria a matéria-prima para descobrir serviços e desenhar formulári
 - JSON inválido recebe retry;
 - o arquivo final só é gravado quando todos os registros estão resolvidos.
 
-O Stage 2 foi congelado com 1.456 registros e SHA-256
+O Estágio 2 foi congelado com 1.456 registros e SHA-256
 `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1`.
 
 ### 5.3 Estágio 3: descoberta dos grupos naturais
@@ -301,7 +301,7 @@ confrontá-la com o catálogo real.
 
 ### 5.4 Interface comum da ablação
 
-Na comparação justa, a saída bruta do Stage 3 é passada por
+Na comparação justa, a saída bruta do Estágio 3 é passada por
 `../scripts/normalizar_stage3_comum.py`.
 
 O normalizador:
@@ -311,9 +311,9 @@ O normalizador:
 - remove `contexto`, `tipo_atual` e distribuição de categorias antigas;
 - remapeia IDs arbitrários por assinatura determinística dos membros;
 - reconstrói amostras e estatísticas com a mesma regra;
-- entrega ao Stage 4 apenas a partição produzida pelo motor.
+- entrega ao Estágio 4 apenas a partição produzida pelo motor.
 
-Isso impede que o braço LLM leve para o Stage 4 descrições mais ricas que o
+Isso impede que o braço LLM leve para o Estágio 4 descrições mais ricas que o
 K-means não poderia produzir.
 
 ### 5.5 Estágio 4: rotulagem dos grupos descobertos
@@ -342,11 +342,11 @@ linguagem de serviço?
 **Relação com o objetivo:** transforma partições técnicas em candidatos
 compreensíveis e começa a responder quais dados um formulário deve solicitar.
 
-**Controle:** checkpoint vinculado ao modelo e ao fingerprint do Stage 3;
+**Controle:** checkpoint vinculado ao modelo e ao fingerprint do Estágio 3;
 campos obrigatórios validados; até três tentativas; nenhuma saída parcial é
 publicada como completa.
 
-No benchmark nativo o Stage 4 pode receber o contexto rico do pipeline
+No benchmark nativo o Estágio 4 pode receber o contexto rico do pipeline
 operacional. Na ablação, ambos os motores recebem estritamente a interface
 comum descrita na seção anterior.
 
@@ -359,7 +359,7 @@ implementável, comparando-os com o catálogo existente?
 
 **Entradas:**
 
-- grupos rotulados do Stage 4;
+- grupos rotulados do Estágio 4;
 - catálogo real em `configuracao/contexto_catalogo.md`;
 - contexto e restrições em `configuracao/config_portfolio.json`;
 - categorias obrigatórias declaradas pela área.
@@ -408,7 +408,7 @@ traduzida em unidades operacionais e formulários.
 - categoria atual inventada;
 - perda de grupo natural;
 - item `manter_separado` sem evidência correspondente;
-- fingerprint incompatível com o Stage 4;
+- fingerprint incompatível com o Estágio 4;
 - Sala indevidamente incluída no universo analítico.
 
 ### 5.7 Estágio 6: classificação fechada no portfólio recomendado
@@ -418,7 +418,7 @@ históricos de forma rastreável?
 
 **Implementação:** `../scripts/run_stage6_llm.py`.
 
-**Entrada:** `02_summaries.json` e o portfólio fechado do Stage 5.
+**Entrada:** `02_summaries.json` e o portfólio fechado do Estágio 5.
 
 **Modelo:** `llama3.3:70b`.
 
@@ -479,11 +479,11 @@ resumos automaticamente em IDs fechados, e
 `scripts/hpc/job_stage7_curadoria.sh` orquestra a execução no HPC. O dashboard
 prefere o agregado `07_*` e, antes que ele exista, lê diretamente
 `formacao_portfolio/decisao_curada/feedback_portfolio.json`; portanto nunca
-apresenta o candidato do Stage 5 como
+apresenta o candidato do Estágio 5 como
 se fosse a decisão final.
 
 Não houve rotulagem humana por chamado. A intervenção humana ocorreu somente
-no nível do catálogo; tanto a referência do estudo quanto a projeção Stage 7
+no nível do catálogo; tanto a referência do estudo quanto a projeção Estágio 7
 por chamado são automáticas.
 
 Depois do encerramento do estudo, essa projeção operacional foi materializada
@@ -493,31 +493,31 @@ em Máquinas Virtuais, 95 em HPC, 65 em Acesso a Bases, 48 em PGD e 23 no item
 residual. Sala de Sigilo não recebeu classificação e continua fora da análise.
 Esses volumes são retrospectivos e não medem adoção futura do portal.
 
-## 6. Como os stages respondem ao objetivo do MBA
+## 6. Como os estágios respondem ao objetivo do MBA
 
 | Objetivo específico | Evidência produzida |
 |---|---|
-| Entender demanda real sem reproduzir o catálogo antigo | Stage 2 |
-| Descobrir agrupamentos naturais | Stage 3 |
-| Tornar grupos compreensíveis e operacionais | Stage 4 |
-| Diagnosticar catálogo e propor redesign | Stage 5 |
-| Testar cobertura e ambiguidade | Stage 6 |
-| Incorporar estratégia e governança | Stage 7 |
-| Definir o que o usuário deve informar | Stages 2 e 4, curadoria do Stage 7 e auditoria do job 90 |
+| Entender demanda real sem reproduzir o catálogo antigo | Estágio 2 |
+| Descobrir agrupamentos naturais | Estágio 3 |
+| Tornar grupos compreensíveis e operacionais | Estágio 4 |
+| Diagnosticar catálogo e propor redesign | Estágio 5 |
+| Testar cobertura e ambiguidade | Estágio 6 |
+| Incorporar estratégia e governança | Estágio 7 |
+| Definir o que o usuário deve informar | Estágios 2 e 4, curadoria do Estágio 7 e auditoria do job 90 |
 | Justificar a escolha de abordagem | benchmark, ablação, robustez e custo |
 
 ## 7. Preparação específica da comparação robusta
 
-### 7.1 Regeneração dos Stages 1 e 2
+### 7.1 Regeneração dos Estágios 1 e 2
 
 A preparação executou, em diretório isolado:
 
 1. validação dos três CSVs filtrados;
-2. Stage 1 sobre 1.456 chamados;
-3. Stage 2 com Llama;
+2. Estágio 1 sobre 1.456 chamados;
+3. Estágio 2 com Llama;
 4. registro de modelo, digest, temperatura, código, cardinalidade e hashes.
 
-Produziu o Stage 2 congelado usado por todos os braços. Nenhum braço pode
+Produziu o Estágio 2 congelado usado por todos os braços. Nenhum braço pode
 regenerá-lo ou alterá-lo.
 
 ### 7.2 Pacote code-only e ambiente
@@ -525,8 +525,8 @@ regenerá-lo ou alterá-lo.
 O ZIP final:
 
 - contém somente código, configuração e protocolo;
-- não contém CSV, Stage 1, Stage 2, checkpoint ou texto por chamado;
-- recebe o Stage 2 por cópia server-side dentro do HPC;
+- não contém CSV, Estágio 1, Estágio 2, checkpoint ou texto por chamado;
+- recebe o Estágio 2 por cópia server-side dentro do HPC;
 - registra manifesto com SHA de cada arquivo.
 
 O job 00 congela ainda:
@@ -547,12 +547,12 @@ O job 00 congela ainda:
 
 **Funções:**
 
-1. valida SHA, cardinalidade e schema do Stage 2;
+1. valida SHA, cardinalidade e schema do Estágio 2;
 2. materializa uma máscara que inclui todos os 1.456 registros;
 3. confirma zero exclusões internas e zero decisão de escopo por LLM;
 4. sobe Ollama e congela o ambiente;
 5. constrói a referência automática contra o portfólio curado;
-6. distribui cópias byte a byte do mesmo Stage 2 aos oito braços;
+6. distribui cópias byte a byte do mesmo Estágio 2 aos oito braços;
 7. valida pacote, escopo, referência, ambiente, ordem das chaves e entradas.
 
 #### Como a referência é construída
@@ -561,7 +561,7 @@ Llama e Qwen classificam cada demanda no portfólio analítico fechado:
 
 - não recebem a chave Jira real, somente identificador opaco;
 - não recebem a categoria histórica;
-- recebem apenas o Stage 2 e o portfólio-alvo;
+- recebem apenas o Estágio 2 e o portfólio-alvo;
 - fazem uma passagem inicial com ordens diferentes das categorias;
 - desacordos, ambiguidade ou baixa confiança recebem retestes;
 - maioria estável de três em quatro define cobertura quando disponível;
@@ -671,7 +671,7 @@ modelo.
 Esse custo é reportado como custo comum de construção da referência automática.
 Ele não entra no desempate entre K-means e LLM, porque todos os braços usam a
 mesma referência já congelada. O custo primário da comparação metodológica é o
-tempo de parede dos Stages 3–6 de cada braço. Falhas e retries continuam
+tempo de parede dos Estágios 3–6 de cada braço. Falhas e retries continuam
 refletidos no tempo de parede e nas amostras de GPU, ainda que o JSONL de tokens
 registre somente respostas HTTP bem-sucedidas.
 
@@ -683,15 +683,15 @@ registre somente respostas HTTP bem-sucedidas.
 
 Executa a arquitetura estatística legada mínima:
 
-- Stage 3 por K-means legado;
-- Stages 4 a 6 legados;
+- Estágio 3 por K-means legado;
+- Estágios 4 a 6 legados;
 - Llama nos componentes semânticos;
-- mesmo Stage 2 e mesmo alvo curado;
+- mesmo Estágio 2 e mesmo alvo curado;
 - ambiente comparado ao snapshot do job 00;
 - telemetria de tempo, tokens e GPU.
 
 **Interpretação:** comparação descritiva entre arquiteturas completas. Não
-isola causalmente K-means, pois vários componentes dos Stages 3 a 6 diferem.
+isola causalmente K-means, pois vários componentes dos Estágios 3 a 6 diferem.
 
 ### 8.3 Job 20: benchmark da arquitetura LLM nativa
 
@@ -701,15 +701,15 @@ isola causalmente K-means, pois vários componentes dos Stages 3 a 6 diferem.
 
 Executa:
 
-- Stage 3 hierárquico por LLM;
-- Stage 4 vigente;
-- Stage 5 vigente;
-- validação do Stage 5;
-- Stage 6 vigente;
+- Estágio 3 hierárquico por LLM;
+- Estágio 4 vigente;
+- Estágio 5 vigente;
+- validação do Estágio 5;
+- Estágio 6 vigente;
 - validação final do portfólio.
 
 Usa Llama para raciocínio, Qwen para JSON e a semente 42. Também recebe o mesmo
-Stage 2 e o mesmo alvo.
+Estágio 2 e o mesmo alvo.
 
 **Interpretação:** segunda arquitetura do benchmark operacional.
 
@@ -717,7 +717,7 @@ Stage 2 e o mesmo alvo.
 
 **Script comum:** `../estudo_comparativo/hpc/job_30_ablacao.sh`.
 
-| Run ID | Motor Stage 3 | Seed |
+| Run ID | Motor Estágio 3 | Seed |
 |---|---|---:|
 | `kmeans_common_seed42` | BGE-M3 + K-means | 42 |
 | `llm_common_seed42` | descoberta hierárquica LLM | 42 |
@@ -728,11 +728,11 @@ Stage 2 e o mesmo alvo.
 
 Em cada par:
 
-- o Stage 2 é idêntico, inclusive ordem;
+- o Estágio 2 é idêntico, inclusive ordem;
 - os campos de descoberta são idênticos;
-- apenas o motor do Stage 3 muda;
+- apenas o motor do Estágio 3 muda;
 - a saída passa pela mesma interface comum;
-- Stages 4, 5 e 6 são os mesmos;
+- Estágios 4, 5 e 6 são os mesmos;
 - modelos, hardware, alvo, avaliador e telemetria são congelados.
 
 As três sementes testam a sensibilidade à inicialização e à ordem de processamento.
@@ -815,7 +815,7 @@ No desenho final:
 
 - nenhum braço gera sua própria referência;
 - a referência é construída antes dos braços;
-- todos recebem o mesmo Stage 2;
+- todos recebem o mesmo Estágio 2;
 - a referência projeta demandas diretamente no portfólio curado;
 - os métodos são comparados contra as mesmas quatro visões;
 - nenhum resultado de braço altera o alvo.
@@ -832,13 +832,13 @@ curadoria estava certa.
 
 A resposta combina três fontes:
 
-1. **Stage 2:** extrai `info_fornecidas` e `info_faltantes` dos chamados;
-2. **Stage 4:** sugere informações necessárias por grupo natural;
-3. **Stage 7:** a gestão congela `informacoes_obrigatorias` por serviço.
+1. **Estágio 2:** extrai `info_fornecidas` e `info_faltantes` dos chamados;
+2. **Estágio 4:** sugere informações necessárias por grupo natural;
+3. **Estágio 7:** a gestão congela `informacoes_obrigatorias` por serviço.
 
 O job 90 executa `auditar_campos_portfolio.py`:
 
-- usa BGE-M3 para alinhar evidências textuais do Stage 2 aos campos curados;
+- usa BGE-M3 para alinhar evidências textuais do Estágio 2 aos campos curados;
 - calcula taxas históricas de informação fornecida, faltante e contraditória;
 - usa como principal o consenso estrito Llama–Qwen;
 - repete o cálculo nas quatro visões da referência;

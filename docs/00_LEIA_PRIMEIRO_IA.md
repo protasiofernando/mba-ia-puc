@@ -11,7 +11,7 @@ A comparação sobre 1.456 chamados foi concluída no A100, passou em 302 verifi
 sem falhas e não encontrou um vencedor global único de aderência: a evidência
 primária favorece K-means, mas o resultado varia com semente, camada e visão de
 referência; o custo favorece o motor estatístico e o portfólio curado permanece
-a decisão operacional. Depois do estudo, o Stage 7 projetou automaticamente os
+a decisão operacional. Depois do estudo, o Estágio 7 projetou automaticamente os
 1.456 chamados nesse portfólio; sua distribuição agregada é publicável e a
 classificação por chamado permanece privada.
 
@@ -19,7 +19,7 @@ classificação por chamado permanece privada.
 
 1. `MANUAL_DO_PROJETO.md`: identidade, arquitetura e desenho do estudo;
 2. `RESULTADOS_COMPARACAO.md`: medições e conclusão;
-3. `FLUXO_COMPLETO_MBA.md`: explicação técnica dos Stages e jobs;
+3. `FLUXO_COMPLETO_MBA.md`: explicação técnica dos Estágios e jobs;
 4. `AUDITORIA_COERENCIA_PROJETO.md`: confronto entre narrativa, código e evidência;
 5. `ESTADO_COMPARACAO_ROBUSTA.json`: estado e linhagem máquina-legíveis;
 6. `APENDICE_TECNICO.md`: tentativas invalidadas e correções.
@@ -27,13 +27,13 @@ classificação por chamado permanece privada.
 ## Fatos congelados
 
 - Universo bruto: 1.584 chamados.
-- Escopo de Sala removido antes do Stage 1: 128 registros, todos com o request
+- Escopo de Sala removido antes do Estágio 1: 128 registros, todos com o request
   type legado `Solicitação de Acesso a Bases de Dados`, do fluxo de dados
   confidenciais/Sala de Sigilo atendido fora da DTI Pesquisa pela equipe de
   Banco de Dados, sem LLM e sem texto livre. Esse rótulo não é o
   serviço curado homônimo de acesso comum a bases fora da Sala.
 - Universo analítico: 1.456 chamados.
-- Stage 2: SHA-256
+- Estágio 2: SHA-256
   `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1`.
 - Portfólio curado: decisão operacional adotada, não referência externa
   independente.
@@ -46,7 +46,7 @@ classificação por chamado permanece privada.
   rotulação humana individual.
 - Job 90 final: `2234.HPCGPU`, `Exit_status=0`, walltime `00:01:04`.
 - `VALIDACAO_RESULTS.json`: `PASS`, 302 verificações, zero falhas.
-- Stage 7 operacional: 1.456 classificações automáticas, oito categorias
+- Estágio 7 operacional: 1.456 classificações automáticas, oito categorias
   analíticas, zero Sala de Sigilo; agregado em
   `pipeline_data/07_portfolio_final.json`.
 
@@ -62,9 +62,9 @@ conclusão de que o método venceu globalmente, porque a vantagem não é invari
 entre sementes, camadas e referências. O custo foi classificado como
 `custo_convergente_estatistico`.
 
-Também não há evidência para atribuir especificamente ao Stage 5 uma eventual
-vantagem do pipeline agêntico: os Stages 4–6 formam a camada semântica comum e
-não houve ablação isolada do Stage 5.
+Também não há evidência para atribuir especificamente ao Estágio 5 uma eventual
+vantagem do pipeline agêntico: os Estágios 4–6 formam a camada semântica comum e
+não houve ablação isolada do Estágio 5.
 
 ## Artefatos finais
 
@@ -104,10 +104,10 @@ os caminhos originais executados permanecem no estado JSON e no apêndice.
 
 ## Regras invioláveis
 
-- não reutilizar o Stage 2 de 1.584 registros;
+- não reutilizar o Estágio 2 de 1.584 registros;
 - não inserir Sala de Sigilo no universo analítico;
 - não tratar o portfólio curado como referência humana independente;
-- não publicar CSV, Stage 1, Stage 2, checkpoints, chaves ou texto por chamado;
+- não publicar CSV, Estágio 1, Estágio 2, checkpoints, chaves ou texto por chamado;
 - não reconstruir uma conclusão diferente a partir de tentativas parciais;
 - separar custo de aderência e medição de interpretação.
 
@@ -124,5 +124,5 @@ modelos ou pergunta de pesquisa mudarem.
 
 A precedência do alvo está formalizada em `../formacao_portfolio/README.md`:
 candidato estatístico, curadoria humana no catálogo, alvo congelado e só então
-comparação dos dois métodos. A execução posterior do Stage 7 foi uma
+comparação dos dois métodos. A execução posterior do Estágio 7 foi uma
 materialização operacional e não altera o estudo já concluído.

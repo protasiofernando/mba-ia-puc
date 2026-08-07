@@ -94,22 +94,31 @@ com base na experiência acumulada dos gestores, sem análise sistemática das
 demandas efetivamente registradas pelos usuários. Este trabalho apresenta um
 sistema de apoio à decisão para reavaliar o portfólio de serviços de tecnologia
 para pesquisa da Diretoria de Tecnologia da Informação (DTI) da Fundação
-Getulio Vargas (FGV) a partir do histórico de chamados. O pipeline foi executado
-integralmente na infraestrutura de computação de alto desempenho da instituição.
-Modelos de linguagem locais, `llama3.3:70b` para raciocínio e
-`qwen3:30b-a3b-instruct-2507-q4_K_M` para geração de saídas estruturadas, foram
-servidos pelo Ollama em uma GPU NVIDIA A100. O processamento destilou intenções,
-identificou grupos de demanda, recomendou um catálogo e reclassificou o
-histórico. Como contribuição metodológica, compararam-se duas abordagens de
-descoberta: embeddings `bge-m3` combinados com K-means e descoberta hierárquica
-por LLM. A comparação controlada utilizou três sementes e uma referência
-automática produzida por consenso entre Llama e Qwen. A evidência primária
-favoreceu K-means e o custo do método estatístico, mas não sustentou a existência
-de um vencedor global único, pois os resultados variaram conforme a semente, a
-camada de avaliação e a referência. O resultado operacional consiste em um
-portfólio curado com sete serviços, uma categoria residual e Sala de Sigilo como
-encaminhamento fixo, todos com escopo e campos obrigatórios definidos. Nenhum
-dado histórico sensível deixou a infraestrutura institucional.
+Getulio Vargas (FGV) a partir do histórico de chamados. A reavaliação enfrenta
+uma restrição institucional que condiciona todo o desenho: os chamados contêm
+dados pessoais e não podem ser enviados a serviços externos de inteligência
+artificial. Nenhum dado histórico sensível deixou a infraestrutura institucional.
+
+O pipeline foi executado integralmente na infraestrutura de computação de alto
+desempenho da instituição. Modelos de linguagem locais, `llama3.3:70b` para
+raciocínio e `qwen3:30b-a3b-instruct-2507-q4_K_M` para geração de saídas
+estruturadas, foram servidos pelo Ollama em uma GPU NVIDIA A100. Cada chamado
+teve sua intenção destilada; os pedidos foram agrupados por intenção, e não pela
+categoria em que haviam sido abertos; desses grupos derivou-se um catálogo
+recomendado, no qual o histórico foi reclassificado. Como contribuição
+metodológica, compararam-se duas abordagens de descoberta sob o mesmo insumo e a
+mesma camada posterior: embeddings `bge-m3` combinados com K-means e descoberta
+hierárquica por LLM, em três sementes, contra uma referência automática
+produzida por consenso entre Llama e Qwen.
+
+A evidência primária favoreceu K-means e o custo do método estatístico, mas não
+sustentou a existência de um vencedor global único, pois os resultados variaram
+conforme a semente, a camada de avaliação e a referência. O resultado
+operacional consiste em um portfólio curado com sete serviços, uma categoria
+residual e Sala de Sigilo como encaminhamento fixo, todos com escopo e campos
+obrigatórios definidos. O que se transfere a outra instituição não é o catálogo,
+que é local, mas a demonstração de que a infraestrutura de HPC já instalada
+basta para conduzir a análise sem exportar dado sensível.
 
 **Palavras-chave:** gestão de serviços de TI; mineração de chamados; modelos de
 linguagem; agrupamento; apoio à decisão; catálogo de serviços.
@@ -119,18 +128,28 @@ linguagem; agrupamento; apoio à decisão; catálogo de serviços.
 IT support areas often organize service catalogs through managerial experience
 rather than systematic analysis of recorded user demand. This study presents a
 decision-support system that redesigns the research technology service portfolio
-of Fundação Getulio Vargas using historical support tickets. Locally hosted
-models on the institutional HPC infrastructure distill intent, identify demand
-groups, recommend a catalog, and reclassify the historical records. As a
+of Fundação Getulio Vargas using historical support tickets. The redesign faces
+an institutional constraint that shapes the entire architecture: tickets contain
+personal data and cannot be sent to external artificial intelligence services.
+Historical sensitive data remained within the institutional infrastructure.
+
+Locally hosted models on the institutional HPC infrastructure distilled the
+intent of each ticket; requests were grouped by intent rather than by the
+category under which they had been opened; a recommended catalog was derived
+from those groups, and the historical records were reclassified into it. As a
 methodological contribution, `bge-m3` embeddings combined with K-means were
 compared with hierarchical LLM-based discovery under a shared downstream
 pipeline, three random seeds, and an automatic reference produced by Llama and
-Qwen. Primary evidence favored K-means and the cost profile of the statistical
+Qwen.
+
+Primary evidence favored K-means and the cost profile of the statistical
 method, but did not support a unique global winner because results varied across
 seeds, evaluation layers, and reference views. The operational outcome is a
 curated portfolio with seven services, a residual category, and the secure-room
-service as a fixed referral, each with a defined scope and required fields.
-Historical sensitive data remained within the institutional infrastructure.
+service as a fixed referral, each with a defined scope and required fields. What
+transfers to another institution is not the catalog, which is local, but the
+demonstration that already installed HPC infrastructure suffices to run the
+analysis without exporting sensitive data.
 
 **Keywords:** IT service management; ticket mining; large language models;
 clustering; decision support; service catalog.
@@ -160,12 +179,21 @@ Três evidências indicavam que o catálogo já não representava adequadamente 
 demanda. Primeiro, a opção genérica "Não encontrou o que procurava?" era a
 terceira categoria mais acionada na base completa, com 203 dos 1.584 chamados
 (12,8%), o que sugeria dificuldade dos usuários para identificar o item correto.
-Segundo, havia categorias sobrepostas para solicitações semelhantes. Terceiro,
-chamados abertos sem as informações necessárias exigiam interações adicionais
-para esclarecimento. No universo analítico, os chamados com múltiplas interações
-apresentaram tempo médio de resolução 5,22 vezes maior que o dos atendimentos
-diretos. Na base completa anterior ao filtro, essa razão foi de 5,51, conforme a
-seção 4.3.
+Segundo, havia categorias sobrepostas para solicitações semelhantes. Terceiro, e
+mais caro em termos operacionais, chamados abertos sem as informações
+necessárias exigiam idas e vindas de esclarecimento. Os chamados resolvidos em
+uma única interação levaram, em média, 2,6 dias. Os que exigiram duas ou mais
+levaram 13,4. A razão de 5,22 entre as médias no universo analítico, ou de 5,51
+na base anterior ao filtro, é essa mesma diferença expressa de outra forma
+(seção 4.3).
+
+As três evidências não têm a mesma força, e a distinção orienta o que se pode
+concluir delas. A sobreposição de categorias e o tempo adicional das múltiplas
+interações estão medidos diretamente no dado. O uso elevado do item genérico
+admite uma segunda leitura: ele pode refletir a posição do item no formulário, e
+não apenas a inadequação do catálogo. A diferença importa porque a primeira
+leitura pede redesenho do catálogo, enquanto a segunda pediria apenas redesenho
+da interface de abertura.
 
 A reavaliação é dificultada pela natureza do insumo. O texto livre de milhares
 de chamados contém títulos vagos, descrições incompletas e comentários de
@@ -371,17 +399,23 @@ operacionais estão em [docs/MANUAL_HPC.md](docs/MANUAL_HPC.md).
 
 #### 4.1 Diagnóstico do portfólio vigente
 
-As quantidades de grupos referem-se a etapas distintas e não devem ser
-interpretadas como resultados equivalentes. O recorte histórico que iniciou a
-formação do portfólio continha **23 grupos**. A execução comparativa final
-produziu **29 grupos** no Método Estatístico e **20 tipos de requisição** no
-Método Agêntico antes da consolidação semântica. Em contraste com as 18
-categorias do catálogo vigente, as três perspectivas revelaram categorias
-excessivamente amplas, demandas recorrentes sem categoria própria e fragmentação
-de pedidos semelhantes. Na base completa de 1.584 chamados, o item “Não
-encontrou o que procurava?” reunia 203 casos (12,8%) e era a terceira categoria
-mais utilizada. Esse percentual descreve o diagnóstico anterior ao filtro e não
-a distribuição do universo comparativo de 1.456 registros.
+O catálogo vigente oferecia 18 categorias. Toda tentativa de reconstruir a
+estrutura da demanda diretamente a partir dos chamados encontrou mais grupos do
+que isso, por qualquer método e em qualquer etapa do projeto. O recorte
+histórico que iniciou a formação do portfólio continha **23 grupos**; a execução
+comparativa final produziu **29 grupos** no Método Estatístico e **20 tipos de
+requisição** no Método Agêntico, antes da consolidação semântica. As três
+quantidades pertencem a etapas distintas e não devem ser interpretadas como
+resultados equivalentes, mas apontam na mesma direção: categorias excessivamente
+amplas, demandas recorrentes sem categoria própria e fragmentação de pedidos
+semelhantes.
+
+O sintoma mais visível desse desalinhamento estava dentro do próprio catálogo.
+Na base completa de 1.584 chamados, o item “Não encontrou o que procurava?”
+reunia 203 casos (12,8%) e era a terceira categoria mais utilizada, o que
+significa que quase um em cada oito solicitantes não localizava onde abrir seu
+pedido. Esse percentual descreve o diagnóstico anterior ao filtro e não a
+distribuição do universo comparativo de 1.456 registros.
 
 #### 4.2 Portfólio final
 
@@ -517,21 +551,28 @@ As instruções completas de instalação e execução estão em [docs/README_TE
 
 #### 4.6 Comparação robusta dos métodos de descoberta
 
-A comparação parte de um Estágio 2 congelado com 1.456 chamados, produzido
-depois da remoção determinística dos 128 registros do tipo de requisição legado
-homônimo
-“Solicitação de Acesso a Bases de Dados”, pertencente ao fluxo de dados
-confidenciais/Sala de Sigilo e atendido fora da DTI Pesquisa pela equipe de
-Banco de Dados. O serviço final de acesso comum a bases é outro objeto
-operacional e permanece no catálogo curado. Nenhuma LLM ou texto
-livre decide o escopo.
-
-Há dois resultados separados:
+Comparar dois métodos de descoberta admite duas perguntas distintas, e responder
+a uma delas não responde à outra. A primeira é operacional: qual arquitetura
+completa produz o melhor resultado final? A segunda é controlada: mantendo
+constante tudo o que vem antes e depois da descoberta, qual motor adere melhor
+ao portfólio adotado? O estudo mantém os dois resultados separados:
 
 1. um benchmark descritivo das arquiteturas completas;
 2. uma comparação controlada do Estágio 3, na qual K-means e LLM utilizam o
    mesmo insumo, os mesmos campos, a mesma interface canônica e os mesmos
    Estágios 4 a 6.
+
+A separação é necessária porque, no benchmark, vários componentes mudam ao mesmo
+tempo, e nenhuma diferença observada pode ser atribuída isoladamente a um deles.
+
+Ambos os desenhos partem do mesmo Estágio 2 congelado, com 1.456 chamados,
+produzido depois da remoção determinística dos 128 registros do tipo de
+requisição legado homônimo
+“Solicitação de Acesso a Bases de Dados”, pertencente ao fluxo de dados
+confidenciais/Sala de Sigilo e atendido fora da DTI Pesquisa pela equipe de
+Banco de Dados. O serviço final de acesso comum a bases é outro objeto
+operacional e permanece no catálogo curado. Nenhuma LLM ou texto
+livre decide o escopo.
 
 A comparação controlada tem três pares de sementes e é confrontada com o
 portfólio curado por uma referência automática produzida por Llama e Qwen em
@@ -554,10 +595,17 @@ estão em [`docs/RESULTADOS_COMPARACAO.md`](docs/RESULTADOS_COMPARACAO.md).
 
 #### 4.7 Discussão integrada
 
-Os resultados respondem afirmativamente à questão aplicada: foi possível
+Os quatro resultados principais deste trabalho compartilham uma forma. Em cada
+um deles, a evidência automática estabelece algo com firmeza e para diante de
+uma segunda pergunta que não alcança. Percorrê-los por esse eixo mostra onde a
+decisão humana permanece necessária.
+
+O primeiro caso é o mais favorável à automação. Os resultados respondem
+afirmativamente à questão aplicada: foi possível
 transformar chamados históricos em evidência auditável para redesenhar o
-catálogo sem transferir dados sensíveis para serviços externos. A descoberta
-não determinou isoladamente o portfólio. A etapa de descoberta revelou padrões
+catálogo sem transferir dados sensíveis para serviços externos. Ainda assim, a
+descoberta não determinou isoladamente o portfólio. A etapa de descoberta
+revelou padrões
 de demanda, que foram convertidos pela área em serviços com responsabilidade,
 escopo e campos de abertura. Em seguida, o Estágio 7 projetou automaticamente o
 histórico na decisão congelada. Essa sequência materializa o princípio de
@@ -565,7 +613,8 @@ histórico na decisão congelada. Essa sequência materializa o princípio de
 um artefato pela relação entre problema organizacional, construção e utilidade
 (HEVNER et al., 2004).
 
-O diagnóstico de categorias sobrepostas e do uso elevado do item genérico é
+O segundo caso delimita a fronteira com mais nitidez. O diagnóstico de
+categorias sobrepostas e do uso elevado do item genérico é
 coerente com a literatura de classificação de chamados: uma taxonomia ambígua
 pode prejudicar o encaminhamento correto já na abertura (AL-HAWARI; BARHAM,
 2021). A projeção de apenas 1,6% do histórico analítico na categoria residual
@@ -574,7 +623,8 @@ o catálogo curado oferece cobertura retrospectiva mais específica. Esse númer
 entretanto, não prova que usuários futuros escolherão corretamente os novos
 itens; essa hipótese exige acompanhamento após a implantação.
 
-Quanto à questão metodológica, K-means recebeu o sinal mais favorável na
+O terceiro caso é aquele em que a própria evidência recusa a conclusão mais
+simples. Quanto à questão metodológica, K-means recebeu o sinal mais favorável na
 evidência primária e apresentou menor custo, mas sua vantagem não permaneceu
 invariante entre sementes, camadas e referências. A conclusão é compatível com
 a literatura de validação de agrupamentos: coesão, concordância externa e
@@ -584,6 +634,7 @@ estabilidade medem propriedades diferentes e não devem ser substituídas por um
 mas que o motor estatístico oferece o melhor compromisso observado na evidência
 primária e no custo deste domínio.
 
+O quarto caso é o que mais tenta o leitor a concluir além do que o dado sustenta.
 A razão entre as médias dos grupos com múltiplas interações e resolução direta
 foi de 5,22 no universo analítico e de 5,51 na base completa anterior ao filtro.
 Essa associação reforça a utilidade operacional de coletar campos obrigatórios.
@@ -591,10 +642,20 @@ Ainda assim, complexidade do chamado, prioridade e disponibilidade da equipe
 podem afetar simultaneamente interações e duração. O projeto usa esse resultado
 para motivar o desenho do formulário, não para prometer redução causal de tempo.
 
-Por fim, manter a curadoria humana e tornar visíveis justificativa, confiança e
+Os quatro casos explicam por que a curadoria humana não é um ajuste posterior.
+Manter a decisão com a área e tornar visíveis justificativa, confiança e
 informações faltantes evita tratar a IA como decisora autônoma. A arquitetura
 apoia a revisão e a correção, em consonância com as recomendações para interação
 entre humanos e sistemas de IA propostas por Amershi et al. (2019).
+
+O padrão sustenta uma conclusão e recusa outra. A automação foi suficiente para
+produzir evidência auditável sobre a demanda: grupos, volumes, sobreposições,
+custo e tempo. Não foi suficiente para produzir a decisão, porque a decisão
+depende de responsabilidade, governança e visibilidade, critérios que não estão
+registrados no histórico de chamados e não poderiam ser inferidos dele. A
+pergunta que permanece aberta não é qual método descobre melhor, mas quanto
+dessa fronteira se desloca quando o histórico passar a registrar também o que a
+área decidiu e por quê.
 
 #### 4.8 Ameaças à validade
 
@@ -667,16 +728,23 @@ se destacam:
    separadamente. A evidência primária favorece K-means, mas a sensibilidade à
    camada impede declarar um vencedor global único.
 
-As limitações identificadas orientam trabalhos futuros. O Método Estatístico
-produz grupos disjuntos e depende da escolha de um valor de K, enquanto o Método
-Agêntico apresenta maior consumo de tokens. A análise de tempo mede associação,
-e não causalidade; uma avaliação causal exigiria, por exemplo, a comparação de
-coortes anteriores e posteriores à adoção do novo portal. Além disso, a
-validação abrange um único domínio, o de serviços de tecnologia para pesquisa.
-Como continuidade, recomenda-se medir a adoção em produção, acompanhar o uso do
-item genérico e a taxa de resolução direta, reexecutar periodicamente o pipeline
-para detectar mudanças na demanda e replicar o método em outras áreas de
-atendimento da instituição.
+Cada limitação identificada aponta para um teste que este trabalho não pôde
+executar. O Método Estatístico produz grupos disjuntos e depende da escolha de
+um valor de K, enquanto o Método Agêntico apresenta maior consumo de tokens. A
+análise de tempo mede associação, e não causalidade; uma avaliação causal
+exigiria, por exemplo, a comparação de coortes anteriores e posteriores à adoção
+do novo portal. A validação abrange um único domínio, o de serviços de
+tecnologia para pesquisa, e apenas a replicação em outras áreas de atendimento
+da instituição separaria o que pertence ao método do que pertence a esta demanda
+específica.
+
+A continuidade recomendada é medir a adoção em produção, acompanhar o uso do
+item genérico e a taxa de resolução direta e reexecutar periodicamente o
+pipeline para detectar mudanças na demanda. Essa medição responde à pergunta que
+o trabalho deixa aberta: um catálogo desenhado a partir do que os usuários
+pediram é, de fato, mais fácil de usar do que um catálogo desenhado a partir da
+percepção de quem opera o serviço. O histórico permitiu formular a hipótese.
+Apenas a produção pode testá-la.
 
 ### 6. Referências
 

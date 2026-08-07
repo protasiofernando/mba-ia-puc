@@ -23,7 +23,7 @@ Os resultados finais do estudo estão em `resultados_publicaveis/`.
 Os artefatos privados `01_tickets.json`, `02_summaries.json`,
 `03_clusters.json`, `06_classificados.json`, checkpoints e telemetria bruta
 permanecem fora do Git. O arquivo `07_portfolio_final.json` só deve ser gerado
-quando o Stage 7 automático for executado sobre um insumo privado válido. Essa
+quando o Estágio 7 automático for executado sobre um insumo privado válido. Essa
 execução foi concluída sobre os 1.456 chamados: o agregado publicável registra
 oito categorias analíticas, com Sala de Sigilo visível mas fora da análise. O
 arquivo `07_classificados_final.json`, por conter dados por chamado, permanece

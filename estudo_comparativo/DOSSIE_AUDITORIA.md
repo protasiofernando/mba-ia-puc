@@ -6,7 +6,7 @@ A primeira tentativa não produziu comparação: o próprio gate abortou o Job
 2165 porque a LLM excluiu 702 de 1.584 chamados como Sala de Sigilo. A máscara
 foi invalidada. O desenho final corrigiu a fronteira na fonte: removeu 128
 chamados pelo request type estruturado legado do fluxo de dados
-confidenciais/Sala antes do Stage 1 e entregou os 1.456 remanescentes igualmente
+confidenciais/Sala antes do Estágio 1 e entregou os 1.456 remanescentes igualmente
 a todos os braços. Nenhum modelo decide o escopo.
 
 Estado atual:
@@ -15,10 +15,10 @@ Estado atual:
 |---|---|
 | CSVs filtrados | PASS: 1.456 linhas e chaves únicas |
 | Manifesto agregado do filtro | Congelado |
-| Código Stage 1–2 isolado | Implementado |
-| ZIP Stage 1–2 code-only | Gerado e auditado |
-| Stage 2 | Concluído no Job `2166.HPCGPU`, `Exit_status=0` |
-| SHA Stage 2 | `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1` |
+| Código Estágio 1–2 isolado | Implementado |
+| ZIP Estágio 1–2 code-only | Gerado e auditado |
+| Estágio 2 | Concluído no Job `2166.HPCGPU`, `Exit_status=0` |
+| SHA Estágio 2 | `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1` |
 | ZIP executado | `mba-ia-puc_rev6_20260803.zip`, SHA `a2896c3e…b1967c` |
 | Jobs de comparação | Concluídos |
 | Validação final | PASS: 302 verificações, zero falhas |
@@ -41,10 +41,10 @@ O benchmark operacional e a ablação justa são apresentados separadamente.
 No benchmark, M1 e M2 são arquiteturas inteiras; qualquer superioridade é
 descritiva. Na ablação, K-means e LLM recebem:
 
-- o mesmo Stage 2;
+- o mesmo Estágio 2;
 - os mesmos 1.456 registros e ordem;
 - a mesma interface intermediária;
-- os mesmos Stages 4–6;
+- os mesmos Estágios 4–6;
 - o mesmo portfólio-alvo;
 - o mesmo avaliador;
 - três sementes pareadas;
@@ -101,7 +101,7 @@ curado homônimo, que cobre acesso comum a pastas e bases de pesquisa fora da
 Sala. A colisão de nomes é documentada em `configuracao/contexto_catalogo.md` e
 na decisão curada.
 
-O job 00 cria uma máscara que inclui todo o Stage 2 v6 e falha se houver
+O job 00 cria uma máscara que inclui todo o Estágio 2 v6 e falha se houver
 exclusão, indeterminação, hash ou ordem divergente.
 
 ## 5. Linhagem de dados
@@ -110,9 +110,9 @@ exclusão, indeterminação, hash ou ordem divergente.
 CSVs originais (1.584)
   -> filtro estruturado exato (remove 128)
 CSVs v6 (1.456; hashes congelados)
-  -> Stage 1 novo, diretório isolado
+  -> Estágio 1 novo, diretório isolado
 01_tickets v6
-  -> Stage 2 novo, checkpoints isolados
+  -> Estágio 2 novo, checkpoints isolados
 02_summaries v6 (SHA e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1)
   -> cópia server-side para pacote final
 máscara determinística (inclui 1.456)
@@ -126,7 +126,7 @@ nos ZIPs code-only.
 
 ## 6. Implementação dos gates
 
-### Antes do Stage 1
+### Antes do Estágio 1
 
 `validar_filtro_sala_sigilo_v6.py` verifica:
 
@@ -138,17 +138,17 @@ nos ZIPs code-only.
   efetivamente removida é o rótulo legado documentado, totalizando 128;
 - 1.456 chaves preenchidas e únicas.
 
-### Depois do Stage 2
+### Depois do Estágio 2
 
 `registrar_stage2_comparacao_v6.py` verifica:
 
-- 1.456 registros nos Stages 1 e 2;
+- 1.456 registros nos Estágios 1 e 2;
 - mesmas chaves e mesma ordem;
 - chaves únicas;
 - schema mínimo;
-- hashes de Stage 1, Stage 2 e manifesto;
+- hashes de Estágio 1, Estágio 2 e manifesto;
 - nome e digest completo do modelo Ollama;
-- versão do contrato, temperatura e hashes do código Stage 2/cliente LLM.
+- versão do contrato, temperatura e hashes do código Estágio 2/cliente LLM.
 
 Ele grava apenas metadados agregados em `MANIFESTO_STAGE2_V6.json`.
 
@@ -159,15 +159,15 @@ Ele grava apenas metadados agregados em `MANIFESTO_STAGE2_V6.json`.
 - geração não for v6;
 - escopo tiver usado LLM;
 - quantidade não for 1.456;
-- SHA do Stage 2 for inválido;
+- SHA do Estágio 2 for inválido;
 - manifesto de escopo divergir.
 
-O SHA do Stage 2 é injetado no `experimento_config.json` dentro do ZIP. Logo, o
+O SHA do Estágio 2 é injetado no `experimento_config.json` dentro do ZIP. Logo, o
 pacote final não pode ser produzido antecipadamente com placeholder.
 
 ### Job 00
 
-1. valida identidade do Stage 2;
+1. valida identidade do Estágio 2;
 2. materializa máscara determinística;
 3. congela ambiente;
 4. cria referência automática;

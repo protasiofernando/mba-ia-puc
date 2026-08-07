@@ -16,11 +16,11 @@ Entradas: `data/` e os arquivos de `configuracao/` (`projeto.json`,
 
 ### Comparação metodológica
 
-Use quando a intenção é comparar métodos sobre o Stage 2 congelado:
+Use quando a intenção é comparar métodos sobre o Estágio 2 congelado:
 
 [`../estudo_comparativo/RUNBOOK_HPC.md`](../estudo_comparativo/RUNBOOK_HPC.md)
 
-Esse fluxo recebe um ZIP code-only, não CSVs. Não execute Stage 1 ou 2 dentro da
+Esse fluxo recebe um ZIP code-only, não CSVs. Não execute Estágio 1 ou 2 dentro da
 comparação.
 
 ## Ambiente vigente

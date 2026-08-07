@@ -18,7 +18,7 @@ Conteúdo:
 - `estudo_comparativo/referencia/`: qualidade agregada da referência automática;
 - manifestos e ambiente congelado necessários para a proveniência.
 - `RESULTADO_DASHBOARD.html`: visualização offline do catálogo, da projeção
-  agregada do Stage 7 e dos resultados permitidos; não integra o tar do Job 90.
+  agregada do Estágio 7 e dos resultados permitidos; não integra o tar do Job 90.
 
 O tar privado não foi copiado. Esta pasta não contém chave Jira, texto de
 chamado, classificação por chamado, CSV, banco, checkpoint ou segredo.

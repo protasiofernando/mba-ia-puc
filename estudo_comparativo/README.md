@@ -25,7 +25,7 @@ Leia primeiro:
 ## Desenho
 
 - Benchmark: duas arquiteturas completas, resultado descritivo.
-- Ablação: somente o motor do Stage 3 varia; Stage 2, interface, Stages 4–6,
+- Ablação: somente o motor do Estágio 3 varia; Estágio 2, interface, Estágios 4–6,
   alvo e avaliador são comuns.
 - Motores: `bge-m3` + K-means e descoberta hierárquica por LLM.
 - Seeds: 42, 31415 e 27182.
@@ -36,7 +36,7 @@ Leia primeiro:
 
 Sala de Sigilo continua visível no portal, mas é atendida pela Segurança da
 Informação. Ela não entra em descoberta, prompts, métricas ou ranking. O filtro
-usa o campo estruturado anterior ao Stage 1 e não usa LLM nem texto livre.
+usa o campo estruturado anterior ao Estágio 1 e não usa LLM nem texto livre.
 
 ## Arquivos principais
 
@@ -47,7 +47,7 @@ usa o campo estruturado anterior ao Stage 1 e não usa LLM nem texto livre.
 - `DOSSIE_AUDITORIA.md`: justificativa dos controles;
 - `RUNBOOK_HPC.md`: reprodução controlada;
 - `hpc/`: jobs PBS;
-- `source/`: ponto privado de injeção do Stage 2 no HPC.
+- `source/`: ponto privado de injeção do Estágio 2 no HPC.
 
-Não versionar CSV, Stage 1, Stage 2, checkpoints, logs, classificações por
+Não versionar CSV, Estágio 1, Estágio 2, checkpoints, logs, classificações por
 chamado ou tar privado.

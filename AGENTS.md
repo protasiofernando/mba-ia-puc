@@ -18,7 +18,7 @@ Antes de agir, leia nesta ordem:
 ## Estado vigente em uma frase
 
 A comparação está concluída. Sala de Sigilo foi removida deterministicamente
-antes do Stage 1; o universo analítico tem 1.456 chamados; o Job 90 final
+antes do Estágio 1; o universo analítico tem 1.456 chamados; o Job 90 final
 `2234.HPCGPU` terminou com `Exit_status=0`; `VALIDACAO_RESULTS.json` passou em
 302 checks, sem falhas. A evidência primária favorece K-means e seu custo, mas
 não há vencedor global único de aderência por sensibilidade a semente, camada
@@ -26,18 +26,18 @@ e referência. O portfólio curado permanece a decisão operacional. Não há jo
 pendente nem motivo para reexecutar a cadeia. A precedência do alvo está
 formalizada em `formacao_portfolio/`: candidato inicial pelo Método Estatístico,
 curadoria humana no nível do catálogo, congelamento e só depois comparação dos
-dois métodos. O Stage 7 automático foi materializado depois da comparação sobre
+dois métodos. O Estágio 7 automático foi materializado depois da comparação sobre
 os 1.456 chamados e não exige rótulos humanos por chamado; seu agregado pode ser
 publicado, mas a classificação por chamado continua privada.
 
 ## Regras que nao podem ser quebradas
 
-- Nao reutilize artefatos v5 nem o Stage 2 antigo de 1.584 registros.
+- Nao reutilize artefatos v5 nem o Estágio 2 antigo de 1.584 registros.
 - Nao trate Sala de Sigilo como parte da analise; ela fica visivel no portfolio,
   mas fora dos metodos, metricas e ranking.
 - Nao envie CSVs, `01_tickets`, `02_summaries`, checkpoints, bancos ou `.env`
   para Git, ZIP code-only ou servicos externos.
-- Para a comparacao robusta, o ZIP e code-only; o Stage 2 e copiado dentro do
+- Para a comparacao robusta, o ZIP e code-only; o Estágio 2 e copiado dentro do
   HPC.
 - O portfolio curado e a decisao operacional adotada, nao uma ground truth
   independente.

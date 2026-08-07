@@ -10,7 +10,7 @@ resultados comparativos dos métodos.
 formacao_portfolio/
 ├── metodo_inicial_kmeans_git_a5576c8/  snapshot imutável do GitHub
 │   ├── pipeline/                       scripts 01–07 que existiam no commit
-│   ├── hpc/                            jobs históricos, inclusive Stage 7
+│   ├── hpc/                            jobs históricos, inclusive Estágio 7
 │   ├── pipeline_data/                  recomendação e final agregados
 │   ├── feedback_portfolio.json         curadoria histórica de sete itens
 │   └── MANIFESTO_SNAPSHOT.json         hashes dos 23 arquivos de origem
@@ -77,10 +77,10 @@ Ele também preserva os três artefatos que provam a execução do fluxo:
   PGD, colaboração/acessos, Sala e catch-all;
 - `feedback_portfolio.json`: redução humana para sete categorias operacionais;
 - `pipeline_data/07_portfolio_final.json`: materialização dessas sete categorias
-  com volumes, produzida pelo Stage 7.
+  com volumes, produzida pelo Estágio 7.
 
 O runner `hpc/run_stage7.sh` daquele commit declara expressamente que roda
-depois dos Stages 1–6 e da curadoria, lê `feedback_portfolio.json` e grava os
+depois dos Estágios 1–6 e da curadoria, lê `feedback_portfolio.json` e grava os
 dois artefatos `07_*`. O modelo operacional daquela execução era
 `gemma4:26b-q8`; os modelos Llama/Qwen pertencem à implementação posterior e ao
 estudo comparativo.
@@ -98,8 +98,8 @@ Portanto, o GitHub prova o processo histórico de formação e curadoria e a ori
 de sete categorias centrais. As duas decisões posteriores são evolução
 estratégica explícita, não saídas ocultas de um algoritmo.
 
-Há ainda uma limitação de linhagem no snapshot antigo: o Stage 5 registra 1.575
-chamados, enquanto o agregado do Stage 7 registra 1.583. Esses artefatos não são
+Há ainda uma limitação de linhagem no snapshot antigo: o Estágio 5 registra 1.575
+chamados, enquanto o agregado do Estágio 7 registra 1.583. Esses artefatos não são
 usados como base numérica da comparação final. O estudo robusto regenerou o
 insumo, retirou Sala deterministicamente e congelou 1.456 chamados com SHA
 próprio. A evidência histórica serve para provar a **ordem do processo**, não
@@ -171,7 +171,7 @@ métricas ou ranking.
 
 ## Como reproduzir a formação
 
-O Stage 2 vigente deve existir em `pipeline_data/02_summaries.json` e passar no
+O Estágio 2 vigente deve existir em `pipeline_data/02_summaries.json` e passar no
 gate de 1.456 registros e SHA congelado. No HPC:
 
 ```bash

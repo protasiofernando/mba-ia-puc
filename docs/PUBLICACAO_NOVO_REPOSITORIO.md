@@ -16,14 +16,14 @@ Uma cópia completa do histórico anterior permanece no backup local ignorado
 
 - código mantido do pipeline e do dashboard;
 - `formacao_portfolio/`, incluindo o snapshot byte a byte do método inicial;
-- decisão curada, contrato de materialização e Stage 7 automático;
+- decisão curada, contrato de materialização e Estágio 7 automático;
 - projeção operacional agregada de 1.456 classificações;
 - protocolo e código do estudo comparativo;
 - `resultados_publicaveis/`, inclusive o dashboard estático autocontido;
 - gerador code-only de uma base demonstrativa inteiramente artificial;
 - documentação acadêmica, estado estruturado e apêndice de auditoria.
 
-Não serão publicados CSVs, bancos, Stage 1, Stage 2, textos ou chaves de
+Não serão publicados CSVs, bancos, Estágio 1, Estágio 2, textos ou chaves de
 chamados, classificações por chamado, checkpoints, `.env`, pacotes privados,
 tarballs ou o workspace `_hpc/`. A base demonstrativa é produzida localmente
 pelo avaliador e continua ignorada pelo Git.

@@ -1,8 +1,13 @@
 # Apêndice técnico: linhagem, falhas e correções do experimento
 
-Este documento preserva a saga de execução fora da narrativa principal do MBA.
-Ele registra por que tentativas anteriores não são resultados, como os gates
-funcionaram e qual execução produziu os artefatos finais. A fonte estruturada
+Cada falha registrada aqui foi interrompida por um controle diferente, antes de
+contaminar a comparação. É por isso que elas pertencem à documentação do
+resultado e não a uma ressalva sobre ele: a sequência de tentativas invalidadas
+é a evidência de que os gates funcionam.
+
+Este documento preserva a linhagem de execução fora da narrativa principal do
+MBA. Ele registra por que tentativas anteriores não são resultados, como cada
+gate atuou e qual execução produziu os artefatos finais. A fonte estruturada
 mais detalhada é `ESTADO_COMPARACAO_ROBUSTA.json`; o resultado científico está
 em `RESULTADOS_COMPARACAO.md`.
 
@@ -14,7 +19,7 @@ existiam:
 
 - `pipeline/03_cluster.py`, com embeddings `bge-m3`, K-means e seleção de K por
   silhueta;
-- os Stages 4–6 de rotulação, recomendação e classificação;
+- os Estágios 4–6 de rotulação, recomendação e classificação;
 - `pipeline/07_finalize_portfolio.py`, que lê explicitamente
   `feedback_portfolio.json` como curadoria humana;
 - o candidato `05_portfolio_recommendation.json`, com 1.575 chamados, 23 grupos
@@ -83,7 +88,7 @@ exclusão tiveram zero ocorrências no período:
 | 2026 | 213 | 33 | 180 |
 | **Total** | **1.584** | **128** | **1.456** |
 
-O filtro passou a ser determinístico, anterior ao Stage 1, sem texto livre e
+O filtro passou a ser determinístico, anterior ao Estágio 1, sem texto livre e
 sem LLM. Sala permaneceu visível no portfólio como encaminhamento da Segurança
 da Informação, mas saiu do universo, das métricas e do ranking.
 
@@ -102,16 +107,16 @@ manifesto e a narrativa mantida acima fornecem a interpretação semântica exat
 
 ## 2. Insumo analítico congelado
 
-O Job `2166.HPCGPU` regenerou os Stages 1 e 2 no universo corrigido e terminou
-com `Exit_status=0`. O Stage 2 válido tem 1.456 registros e SHA-256
+O Job `2166.HPCGPU` regenerou os Estágios 1 e 2 no universo corrigido e terminou
+com `Exit_status=0`. O Estágio 2 válido tem 1.456 registros e SHA-256
 `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1`.
 O SHA antigo de 1.584 registros é proibido. Todos os braços finais receberam
 cópias byte-idênticas do novo insumo.
 
 O código que reproduz essa preparação foi retirado da raiz e está agora em:
 
-- `scripts/hpc/job_pipeline.sh`: runner geral dos Stages 1–6;
-- `estudo_comparativo/hpc/job_preparar_insumo.sh`: wrapper isolado dos Stages
+- `scripts/hpc/job_pipeline.sh`: runner geral dos Estágios 1–6;
+- `estudo_comparativo/hpc/job_preparar_insumo.sh`: wrapper isolado dos Estágios
   1–2 e do manifesto agregado.
 
 Os nomes foram simplificados após a execução. Os caminhos remotos originais,
@@ -135,14 +140,14 @@ recebem as passagens `a2/b2`, e os casos ainda sem maioria recebem um chair
 automático. Essa referência mede aderência ao portfólio adotado, não verdade
 externa.
 
-## 4. Falhas do Stage 5 e proteção de destinos fechados
+## 4. Falhas do Estágio 5 e proteção de destinos fechados
 
 O Job `2172.HPCGPU` falhou porque o mínimo de categorias era validado antes do
 merge determinístico de uma categoria obrigatória. A ordem do contrato foi
 corrigida; os sucessores foram corretamente bloqueados por `afterok`.
 
 Na cadeia seguinte, os Jobs `2183` a `2189` concluíram, mas o último braço,
-`2190.HPCGPU`, falhou no Stage 5a.3: a LLM retornou
+`2190.HPCGPU`, falhou no Estágio 5a.3: a LLM retornou
 `test_e_projeto_4c2cd10d` em vez do destino canônico
 `teste_e_projeto_4c2cd10d`. A retomada única `2192.HPCGPU` reproduziu o erro e
 acionou o gate de parada. A correção posterior passou a aceitar uma variação
@@ -151,7 +156,7 @@ canônico; não foi introduzido fuzzy matching.
 
 ## 5. Desalinhamento entre produtor e validador
 
-O Job `2196.HPCGPU` gerou um Stage 5 com o contrato
+O Job `2196.HPCGPU` gerou um Estágio 5 com o contrato
 `closed-destination-stage4-evidence-v3`, mas o validador empacotado ainda
 exigia `v2`. Foi uma falha de integração, não do método ou do modelo. A correção
 alinhou produtor, artefato e validador e adicionou testes e preflight do ZIP.
@@ -163,7 +168,7 @@ Uma tentativa de editar o avaliador in-place (`2214`) foi barrada pelo freeze,
 como previsto. O prefixo passou a ser normalizado sem relaxar a validação por
 digest.
 
-## 6. Segunda opção opcional no Stage 6
+## 6. Segunda opção opcional no Estágio 6
 
 Na cadeia posterior, o Job 00 e o benchmark legado passaram, mas o Job
 `2217.HPCGPU` terminou com erro após quatro respostas conterem uma segunda
@@ -183,7 +188,7 @@ code-only `mba-ia-puc_rev6_20260803.zip`:
 - SHA-256 do ZIP:
   `a2896c3e46f0b8d6dc90660a8715bf719effcfd55af4964e3486cb9283b1967c`;
 - tamanho: 210.750 bytes;
-- Stage 2: 1.456 registros, SHA-256 `e4fb8e41…54ff1`;
+- Estágio 2: 1.456 registros, SHA-256 `e4fb8e41…54ff1`;
 - Job 90 final: `2234.HPCGPU`, `Exit_status=0`, walltime `00:01:04`;
 - `VALIDACAO_RESULTS.json`: `PASS`, 302 verificações, zero falhas;
 - conclusão registrada em 4 de agosto de 2026 às 13:11:23 -03.
@@ -223,3 +228,11 @@ O resultado científico válido é exclusivamente o descrito em
 vencedor global único de aderência devido à sensibilidade à semente e à camada;
 o custo favorece a alternativa estatística; o portfólio curado permanece a
 decisão operacional.
+
+Há um limite nessa leitura, e convém deixá-lo explícito. Um gate só barra a
+falha que foi previsto para barrar, e todas as classes registradas acima foram
+detectadas por controles escritos antes delas. Nada aqui demonstra que a
+execução aprovada esteja livre de uma falha silenciosa, de tipo não antecipado.
+O que o registro sustenta é mais modesto e ainda assim útil: sempre que o
+aparato detectou um problema, ele interrompeu a cadeia em vez de produzir um
+número.

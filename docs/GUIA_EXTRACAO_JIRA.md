@@ -23,7 +23,7 @@ Valide antes do HPC:
 python scripts\validar_pre_hpc.py
 ```
 
-## Stage 1 vigente
+## Estágio 1 vigente
 
 O extrator atual é:
 
@@ -35,7 +35,7 @@ Ele é Python determinístico e gera `pipeline_data/01_tickets.json`. Na operaç
 normal, não é necessário chamá-lo separadamente:
 `scripts/hpc/job_pipeline.sh` o executa na ordem correta.
 
-O Stage 2 lê o Stage 1 e gera `02_summaries.json` com intenção, tema, tipo de
+O Estágio 2 lê o Estágio 1 e gera `02_summaries.json` com intenção, tema, tipo de
 pedido e informações fornecidas/faltantes.
 
 ## Relação com a comparação robusta

@@ -14,8 +14,8 @@ Este repositório contém três fases relacionadas, mas diferentes:
 
 1. **formação assistida**: o Método Estatístico gera o candidato automático;
 2. **curadoria operacional**: a área congela a decisão no nível do catálogo e
-   o Stage 7 projeta os chamados automaticamente;
-3. **comparação robusta**: reexecuta os dois métodos sobre Stage 2 e alvo
+   o Estágio 7 projeta os chamados automaticamente;
+3. **comparação robusta**: reexecuta os dois métodos sobre Estágio 2 e alvo
    congelados para medir aderência, estabilidade e custo.
 
 Nao use jobs ou outputs de um fluxo como substitutos do outro.
@@ -30,7 +30,7 @@ Modelos vigentes no A100:
 
 Estágios:
 
-| Stage | Implementação | Saída |
+| Estágio | Implementação | Saída |
 |---:|---|---|
 | 1 | Python determinístico | `01_tickets.json` |
 | 2 | LLM por chamado | `02_summaries.json` |
@@ -68,7 +68,7 @@ qstat
 tail -F logs/triagem_*.log
 ```
 
-O job executa validação, Stages 1–6 e validadores intermediários.
+O job executa validação, Estágios 1–6 e validadores intermediários.
 
 ### Formação do candidato estatístico
 

@@ -14,9 +14,9 @@ Arquivos executados:
 - `pipeline/llm_client.py`;
 - `config_portfolio.json`.
 
-O Stage 2 não é gerado aqui. O job robusto copia para `pipeline_data/` o mesmo
+O Estágio 2 não é gerado aqui. O job robusto copia para `pipeline_data/` o mesmo
 `02_summaries.json` filtrado usado por todos os braços. O job também fixa
-`OLLAMA_MODEL=llama3.3:70b`; não há Stage 7, dashboard ou resultado antigo
+`OLLAMA_MODEL=llama3.3:70b`; não há Estágio 7, dashboard ou resultado antigo
 neste diretório.
 
 Não execute esses módulos diretamente a partir do repositório local. O ponto de

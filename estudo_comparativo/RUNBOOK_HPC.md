@@ -22,16 +22,16 @@ pergunta de pesquisa. Nesse caso:
 | Insumo | Identidade |
 |---|---|
 | Universo analítico | 1.456 chamados |
-| Stage 2 | SHA-256 `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1` |
+| Estágio 2 | SHA-256 `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1` |
 | Filtro de Sala | `filtro_sala_sigilo_manifest_v6.json` |
 | Portfólio-alvo | `portfolio_referencia.json` |
 | Regras | `decision_rules_v1.json` |
 | Configuração | `experimento_config.json` |
 
-O Stage 2 contém dados derivados por chamado. Ele não entra no Git nem no ZIP
+O Estágio 2 contém dados derivados por chamado. Ele não entra no Git nem no ZIP
 code-only e deve ser copiado server-side no HPC.
 
-## 3. Regeneração opcional dos Stages 1–2
+## 3. Regeneração opcional dos Estágios 1–2
 
 O pacote code-only de preparação é gerado por:
 
@@ -48,7 +48,7 @@ O wrapper específico está em:
 qsub estudo_comparativo/hpc/job_preparar_insumo.sh
 ```
 
-Ele usa `scripts/hpc/job_pipeline.sh`, limita a execução aos Stages 1–2 e grava
+Ele usa `scripts/hpc/job_pipeline.sh`, limita a execução aos Estágios 1–2 e grava
 em:
 
 ```text
@@ -84,7 +84,7 @@ python scripts\validar_pacote_comparacao.py `
   _hpc\pacote\mba-ia-puc_rev6_20260803.zip
 ```
 
-O gerador usa lista positiva. O ZIP não pode conter CSV, Stage 1, Stage 2,
+O gerador usa lista positiva. O ZIP não pode conter CSV, Estágio 1, Estágio 2,
 checkpoints, banco, `.env`, chave ou texto de chamado. Registre SHA e tamanho
 externamente; o ZIP executado final tem SHA-256
 `a2896c3e46f0b8d6dc90660a8715bf719effcfd55af4964e3486cb9283b1967c`.
@@ -107,7 +107,7 @@ sed -i 's/\r$//' hpc/*.sh
 bash -n hpc/*.sh
 ```
 
-Copie o Stage 2 congelado para `source/02_summaries.json` e valide:
+Copie o Estágio 2 congelado para `source/02_summaries.json` e valide:
 
 ```bash
 source ~/venvs/venv/bin/activate
