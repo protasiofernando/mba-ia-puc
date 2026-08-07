@@ -1,6 +1,7 @@
 # Triagem Inteligente de Chamados de TI com LLM Local
 
 #### Aluno: [Fernando Nóbrega Mendes Protasio](https://github.com/protasiofernando)
+#### Matricula: [241100336]
 #### Orientadora: [Manoela Rabello Kohler](https://github.com/manoelakohler)
 
 ---
