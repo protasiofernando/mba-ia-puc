@@ -1,4 +1,4 @@
-# Dossiê de auditoria — comparação robusta
+# Dossiê de auditoria da comparação robusta
 
 ## Sumário executivo
 
@@ -21,7 +21,7 @@ Estado atual:
 | SHA Stage 2 | `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1` |
 | ZIP executado | `mba-ia-puc_rev6_20260803.zip`, SHA `a2896c3e…b1967c` |
 | Jobs de comparação | Concluídos |
-| Validação final | PASS: 302 checks, zero falhas |
+| Validação final | PASS: 302 verificações, zero falhas |
 | Resultado | Dependente da camada; sem vencedor global único |
 
 ## 1. Objetivo de negócio
@@ -47,7 +47,7 @@ descritiva. Na ablação, K-means e LLM recebem:
 - os mesmos Stages 4–6;
 - o mesmo portfólio-alvo;
 - o mesmo avaliador;
-- três seeds pareadas;
+- três sementes pareadas;
 - o mesmo ambiente HPC.
 
 Isso isola melhor o motor de descoberta e evita atribuir ao clustering diferenças
@@ -68,7 +68,7 @@ A blindagem inclui:
 - quatro visões de referência;
 - dois modelos distintos;
 - IC bootstrap;
-- três seeds;
+- três sementes;
 - métricas por duas camadas;
 - perdas por serviço estratégico;
 - métricas estruturais sem mapeamento único;
@@ -187,7 +187,7 @@ pacote final não pode ser produzido antecipadamente com placeholder.
 - consenso estrito não usa chair e exige acordo inicial sem baixa confiança ou
   ambiguidade;
 - consenso completo cobre todos os registros, mas continua sendo referência
-  automática, não ground truth humana.
+  automática, não uma referência humana independente.
 
 Os checkpoints são separados por fase, passagem, modelo e fingerprint do
 prompt. Isso permite retomar uma interrupção sem misturar respostas produzidas
@@ -248,7 +248,7 @@ em vez de ocultar uma rodada desfavorável.
 ## 10. Resultado da auditoria
 
 O estudo foi concluído pelo Job 90 `2234.HPCGPU`, com `Exit_status=0`.
-`VALIDACAO_RESULTS.json` registrou `PASS`, 302 checks e zero falhas. A
+`VALIDACAO_RESULTS.json` registrou `PASS`, 302 verificações e zero falhas. A
 conclusão formal é dependente da camada tanto no benchmark quanto na ablação.
 A evidência primária favorece K-means, mas não sustenta vencedor global único;
 o custo favorece o motor estatístico.

@@ -11,15 +11,15 @@ Atualizado em 7 de agosto de 2026.
 | Escopo de Sala de Sigilo | 128 registros do request type legado homônimo removidos; item preservado no portal |
 | Comparação | concluída |
 | Job 90 | `2234.HPCGPU`, `F/exit 0`, `00:01:04` |
-| Validação final | `PASS`, 302 checks, zero falhas |
+| Validação final | `PASS`, 302 verificações, zero falhas |
 | Resultado global de aderência | não único; dependente da camada |
 | Evidência primária | favorece K-means |
 | Custo | favorece o motor estatístico |
 | Decisão operacional | portfólio curado |
-| Stage 7 operacional | concluído; 1.456 classificações automáticas, agregado publicável |
+| Estágio 7 operacional | concluído; 1.456 classificações automáticas, agregado publicável |
 | Jobs pendentes | nenhum |
 | Formação e curadoria | processo e runners formalizados em `formacao_portfolio/` |
-| Auditoria de coerência | `PASS`, 49 checks, zero falhas/avisos |
+| Auditoria de coerência | `PASS`, 49 verificações, zero falhas ou avisos |
 | Gate integral pré-publicação | `PASS`, 163 arquivos, 39 testes |
 | Pré-registro público | proveniência interna disponível; anterioridade não atestada por timestamp externo |
 
@@ -31,7 +31,7 @@ Atualizado em 7 de agosto de 2026.
 - Linhagem: `docs/APENDICE_TECNICO.md`.
 - Estado estruturado: `docs/ESTADO_COMPARACAO_ROBUSTA.json`.
 - Resultado público versionável: `resultados_publicaveis/`.
-- Projeção operacional agregada do Stage 7:
+- Projeção operacional agregada do Estágio 7:
   `pipeline_data/07_portfolio_final.json`.
 - Evidência original local/privada: `_hpc/resultado/`, fora do Git.
 - Gate de publicação: `docs/PUBLICACAO_NOVO_REPOSITORIO.md`.
@@ -39,10 +39,10 @@ Atualizado em 7 de agosto de 2026.
 ## Interpretação autorizada
 
 O estudo mostra que K-means é a alternativa mais econômica e recebe o sinal
-mais favorável na evidência primária. A banca não deve receber a alegação de
-“vencedor absoluto”: as conclusões formais do benchmark e da ablação são
-dependentes da camada e a referência automática mede aderência ao portfólio
-curado, não acurácia contra verdade externa.
+mais favorável na evidência primária. Os resultados não sustentam a alegação de
+um vencedor absoluto: as conclusões formais do benchmark e da comparação
+controlada dependem da camada, e a referência automática mede aderência ao
+portfólio curado, não acurácia em relação a uma referência externa independente.
 
 O portfólio adotado continua sendo o curado pela área porque sua seleção inclui
 governança, responsabilidade técnica, navegação e visibilidade de serviços. A
@@ -52,7 +52,7 @@ Sua linhagem é: candidato formado inicialmente pelo Método Estatístico,
 curadoria humana no nível do catálogo, congelamento do alvo e reexecução dos
 dois métodos na comparação. Não houve rotulagem humana por chamado.
 
-Depois do encerramento da comparação, o Stage 7 classificou automaticamente os
+Depois do encerramento da comparação, o Estágio 7 classificou automaticamente os
 1.456 chamados no catálogo congelado. Essa materialização produziu volumes
 operacionais retrospectivos, não alterou o alvo nem as métricas do Job 90 e não
 mede adoção futura do portal. O agregado pode ser versionado; a classificação

@@ -1,12 +1,12 @@
-# Guia tecnico vigente
+# Guia técnico vigente
 
-Para retomar o projeto com baixo custo de contexto, comece por
-`docs/00_LEIA_PRIMEIRO_IA.md`. Para navegar toda a documentacao, use
+Uma síntese do estado vigente está disponível em
+`docs/00_LEIA_PRIMEIRO_IA.md`. O índice completo da documentação encontra-se em
 `docs/README.md`.
 
-Para compreender e explicar o fluxo completo do MBA, leia
-`docs/FLUXO_COMPLETO_MBA.md`. Este arquivo fica como referência curta de
-execução; o documento novo é a narrativa técnica canônica.
+A descrição integral do fluxo está em `docs/FLUXO_COMPLETO_MBA.md`. Este guia
+funciona como referência concisa para a execução, enquanto o documento de fluxo
+constitui a narrativa técnica canônica.
 
 ## Escopo
 
@@ -117,9 +117,10 @@ Ponto de entrada:
 O experimento separa:
 
 - benchmark descritivo de duas arquiteturas completas;
-- ablação justa entre K-means e LLM, com Stages 4–6 comuns e três seeds.
+- comparação controlada entre K-means e LLM, com Estágios 4 a 6 comuns e três
+  sementes.
 
-O estudo foi concluído no A100. A validação final passou em 302 checks, sem
+O estudo foi concluído no A100. A validação final passou em 302 verificações, sem
 falhas; a interpretação está em `RESULTADOS_COMPARACAO.md`.
 
 ## Guia: como reproduzir o método
@@ -163,7 +164,7 @@ reais com o mesmo schema. O gerador usa somente
 interações são criados artificialmente e não preservam linhas ou distribuições
 privadas. A saída permanece ignorada pelo Git.
 
-### Passo 1 — formação do candidato (Método Estatístico: bge-m3 + K-means)
+### Passo 1: formação do candidato (Método Estatístico: bge-m3 + K-means)
 
 Reproduz o processo que originou o portfólio: extração e interpretação (Estágios
 1–2) e depois a descoberta estatística com rotulação, consolidação e classificação.
@@ -173,15 +174,15 @@ qsub formacao_portfolio/hpc/job_formar_candidato_estatistico.sh
 ```
 
 Saída: um candidato automático e evidências em `formacao_portfolio/`. Este passo
-**não** decide o catálogo — a curadoria humana faz isso (ver "Curadoria e
+**não** decide o catálogo. Essa decisão cabe à curadoria humana (ver "Curadoria e
 portfólio adotado"). Localmente, sem PBS, executam-se os mesmos scripts de Estágio
 que o job encapsula, com `JIRA_DATA_DIR=data_exemplo`.
 
-### Passo 2 — reexecutar os dois métodos e medir
+### Passo 2: reexecutar os dois métodos e medir
 
 O estudo comparativo é empacotado para uma execução controlada. A sequência exata
 (referência + insumos comuns, benchmark das arquiteturas, comparação controlada do
-motor em três seeds, avaliação) está em
+motor com três sementes, avaliação) está em
 [`../estudo_comparativo/RUNBOOK_HPC.md`](../estudo_comparativo/RUNBOOK_HPC.md), com
 as dependências `afterok` e os gates. Em resumo:
 
@@ -191,18 +192,18 @@ qsub estudo_comparativo/hpc/job_10_m1_legado_llama.sh   # benchmark Método Esta
 qsub estudo_comparativo/hpc/job_20_m2_nativo.sh         # benchmark Método Agêntico
 qsub -v RUN_ID=kmeans_common_seed42 estudo_comparativo/hpc/job_30_ablacao.sh
 qsub -v RUN_ID=llm_common_seed42    estudo_comparativo/hpc/job_30_ablacao.sh
-#   ... demais seeds (31415, 27182) — ver RUNBOOK
+#   ... demais sementes (31415, 27182); ver RUNBOOK
 qsub estudo_comparativo/hpc/job_90_avaliacao.sh         # avaliação + métricas + pacotes
 ```
 
-### O que a reprodução entrega — e o que não entrega
+### Escopo e limites da reprodução
 
 - **Entrega:** o processo completo (formação → dois métodos → métricas) executando
   sobre uma base sintética fornecida localmente, com as mesmas métricas (Macro-F1 por serviço, B-cubed,
   ARI, AMI, taxa de reatribuição, custo) e os mesmos gates pré-registrados.
 - **Não entrega:** os **números exatos** do trabalho. Esses vêm da base real
   (1.456 chamados), que não é publicada. Na base sintética local os valores são outros, e
-  a aderência ao portfólio curado é **ilustrativa** — o alvo é uma decisão humana
+  a aderência ao portfólio curado é **ilustrativa**, pois o alvo é uma decisão humana
   tomada sobre a base real e não foi curado sobre a sintética. Os resultados
   oficiais permanecem em `resultados_publicaveis/`.
 

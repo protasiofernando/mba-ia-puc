@@ -32,7 +32,7 @@ reexecutados.
 Os blobs Git auditados e os runners mantidos estão registrados em
 `../formacao_portfolio/MANIFESTO_ORIGEM.json`. Essa precedência elimina a
 circularidade direta de usar a saída de um braço como alvo, mas não transforma
-o portfólio em ground truth independente: o caminho estatístico informou sua
+o portfólio em referência externa independente: o caminho estatístico informou sua
 formação.
 
 Essa evidência histórica demonstra a precedência do alvo, não funciona como
@@ -185,7 +185,7 @@ code-only `mba-ia-puc_rev6_20260803.zip`:
 - tamanho: 210.750 bytes;
 - Stage 2: 1.456 registros, SHA-256 `e4fb8e41…54ff1`;
 - Job 90 final: `2234.HPCGPU`, `Exit_status=0`, walltime `00:01:04`;
-- `VALIDACAO_RESULTS.json`: `PASS`, 302 checks, zero falhas;
+- `VALIDACAO_RESULTS.json`: `PASS`, 302 verificações, zero falhas;
 - conclusão registrada em 4 de agosto de 2026 às 13:11:23 -03.
 
 Artefatos locais:

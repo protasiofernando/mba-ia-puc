@@ -8,7 +8,7 @@ gate.
 
 **PASS.** A história metodológica, os runners, os alvos congelados e os
 resultados finais descrevem o mesmo processo. O gate automatizado passou em 49
-checks, sem falhas e sem avisos:
+verificações, sem falhas e sem avisos:
 
 ```powershell
 python scripts\validar_coerencia_projeto.py
@@ -42,7 +42,7 @@ limitações do desenho.
    insumos comuns. Os benchmarks compararam arquiteturas completas; os seis
    braços pareados compararam apenas o motor de descoberta em três sementes.
 8. O Job 90 `2234.HPCGPU` avaliou os resultados e terminou com
-   `Exit_status=0`. `VALIDACAO_RESULTS.json` passou em 302 checks sem falhas.
+   `Exit_status=0`. `VALIDACAO_RESULTS.json` passou em 302 verificações sem falhas.
 9. A evidência primária e o custo favorecem o caminho estatístico, mas a
    aderência varia por camada, semente e visão de referência. Portanto não há
    vencedor global único, e o portfólio curado permanece a decisão operacional.
@@ -57,7 +57,7 @@ limitações do desenho.
 | Referência | `estudo_comparativo/hpc/job_00_referencia.sh` | valida escopo, produz consenso automático, prepara insumos e libera o setup |
 | Benchmark estatístico | `job_10_m1_legado_llama.sh` | arquitetura estatística completa, Stages 3–6 |
 | Benchmark agêntico | `job_20_m2_nativo.sh` | arquitetura LLM completa, Stages 3–6 |
-| Ablação justa | `job_30_ablacao.sh` | K-means × LLM, mesma interface e Stages 4–6, seeds 42, 31415 e 27182 |
+| Comparação controlada | `job_30_ablacao.sh` | K-means × LLM, mesma interface e Estágios 4 a 6, sementes 42, 31415 e 27182 |
 | Avaliação | `job_90_avaliacao.sh` | valida, audita campos, calcula métricas e gera os pacotes de resultado |
 
 ## Correções feitas nesta auditoria

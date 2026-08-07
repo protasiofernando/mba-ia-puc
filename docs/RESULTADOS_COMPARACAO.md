@@ -25,7 +25,7 @@ O pacote final publicável foi validado antes desta síntese:
 | Checks finais | 302 |
 | Falhas | 0 |
 | Visões de referência | 4 completas |
-| Cubo controlado | 3 seeds × 4 referências × 3 camadas completo |
+| Cubo controlado | 3 sementes × 4 referências × 3 camadas completo |
 
 Os 128 registros removidos tinham todos o valor estruturado legado
 `Solicitação de Acesso a Bases de Dados` em `Customer Request Type`. No contexto
@@ -51,17 +51,17 @@ O estudo responde a dois estimandos diferentes:
    componentes mudam simultaneamente.
 2. **Comparação Controlada do Motor de Descoberta:** mantém insumo, interface e
    Estágios 4–6 iguais e troca somente o motor do Estágio 3: K-means ou LLM.
-   Foi repetida nas seeds 42, 31.415 e 27.182.
+   Foi repetida com as sementes 42, 31.415 e 27.182.
 
 A métrica primária pré-registrada foi o Macro-F1 por serviço na camada de
 request types finais. A margem de relevância prática foi 0,03. B-cubed F1,
 ARI, AMI e taxa mínima de reatribuição foram métricas secundárias, sem escore
 composto. O custo foi analisado separadamente. O Macro-F1 dá o mesmo peso aos
-sete serviços substantivos e exclui o catch-all; cada serviço usa seu melhor
+sete serviços substantivos e exclui a categoria residual; cada serviço usa seu melhor
 grupo predito de forma independente. Pareamento húngaro e diagnósticos de
 fusão/fragmentação complementam essa escolha permissiva.
 
-# Parte I — Medição
+# Parte I: medição
 
 ## 3. Comparação de Arquiteturas
 
@@ -88,7 +88,7 @@ ele isoladamente.
 
 ## 4. Comparação Controlada do Motor de Descoberta
 
-Na seed principal (42), valores negativos de Δ indicam vantagem do K-means.
+Na semente principal (42), valores negativos de Δ indicam vantagem do K-means.
 
 | Visão da referência | Cobertura | Δ Macro-F1 (LLM − K-means) | IC 95% | Direção |
 |---|---:|---:|---|---|
@@ -117,7 +117,7 @@ nenhuma perda material.
 | AMI | 0,531 | 0,403 | K-means |
 | Reatribuição mínima | 18,1% | 32,4% | K-means |
 
-### 4.1 Sensibilidade entre seeds
+### 4.1 Sensibilidade entre sementes
 
 | Seed | Δ Macro-F1 (LLM − K-means) | Direção |
 |---:|---:|---|
@@ -126,8 +126,8 @@ nenhuma perda material.
 | 31.415 | +0,002 | equivalentes |
 
 Portanto, a vantagem observada do K-means não foi uniforme: permaneceu nas
-seeds 42 e 27.182, mas desapareceu na seed 31.415. Também houve células
-equivalentes em grupos finais nas seeds 27.182 e 31.415. Esse é o motivo pelo
+sementes 42 e 27.182, mas desapareceu na semente 31.415. Também houve células
+equivalentes em grupos finais com as sementes 27.182 e 31.415. Esse é o motivo pelo
 qual a regra pré-registrada não autoriza declarar vencedor global de
 aderência.
 
@@ -151,7 +151,8 @@ downstream interagem; não sustenta atribuição isolada ao Estágio 5.
 ## 5. Serviços estratégicos
 
 Os quatro serviços protegidos foram avaliáveis em todas as 12 células do cubo.
-O gate estratégico passou: nenhuma perda excedeu o limite pré-registrado de
+O critério de proteção dos serviços estratégicos foi atendido: nenhuma perda
+excedeu o limite pré-registrado de
 0,10.
 
 | Serviço | F1 K-means | F1 LLM | Margem principal | Pior margem do vencedor no cubo |
@@ -169,7 +170,7 @@ O custo comparável usa o tempo da última execução bem-sucedida dos Estágios
 | Estimando | Método Estatístico | Método Agêntico | Redução estatística |
 |---|---:|---:|---:|
 | Arquiteturas completas | 2,01 h | 4,60 h | 56,3% |
-| Motores, mediana de 3 seeds | 1,69 h | 4,41 h | 61,6% |
+| Motores, mediana de 3 sementes | 1,69 h | 4,41 h | 61,6% |
 
 Nos braços controlados, as execuções K-means consumiram entre 3,43 e 4,19
 milhões de tokens e aproximadamente 455–496 Wh; as execuções LLM consumiram
@@ -177,20 +178,20 @@ entre 8,57 e 8,98 milhões de tokens e aproximadamente 1.278–1.303 Wh. Ambos o
 pipelines ainda usam LLM nos estágios comuns, portanto “estatístico” descreve o
 motor de descoberta, não ausência total de LLM.
 
-# Parte II — Conclusão
+# Parte II: conclusão
 
 ## 7. Conclusões permitidas pelas regras pré-registradas
 
 | Escopo | Código formal | Interpretação |
 |---|---|---|
 | Arquiteturas completas | `operacional_inconclusivo_dependente_da_camada` | A arquitetura agêntica foi melhor na saída final, mas pior na descoberta; uma execução não isola a causa nem estima variância. |
-| Motor de descoberta | `inconclusivo_dependente_da_camada` | O recorte principal e duas seeds favoreceram K-means, mas a seed 31.415 e células de camada produziram equivalência. |
+| Motor de descoberta | `inconclusivo_dependente_da_camada` | O recorte principal e duas sementes favoreceram K-means, mas a semente 31.415 e células de camada produziram equivalência. |
 | Resultado integrado | `resultado_global_nao_unico` | Os estimandos respondem perguntas diferentes e não autorizam um vencedor global de aderência. |
 | Custo | `custo_convergente_estatistico` | Os dois estimandos apontaram menor tempo e consumo para o caminho estatístico. |
 
 Em linguagem executiva: **há evidência relevante favorável ao K-means como
 motor de descoberta, mas não há vencedor formal de aderência** devido à
-sensibilidade à seed e à camada. A única conclusão convergente e forte entre os
+sensibilidade à semente e à camada. A única conclusão convergente e forte entre os
 dois estimandos é a de eficiência: o caminho estatístico foi substancialmente
 mais barato.
 
@@ -212,8 +213,8 @@ dois métodos foram reexecutados no
 estudo. Portanto, estes resultados comparam quanto cada método reconstrói a
 decisão adotada. Eles não foram usados para criar retroativamente o alvo.
 
-O snapshot público de 3 de julho contém a recomendação automática de dez itens,
-a curadoria para sete e sua materialização pelo Stage 7. O desenho atual evoluiu
+O registro público de 3 de julho contém a recomendação automática de dez itens,
+a curadoria para sete e sua materialização pelo Estágio 7. O desenho atual evoluiu
 com Acesso a Bases e Sala de Sigilo como encaminhamento fixo. Essa evolução é
 gerencial e antecede o alvo congelado usado no experimento.
 
@@ -231,17 +232,17 @@ gerencial e antecede o alvo congelado usado no experimento.
 
 O confronto automático com o histórico ajuda a priorizar os campos, mas não os
 define sozinho. Os maiores sinais de informação faltante foram: descrição no
-catch-all (53,8%), permissão e prazo em acesso a bases (30,2%), descrição em
+categoria residual (53,8%), permissão e prazo em acesso a bases (30,2%), descrição em
 servidores compartilhados (23,2%), perfil de VM (22,4%), usuários em acesso a
 bases (18,6%) e usuários na nuvem (12,8%). Essas taxas são retrospectivas e
 dependem do alinhamento semântico automático; os campos finais são uma decisão
 curada.
 
-Após o encerramento do estudo, o Stage 7 vigente projetou automaticamente os
+Após o encerramento do estudo, o Estágio 7 vigente projetou automaticamente os
 1.456 chamados no portfólio adotado. O agregado resultou em 455 chamados em
 Servidores Acadêmicos, 426 em Nuvem Pública, 246 em Softwares e Licenças, 98
 em Máquinas Virtuais, 95 em HPC, 65 em Acesso a Bases, 48 em PGD e 23 no
-catch-all. Essa materialização é uma saída operacional posterior: não entrou
+categoria residual. Essa materialização é uma saída operacional posterior: não entrou
 nas métricas do Job 90, não altera a comparação e não equivale a uso observado
 depois da implantação do novo portal.
 
@@ -250,18 +251,19 @@ depois da implantação do novo portal.
 - A referência por chamado é automática (Llama + Qwen), não uma classificação
   humana independente.
 - O candidato do Método Estatístico informou a curadoria; logo, o alvo é
-  endógeno ao processo de projeto e não uma ground truth independente. A
+  endógeno ao processo de projeto e não uma referência externa independente. A
   reexecução posterior dos dois braços evita circularidade direta, mas não
   elimina essa limitação de origem.
 - A inferência é retrospectiva e in-sample; o bootstrap é condicional ao corpus
   e não prova generalização temporal ou populacional.
 - O benchmark de arquiteturas tem uma execução por arquitetura e não isola qual
   estágio downstream explica a diferença.
-- A ablação tem três seeds; a variação observada foi suficiente para impedir um
+- A comparação controlada tem três sementes; a variação observada foi suficiente para impedir um
   vencedor formal de aderência.
 - As taxas de campos usam alinhamento `bge-m3` com limiar principal 0,55 e devem
   ser interpretadas como evidência de apoio, não julgamento do usuário.
-- O portfólio curado é um alvo operacional ex post, não ground truth externa.
+- O portfólio curado é um alvo operacional definido após a formação do
+  candidato, não uma referência externa independente.
 - O repositório público reúne regras e resultados no mesmo commit-raiz; hashes,
   manifestos e timestamps preservam proveniência interna, mas não comprovam de
   forma independente a anterioridade temporal do pré-registro.

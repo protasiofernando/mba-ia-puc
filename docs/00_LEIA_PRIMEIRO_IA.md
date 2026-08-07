@@ -1,11 +1,13 @@
-# Leia primeiro: contexto mínimo para IA
+# Estado resumido do projeto
 
-Este é o ponto de entrada curto do projeto `mba-ia-masterbi-puc`. O experimento
-está concluído; não há job pendente nem autorização implícita para reexecutá-lo.
+Este documento apresenta uma síntese do projeto `mba-ia-masterbi-puc`. O
+experimento está concluído e não há execução pendente. Uma nova execução somente
+se justifica se houver alteração nos dados, métodos, modelos ou na pergunta de
+pesquisa.
 
 ## Estado em uma frase
 
-A comparação sobre 1.456 chamados foi concluída no A100, passou em 302 checks
+A comparação sobre 1.456 chamados foi concluída no A100, passou em 302 verificações
 sem falhas e não encontrou um vencedor global único de aderência: a evidência
 primária favorece K-means, mas o resultado varia com semente, camada e visão de
 referência; o custo favorece o motor estatístico e o portfólio curado permanece
@@ -33,7 +35,8 @@ classificação por chamado permanece privada.
 - Universo analítico: 1.456 chamados.
 - Stage 2: SHA-256
   `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1`.
-- Portfólio curado: decisão operacional adotada, não ground truth externa.
+- Portfólio curado: decisão operacional adotada, não referência externa
+  independente.
 - Sala de Sigilo: visível e imutável no portal, atendida pela Segurança da
   Informação e fora de descoberta, métricas e ranking.
 - Pré-registro: a proveniência interna é preservada por hashes, manifestos e
@@ -42,7 +45,7 @@ classificação por chamado permanece privada.
 - Referência por chamado: automática, por consenso Llama+Qwen; não houve
   rotulação humana individual.
 - Job 90 final: `2234.HPCGPU`, `Exit_status=0`, walltime `00:01:04`.
-- `VALIDACAO_RESULTS.json`: `PASS`, 302 checks, zero falhas.
+- `VALIDACAO_RESULTS.json`: `PASS`, 302 verificações, zero falhas.
 - Stage 7 operacional: 1.456 classificações automáticas, oito categorias
   analíticas, zero Sala de Sigilo; agregado em
   `pipeline_data/07_portfolio_final.json`.
@@ -55,8 +58,8 @@ Há dois estimandos e eles não podem ser misturados:
 - ablação justa do motor de descoberta: resultado dependente da camada.
 
 Na evidência primária, K-means apresenta melhor aderência. Isso não autoriza a
-frase “K-means venceu globalmente”, porque a vantagem não é invariável nas
-seeds, camadas e referências. O custo foi classificado como
+conclusão de que o método venceu globalmente, porque a vantagem não é invariável
+entre sementes, camadas e referências. O custo foi classificado como
 `custo_convergente_estatistico`.
 
 Também não há evidência para atribuir especificamente ao Stage 5 uma eventual
@@ -108,10 +111,10 @@ os caminhos originais executados permanecem no estado JSON e no apêndice.
 - não reconstruir uma conclusão diferente a partir de tentativas parciais;
 - separar custo de aderência e medição de interpretação.
 
-## Próxima ação
+## Situação de encerramento
 
-O trabalho computacional e a publicação terminaram. O gate de coerência passou
-em 49 checks e o gate integral passou sobre 163 arquivos e 39 testes. A árvore
+O trabalho computacional e a publicação foram concluídos. O gate de coerência passou
+em 49 verificações, e o gate integral passou sobre 163 arquivos e 39 testes. A árvore
 code-only validada ocupa a `main` de
 `protasiofernando/mba-ia-puc` em um único commit-raiz. O repositório de entrega
 não possui histórico anterior, branch de arquivo ou tag; os repositórios

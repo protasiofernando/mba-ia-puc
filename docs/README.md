@@ -2,22 +2,23 @@
 
 Este é o índice canônico da pasta `docs/`. O experimento está concluído.
 
-A síntese acadêmica — questão de pesquisa, fundamentação teórica, modelagem,
-resultados, discussão, ameaças à validade, conclusões e referências — está no
+A síntese acadêmica, que reúne a questão de pesquisa, a fundamentação teórica,
+a modelagem, os resultados, a discussão, as ameaças à validade, as conclusões e
+as referências, está no
 [`README.md` da raiz](../README.md). Esta pasta preserva o detalhamento técnico
 e as evidências sem duplicar essa narrativa.
 
 ## Leitura mínima
 
-1. `MANUAL_DO_PROJETO.md` — visão formal, arquitetura e desenho;
-2. `RESULTADOS_COMPARACAO.md` — medições e conclusão;
-3. `FLUXO_COMPLETO_MBA.md` — fluxo técnico de ponta a ponta;
-4. `00_LEIA_PRIMEIRO_IA.md` — retomada rápida por IA;
-5. `ESTADO_COMPARACAO_ROBUSTA.json` — estado estruturado;
-6. `AUDITORIA_COERENCIA_PROJETO.md` — confronto entre história, scripts,
+1. `MANUAL_DO_PROJETO.md`: visão formal, arquitetura e desenho;
+2. `RESULTADOS_COMPARACAO.md`: medições e conclusão;
+3. `FLUXO_COMPLETO_MBA.md`: fluxo técnico de ponta a ponta;
+4. `00_LEIA_PRIMEIRO_IA.md`: síntese do estado vigente;
+5. `ESTADO_COMPARACAO_ROBUSTA.json`: estado estruturado;
+6. `AUDITORIA_COERENCIA_PROJETO.md`: confronto entre história, scripts,
    alvos e resultados;
-7. `APENDICE_TECNICO.md` — tentativas, falhas e correções;
-8. `PUBLICACAO_NOVO_REPOSITORIO.md` — gate e sequência segura de publicação.
+7. `APENDICE_TECNICO.md`: tentativas, falhas e correções;
+8. `PUBLICACAO_NOVO_REPOSITORIO.md`: gate e sequência segura de publicação.
 
 ## Operação e código
 

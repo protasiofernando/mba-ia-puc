@@ -1,8 +1,8 @@
 # Formação do portfólio adotado
 
-Esta pasta documenta e executa a fase que **precede** o estudo comparativo. Ela
-resolve uma dúvida central da banca: o alvo da avaliação não apareceu depois de
-ver os placares dos métodos.
+Esta pasta documenta e executa a fase que **precede** o estudo comparativo. A
+linhagem demonstra que o alvo da avaliação foi definido antes da observação dos
+resultados comparativos dos métodos.
 
 ## Organização da pasta
 
@@ -21,9 +21,9 @@ formacao_portfolio/
 └── verificar_snapshot.py               gate local contra hashes e blobs Git
 ```
 
-O snapshot é evidência e não recebe correções. O código atual fica nos demais
-diretórios do projeto, evitando que uma banca confunda “o que rodou no início”
-com “a implementação endurecida usada depois no estudo”. Verificação:
+O snapshot constitui evidência histórica e não recebe correções. O código atual
+fica nos demais diretórios do projeto, o que distingue a execução inicial da
+implementação posteriormente consolidada para o estudo. Verificação:
 
 ```powershell
 python formacao_portfolio\verificar_snapshot.py

@@ -21,7 +21,7 @@ Trabalho apresentado ao curso [BI MASTER](https://ica.puc-rio.ai/bi-master) como
 
 - [Documentação técnica e instruções de execução](docs/README_TECNICO.md).
 
-- [Ponto de entrada para IA/auditoria](docs/00_LEIA_PRIMEIRO_IA.md).
+- [Síntese auditável do estado do projeto](docs/00_LEIA_PRIMEIRO_IA.md).
 
 - [Auditoria de coerência entre história, scripts e resultados](docs/AUDITORIA_COERENCIA_PROJETO.md).
 
@@ -34,10 +34,10 @@ Trabalho apresentado ao curso [BI MASTER](https://ica.puc-rio.ai/bi-master) como
 
 > **Estado final em 07/08/2026.** O estudo foi concluído no A100 sobre 1.456
 > chamados. O Job 90 terminou com `Exit_status=0` e a validação passou em 302
-> checks, sem falhas. A evidência primária favorece K-means, especialmente em
+> verificações, sem falhas. A evidência primária favorece K-means, especialmente em
 > custo, mas a aderência varia por semente, camada e referência; portanto, não
 > há vencedor global único. O portfólio curado permanece a decisão operacional.
-> Depois do estudo, o Stage 7 projetou automaticamente os 1.456 chamados nesse
+> Depois do estudo, o Estágio 7 projetou automaticamente os 1.456 chamados nesse
 > portfólio; o agregado publicável está em `pipeline_data/07_portfolio_final.json`.
 > Veja [`docs/RESULTADOS_COMPARACAO.md`](docs/RESULTADOS_COMPARACAO.md).
 
@@ -45,56 +45,92 @@ Trabalho apresentado ao curso [BI MASTER](https://ica.puc-rio.ai/bi-master) como
 > portfólio da DTI Pesquisa, com dashboard e curadoria estratégica. A
 > **metodológica** é uma comparação entre descoberta estatística
 > (`bge-m3` + K-means) e descoberta hierárquica por LLM. O desenho separa um
-> benchmark descritivo das arquiteturas completas de uma ablação realmente
-> controlada do Stage 3, com três seeds, referência automática Llama+Qwen,
-> métricas por serviço, custo separado e regra de decisão pré-registrada.
-> Comece pelo
-> **[dossiê de auditoria](estudo_comparativo/DOSSIE_AUDITORIA.md)**.
+> benchmark descritivo das arquiteturas completas de uma comparação controlada
+> do Estágio 3, com três sementes, referência automática produzida por Llama e
+> Qwen,
+> métricas por serviço, custo separado e regra de decisão pré-registrada. O
+> **[dossiê de auditoria](estudo_comparativo/DOSSIE_AUDITORIA.md)** consolida os
+> controles metodológicos.
 
 ### Arquitetura vigente
 
 O repositório está organizado em três fases, que não devem ser misturadas:
 
 1. **Formação:** o Método Estatístico produz um candidato automático nos
-   Stages 3–6; a implementação e a linhagem ficam em `formacao_portfolio/`.
+   Estágios 3 a 6; a implementação e a linhagem ficam em `formacao_portfolio/`.
 2. **Curadoria:** a área revisa o candidato no nível do catálogo e congela a
    decisão em `formacao_portfolio/decisao_curada/feedback_portfolio.json`; não
-   rotula chamados manualmente. O Stage 7 possui materializador, classificador
+   rotula chamados manualmente. O Estágio 7 possui materializador, classificador
    automático e job PBS; sua projeção operacional posterior ao estudo foi
    concluída sobre os 1.456 chamados.
 3. **Comparação:** depois do congelamento, os métodos Estatístico e Agêntico
-   são reexecutados sobre o mesmo Stage 2 de 1.456 chamados para medir
-   aderência, estabilidade e custo. O ZIP é code-only.
+   são reexecutados sobre o mesmo Estágio 2 de 1.456 chamados para medir
+   aderência, estabilidade e custo. O pacote de execução contém somente código.
 
 Componentes principais:
 
 | Caminho | Papel |
 |---|---|
-| `scripts/` | Stages, validadores, avaliador e geradores de pacote |
+| `scripts/` | Estágios, validadores, avaliador e geradores de pacote |
 | `dashboard/` | Aplicação Flask local |
 | `configuracao/` | Identidade, contexto institucional e catálogo real |
 | `data/` | CSVs reais sensíveis, fora do Git |
 | `pipeline_data/` | Artefatos agregados versionáveis e saídas locais permitidas |
 | `formacao_portfolio/` | Snapshot imutável, formação e decisão curada congelada |
-| `estudo_comparativo/` | Protocolo, regras, jobs PBS e runbook do estudo |
+| `estudo_comparativo/` | Protocolo, regras, jobs PBS e roteiro operacional do estudo |
 | `resultados_publicaveis/` | Relatórios, métricas e gates agregados do Job 90 |
 | `docs/` | Narrativa, resultado, estado e apêndice técnico |
 | `metodo_estatistico/` | Motor estatístico mantido, usado na formação e reexecutado na comparação |
 
-Para outra IA retomar o projeto, o caminho mais barato e
-[`docs/00_LEIA_PRIMEIRO_IA.md`](docs/00_LEIA_PRIMEIRO_IA.md) ->
+O estado resumido do projeto está documentado em
+[`docs/00_LEIA_PRIMEIRO_IA.md`](docs/00_LEIA_PRIMEIRO_IA.md), e sua versão
+estruturada está em
 [`docs/ESTADO_COMPARACAO_ROBUSTA.json`](docs/ESTADO_COMPARACAO_ROBUSTA.json).
 
 ### Resumo
 
-As áreas de suporte de TI organizam seus atendimentos em catálogos de serviços definidos, na maioria das vezes, pela intuição dos gestores — e não pela análise sistemática do que os usuários realmente solicitam. Este trabalho apresenta um sistema de apoio à decisão que reavalia o portfólio de serviços de tecnologia para pesquisa da Diretoria de Tecnologia da Informação (DTI) da Fundação Getulio Vargas (FGV) a partir do histórico real de chamados. Um pipeline executado integralmente na infraestrutura de HPC da instituição usa modelos de linguagem locais (`llama3.3:70b` para raciocínio e `qwen3:30b-a3b-instruct-2507-q4_K_M` para saída estruturada, via Ollama em GPU NVIDIA A100) para destilar intenções, descobrir grupos de demanda, recomendar um catálogo e reclassificar o histórico. Como contribuição metodológica, a descoberta foi comparada por duas abordagens — embeddings `bge-m3` + K-means e descoberta hierárquica por LLM — numa ablação comum com três seeds e referência automática Llama+Qwen. A evidência primária favoreceu K-means e o custo estatístico, mas não sustentou vencedor global único por sensibilidade à semente, camada e referência. O resultado operacional é um portfólio curado de sete serviços, um catch-all e Sala de Sigilo como encaminhamento fixo, com escopo e campos obrigatórios definidos. Nenhum dado histórico sensível deixa a infraestrutura institucional.
+As áreas de suporte de TI frequentemente estruturam seus catálogos de serviços
+com base na experiência acumulada dos gestores, sem análise sistemática das
+demandas efetivamente registradas pelos usuários. Este trabalho apresenta um
+sistema de apoio à decisão para reavaliar o portfólio de serviços de tecnologia
+para pesquisa da Diretoria de Tecnologia da Informação (DTI) da Fundação
+Getulio Vargas (FGV) a partir do histórico de chamados. O pipeline foi executado
+integralmente na infraestrutura de computação de alto desempenho da instituição.
+Modelos de linguagem locais, `llama3.3:70b` para raciocínio e
+`qwen3:30b-a3b-instruct-2507-q4_K_M` para geração de saídas estruturadas, foram
+servidos pelo Ollama em uma GPU NVIDIA A100. O processamento destilou intenções,
+identificou grupos de demanda, recomendou um catálogo e reclassificou o
+histórico. Como contribuição metodológica, compararam-se duas abordagens de
+descoberta: embeddings `bge-m3` combinados com K-means e descoberta hierárquica
+por LLM. A comparação controlada utilizou três sementes e uma referência
+automática produzida por consenso entre Llama e Qwen. A evidência primária
+favoreceu K-means e o custo do método estatístico, mas não sustentou a existência
+de um vencedor global único, pois os resultados variaram conforme a semente, a
+camada de avaliação e a referência. O resultado operacional consiste em um
+portfólio curado com sete serviços, uma categoria residual e Sala de Sigilo como
+encaminhamento fixo, todos com escopo e campos obrigatórios definidos. Nenhum
+dado histórico sensível deixou a infraestrutura institucional.
 
 **Palavras-chave:** gestão de serviços de TI; mineração de chamados; modelos de
 linguagem; agrupamento; apoio à decisão; catálogo de serviços.
 
 ### Abstract
 
-IT support areas often organize service catalogs through managerial intuition rather than systematic analysis of user demand. This work presents a decision-support system that redesigns the research-technology portfolio of Fundação Getulio Vargas from historical support tickets. Locally hosted models on the institutional HPC distill intent, discover demand groups, recommend a catalog and reclassify the history. As a methodological contribution, `bge-m3` embeddings plus K-means were compared with hierarchical LLM discovery under a common downstream pipeline, three seeds and an automatic Llama+Qwen reference. Primary evidence favored K-means and the statistical cost profile, but did not support a unique global winner because results varied by seed, evaluation layer and reference view. The operational outcome is a curated seven-service portfolio, a catch-all and the secure-room service as a fixed referral, with defined scope and required fields. Historical sensitive data never leaves the institutional infrastructure.
+IT support areas often organize service catalogs through managerial experience
+rather than systematic analysis of recorded user demand. This study presents a
+decision-support system that redesigns the research technology service portfolio
+of Fundação Getulio Vargas using historical support tickets. Locally hosted
+models on the institutional HPC infrastructure distill intent, identify demand
+groups, recommend a catalog, and reclassify the historical records. As a
+methodological contribution, `bge-m3` embeddings combined with K-means were
+compared with hierarchical LLM-based discovery under a shared downstream
+pipeline, three random seeds, and an automatic reference produced by Llama and
+Qwen. Primary evidence favored K-means and the cost profile of the statistical
+method, but did not support a unique global winner because results varied across
+seeds, evaluation layers, and reference views. The operational outcome is a
+curated portfolio with seven services, a residual category, and the secure-room
+service as a fixed referral, each with a defined scope and required fields.
+Historical sensitive data remained within the institutional infrastructure.
 
 **Keywords:** IT service management; ticket mining; large language models;
 clustering; decision support; service catalog.
@@ -103,20 +139,42 @@ clustering; decision support; service catalog.
 
 #### 1.1 Contexto e problema
 
-A DTI da FGV atende, pelo seu portal de serviços, as demandas de tecnologia dos professores e pesquisadores da instituição: acesso a servidores acadêmicos, computação em nuvem, HPC, máquinas virtuais, softwares científicos e armazenamento de dados de pesquisa. Esses atendimentos são registrados como chamados no Jira e classificados em um catálogo de 18 categorias que foi construído incrementalmente, com base na percepção dos gestores sobre a demanda.
+A DTI da FGV atende, por meio de seu portal de serviços, às demandas de
+tecnologia de professores e pesquisadores da instituição. Entre os serviços
+prestados estão o acesso a servidores acadêmicos, computação em nuvem, HPC,
+máquinas virtuais, softwares científicos e armazenamento de dados de pesquisa.
+Esses atendimentos são registrados no Jira e classificados em um catálogo de 18
+categorias, construído incrementalmente com base na percepção dos gestores sobre
+a demanda.
 
 A gestão sistemática desses serviços envolve planejar, desenhar, entregar,
 medir e melhorar os serviços para produzir valor, conforme o escopo da
 ISO/IEC 20000-1 (ISO; IEC, 2018). Em centrais de atendimento, a classificação
-correta já na abertura também é relevante para encaminhar a solicitação à área
-responsável e evitar atrasos associados a reclassificações sucessivas
+correta já na abertura também é relevante para associar a solicitação ao serviço
+adequado, reduzir encaminhamentos incorretos e diminuir o tempo de resolução
 (AL-HAWARI; BARHAM, 2021). Nesse contexto, o catálogo não é apenas uma lista de
 opções: ele funciona como interface entre a necessidade do usuário, a coleta de
 informações e a operação que prestará o serviço.
 
-Três evidências indicavam que esse catálogo não refletia mais a realidade. Primeiro, a opção genérica "Não encontrou o que procurava?" era a terceira categoria mais acionada na base completa (203 de 1.584; 12,8%), sinal de que os usuários não localizavam onde abrir seus pedidos. Segundo, havia categorias sobrepostas disputando o mesmo tipo de solicitação. Terceiro — e mais custoso — chamados abertos sem as informações necessárias geravam idas e vindas de esclarecimento: no universo analítico, chamados que exigiram múltiplas interações levaram, em média, 5,22 vezes mais tempo para serem resolvidos do que os atendidos de forma direta; na base completa pré-filtro, a razão era 5,51 (seção 4.3).
+Três evidências indicavam que o catálogo já não representava adequadamente a
+demanda. Primeiro, a opção genérica "Não encontrou o que procurava?" era a
+terceira categoria mais acionada na base completa, com 203 dos 1.584 chamados
+(12,8%), o que sugeria dificuldade dos usuários para identificar o item correto.
+Segundo, havia categorias sobrepostas para solicitações semelhantes. Terceiro,
+chamados abertos sem as informações necessárias exigiam interações adicionais
+para esclarecimento. No universo analítico, os chamados com múltiplas interações
+apresentaram tempo médio de resolução 5,22 vezes maior que o dos atendimentos
+diretos. Na base completa anterior ao filtro, essa razão foi de 5,51, conforme a
+seção 4.3.
 
-A dificuldade desse tipo de reavaliação é que o insumo relevante — o texto livre de milhares de chamados, com títulos vagos, descrições incompletas e comentários de acompanhamento — pode ser representado de maneiras lexicalmente diferentes para uma mesma intenção. Modelos de sentença baseados em Transformers foram propostos justamente para produzir representações semânticas comparáveis e úteis em busca e agrupamento (REIMERS; GUREVYCH, 2019). O uso de LLMs e embeddings amplia essa capacidade, mas APIs externas esbarram em uma restrição institucional: os chamados contêm dados pessoais e não podem deixar a infraestrutura da FGV.
+A reavaliação é dificultada pela natureza do insumo. O texto livre de milhares
+de chamados contém títulos vagos, descrições incompletas e comentários de
+acompanhamento, e uma mesma intenção pode assumir diferentes formas lexicais.
+Modelos de sentença baseados em Transformers foram propostos para produzir
+representações semânticas comparáveis e úteis em tarefas de busca e agrupamento
+(REIMERS; GUREVYCH, 2019). LLMs e embeddings ampliam essa capacidade, mas o uso
+de APIs externas encontra uma restrição institucional: os chamados contêm dados
+pessoais e não podem deixar a infraestrutura da FGV.
 
 #### 1.2 Questão de pesquisa e objetivos
 
@@ -127,11 +185,24 @@ desdobra uma segunda questão: **sob o mesmo insumo e a mesma camada semântica
 posterior, como a descoberta por embeddings `bge-m3` + K-means e a descoberta
 hierárquica por LLM se comparam em aderência, robustez e custo?** A investigação
 não pressupõe superioridade de um método e admite como resultado válido um
-trade-off ou uma conclusão sensível à camada.
+compromisso entre critérios ou uma conclusão dependente da camada de avaliação.
 
-Este trabalho explora a viabilidade de um caminho intermediário: executar LLMs abertos localmente na infraestrutura de HPC já existente na instituição, combinando três famílias de técnicas — sumarização estruturada por LLM, descoberta de grupos naturais de demanda (por embeddings ou por LLM) e classificação assistida por LLM — em um pipeline offline cujo resultado alimenta um sistema interativo de apoio à decisão.
+Este trabalho examina a viabilidade de executar modelos de linguagem abertos na
+infraestrutura de HPC já disponível na instituição. A solução combina
+sumarização estruturada por LLM, descoberta de grupos naturais de demanda por
+embeddings ou por LLM e classificação assistida por LLM. Essas técnicas integram
+um pipeline offline cujos resultados alimentam um sistema interativo de apoio à
+decisão.
 
-O objetivo geral é redesenhar o portfólio de serviços com base em evidências, e os objetivos específicos são: (i) extrair a intenção real de cada chamado histórico, independentemente da categoria em que foi aberto; (ii) descobrir os grupos naturais de demanda sem partir das categorias existentes; (iii) diagnosticar sobreposições, lacunas e fragmentações do catálogo vigente; (iv) propor e consolidar, com curadoria humana, um portfólio otimizado com escopo, campos obrigatórios e SLA por categoria; e (v) disponibilizar um assistente de triagem que classifique novos chamados nesse portfólio em tempo real, antecipando as informações necessárias.
+O objetivo geral é redesenhar o portfólio de serviços com base em evidências. Os
+objetivos específicos são: (i) extrair a intenção de cada chamado histórico,
+independentemente da categoria de abertura; (ii) identificar grupos naturais de
+demanda sem utilizar as categorias existentes como ponto de partida; (iii)
+diagnosticar sobreposições, lacunas e fragmentações do catálogo vigente; (iv)
+propor e consolidar, mediante curadoria humana, um portfólio com escopo, campos
+obrigatórios e SLA por categoria; e (v) disponibilizar um assistente de triagem
+capaz de classificar novos chamados nesse portfólio em tempo real e indicar as
+informações necessárias para o atendimento.
 
 ### 2. Fundamentação teórica
 
@@ -157,9 +228,9 @@ Embeddings de sentenças permitem comparar textos pelo conteúdo semântico, em
 vez de depender apenas da coincidência de termos (REIMERS; GUREVYCH, 2019). O
 `bge-m3`, utilizado no método estatístico, oferece representação multilíngue e
 suporte a diferentes granularidades textuais (CHEN et al., 2024). Essa base
-justifica representar as intenções destiladas no Stage 2 como vetores e aplicar
-K-means, algoritmo particional que busca minimizar a dispersão interna dos
-grupos em torno de centroides (MACQUEEN, 1967).
+justifica representar as intenções destiladas no Estágio 2 como vetores e
+aplicar K-means, método particional iterativo baseado na atribuição das
+observações a grupos representados por suas médias (MACQUEEN, 1967).
 
 Não existe, contudo, um número de grupos naturalmente garantido. A silhueta
 avalia simultaneamente coesão interna e separação entre grupos (ROUSSEEUW,
@@ -167,24 +238,25 @@ avalia simultaneamente coesão interna e separação entre grupos (ROUSSEEUW,
 utilidade de negócio do catálogo. Por isso, o projeto separa a descoberta
 estatística do julgamento sobre escopo, governança e navegabilidade.
 
-#### 2.3 Avaliação, robustez e decisão humano–IA
+#### 2.3 Avaliação, robustez e decisão entre humanos e sistemas de IA
 
 A comparação entre partições requer métricas corrigidas para concordância ao
 acaso, como o índice de Rand ajustado (HUBERT; ARABIE, 1985), e medidas
 informacionais normalizadas ou ajustadas (VINH; EPPS; BAILEY, 2010). Além da
-aderência a uma referência, a estabilidade entre reexecuções é relevante para
-distinguir estrutura persistente de variação induzida por amostragem ou
-inicialização (LANGE et al., 2004). Essa literatura sustenta o uso conjunto de
-Macro-F1 por serviço, B-cubed, ARI, AMI, reatribuição entre seeds e análise de
-custo, sem condensá-los em uma nota composta arbitrária.
+aderência a uma referência, a estabilidade sob novas amostras ou reexecuções
+fornece evidência de reprodutibilidade das soluções de agrupamento (LANGE et
+al., 2004). Neste estudo, a sensibilidade às sementes de inicialização constitui
+uma verificação complementar. Essa literatura sustenta o uso conjunto de
+Macro-F1 por serviço, B-cubed, ARI, AMI, reatribuição entre sementes e análise
+de custo, sem condensá-los em uma nota composta arbitrária.
 
 O projeto também se enquadra em *design science*: constrói e avalia artefatos
 tecnológicos destinados a ampliar capacidades organizacionais (HEVNER et al.,
 2004). A curadoria no nível do catálogo preserva decisão e responsabilidade
 humanas, enquanto a IA oferece evidências, alternativas e projeções. Essa
-separação é coerente com recomendações de interação humano–IA que enfatizam
-explicitar capacidades, permitir correção e apoiar o usuário quando o sistema
-estiver incerto (AMERSHI et al., 2019).
+separação é coerente com recomendações para interação entre humanos e sistemas
+de IA que enfatizam explicitar capacidades, permitir correção e apoiar o usuário
+quando o sistema estiver incerto (AMERSHI et al., 2019).
 
 ### 3. Modelagem
 
@@ -198,65 +270,124 @@ universo temporal e organizacional restringe-se aos chamados da DTI Pesquisa
 da FGV entre 2024 e 2026.
 
 A avaliação possui dois estimandos deliberadamente separados: o benchmark das
-arquiteturas completas e a ablação controlada do motor de descoberta no Stage
-3. A comparação usa o mesmo Stage 2 congelado, a mesma interface e os mesmos
-Stages 4–6; três seeds observam sensibilidade à inicialização. A referência por
-chamado é automática, por consenso Llama+Qwen, e mede aderência ao portfólio
-curado, não acurácia contra uma verdade externa. Custo, aderência e estabilidade
+arquiteturas completas e a comparação controlada do motor de descoberta no
+Estágio 3. A comparação usa o mesmo Estágio 2 congelado, a mesma interface e os
+mesmos Estágios 4 a 6. Três sementes permitem observar a sensibilidade à
+inicialização. A referência por chamado é automática, produzida por consenso
+entre Llama e Qwen, e mede aderência ao portfólio curado, não acurácia em relação
+a uma referência externa independente. Custo, aderência e estabilidade
 são reportados separadamente. O protocolo e as regras de decisão foram
 registrados antes da avaliação final em
 [`estudo_comparativo/PROTOCOLO_METODOLOGICO.md`](estudo_comparativo/PROTOCOLO_METODOLOGICO.md).
 
 #### 3.2 Dados
 
-A base original reúne os chamados do portal de serviços de pesquisa registrados entre 2024 e 2026 — **1.584 chamados** após deduplicação. Para a comparação, uma regra exata sobre `Customer Request Type` removeu 128 registros antes do Stage 1, restando **1.456 chamados**. Todos os 128 registros efetivamente removidos tinham o rótulo legado **“Solicitação de Acesso a Bases de Dados”**, pertencente ao fluxo de dados confidenciais/Sala de Sigilo e atendido fora da DTI Pesquisa pela equipe de Banco de Dados; os outros seis rótulos da lista de exclusão tiveram zero ocorrências no período. Esse item legado não é o serviço homônimo do portfólio curado: o serviço final atende acesso comum a pastas e bases de pesquisa **fora da Sala de Sigilo** e substitui “Acessar pastas de dados de pesquisa”. A distinção institucional e as contagens estão em [`configuracao/contexto_catalogo.md`](configuracao/contexto_catalogo.md), e a decisão curada a registra em [`feedback_portfolio.json`](formacao_portfolio/decisao_curada/feedback_portfolio.json). Cada chamado traz título, descrição, categoria atribuída, situação, datas, responsáveis e comentários. Os dados brutos contêm dados pessoais e **não são versionados**. O script `scripts/gerar_base_sintetica.py` produz localmente em `data_exemplo/` uma amostra inteiramente artificial com o mesmo schema para demonstração, usando apenas o catálogo agregado público; por política de publicação, nenhum CSV integra este repositório. **Todos os números aplicados apresentados neste trabalho foram calculados sobre a base real, dentro da infraestrutura da FGV**.
+A base original reúne os chamados registrados no portal de serviços de pesquisa
+entre 2024 e 2026, totalizando **1.584 registros** após a deduplicação. Para a
+comparação, uma regra exata aplicada ao campo `Customer Request Type` removeu
+128 registros antes do Estágio 1, o que resultou em um universo analítico de
+**1.456 chamados**. Todos os registros removidos apresentavam o rótulo legado
+**“Solicitação de Acesso a Bases de Dados”**, correspondente ao fluxo de dados
+confidenciais da Sala de Sigilo, atendido fora da DTI Pesquisa pela equipe de
+Banco de Dados. Além disso, os outros seis rótulos da lista de exclusão tiveram zero ocorrências no período.
+
+O item legado removido não corresponde ao serviço homônimo do portfólio curado.
+O serviço final contempla o acesso comum a pastas e bases de pesquisa **fora da
+Sala de Sigilo** e substitui a categoria “Acessar pastas de dados de pesquisa”.
+A distinção institucional e as respectivas contagens estão documentadas em
+[`configuracao/contexto_catalogo.md`](configuracao/contexto_catalogo.md), e a
+decisão curada está registrada em
+[`feedback_portfolio.json`](formacao_portfolio/decisao_curada/feedback_portfolio.json).
+
+Cada chamado contém título, descrição, categoria atribuída, situação, datas,
+responsáveis e comentários. Como os dados brutos contêm informações pessoais,
+eles não são versionados. O script `scripts/gerar_base_sintetica.py` produz, em
+`data_exemplo/`, uma amostra inteiramente artificial com o mesmo esquema para
+fins de demonstração. O gerador utiliza somente o catálogo agregado público e,
+por política de publicação, nenhum arquivo CSV integra este repositório. Todos
+os resultados quantitativos apresentados no trabalho foram calculados sobre a
+base real, dentro da infraestrutura da FGV.
 
 #### 3.3 Arquitetura em três camadas
 
 O sistema separa o processamento pesado, executado uma única vez, do uso interativo:
 
-1. **Pipeline offline (HPC)** — Stages 1–6 executados no nó GPU (NVIDIA A100) via PBS, com os LLMs `llama3.3:70b` (raciocínio) e `qwen3:30b` (compilação de JSON) e o modelo de embeddings `bge-m3` servidos localmente pelo Ollama. O Stage 7 é a curadoria gerencial posterior. O fluxo consome os CSVs do Jira e persiste os resultados como JSON.
-2. **Simulação de triagem** — classificação de novos chamados em tempo real, via LLM local (túnel SSH até o nó GPU) ou Azure OpenAI (opcional; recebe apenas o texto digitado na simulação, nunca dados históricos).
-3. **Dashboard web (Flask + SQLite + Chart.js)** — quatro abas: Tipos de Chamado Sugeridos, Indicadores, Prévia do Portal e Histórico.
+1. **Pipeline offline (HPC):** os Estágios 1 a 6 são executados no nó com GPU
+   NVIDIA A100 por meio do PBS. Os modelos `llama3.3:70b`, `qwen3:30b` e
+   `bge-m3` são servidos localmente pelo Ollama. O fluxo consome os CSVs do Jira
+   e persiste os resultados em JSON.
+2. **Simulação de triagem:** novos chamados são classificados em tempo real por
+   um LLM local, acessado por túnel SSH até o nó com GPU, ou opcionalmente pelo
+   Azure OpenAI. Neste último caso, apenas o texto inserido na simulação é
+   enviado; os dados históricos nunca são transmitidos.
+3. **Dashboard web:** a aplicação utiliza Flask, SQLite e Chart.js e apresenta
+   as abas Tipos de Chamado Sugeridos, Indicadores, Prévia do Portal e Histórico.
 
 #### 3.4 Pipeline de sete estágios
 
-| Stage | Técnica | O que faz |
+| Estágio | Técnica | O que faz |
 |-------|---------|-----------|
-| 1 — Extração | regras | Lê os CSVs do Jira, limpa HTML/URLs/e-mails e estrutura os campos relevantes |
-| 2 — Sumarização | LLM | Para cada chamado, destila um resumo estruturado: `intencao`, `tema`, `tipo_pedido`, `contexto`, campos fornecidos/faltantes e a tag `descricao_insuficiente` (se o atendente precisou pedir informações) |
-| 3 — Descoberta de grupos | `bge-m3` + K-means ou LLM hierárquica | A formação inicial usou o motor estatístico; o segundo método usa descoberta por LLM; a comparação reexecuta os dois sob interface comum |
-| 4 — Rotulação | LLM | Nomeia cada grupo e define descrição, critério de uso, campos obrigatórios e SLA |
-| 5 — Comparação | LLM | Compara o catálogo vigente (com volumes reais) com os grupos naturais e gera o diagnóstico e o portfólio otimizado recomendado |
-| 6 — Classificação | LLM | Reclassifica cada chamado histórico no portfólio recomendado, com justificativa e confiança |
-| 7 — Finalização curada | curadoria humana + projeção automática | Congela a decisão em `formacao_portfolio/decisao_curada/feedback_portfolio.json`; `materializar_portfolio_curado.py` cria o agregado e `run_stage7_curadoria.py` classifica os chamados sem rótulos manuais |
+| 1. Extração | regras | Lê os CSVs do Jira, limpa HTML, URLs e endereços de e-mail e estrutura os campos relevantes |
+| 2. Sumarização | LLM | Para cada chamado, produz um resumo estruturado com intenção, tema, tipo de pedido, contexto, campos fornecidos ou faltantes e a marcação `descricao_insuficiente` |
+| 3. Descoberta de grupos | `bge-m3` + K-means ou LLM hierárquica | A formação inicial usou o motor estatístico; o segundo método usa descoberta por LLM; a comparação reexecuta ambos sob uma interface comum |
+| 4. Rotulação | LLM | Nomeia cada grupo e define sua descrição, seu critério de uso, seus campos obrigatórios e seu SLA |
+| 5. Comparação | LLM | Compara o catálogo vigente com os grupos naturais e gera o diagnóstico e a recomendação de portfólio |
+| 6. Classificação | LLM | Reclassifica cada chamado histórico no portfólio recomendado, com justificativa e confiança |
+| 7. Finalização curada | curadoria humana e projeção automática | Congela a decisão em `formacao_portfolio/decisao_curada/feedback_portfolio.json`; `materializar_portfolio_curado.py` cria o agregado e `run_stage7_curadoria.py` classifica os chamados sem rótulos manuais |
 
-O princípio central da modelagem: **o LLM entende e destila cada chamado
-(Stage 2) → a descoberta agrupa os pedidos pela intenção (Stage 3, por
-estatística ou por LLM) → os Stages 4–6 transformam os grupos em proposta e
-evidência operacional → a curadoria humana consolida o portfólio → o Stage 7
-opcional projeta automaticamente os chamados no catálogo congelado**. O fluxo
-detalhado, incluindo a diferença entre stage e job, está em
+O princípio central da modelagem estabelece a seguinte sequência: **o LLM
+interpreta e destila cada chamado no Estágio 2; a descoberta agrupa os pedidos
+por intenção no Estágio 3, por estatística ou por LLM; os Estágios 4 a 6
+transformam os grupos em proposta e evidência operacional; a curadoria humana
+consolida o portfólio; e o Estágio 7 projeta automaticamente os chamados no
+catálogo congelado**. O fluxo
+detalhado, incluindo a diferença entre estágio do pipeline e job de execução, está em
 [`docs/FLUXO_COMPLETO_MBA.md`](docs/FLUXO_COMPLETO_MBA.md). Nenhum estágio usa
-TF-IDF ou contagem de termos: as keywords dos grupos são os campos `tema`
+TF-IDF ou contagem de termos: as palavras-chave dos grupos são os campos `tema`
 gerados pelo LLM.
 
-Duas decisões de projeto merecem destaque. A primeira é a separação entre recomendação e decisão: o Stage 5 produz um candidato, enquanto as categorias finais, diretrizes e encaminhamentos vivem em `formacao_portfolio/decisao_curada/`. O materializador valida deterministicamente que `portfolio_referencia.json` é o espelho analítico de `feedback_portfolio.json`; a projeção por chamado do Stage 7 continua automática. A segunda é a resiliência operacional: sumarização e classificações usam checkpoints vinculados ao conteúdo, e todas as chamadas ao LLM passam por retry e validação de JSON.
+Duas decisões de projeto merecem destaque. A primeira é a separação entre
+recomendação e decisão. O Estágio 5 produz um candidato, enquanto as categorias
+finais, diretrizes e encaminhamentos são registrados em
+`formacao_portfolio/decisao_curada/`. O materializador verifica, de forma
+determinística, se `portfolio_referencia.json` constitui o espelho analítico de
+`feedback_portfolio.json`. A projeção por chamado no Estágio 7 permanece
+automática. A segunda decisão é a resiliência operacional. A sumarização e as
+classificações utilizam pontos de controle vinculados ao conteúdo, e todas as
+chamadas aos modelos passam por novas tentativas controladas e validação de JSON.
 
 #### 3.5 Infraestrutura e privacidade
 
-Todo o processamento dos dados históricos ocorre dentro da infraestrutura da FGV: os modelos rodam no nó GPU do HPC institucional (NVIDIA A100), servidos pelo Ollama. A escolha de modelos abertos — `llama3.3:70b` para as tarefas de raciocínio e `qwen3:30b-a3b-instruct-2507-q4_K_M` para compilar a saída estruturada em JSON — equilibra qualidade de instrução em português e viabilidade de execução local. Os arquivos com texto ou classificação por chamado são mantidos fora do versionamento; apenas agregados são versionados. Detalhes operacionais estão em [docs/MANUAL_HPC.md](docs/MANUAL_HPC.md).
+Todo o processamento dos dados históricos ocorre dentro da infraestrutura da
+FGV. Os modelos são executados no nó com GPU NVIDIA A100 do HPC institucional e
+servidos pelo Ollama. A escolha de `llama3.3:70b` para as tarefas de raciocínio
+e de `qwen3:30b-a3b-instruct-2507-q4_K_M` para gerar a saída estruturada em JSON
+busca equilibrar a qualidade das instruções em português e a viabilidade da
+execução local. Arquivos com texto ou classificação por chamado permanecem fora
+do versionamento; somente dados agregados são publicados. Os detalhes
+operacionais estão em [docs/MANUAL_HPC.md](docs/MANUAL_HPC.md).
 
 ### 4. Resultados e discussão
 
 #### 4.1 Diagnóstico do portfólio vigente
 
-Os números de grupos pertencem a etapas distintas e não devem ser confundidos: o snapshot histórico que iniciou a formação do portfólio tinha **23 grupos**, enquanto a execução comparativa final produziu **29 clusters** no método estatístico e **20 tipos de requisição** no método agêntico, antes da consolidação semântica. Em contraste com as 18 categorias do catálogo vigente, as três leituras evidenciaram categorias amplas demais, demandas recorrentes sem categoria própria e fragmentação de pedidos semelhantes. Na base completa de 1.584 chamados, o item “Não encontrou o que procurava?” reunia 203 casos (12,8%) e era a terceira categoria mais usada; esse percentual é um diagnóstico pré-filtro, não a distribuição do universo comparativo de 1.456.
+As quantidades de grupos referem-se a etapas distintas e não devem ser
+interpretadas como resultados equivalentes. O recorte histórico que iniciou a
+formação do portfólio continha **23 grupos**. A execução comparativa final
+produziu **29 grupos** no Método Estatístico e **20 tipos de requisição** no
+Método Agêntico antes da consolidação semântica. Em contraste com as 18
+categorias do catálogo vigente, as três perspectivas revelaram categorias
+excessivamente amplas, demandas recorrentes sem categoria própria e fragmentação
+de pedidos semelhantes. Na base completa de 1.584 chamados, o item “Não
+encontrou o que procurava?” reunia 203 casos (12,8%) e era a terceira categoria
+mais utilizada. Esse percentual descreve o diagnóstico anterior ao filtro e não
+a distribuição do universo comparativo de 1.456 registros.
 
 #### 4.2 Portfólio final
 
 Após a revisão da recomendação automática pela área, o portfólio final curado
-organiza a demanda em **7 serviços**, um *catch-all* e o encaminhamento fixo
+organiza a demanda em **7 serviços**, uma categoria residual (*catch-all*) e o
+encaminhamento fixo
 *Sala de Sigilo*:
 
 | Grupo | Categoria final | Papel no catálogo |
@@ -268,14 +399,15 @@ organiza a demanda em **7 serviços**, um *catch-all* e o encaminhamento fixo
 | Nuvem Pública | Nuvem Pública (AWS, Azure, GCP) | serviço analítico |
 | Dados e Governança de Pesquisa | Submissão do Plano de Gestão de Dados (PGD) de Pesquisa | serviço analítico estratégico |
 | Dados e Governança de Pesquisa | Solicitação de Acesso a Bases de Dados | serviço analítico |
-| Triagem | Não encontrou o que procurava? | *catch-all* residual |
+| Triagem | Não encontrou o que procurava? | categoria residual |
 | Encaminhamentos | Sala de Sigilo | visível, imutável e fora da análise |
 
 Cada categoria carrega um critério de uso (`quando_usar`), a lista de
-informações obrigatórias a coletar na abertura e o SLA sugerido — insumos
-diretos para o novo formulário do portal e para o assistente de triagem. O
-Stage 7 vigente foi materializado automaticamente depois do encerramento do
-estudo. A projeção operacional, que não altera as métricas comparativas, foi:
+informações obrigatórias a coletar na abertura e o SLA sugerido. Esses elementos
+constituem insumos diretos para o novo formulário do portal e para o assistente
+de triagem. O Estágio 7 vigente foi materializado automaticamente depois do
+encerramento do estudo. A projeção operacional, que não altera as métricas
+comparativas, foi:
 
 | Categoria analítica | Chamados | Participação |
 |---|---:|---:|
@@ -301,11 +433,16 @@ múltiplas interações e maior tempo de resolução. O cálculo, implementado e
 [`scripts/analise_tempo_interacoes.py`](scripts/analise_tempo_interacoes.py), é
 definido assim:
 
-- **Interação humana**: comentário do chamado cujo autor não é o robô de automação do Jira (autor ≠ `automato`);
-- **Resolução direta**: chamado resolvido com **até 1** interação humana;
-- **Múltiplas interações**: chamado que exigiu **2 ou mais** trocas com o solicitante;
-- **Tempo de resolução**: diferença entre as datas de resolução e criação, em dias; consideram-se apenas chamados com tempo válido (resolução posterior à criação);
-- **Razão descritiva** = tempo(múltiplas) / tempo(direta).
+- **Interação humana:** comentário do chamado cujo autor não é o robô de
+  automação do Jira, identificado como `automato`.
+- **Resolução direta:** chamado resolvido com até uma interação humana.
+- **Múltiplas interações:** chamado que exigiu duas ou mais trocas com o
+  solicitante.
+- **Tempo de resolução:** diferença, em dias, entre as datas de resolução e
+  criação. São considerados apenas chamados com tempo válido, cuja resolução é
+  posterior à criação.
+- **Razão descritiva:** tempo médio do grupo com múltiplas interações dividido
+  pelo tempo médio do grupo com resolução direta.
 
 Como o diagnóstico operacional foi calculado antes da definição do recorte
 comparativo, há dois denominadores legítimos. Eles são declarados separadamente:
@@ -317,16 +454,16 @@ comparativo, há dois denominadores legítimos. Eles são declarados separadamen
 
 No ambiente interno, o comando sem argumentos lê o diretório privado `data/`,
 que contém o universo analítico de 1.456 registros, e portanto reproduz
-**5,22x**. O valor **5,51x** requer a cópia privada pré-filtro de 1.584
-registros, informada com `--dados`;
-essa base não pode ser publicada. Os valores descrevem os grupos históricos e
+**5,22x**. O valor **5,51x** requer a cópia privada anterior ao filtro, com
+1.584 registros, informada por meio do argumento `--dados`. Essa base não pode
+ser publicada. Os valores descrevem os grupos históricos e
 não estimam quanto tempo seria economizado ao alterar o formulário.
 
 Como os dados reais do Jira não são publicados, `scripts/gerar_base_sintetica.py`
 pode gerar em `data_exemplo/` uma amostra inteiramente artificial para
 demonstrar o cálculo. O gerador lê somente o portfólio agregado público e cria
-textos, pessoas, datas, durações e interações fictícios; não acessa Stage 1,
-Stage 2 ou qualquer distribuição por chamado. O CSV gerado localmente permanece
+textos, pessoas, datas, durações e interações fictícios. O script não acessa os
+Estágios 1 e 2 nem qualquer distribuição por chamado. O CSV gerado localmente permanece
 ignorado pelo Git.
 
 Depois de gerar a base sintética:
@@ -338,16 +475,22 @@ python scripts/analise_tempo_interacoes.py --dados data_exemplo
 
 Os números sintéticos servem somente para verificar a execução.
 
-**Ressalva metodológica**: trata-se de uma associação, não de uma relação causal
-isolada — chamados intrinsecamente mais complexos tendem tanto a exigir mais
-interações quanto a demorar mais. Uma análise complementar com a tag
+**Ressalva metodológica:** trata-se de uma associação, não de uma relação causal
+isolada. Chamados intrinsecamente mais complexos tendem a exigir mais interações
+e também a apresentar maior tempo de resolução. Uma análise complementar com a
+marcação
 `descricao_insuficiente` mostra a mesma direção, com magnitude menor: 1,9x na
 média. Essas análises motivam a coleta de campos, mas não quantificam um ganho
 causal atribuível ao novo formulário.
 
 #### 4.4 Assistente de triagem
 
-Com o portfólio final como contexto, o assistente classifica um chamado novo em tempo real: recebe título e descrição, devolve a categoria sugerida, a justificativa e as informações que faltam para o atendimento direto. No dashboard, a simulação funciona com o LLM local (mesmo modelo do pipeline) ou, opcionalmente, com Azure OpenAI — caso em que apenas o texto digitado é enviado, nunca dados históricos.
+Com o portfólio final como contexto, o assistente classifica novos chamados em
+tempo real. O sistema recebe título e descrição e retorna a categoria sugerida,
+a justificativa e as informações ainda necessárias para o atendimento direto.
+No dashboard, a simulação utiliza o mesmo modelo local do pipeline ou,
+opcionalmente, o Azure OpenAI. Nesse segundo caso, somente o texto inserido na
+simulação é enviado; os dados históricos não são transmitidos.
 
 #### 4.5 Reprodutibilidade e demonstração
 
@@ -358,7 +501,10 @@ pip install -r requirements.txt
 python dashboard/app.py   # http://localhost:5000
 ```
 
-- A aba **Tipos de Chamado Sugeridos** abre pronta, exibindo os resultados agregados **reais** do pipeline (JSONs versionados em `pipeline_data/`, sem dados pessoais): diagnóstico executivo, portfólio curado, projeção agregada do Stage 7 e consolidação do catálogo.
+- A aba **Tipos de Chamado Sugeridos** apresenta os resultados agregados reais
+  do pipeline, versionados em `pipeline_data/` sem dados pessoais. A visualização
+  reúne o diagnóstico executivo, o portfólio curado, a projeção agregada do
+  Estágio 7 e a consolidação do catálogo.
 - As abas **Indicadores** e **Histórico** dependem de `dashboard/runtime/knowledge_base.db`. Qualquer pessoa pode gerar a base artificial com `python scripts/gerar_base_sintetica.py` e, depois, usar `$env:JIRA_DATA_DIR="data_exemplo"; python scripts/knowledge_base.py`. Esses indicadores são demonstrativos; os resultados oficiais são os agregados versionados.
 - A aba **Prévia do Portal** mostra o catálogo proposto; a simulação ao vivo exige credenciais Azure OpenAI em `.env`.
 - A associação entre tempo e interações (seção 4.3) pode rodar sobre a base
@@ -371,8 +517,9 @@ As instruções completas de instalação e execução estão em [docs/README_TE
 
 #### 4.6 Comparação robusta dos métodos de descoberta
 
-A comparação parte de um Stage 2 congelado com 1.456 chamados, produzido depois
-da remoção determinística dos 128 registros do request type legado homônimo
+A comparação parte de um Estágio 2 congelado com 1.456 chamados, produzido
+depois da remoção determinística dos 128 registros do tipo de requisição legado
+homônimo
 “Solicitação de Acesso a Bases de Dados”, pertencente ao fluxo de dados
 confidenciais/Sala de Sigilo e atendido fora da DTI Pesquisa pela equipe de
 Banco de Dados. O serviço final de acesso comum a bases é outro objeto
@@ -382,22 +529,25 @@ livre decide o escopo.
 Há dois resultados separados:
 
 1. um benchmark descritivo das arquiteturas completas;
-2. uma ablação do Stage 3 em que K-means e LLM usam o mesmo insumo, os mesmos
-   campos, a mesma interface canônica e os mesmos Stages 4–6.
+2. uma comparação controlada do Estágio 3, na qual K-means e LLM utilizam o
+   mesmo insumo, os mesmos campos, a mesma interface canônica e os mesmos
+   Estágios 4 a 6.
 
-A ablação tem três pares de seeds e é confrontada com o portfólio curado por uma
-referência automática Llama+Qwen em quatro visões. A métrica principal dá o
+A comparação controlada tem três pares de sementes e é confrontada com o
+portfólio curado por uma referência automática produzida por Llama e Qwen em
+quatro visões. A métrica principal dá o
 mesmo peso aos serviços; ARI e outras métricas são secundárias. A regra pode
-concluir superioridade, equivalência, trade-off ou resultado sensível, sem nota
-composta.
+concluir superioridade, equivalência, compromisso entre critérios ou resultado
+dependente da camada, sem recorrer a uma nota composta.
 
-O target é o portfólio operacional adotado, não uma verdade externa. Assim, a
-comparação mede aderência à decisão da área e explicita a endogeneidade da
-curadoria. O custo dos Stages 3–6 é medido separadamente.
+O alvo é o portfólio operacional adotado, não uma referência externa
+independente. Assim, a comparação mede aderência à decisão da área e explicita a
+endogeneidade da curadoria. O custo dos Estágios 3 a 6 é medido separadamente.
 
-**Resultado:** a validação final passou em 302 checks, sem falhas. A evidência
-primária favorece K-means e o custo estatístico, mas benchmark e ablação foram
-classificados como dependentes da camada. Portanto, não há vencedor global
+**Resultado:** a validação final passou em 302 verificações, sem falhas. A
+evidência primária favorece K-means e o custo estatístico, mas o benchmark e a
+comparação controlada produziram resultados dependentes da camada. Portanto,
+não há vencedor global
 único de aderência. A linhagem de tentativas invalidadas está em
 [`docs/APENDICE_TECNICO.md`](docs/APENDICE_TECNICO.md), e as tabelas completas
 estão em [`docs/RESULTADOS_COMPARACAO.md`](docs/RESULTADOS_COMPARACAO.md).
@@ -407,17 +557,19 @@ estão em [`docs/RESULTADOS_COMPARACAO.md`](docs/RESULTADOS_COMPARACAO.md).
 Os resultados respondem afirmativamente à questão aplicada: foi possível
 transformar chamados históricos em evidência auditável para redesenhar o
 catálogo sem transferir dados sensíveis para serviços externos. A descoberta
-não decidiu sozinha o portfólio. Ela revelou padrões de demanda; a área
-converteu esses padrões em serviços com responsabilidade, escopo e campos de
-abertura; e o Stage 7 projetou automaticamente o histórico na decisão
-congelada. Essa sequência materializa o princípio de *design science* de avaliar
+não determinou isoladamente o portfólio. A etapa de descoberta revelou padrões
+de demanda, que foram convertidos pela área em serviços com responsabilidade,
+escopo e campos de abertura. Em seguida, o Estágio 7 projetou automaticamente o
+histórico na decisão congelada. Essa sequência materializa o princípio de
+*design science* de avaliar
 um artefato pela relação entre problema organizacional, construção e utilidade
 (HEVNER et al., 2004).
 
 O diagnóstico de categorias sobrepostas e do uso elevado do item genérico é
 coerente com a literatura de classificação de chamados: uma taxonomia ambígua
 pode prejudicar o encaminhamento correto já na abertura (AL-HAWARI; BARHAM,
-2021). A projeção de apenas 1,6% do histórico analítico no *catch-all* mostra que
+2021). A projeção de apenas 1,6% do histórico analítico na categoria residual
+mostra que
 o catálogo curado oferece cobertura retrospectiva mais específica. Esse número,
 entretanto, não prova que usuários futuros escolherão corretamente os novos
 itens; essa hipótese exige acompanhamento após a implantação.
@@ -432,27 +584,29 @@ estabilidade medem propriedades diferentes e não devem ser substituídas por um
 mas que o motor estatístico oferece o melhor compromisso observado na evidência
 primária e no custo deste domínio.
 
-A associação de 5,22 vezes no universo analítico — e de 5,51 vezes na base
-completa pré-filtro — entre as médias dos grupos com múltiplas interações e
-resolução direta reforça a utilidade operacional de coletar campos obrigatórios.
+A razão entre as médias dos grupos com múltiplas interações e resolução direta
+foi de 5,22 no universo analítico e de 5,51 na base completa anterior ao filtro.
+Essa associação reforça a utilidade operacional de coletar campos obrigatórios.
 Ainda assim, complexidade do chamado, prioridade e disponibilidade da equipe
 podem afetar simultaneamente interações e duração. O projeto usa esse resultado
 para motivar o desenho do formulário, não para prometer redução causal de tempo.
 
 Por fim, manter a curadoria humana e tornar visíveis justificativa, confiança e
 informações faltantes evita tratar a IA como decisora autônoma. A arquitetura
-apoia revisão e correção, em linha com as recomendações de interação humano–IA
-de Amershi et al. (2019).
+apoia a revisão e a correção, em consonância com as recomendações para interação
+entre humanos e sistemas de IA propostas por Amershi et al. (2019).
 
 #### 4.8 Ameaças à validade
 
 - **Validade de construto:** o portfólio curado é uma decisão operacional da
-  própria área, não uma *ground truth* externa. A referência Llama+Qwen reduz a
-  dependência de um único modelo, mas continua automática. Estudos sobre
-  LLMs avaliadores mostram que julgamentos podem sofrer vieses sistemáticos
-  (SHI et al., 2025); por isso, o trabalho interpreta as métricas como aderência
-  ao alvo adotado, e não como acurácia absoluta.
-- **Validade interna:** as três seeds e a camada comum dos Stages 4–6 controlam
+  própria área, não uma referência externa independente. O consenso entre Llama
+  e Qwen reduz a dependência de um único modelo, mas a referência continua
+  automática. Estudos sobre
+  avaliadores baseados em LLM demonstram a ocorrência de viés de posição nos
+  julgamentos (SHI et al., 2025). Por isso, o trabalho interpreta as métricas
+  como aderência ao alvo adotado, e não como acurácia absoluta.
+- **Validade interna:** as três sementes e a camada comum dos Estágios 4 a 6
+  controlam
   parte da variabilidade, mas não eliminam a não determinação dos modelos. A
   análise de interações e tempo é observacional e não controla todos os fatores
   de complexidade; nenhuma conclusão causal é formulada.
@@ -461,11 +615,12 @@ de Amershi et al. (2019).
   transferível, mas os serviços descobertos, limiares e custos não devem ser
   generalizados sem nova execução e validação local.
 - **Validade de conclusão:** Macro-F1, B-cubed, ARI, AMI, reatribuição e custo
-  reduzem a dependência de uma única métrica; três seeds, porém, não cobrem toda
-  a variabilidade possível. A conclusão conservadora — ausência de vencedor
-  global único — respeita essa limitação.
+  reduzem a dependência de uma única métrica; três sementes, porém, não cobrem
+  toda
+  a variabilidade possível. A conclusão conservadora, que reconhece a ausência
+  de um vencedor global único, respeita essa limitação.
 - **Reprodutibilidade e privacidade:** código, configurações, hashes, resultados
-  agregados e 302 checks são públicos. Textos e classificações por chamado não
+  agregados e 302 verificações são públicos. Textos e classificações por chamado não
   podem ser divulgados, o que limita a reprodução independente dos números
   exatos, mas preserva a obrigação institucional de proteção dos dados.
 - **Auditabilidade temporal:** o repositório público foi consolidado depois da
@@ -478,14 +633,50 @@ de Amershi et al. (2019).
 
 ### 5. Conclusões
 
-O trabalho demonstrou que é viável — técnica e institucionalmente — usar LLMs para redesenhar um portfólio de serviços a partir da demanda real, sem que nenhum dado sensível deixe a infraestrutura da organização. Quatro conclusões se destacam:
+O trabalho demonstrou a viabilidade técnica e institucional do uso de LLMs para
+redesenhar um portfólio de serviços a partir da demanda observada, sem transferir
+dados sensíveis para fora da infraestrutura da organização. Quatro conclusões
+se destacam:
 
-1. **Dados qualificam a decisão gerencial no desenho de catálogos.** O portfólio vigente, construído incrementalmente pela percepção dos gestores, divergia de forma mensurável da estrutura encontrada nos chamados: o snapshot de formação tinha 23 grupos, e a comparação final encontrou 29 clusters estatísticos e 20 tipos agênticos, frente a 18 categorias vigentes. O portfólio final transforma essa evidência em sete serviços com escopos mais claros, um *catch-all* residual e Sala de Sigilo como encaminhamento fixo. A projeção automática posterior do Stage 7 atribuiu 1,6% do histórico analítico ao *catch-all*; a participação futura em produção ainda deve ser medida após a implantação.
-2. **LLMs abertos locais dão conta da tarefa.** Os modelos `llama3.3:70b` (raciocínio) e `qwen3:30b` (compilação de JSON), rodando em GPU A100, sustentaram todas as etapas semânticas do pipeline (sumarização, rotulação, diagnóstico e classificação) com saída estruturada confiável — ao custo de um processamento offline de poucas horas, adequado para uma análise que se repete apenas periodicamente.
-3. **A curadoria humana é parte do método, não um ajuste posterior.** A separação entre recomendação automática e decisão de negócio (`formacao_portfolio/decisao_curada/feedback_portfolio.json`) tornou o resultado adotável. A área preserva serviços por responsabilidade, governança e visibilidade, inclusive quando o volume é baixo. Sala de Sigilo é um encaminhamento fixo e não participa da comparação.
-4. **A comparação metodológica precisa separar aderência, robustez e custo.** O protocolo não escolhe um vencedor por uma única métrica: confronta serviços, seeds, referências e camadas e mede custo separadamente. A evidência primária favorece K-means, mas a sensibilidade à camada impede declarar vencedor global único.
+1. **Dados qualificam a decisão gerencial no desenho de catálogos.** O portfólio
+   vigente, construído incrementalmente com base na percepção dos gestores,
+   divergia de forma mensurável da estrutura observada nos chamados. A formação
+   inicial identificou 23 grupos, enquanto a comparação final encontrou 29
+   grupos estatísticos e 20 tipos de requisição pelo Método Agêntico, diante de
+   18 categorias vigentes. O portfólio final converte essa evidência em sete
+   serviços com escopos mais claros, uma categoria residual e Sala de Sigilo
+   como encaminhamento fixo. A projeção automática posterior do Estágio 7
+   atribuiu 1,6% do histórico analítico à categoria residual. A participação
+   futura em produção deverá ser medida após a implantação.
+2. **Modelos de linguagem abertos e locais mostraram-se viáveis.** Os modelos
+   `llama3.3:70b` e `qwen3:30b`, empregados respectivamente nas tarefas de
+   raciocínio e de geração de JSON, foram executados em uma GPU A100 e
+   sustentaram as etapas semânticas de sumarização, rotulação, diagnóstico e
+   classificação. O processamento offline exigiu poucas horas, duração
+   compatível com uma análise de periodicidade eventual.
+3. **A curadoria humana é parte do método, não um ajuste posterior.** A
+   separação entre recomendação automática e decisão de negócio, registrada em
+   `formacao_portfolio/decisao_curada/feedback_portfolio.json`, tornou o
+   resultado operacionalmente adotável. A área preserva serviços por critérios
+   de responsabilidade, governança e visibilidade, inclusive quando o volume é
+   reduzido. Sala de Sigilo é um encaminhamento fixo e não participa da
+   comparação.
+4. **A comparação metodológica precisa separar aderência, robustez e custo.** O
+   protocolo não seleciona um vencedor com base em uma única métrica. Serviços,
+   sementes, referências e camadas são confrontados, enquanto o custo é medido
+   separadamente. A evidência primária favorece K-means, mas a sensibilidade à
+   camada impede declarar um vencedor global único.
 
-As principais limitações apontam os trabalhos futuros: o método estatístico impõe grupos disjuntos e depende de um K sem valor natural (silhueta sensível à composição da base), enquanto o agêntico é caro em tokens; a análise de ganho de tempo mede associação, não causalidade — o desenho ideal seria comparar coortes antes/depois da adoção do novo portal; e a validação cobre um único domínio (serviços de tecnologia para pesquisa). Os próximos passos naturais são medir a adoção em produção (evolução do uso do item genérico e da taxa de resolução direta), reexecutar o pipeline periodicamente para detectar deriva da demanda e replicar o método em outras áreas de atendimento da instituição — o que o desenho genérico do pipeline já permite sem alteração de código.
+As limitações identificadas orientam trabalhos futuros. O Método Estatístico
+produz grupos disjuntos e depende da escolha de um valor de K, enquanto o Método
+Agêntico apresenta maior consumo de tokens. A análise de tempo mede associação,
+e não causalidade; uma avaliação causal exigiria, por exemplo, a comparação de
+coortes anteriores e posteriores à adoção do novo portal. Além disso, a
+validação abrange um único domínio, o de serviços de tecnologia para pesquisa.
+Como continuidade, recomenda-se medir a adoção em produção, acompanhar o uso do
+item genérico e a taxa de resolução direta, reexecutar periodicamente o pipeline
+para detectar mudanças na demanda e replicar o método em outras áreas de
+atendimento da instituição.
 
 ### 6. Referências
 
@@ -512,7 +703,7 @@ HUBERT, L.; ARABIE, P. Comparing partitions. *Journal of Classification*, v. 2,
 n. 1, p. 193–218, 1985.
 [https://doi.org/10.1007/BF01908075](https://doi.org/10.1007/BF01908075).
 
-ISO; IEC. *ISO/IEC 20000-1:2018: Information technology — Service management —
+ISO; IEC. *ISO/IEC 20000-1:2018: Information technology: Service management:
 Part 1: Service management system requirements*. 3. ed. Geneva: ISO, 2018.
 [https://www.iso.org/standard/70636.html](https://www.iso.org/standard/70636.html).
 
@@ -524,6 +715,7 @@ MACQUEEN, J. B. Some methods for classification and analysis of multivariate
 observations. In: *Proceedings of the Fifth Berkeley Symposium on Mathematical
 Statistics and Probability*. Berkeley: University of California Press, 1967.
 v. 1, p. 281–297.
+[https://digicoll.lib.berkeley.edu/record/113015](https://digicoll.lib.berkeley.edu/record/113015).
 
 REIMERS, N.; GUREVYCH, I. Sentence-BERT: sentence embeddings using Siamese
 BERT-networks. In: *Proceedings of EMNLP-IJCNLP 2019*. Hong Kong: Association

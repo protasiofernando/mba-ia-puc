@@ -10,7 +10,7 @@ Origem congelada:
 - Job 90: `2234.HPCGPU`, `Exit_status=0`;
 - tar público: `comparacao_publicavel_20260804_131120.tar.gz`;
 - SHA-256 do tar: `f476e4103044ee0cc578597523689cbafaf7b2b164fa720a5078808bc4545be6`;
-- gate: `VALIDACAO_RESULTS.json = PASS`, 302 checks, zero falhas.
+- validação: `VALIDACAO_RESULTS.json = PASS`, 302 verificações, zero falhas.
 
 Conteúdo:
 

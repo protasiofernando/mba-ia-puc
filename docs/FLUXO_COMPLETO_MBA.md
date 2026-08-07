@@ -40,7 +40,7 @@ O portfólio vigente possui:
 ## 2. Três fases que não devem ser misturadas
 
 ```text
-FASE A — formação assistida do candidato
+FASE A: formação assistida do candidato
 
 CSV Jira
   -> filtro de escopo quando aplicável
@@ -52,7 +52,7 @@ CSV Jira
   -> Stage 6: reclassificar o histórico
   -> candidato automático + evidências
 
-FASE B — decisão operacional
+FASE B: decisão operacional
 
 candidato automático
   -> curadoria humana no nível do catálogo
@@ -61,13 +61,13 @@ candidato automático
   -> formacao_portfolio/decisao_curada/portfolio_referencia.json congelado
   -> Stage 7: classificação automática no portfólio adotado
 
-FASE C — contribuição metodológica do MBA
+FASE C: contribuição metodológica do MBA
 
 Stage 2 congelado + portfólio curado congelado
   -> job 00: referência automática independente dos braços
   -> benchmark: arquitetura legada versus arquitetura nativa
   -> ablação: K-means versus LLM com restante comum
-  -> três seeds + quatro visões de referência + camadas
+  -> três sementes + quatro visões de referência + camadas
   -> job 90: métricas, incerteza, custo e auditoria dos campos
   -> conclusão metodológica pré-registrada
 ```
@@ -170,7 +170,7 @@ portfólio analítico sem contradizer o recorte.
 
 ## 5. Pipeline operacional, Stage por Stage
 
-### 5.1 Stage 1 — extração e limpeza determinística
+### 5.1 Estágio 1: extração e limpeza determinística
 
 **Pergunta respondida:** quais registros possuem conteúdo utilizável e qual é a
 representação estruturada mínima de cada chamado?
@@ -199,7 +199,7 @@ decisão sobre portfólio.
 **Controle:** contagens, campos presentes e cardinalidade são registrados no
 log. Na execução analisada foram produzidos 1.456 registros.
 
-### 5.2 Stage 2 — destilação da intenção por chamado
+### 5.2 Estágio 2: destilação da intenção por chamado
 
 **Pergunta respondida:** o que o usuário realmente queria, independentemente da
 categoria em que abriu o chamado?
@@ -244,7 +244,7 @@ catálogo e cria a matéria-prima para descobrir serviços e desenhar formulári
 O Stage 2 foi congelado com 1.456 registros e SHA-256
 `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1`.
 
-### 5.3 Stage 3 — descoberta dos grupos naturais
+### 5.3 Estágio 3: descoberta dos grupos naturais
 
 **Pergunta respondida:** quais demandas exigem tratamento, equipe, autorização,
 formulário ou fluxo diferentes?
@@ -286,7 +286,7 @@ O contrato comum usa intenção, tema e tipo de pedido.
 2. gera embeddings com `bge-m3`;
 3. normaliza os vetores;
 4. testa `K=4..30`;
-5. executa K-means com `n_init=20` e seed congelada;
+5. executa K-means com `n_init=20` e semente congelada;
 6. escolhe o maior silhouette score;
 7. em empate no sexto decimal, escolhe o menor K;
 8. atribui cada chamado ao centroide mais próximo.
@@ -316,7 +316,7 @@ O normalizador:
 Isso impede que o braço LLM leve para o Stage 4 descrições mais ricas que o
 K-means não poderia produzir.
 
-### 5.5 Stage 4 — rotulagem dos grupos descobertos
+### 5.5 Estágio 4: rotulagem dos grupos descobertos
 
 **Pergunta respondida:** como cada grupo natural deve ser apresentado em
 linguagem de serviço?
@@ -350,7 +350,7 @@ No benchmark nativo o Stage 4 pode receber o contexto rico do pipeline
 operacional. Na ablação, ambos os motores recebem estritamente a interface
 comum descrita na seção anterior.
 
-### 5.6 Stage 5 — reconciliação e recomendação de portfólio
+### 5.6 Estágio 5: reconciliação e recomendação de portfólio
 
 **Pergunta respondida:** como converter grupos naturais em um catálogo
 implementável, comparando-os com o catálogo existente?
@@ -411,7 +411,7 @@ traduzida em unidades operacionais e formulários.
 - fingerprint incompatível com o Stage 4;
 - Sala indevidamente incluída no universo analítico.
 
-### 5.7 Stage 6 — classificação fechada no portfólio recomendado
+### 5.7 Estágio 6: classificação fechada no portfólio recomendado
 
 **Pergunta respondida:** o portfólio proposto consegue receber todos os chamados
 históricos de forma rastreável?
@@ -444,7 +444,7 @@ portfólio proposto e fornece a distribuição usada no dashboard.
 **Controle:** até três tentativas semânticas; ID inventado é rejeitado; não há
 fallback para a primeira categoria; o arquivo final exige cobertura completa.
 
-### 5.8 Stage 7 — curadoria estratégica
+### 5.8 Estágio 7: curadoria estratégica
 
 **Pergunta respondida:** qual configuração será adotada pela organização,
 considerando evidência e decisão de gestão?
@@ -539,7 +539,7 @@ O job 00 congela ainda:
 
 ## 8. O que faz cada job da comparação
 
-### 8.1 Job 00 — referência automática e gate de setup
+### 8.1 Job 00: referência automática e validação de configuração
 
 **Script:** `../estudo_comparativo/hpc/job_00_referencia.sh`.
 
@@ -646,7 +646,7 @@ braços downstream. O artefato publicável
 `resultados_publicaveis/estudo_comparativo/avaliacao/VALIDACAO_SETUP.json`
 registra `PASS`. IDs de tentativas intermediárias pertencem apenas ao apêndice
 técnico; a conclusão canônica é a do Job 90 `2234.HPCGPU`, que terminou com
-`Exit_status=0` e validou os resultados em 302 checks sem falhas.
+`Exit_status=0` e validou os resultados em 302 verificações sem falhas.
 
 #### Telemetria da referência
 
@@ -675,7 +675,7 @@ tempo de parede dos Stages 3–6 de cada braço. Falhas e retries continuam
 refletidos no tempo de parede e nas amostras de GPU, ainda que o JSONL de tokens
 registre somente respostas HTTP bem-sucedidas.
 
-### 8.2 Job 10 — benchmark da arquitetura legada
+### 8.2 Job 10: benchmark da arquitetura legada
 
 **Script:** `../estudo_comparativo/hpc/job_10_m1_legado_llama.sh`.
 
@@ -693,7 +693,7 @@ Executa a arquitetura estatística legada mínima:
 **Interpretação:** comparação descritiva entre arquiteturas completas. Não
 isola causalmente K-means, pois vários componentes dos Stages 3 a 6 diferem.
 
-### 8.3 Job 20 — benchmark da arquitetura LLM nativa
+### 8.3 Job 20: benchmark da arquitetura LLM nativa
 
 **Script:** `../estudo_comparativo/hpc/job_20_m2_nativo.sh`.
 
@@ -708,12 +708,12 @@ Executa:
 - Stage 6 vigente;
 - validação final do portfólio.
 
-Usa Llama para raciocínio, Qwen para JSON e seed 42. Também recebe o mesmo
+Usa Llama para raciocínio, Qwen para JSON e a semente 42. Também recebe o mesmo
 Stage 2 e o mesmo alvo.
 
 **Interpretação:** segunda arquitetura do benchmark operacional.
 
-### 8.4 Jobs 30 — seis braços da ablação justa
+### 8.4 Jobs 30: seis braços da comparação controlada
 
 **Script comum:** `../estudo_comparativo/hpc/job_30_ablacao.sh`.
 
@@ -735,12 +735,12 @@ Em cada par:
 - Stages 4, 5 e 6 são os mesmos;
 - modelos, hardware, alvo, avaliador e telemetria são congelados.
 
-As três seeds testam sensibilidade a inicialização e ordem de processamento.
+As três sementes testam a sensibilidade à inicialização e à ordem de processamento.
 
 **Interpretação:** esta é a comparação apropriada para discutir o efeito do
 motor estatístico versus LLM, dentro deste corpus e deste pipeline.
 
-### 8.5 Job 90 — validação, comparação e campos de formulário
+### 8.5 Job 90: validação, comparação e campos de formulário
 
 **Script:** `../estudo_comparativo/hpc/job_90_avaliacao.sh`.
 
@@ -790,7 +790,7 @@ Também são analisados:
 - perdas por serviço;
 - request types finais e agrupadores lógicos;
 - quatro visões da referência;
-- três seeds;
+- três sementes;
 - intervalos bootstrap.
 
 ### 9.4 Regra de decisão
@@ -803,10 +803,10 @@ Também são analisados:
 - equivalência exige IC inteiro em `[-0,03, +0,03]`;
 - custo só desempata equivalência com diferença mínima de 10%;
 - custo, tokens e GPU não são fundidos com qualidade;
-- divergência por seed, camada, referência ou métrica gera conclusão sensível
+- divergência por semente, camada, referência ou métrica gera conclusão sensível
   ou inconclusiva, não um vencedor forçado.
 
-## 10. Por que a métrica não é circular — e qual limitação permanece
+## 10. Fundamentação da não circularidade da métrica e limitação remanescente
 
 A versão antiga era circular quando a própria saída do método ajudava a definir
 a “verdade” usada para avaliá-lo.
@@ -870,7 +870,7 @@ A conclusão do MBA deve ser organizada em três níveis:
 1. **Resultado operacional:** o portfólio curado adotado e seus formulários;
 2. **Resultado metodológico:** aderência, robustez e custo dos métodos;
 3. **Limitações:** estudo retrospectivo, alvo endógeno, referência automática,
-   três seeds e ausência de validação temporal externa.
+   três sementes e ausência de validação temporal externa.
 
 O avaliador final confirmou a completude dos oito braços, a identidade do
 insumo, as réplicas, as camadas de referência e o relatório. A conclusão não é
