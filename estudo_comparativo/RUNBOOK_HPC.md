@@ -65,7 +65,9 @@ bash -n scripts/hpc/job_pipeline.sh estudo_comparativo/hpc/job_preparar_insumo.s
 ```
 
 O gate deve confirmar 1.584 registros antes do filtro, 128 removidos, 1.456
-restantes, chaves únicas e zero uso de LLM ou texto livre para escopo. O
+restantes, chaves únicas, que os 128 casos efetivos correspondem ao request type
+legado documentado quando o relatório privado estiver disponível, e zero uso de
+LLM ou texto livre para escopo. O
 manifesto agregado continua se chamando `MANIFESTO_STAGE2_V6.json` porque o
 contrato técnico congelado é versionado, embora o script e a pasta tenham nomes
 permanentes.

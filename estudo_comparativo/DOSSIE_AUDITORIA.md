@@ -5,8 +5,9 @@
 A primeira tentativa não produziu comparação: o próprio gate abortou o Job
 2165 porque a LLM excluiu 702 de 1.584 chamados como Sala de Sigilo. A máscara
 foi invalidada. O desenho final corrigiu a fronteira na fonte: removeu 128
-chamados pelo request type estruturado antes do Stage 1 e entregou os 1.456
-remanescentes igualmente a todos os braços. Nenhum modelo decide Sala.
+chamados pelo request type estruturado legado do fluxo de dados
+confidenciais/Sala antes do Stage 1 e entregou os 1.456 remanescentes igualmente
+a todos os braços. Nenhum modelo decide o escopo.
 
 Estado atual:
 
@@ -91,6 +92,15 @@ Na v6, a exclusão ocorre nos CSVs originais pelo campo
 Não se usa texto livre. Assim, menções incidentais a Sala em comentários não
 alteram o escopo.
 
+O relatório privado mostra que todos os 128 casos efetivamente removidos tinham
+o rótulo legado `Solicitação de Acesso a Bases de Dados`; os outros seis rótulos
+da política tiveram zero ocorrências. Esse item pertencia ao fluxo de dados
+confidenciais/Sala de Sigilo, atendido fora da DTI Pesquisa pela equipe de Banco
+de Dados. Ele não é o serviço
+curado homônimo, que cobre acesso comum a pastas e bases de pesquisa fora da
+Sala. A colisão de nomes é documentada em `configuracao/contexto_catalogo.md` e
+na decisão curada.
+
 O job 00 cria uma máscara que inclui todo o Stage 2 v6 e falha se houver
 exclusão, indeterminação, hash ou ordem divergente.
 
@@ -124,6 +134,8 @@ nos ZIPs code-only.
 - SHA-256 de cada arquivo;
 - cardinalidade por período;
 - zero request types proibidos;
+- quando o relatório privado está disponível, que a única categoria
+  efetivamente removida é o rótulo legado documentado, totalizando 128;
 - 1.456 chaves preenchidas e únicas.
 
 ### Depois do Stage 2

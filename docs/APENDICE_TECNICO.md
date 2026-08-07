@@ -8,8 +8,9 @@ em `RESULTADOS_COMPARACAO.md`.
 
 ## 0. Formação do portfólio antes do experimento
 
-O histórico público prova que o alvo não foi criado a partir dos placares da
-comparação. No commit `a5576c8`, anterior ao estudo robusto, já existiam:
+O snapshot público preservado do commit histórico `a5576c8` mostra que o alvo
+não foi criado a partir dos placares da comparação. Antes do estudo robusto, já
+existiam:
 
 - `pipeline/03_cluster.py`, com embeddings `bge-m3`, K-means e seleção de K por
   silhueta;
@@ -33,6 +34,14 @@ Os blobs Git auditados e os runners mantidos estão registrados em
 circularidade direta de usar a saída de um braço como alvo, mas não transforma
 o portfólio em ground truth independente: o caminho estatístico informou sua
 formação.
+
+Essa evidência histórica demonstra a precedência do alvo, não funciona como
+atestação externa da anterioridade das regras de decisão. O repositório público
+foi consolidado depois da execução e contém protocolo, regras e resultados no
+mesmo commit-raiz. Portanto, hashes, manifestos, timestamps de jobs e este
+apêndice devem ser lidos como proveniência interna auditável, não como um
+pré-registro com carimbo de tempo independente. Uma replicação futura deve
+depositar as regras em um serviço externo imutável antes de liberar resultados.
 
 O arquivo fornecido à execução continha um campo legado `_fonte_canonica` no
 sentido inverso e nomenclatura técnica antiga no comentário. Seus bytes foram
@@ -61,7 +70,11 @@ ZIP dessa tentativa tinha SHA-256
 ele é somente evidência histórica.
 
 A correção foi retirar a decisão de escopo das LLMs. O campo estruturado
-`Customer Request Type` identificou 128 registros da categoria de Sala:
+`Customer Request Type` identificou 128 registros; todos tinham o valor legado
+`Solicitação de Acesso a Bases de Dados`, classificado institucionalmente no
+fluxo de dados confidenciais/Sala de Sigilo e atendido fora da DTI Pesquisa
+pela equipe de Banco de Dados. Os outros seis request types da lista de
+exclusão tiveram zero ocorrências no período:
 
 | Período | Antes | Removidos | Depois |
 |---|---:|---:|---:|
@@ -73,6 +86,19 @@ A correção foi retirar a decisão de escopo das LLMs. O campo estruturado
 O filtro passou a ser determinístico, anterior ao Stage 1, sem texto livre e
 sem LLM. Sala permaneceu visível no portfólio como encaminhamento da Segurança
 da Informação, mas saiu do universo, das métricas e do ranking.
+
+Há uma colisão de nomes que precisa ser preservada na leitura. O serviço final
+curado `Solicitação de Acesso a Bases de Dados` não reintroduz os 128 registros:
+ele substitui `Acessar pastas de dados de pesquisa` e atende acesso comum a
+pastas e bases fora da Sala de Sigilo. A decisão curada já registra essa
+distinção em `feedback_portfolio.json`.
+
+Por integridade de proveniência, os bytes executados não foram reescritos depois
+do resultado. Assim, `decision_rules_v1.json` usa “Sala de Sigilo” como síntese
+operacional em `primary_universe`, e alguns campos congelados mantêm o prefixo
+técnico legado `n_sala_*`. Esses nomes significam “remoção upstream do escopo
+de Sala” e não afirmam que o texto literal “Sala” aparecia no request type. O
+manifesto e a narrativa mantida acima fornecem a interpretação semântica exata.
 
 ## 2. Insumo analítico congelado
 

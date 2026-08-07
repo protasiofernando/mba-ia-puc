@@ -6,8 +6,11 @@ comparação entre descoberta estatística e descoberta por LLM.
 ## Resultado
 
 O estudo foi concluído sobre 1.456 chamados, após remoção determinística de 128
-registros de Sala de Sigilo. A validação final passou em 302 checks, sem
-falhas. A evidência primária favorece K-means, mas o resultado de aderência é
+registros do request type legado `Solicitação de Acesso a Bases de Dados`, do
+fluxo de dados confidenciais/Sala de Sigilo atendido fora da DTI Pesquisa pela
+equipe de Banco de Dados. Esse rótulo é
+distinto do serviço curado homônimo para acesso comum fora da Sala. A validação
+final passou em 302 checks, sem falhas. A evidência primária favorece K-means, mas o resultado de aderência é
 dependente de semente, camada e referência; não há vencedor global único. O
 custo favorece o motor estatístico.
 

@@ -114,7 +114,7 @@ responsável e evitar atrasos associados a reclassificações sucessivas
 opções: ele funciona como interface entre a necessidade do usuário, a coleta de
 informações e a operação que prestará o serviço.
 
-Três evidências indicavam que esse catálogo não refletia mais a realidade. Primeiro, a opção genérica "Não encontrou o que procurava?" era a terceira categoria mais acionada (cerca de 13% dos chamados), sinal de que os usuários não localizavam onde abrir seus pedidos. Segundo, havia categorias sobrepostas disputando o mesmo tipo de solicitação. Terceiro — e mais custoso — chamados abertos sem as informações necessárias geravam idas e vindas de esclarecimento: a análise do histórico mostrou que chamados que exigiram múltiplas interações levaram, em média, cerca de 5,5 vezes mais tempo para serem resolvidos do que os atendidos de forma direta (seção 4.3).
+Três evidências indicavam que esse catálogo não refletia mais a realidade. Primeiro, a opção genérica "Não encontrou o que procurava?" era a terceira categoria mais acionada na base completa (203 de 1.584; 12,8%), sinal de que os usuários não localizavam onde abrir seus pedidos. Segundo, havia categorias sobrepostas disputando o mesmo tipo de solicitação. Terceiro — e mais custoso — chamados abertos sem as informações necessárias geravam idas e vindas de esclarecimento: no universo analítico, chamados que exigiram múltiplas interações levaram, em média, 5,22 vezes mais tempo para serem resolvidos do que os atendidos de forma direta; na base completa pré-filtro, a razão era 5,51 (seção 4.3).
 
 A dificuldade desse tipo de reavaliação é que o insumo relevante — o texto livre de milhares de chamados, com títulos vagos, descrições incompletas e comentários de acompanhamento — pode ser representado de maneiras lexicalmente diferentes para uma mesma intenção. Modelos de sentença baseados em Transformers foram propostos justamente para produzir representações semânticas comparáveis e úteis em busca e agrupamento (REIMERS; GUREVYCH, 2019). O uso de LLMs e embeddings amplia essa capacidade, mas APIs externas esbarram em uma restrição institucional: os chamados contêm dados pessoais e não podem deixar a infraestrutura da FGV.
 
@@ -209,7 +209,7 @@ registrados antes da avaliação final em
 
 #### 3.2 Dados
 
-A base original reúne os chamados do portal de serviços de pesquisa registrados entre 2024 e 2026 — **1.584 chamados** após deduplicação. Para a comparação, 128 request types de Sala de Sigilo foram removidos antes do Stage 1, restando **1.456 chamados**. Cada chamado traz título, descrição, categoria atribuída, situação, datas, responsáveis e comentários. Os dados brutos contêm dados pessoais e **não são versionados**. O script `scripts/gerar_base_sintetica.py` produz localmente em `data_exemplo/` uma amostra inteiramente artificial com o mesmo schema para demonstração, usando apenas o catálogo agregado público; por política de publicação, nenhum CSV integra este repositório. **Todos os números aplicados apresentados neste trabalho foram calculados sobre a base real, dentro da infraestrutura da FGV**.
+A base original reúne os chamados do portal de serviços de pesquisa registrados entre 2024 e 2026 — **1.584 chamados** após deduplicação. Para a comparação, uma regra exata sobre `Customer Request Type` removeu 128 registros antes do Stage 1, restando **1.456 chamados**. Todos os 128 registros efetivamente removidos tinham o rótulo legado **“Solicitação de Acesso a Bases de Dados”**, pertencente ao fluxo de dados confidenciais/Sala de Sigilo e atendido fora da DTI Pesquisa pela equipe de Banco de Dados; os outros seis rótulos da lista de exclusão tiveram zero ocorrências no período. Esse item legado não é o serviço homônimo do portfólio curado: o serviço final atende acesso comum a pastas e bases de pesquisa **fora da Sala de Sigilo** e substitui “Acessar pastas de dados de pesquisa”. A distinção institucional e as contagens estão em [`configuracao/contexto_catalogo.md`](configuracao/contexto_catalogo.md), e a decisão curada a registra em [`feedback_portfolio.json`](formacao_portfolio/decisao_curada/feedback_portfolio.json). Cada chamado traz título, descrição, categoria atribuída, situação, datas, responsáveis e comentários. Os dados brutos contêm dados pessoais e **não são versionados**. O script `scripts/gerar_base_sintetica.py` produz localmente em `data_exemplo/` uma amostra inteiramente artificial com o mesmo schema para demonstração, usando apenas o catálogo agregado público; por política de publicação, nenhum CSV integra este repositório. **Todos os números aplicados apresentados neste trabalho foram calculados sobre a base real, dentro da infraestrutura da FGV**.
 
 #### 3.3 Arquitetura em três camadas
 
@@ -251,7 +251,7 @@ Todo o processamento dos dados históricos ocorre dentro da infraestrutura da FG
 
 #### 4.1 Diagnóstico do portfólio vigente
 
-A descoberta automática identificou cerca de **20 grupos naturais de demanda** (20 tipos de requisição na abordagem agêntica; a estatística chegou a 29 clusters antes da consolidação) — frente às 18 categorias do catálogo vigente — e evidenciou três padrões de desalinhamento: categorias amplas demais concentrando pedidos heterogêneos, demandas recorrentes sem categoria própria (que escoavam para o item genérico) e fragmentação de um mesmo tipo de pedido em categorias distintas. O item "Não encontrou o que procurava?", com 12,8% dos chamados, era a terceira categoria mais usada do catálogo.
+Os números de grupos pertencem a etapas distintas e não devem ser confundidos: o snapshot histórico que iniciou a formação do portfólio tinha **23 grupos**, enquanto a execução comparativa final produziu **29 clusters** no método estatístico e **20 tipos de requisição** no método agêntico, antes da consolidação semântica. Em contraste com as 18 categorias do catálogo vigente, as três leituras evidenciaram categorias amplas demais, demandas recorrentes sem categoria própria e fragmentação de pedidos semelhantes. Na base completa de 1.584 chamados, o item “Não encontrou o que procurava?” reunia 203 casos (12,8%) e era a terceira categoria mais usada; esse percentual é um diagnóstico pré-filtro, não a distribuição do universo comparativo de 1.456.
 
 #### 4.2 Portfólio final
 
@@ -307,16 +307,20 @@ definido assim:
 - **Tempo de resolução**: diferença entre as datas de resolução e criação, em dias; consideram-se apenas chamados com tempo válido (resolução posterior à criação);
 - **Razão descritiva** = tempo(múltiplas) / tempo(direta).
 
-Na base real (1.561 chamados com tempo de resolução válido):
+Como o diagnóstico operacional foi calculado antes da definição do recorte
+comparativo, há dois denominadores legítimos. Eles são declarados separadamente:
 
-| Grupo | n | Média | Mediana |
-|-------|--:|------:|--------:|
-| Resolução direta (≤1 interação humana) | 333 | 2,5 dias | 0,4 dia |
-| Múltiplas interações (≥2) | 1.228 | 13,9 dias | 5,7 dias |
+| Universo | Tempo válido | Direta (n; média; mediana) | Múltiplas (n; média; mediana) | Razão das médias | Razão das medianas |
+|---|---:|---|---|---:|---:|
+| Base completa pré-filtro | 1.561 | 333; 2,5 dias; 0,4 dia | 1.228; 13,9 dias; 5,7 dias | 5,51x | 14,75x |
+| Universo analítico pós-filtro | 1.440 | 329; 2,6 dias; 0,4 dia | 1.111; 13,4 dias; 5,8 dias | 5,22x | 14,01x |
 
-A razão observada das médias é **5,5x** e a das medianas é 14,7x. Esses valores
-descrevem os dois grupos históricos; não estimam quanto tempo seria economizado
-ao alterar o formulário.
+No ambiente interno, o comando sem argumentos lê o diretório privado `data/`,
+que contém o universo analítico de 1.456 registros, e portanto reproduz
+**5,22x**. O valor **5,51x** requer a cópia privada pré-filtro de 1.584
+registros, informada com `--dados`;
+essa base não pode ser publicada. Os valores descrevem os grupos históricos e
+não estimam quanto tempo seria economizado ao alterar o formulário.
 
 Como os dados reais do Jira não são publicados, `scripts/gerar_base_sintetica.py`
 pode gerar em `data_exemplo/` uma amostra inteiramente artificial para
@@ -368,8 +372,12 @@ As instruções completas de instalação e execução estão em [docs/README_TE
 #### 4.6 Comparação robusta dos métodos de descoberta
 
 A comparação parte de um Stage 2 congelado com 1.456 chamados, produzido depois
-da remoção determinística de 128 registros de Sala de Sigilo pelo campo
-estruturado do Jira. Nenhuma LLM ou texto livre decide o escopo.
+da remoção determinística dos 128 registros do request type legado homônimo
+“Solicitação de Acesso a Bases de Dados”, pertencente ao fluxo de dados
+confidenciais/Sala de Sigilo e atendido fora da DTI Pesquisa pela equipe de
+Banco de Dados. O serviço final de acesso comum a bases é outro objeto
+operacional e permanece no catálogo curado. Nenhuma LLM ou texto
+livre decide o escopo.
 
 Há dois resultados separados:
 
@@ -424,12 +432,12 @@ estabilidade medem propriedades diferentes e não devem ser substituídas por um
 mas que o motor estatístico oferece o melhor compromisso observado na evidência
 primária e no custo deste domínio.
 
-A associação de 5,5 vezes entre as médias de tempo dos grupos com múltiplas
-interações e resolução direta reforça a utilidade operacional de coletar campos
-obrigatórios. Ainda assim, complexidade do chamado, prioridade e disponibilidade
-da equipe podem afetar simultaneamente interações e duração. O projeto usa esse
-resultado para motivar o desenho do formulário, não para prometer redução causal
-de tempo.
+A associação de 5,22 vezes no universo analítico — e de 5,51 vezes na base
+completa pré-filtro — entre as médias dos grupos com múltiplas interações e
+resolução direta reforça a utilidade operacional de coletar campos obrigatórios.
+Ainda assim, complexidade do chamado, prioridade e disponibilidade da equipe
+podem afetar simultaneamente interações e duração. O projeto usa esse resultado
+para motivar o desenho do formulário, não para prometer redução causal de tempo.
 
 Por fim, manter a curadoria humana e tornar visíveis justificativa, confiança e
 informações faltantes evita tratar a IA como decisora autônoma. A arquitetura
@@ -460,12 +468,19 @@ de Amershi et al. (2019).
   agregados e 302 checks são públicos. Textos e classificações por chamado não
   podem ser divulgados, o que limita a reprodução independente dos números
   exatos, mas preserva a obrigação institucional de proteção dos dados.
+- **Auditabilidade temporal:** o repositório público foi consolidado depois da
+  execução e publicou regras e resultados no mesmo commit-raiz. Assim, seu
+  histórico Git não comprova de forma independente a anterioridade temporal do
+  pré-registro. Manifestos, hashes, timestamps de jobs e o apêndice técnico
+  preservam a proveniência interna, mas não equivalem a um carimbo de tempo de
+  terceiro. Uma replicação futura deve registrar protocolo e regras em serviço
+  externo imutável antes de liberar os resultados.
 
 ### 5. Conclusões
 
 O trabalho demonstrou que é viável — técnica e institucionalmente — usar LLMs para redesenhar um portfólio de serviços a partir da demanda real, sem que nenhum dado sensível deixe a infraestrutura da organização. Quatro conclusões se destacam:
 
-1. **Dados qualificam a decisão gerencial no desenho de catálogos.** O portfólio vigente, construído incrementalmente pela percepção dos gestores, divergia de forma mensurável da estrutura encontrada nos chamados: cerca de 20 grupos naturais contra 18 categorias, com o item genérico entre os mais acionados. O portfólio final transforma essa evidência em sete serviços com escopos mais claros, um *catch-all* residual e Sala de Sigilo como encaminhamento fixo. A projeção automática posterior do Stage 7 atribuiu 1,6% do histórico analítico ao *catch-all*; a participação futura em produção ainda deve ser medida após a implantação.
+1. **Dados qualificam a decisão gerencial no desenho de catálogos.** O portfólio vigente, construído incrementalmente pela percepção dos gestores, divergia de forma mensurável da estrutura encontrada nos chamados: o snapshot de formação tinha 23 grupos, e a comparação final encontrou 29 clusters estatísticos e 20 tipos agênticos, frente a 18 categorias vigentes. O portfólio final transforma essa evidência em sete serviços com escopos mais claros, um *catch-all* residual e Sala de Sigilo como encaminhamento fixo. A projeção automática posterior do Stage 7 atribuiu 1,6% do histórico analítico ao *catch-all*; a participação futura em produção ainda deve ser medida após a implantação.
 2. **LLMs abertos locais dão conta da tarefa.** Os modelos `llama3.3:70b` (raciocínio) e `qwen3:30b` (compilação de JSON), rodando em GPU A100, sustentaram todas as etapas semânticas do pipeline (sumarização, rotulação, diagnóstico e classificação) com saída estruturada confiável — ao custo de um processamento offline de poucas horas, adequado para uma análise que se repete apenas periodicamente.
 3. **A curadoria humana é parte do método, não um ajuste posterior.** A separação entre recomendação automática e decisão de negócio (`formacao_portfolio/decisao_curada/feedback_portfolio.json`) tornou o resultado adotável. A área preserva serviços por responsabilidade, governança e visibilidade, inclusive quando o volume é baixo. Sala de Sigilo é um encaminhamento fixo e não participa da comparação.
 4. **A comparação metodológica precisa separar aderência, robustez e custo.** O protocolo não escolhe um vencedor por uma única métrica: confronta serviços, seeds, referências e camadas e mede custo separadamente. A evidência primária favorece K-means, mas a sensibilidade à camada impede declarar vencedor global único.

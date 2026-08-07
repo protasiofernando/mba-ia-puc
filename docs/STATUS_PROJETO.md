@@ -8,7 +8,7 @@ Atualizado em 7 de agosto de 2026.
 |---|---|
 | Pipeline e escopo | concluídos |
 | Universo analítico | 1.456 chamados |
-| Sala de Sigilo | removida deterministicamente da análise; preservada no portal |
+| Escopo de Sala de Sigilo | 128 registros do request type legado homônimo removidos; item preservado no portal |
 | Comparação | concluída |
 | Job 90 | `2234.HPCGPU`, `F/exit 0`, `00:01:04` |
 | Validação final | `PASS`, 302 checks, zero falhas |
@@ -19,8 +19,9 @@ Atualizado em 7 de agosto de 2026.
 | Stage 7 operacional | concluído; 1.456 classificações automáticas, agregado publicável |
 | Jobs pendentes | nenhum |
 | Formação e curadoria | processo e runners formalizados em `formacao_portfolio/` |
-| Auditoria de coerência | `PASS`, 48 checks, zero falhas/avisos |
+| Auditoria de coerência | `PASS`, 49 checks, zero falhas/avisos |
 | Gate integral pré-publicação | `PASS`, 163 arquivos, 39 testes |
+| Pré-registro público | proveniência interna disponível; anterioridade não atestada por timestamp externo |
 
 ## Entregáveis
 

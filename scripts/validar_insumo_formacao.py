@@ -49,7 +49,10 @@ def main() -> None:
         "arquivo": str(args.input.resolve()),
         "sha256": actual_sha,
         "n": len(rows),
-        "scope": "Sala de Sigilo removida antes do Stage 1",
+        "scope": (
+            "128 registros do request type legado do fluxo de dados "
+            "confidenciais/Sala removidos antes do Stage 1"
+        ),
     }, ensure_ascii=False, indent=2))
 
 

@@ -139,7 +139,7 @@
   "prepublication_audit": {
     "as_of": "2026-08-07",
     "coherence_status": "PASS",
-    "coherence_checks": 48,
+    "coherence_checks": 49,
     "coherence_failures": 0,
     "coherence_warnings": 0,
     "publication_gate_status": "PASS",
@@ -148,6 +148,8 @@
     "markdown_files_checked": 32,
     "pytest_tests_passed": 39,
     "git_upload_performed": true,
+    "public_git_independently_attests_preregistration_timing": false,
+    "preregistration_evidence": "Internal provenance through manifests, hashes, job timestamps and technical appendix; not an external trusted timestamp.",
     "next_action": "No computational action is pending; proceed with academic review and rerun only if data, methods, models, or the research question change."
   },
   "scope": {
@@ -157,6 +159,10 @@
     "rows_removed_before_stage1": 128,
     "rows_after": 1456,
     "unique_keys_after": 1456,
+    "effective_removed_request_types": {
+      "Solicitação de Acesso a Bases de Dados": 128
+    },
+    "semantic_distinction": "O valor removido era o request type legado do fluxo de dados confidenciais/Sala de Sigilo, atendido fora da DTI Pesquisa pela equipe de Banco de Dados; o serviço curado homônimo cobre acesso comum a pastas e bases fora da Sala.",
     "llm_used_for_scope": false,
     "free_text_used_for_scope": false,
     "manifest": "estudo_comparativo/filtro_sala_sigilo_manifest_v6.json",

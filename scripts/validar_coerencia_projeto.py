@@ -103,6 +103,27 @@ def _check_scope(audit: Audit) -> None:
         scope.get("privacy", {}).get("contains_ticket_keys") is False
         and scope.get("privacy", {}).get("contains_ticket_text") is False,
     )
+    legacy_label = "Solicitação de Acesso a Bases de Dados"
+    context = _text("configuracao/contexto_catalogo.md")
+    readme = _text("README.md")
+    feedback = _json("formacao_portfolio/decisao_curada/feedback_portfolio.json")
+    access_service = next(
+        (
+            row
+            for row in feedback.get("portfolio_final", [])
+            if row.get("id") == "acesso_bases_dados"
+        ),
+        {},
+    )
+    audit.check(
+        "scope.semantic_exclusion_documented",
+        legacy_label in scope.get("excluded_request_types", [])
+        and f"| {legacy_label} | 128 |" in context
+        and "outros seis rótulos da lista de exclusão tiveram zero ocorrências" in readme
+        and "rótulo legado" in readme
+        and "Não confundir com o request type antigo de mesmo nome"
+        in access_service.get("justificativa_consolidacao", ""),
+    )
 
     config = _json("estudo_comparativo/experimento_config.json")
     source = config.get("input", {})

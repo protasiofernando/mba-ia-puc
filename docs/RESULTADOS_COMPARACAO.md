@@ -17,7 +17,7 @@ O pacote final publicável foi validado antes desta síntese:
 | Gate | Resultado |
 |---|---:|
 | Universo original | 1.584 chamados |
-| Remoção estruturada de Sala de Sigilo | 128 chamados |
+| Remoção estruturada do request type legado homônimo | 128 chamados |
 | Universo analítico | 1.456 chamados |
 | Exclusões adicionais dentro da análise | 0 |
 | Casos indeterminados dentro da análise | 0 |
@@ -27,10 +27,16 @@ O pacote final publicável foi validado antes desta síntese:
 | Visões de referência | 4 completas |
 | Cubo controlado | 3 seeds × 4 referências × 3 camadas completo |
 
-A Sala de Sigilo foi removida por correspondência exata do campo estruturado
-`Customer Request Type`, antes do Estágio 1, sem LLM e sem leitura de texto
-livre. Ela permanece visível no portal como encaminhamento para a Equipe de
-Segurança da Informação, mas não participa de descoberta, métricas ou ranking.
+Os 128 registros removidos tinham todos o valor estruturado legado
+`Solicitação de Acesso a Bases de Dados` em `Customer Request Type`. No contexto
+institucional, esse rótulo pertencia ao fluxo de dados confidenciais/Sala de
+Sigilo, atendido fora da DTI Pesquisa pela equipe de Banco de Dados; os outros
+seis rótulos da política de exclusão tiveram
+zero ocorrências no período. A exclusão ocorreu antes do Estágio 1, sem LLM e
+sem leitura de texto livre. O serviço curado de mesmo nome é distinto: atende
+acesso comum a pastas e bases de pesquisa fora da Sala de Sigilo. Sala permanece
+visível no portal como encaminhamento para a Equipe de Segurança da Informação,
+mas não participa de descoberta, métricas ou ranking.
 
 As quatro visões automáticas de referência foram: consenso estrito, consenso
 pleno, modelo A e modelo B. O consenso estrito cobriu 1.301 de 1.456 chamados;
@@ -256,6 +262,9 @@ depois da implantação do novo portal.
 - As taxas de campos usam alinhamento `bge-m3` com limiar principal 0,55 e devem
   ser interpretadas como evidência de apoio, não julgamento do usuário.
 - O portfólio curado é um alvo operacional ex post, não ground truth externa.
+- O repositório público reúne regras e resultados no mesmo commit-raiz; hashes,
+  manifestos e timestamps preservam proveniência interna, mas não comprovam de
+  forma independente a anterioridade temporal do pré-registro.
 
 ## 10. Proveniência
 

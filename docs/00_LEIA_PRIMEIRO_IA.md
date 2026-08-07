@@ -25,14 +25,20 @@ classificação por chamado permanece privada.
 ## Fatos congelados
 
 - Universo bruto: 1.584 chamados.
-- Sala de Sigilo removida antes do Stage 1: 128 registros, por request type
-  estruturado, sem LLM e sem texto livre.
+- Escopo de Sala removido antes do Stage 1: 128 registros, todos com o request
+  type legado `Solicitação de Acesso a Bases de Dados`, do fluxo de dados
+  confidenciais/Sala de Sigilo atendido fora da DTI Pesquisa pela equipe de
+  Banco de Dados, sem LLM e sem texto livre. Esse rótulo não é o
+  serviço curado homônimo de acesso comum a bases fora da Sala.
 - Universo analítico: 1.456 chamados.
 - Stage 2: SHA-256
   `e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1`.
 - Portfólio curado: decisão operacional adotada, não ground truth externa.
 - Sala de Sigilo: visível e imutável no portal, atendida pela Segurança da
   Informação e fora de descoberta, métricas e ranking.
+- Pré-registro: a proveniência interna é preservada por hashes, manifestos e
+  timestamps, mas o commit-raiz público reúne regras e resultados e não funciona
+  como comprovação temporal externa da anterioridade das regras.
 - Referência por chamado: automática, por consenso Llama+Qwen; não houve
   rotulação humana individual.
 - Job 90 final: `2234.HPCGPU`, `Exit_status=0`, walltime `00:01:04`.
@@ -105,7 +111,7 @@ os caminhos originais executados permanecem no estado JSON e no apêndice.
 ## Próxima ação
 
 O trabalho computacional e a publicação terminaram. O gate de coerência passou
-em 48 checks e o gate integral passou sobre 163 arquivos e 39 testes. A árvore
+em 49 checks e o gate integral passou sobre 163 arquivos e 39 testes. A árvore
 code-only validada ocupa a `main` de
 `protasiofernando/mba-ia-puc` em um único commit-raiz. O repositório de entrega
 não possui histórico anterior, branch de arquivo ou tag; os repositórios

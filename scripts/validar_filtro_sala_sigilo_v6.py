@@ -15,12 +15,76 @@ sys.path.insert(0, str(Path(__file__).parent))
 from projeto import data_dir, projeto_dir
 
 
+EXPECTED_EFFECTIVE_REMOVALS = {
+    "Solicitação de Acesso a Bases de Dados": 128,
+}
+
+
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def _validate_semantic_report(report_path: Path, manifest: dict) -> dict:
+    """Confere o que efetivamente foi removido, sem expor chaves de chamados."""
+    if not report_path.is_file():
+        return {
+            "status": "NOT_CHECKED_PRIVATE_REPORT_ABSENT",
+            "private_report": str(report_path),
+        }
+
+    report = json.loads(report_path.read_text(encoding="utf-8-sig"))
+    if report.get("field") != manifest.get("decision_field"):
+        raise SystemExit(
+            "ERRO: campo decisório do relatório privado diverge do manifesto"
+        )
+    if set(report.get("excluded_categories", [])) != set(
+        manifest.get("excluded_request_types", [])
+    ):
+        raise SystemExit(
+            "ERRO: política de exclusão do relatório privado diverge do manifesto"
+        )
+
+    report_totals = report.get("totals", {})
+    manifest_totals = manifest.get("totals", {})
+    expected_totals = {
+        "rows_before": int(manifest_totals["rows_before"]),
+        "rows_after": int(manifest_totals["rows_after"]),
+        "rows_removed": int(manifest_totals["rows_removed_before_stage1"]),
+    }
+    if any(
+        report_totals.get(key) != value
+        for key, value in expected_totals.items()
+    ):
+        raise SystemExit(
+            "ERRO: totais do relatório privado divergem do manifesto público"
+        )
+
+    effective: dict[str, int] = {}
+    for item in report.get("files", []):
+        for request_type, count in item.get("removed_categories", {}).items():
+            request_type = str(request_type)
+            effective[request_type] = effective.get(request_type, 0) + int(count)
+    if effective != EXPECTED_EFFECTIVE_REMOVALS:
+        raise SystemExit(
+            "ERRO: categorias efetivamente removidas divergem da descrição "
+            f"semântica: esperado={EXPECTED_EFFECTIVE_REMOVALS} obtido={effective}"
+        )
+
+    return {
+        "status": "PASS",
+        "effective_removed_request_types": effective,
+        "semantic_distinction": (
+            "rótulo legado do fluxo de dados confidenciais/Sala de Sigilo, "
+            "atendido fora da DTI Pesquisa pela equipe de Banco de Dados; distinto "
+            "do serviço curado homônimo para acesso comum fora da Sala"
+        ),
+        "contains_ticket_keys": False,
+        "contains_ticket_text": False,
+    }
 
 
 def main() -> None:
@@ -33,6 +97,13 @@ def main() -> None:
             / "filtro_sala_sigilo_manifest_v6.json"
         ),
     )
+    parser.add_argument(
+        "--private-report",
+        help=(
+            "Relatório privado produzido pelo filtro; quando presente, valida "
+            "as categorias efetivamente removidas sem imprimi-lo"
+        ),
+    )
     args = parser.parse_args()
 
     manifest_path = Path(args.manifest).resolve()
@@ -43,6 +114,12 @@ def main() -> None:
     request_type_field = str(manifest["decision_field"])
     key_field = str(manifest["key_field"])
     excluded = set(manifest["excluded_request_types"])
+    private_report_path = (
+        Path(args.private_report).resolve()
+        if args.private_report
+        else (data_dir() / "filtro_sala_sigilo_20260727.json").resolve()
+    )
+    semantic_check = _validate_semantic_report(private_report_path, manifest)
     expected_files = manifest["files"]
     expected_names = [str(item["name"]) for item in expected_files]
     actual_files = sorted(data_dir().glob("dti-pesquisa__*.csv"))
@@ -125,6 +202,7 @@ def main() -> None:
         "files": result_files,
         "llm_used_for_scope": False,
         "free_text_used_for_scope": False,
+        "semantic_exclusion_check": semantic_check,
     }, ensure_ascii=False, indent=2))
 
 

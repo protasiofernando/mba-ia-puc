@@ -147,14 +147,17 @@ Isola a variável **modo de descoberta** e responde **duas perguntas separadas**
    efeito interno do mecanismo, sem afirmar validade causal externa; o teste é repetido em
    **3 sementes**.
 
-Garantias de rigor: mesmo `02` congelado (SHA conferido); Sala de Sigilo removida por
-**regra estruturada determinística** (não por LLM) antes do Estágio 1; **4 visões** de
+Garantias de rigor: mesmo `02` congelado (SHA conferido); 128 registros do request type
+legado homônimo do fluxo de Sala removidos por **regra estruturada determinística**
+(não por LLM) antes do Estágio 1; **4 visões** de
 referência; **bootstrap** com margens **pré-registradas**; proteção dos serviços
 estratégicos de baixo volume; e regra de decisão fixada **antes** dos resultados.
 
 Universos: **1.584** chamados na base aplicada; **1.456** no universo analítico da
-comparação (após a remoção estruturada de 128 chamados de escopo-Sala). Os dois números
-são distintos **de propósito** e nunca se confundem no texto.
+comparação (após a remoção estruturada de 128 chamados de escopo-Sala). Os 128 tinham
+o rótulo legado `Solicitação de Acesso a Bases de Dados`, distinto do serviço curado
+homônimo para acesso comum fora da Sala. Os dois denominadores são distintos **de
+propósito** e devem ser identificados em toda estatística.
 
 ---
 

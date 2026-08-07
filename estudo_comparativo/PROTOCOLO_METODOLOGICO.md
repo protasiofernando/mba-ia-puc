@@ -1,5 +1,15 @@
 # Protocolo metodológico pré-registrado — v6
 
+> **Clarificação editorial pós-execução (07/08/2026).** O único request type
+> que efetivamente casou com a política de exclusão foi o rótulo legado
+> `Solicitação de Acesso a Bases de Dados` (128 registros), pertencente ao fluxo
+> de dados confidenciais/Sala de Sigilo e atendido fora da DTI Pesquisa pela
+> equipe de Banco de Dados. Ele é distinto do serviço curado homônimo para
+> acesso comum fora da Sala. Esta nota
+> corrige a descrição semântica do recorte; não altera regra, corpus, hashes,
+> limiares ou resultados. Os bytes e hashes da execução permanecem preservados
+> no pacote de proveniência.
+
 ## 1. Pergunta e estimando
 
 O projeto busca o portfólio que melhor atende às demandas reais e as informações
@@ -19,7 +29,12 @@ Não se afirma generalização temporal ou populacional.
 
 O universo original tinha 1.584 chamados. Antes do Stage 1 foram removidos 128
 registros cujo campo estruturado `Customer Request Type` correspondia exatamente
-a um request type de Sala de Sigilo. Restaram 1.456 chamados.
+ao rótulo legado `Solicitação de Acesso a Bases de Dados` do fluxo de dados
+confidenciais/Sala de Sigilo, atendido fora da DTI Pesquisa pela equipe de Banco
+de Dados. Os outros seis request types da lista de exclusão tiveram zero
+ocorrências. Restaram 1.456 chamados. O serviço curado homônimo
+cobre acesso comum a pastas e bases fora da Sala e não representa os registros
+removidos.
 
 Regras congeladas:
 
@@ -34,6 +49,12 @@ Regras congeladas:
 Os hashes por CSV e a lista de request types ficam em
 `filtro_sala_sigilo_manifest_v6.json`. O Stage 2 só será pré-registrado pelo seu
 SHA-256 depois de concluído; o gerador do ZIP final recusa manifesto divergente.
+
+O repositório público foi consolidado após a execução, com regras e resultados
+no mesmo commit-raiz. Logo, ele preserva a proveniência interna deste protocolo,
+mas não fornece comprovação temporal independente de sua anterioridade. Uma
+replicação deve depositar as regras em serviço externo imutável antes da
+liberação dos resultados.
 
 ## 3. Desenhos de comparação
 

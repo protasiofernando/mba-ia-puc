@@ -144,7 +144,11 @@ dado público. Artefatos por chamado continuam privados.
 
 O universo original tinha 1.584 chamados. Antes do Stage 1, 128 registros
 foram removidos por correspondência determinística no campo estruturado
-`Customer Request Type`. Restaram 1.456.
+`Customer Request Type`. Todos os 128 tinham o rótulo legado `Solicitação de
+Acesso a Bases de Dados`, pertencente ao fluxo de dados confidenciais/Sala de
+Sigilo e atendido fora da DTI Pesquisa pela equipe de Banco de Dados; os outros
+seis valores da lista tiveram zero
+ocorrências no período. Restaram 1.456.
 
 O filtro:
 
@@ -158,9 +162,11 @@ Sala de Sigilo continua visível no portfólio, mas não entra em descoberta,
 referência, métrica ou ranking.
 
 Uma demanda textual sobre acesso a dados não é automaticamente Sala. O que
-define a exclusão é o request type estruturado congelado no manifesto. Por isso,
-o portfólio analítico ainda pode conter um serviço de acesso a bases para
-demandas remanescentes que pertençam à DTI Pesquisa.
+define a exclusão é o request type estruturado congelado no manifesto. O serviço
+curado homônimo `Solicitação de Acesso a Bases de Dados` é outro objeto: cobre
+acesso comum a pastas e bases de pesquisa fora da Sala e substitui o item
+vigente `Acessar pastas de dados de pesquisa`. Por isso, ele permanece no
+portfólio analítico sem contradizer o recorte.
 
 ## 5. Pipeline operacional, Stage por Stage
 

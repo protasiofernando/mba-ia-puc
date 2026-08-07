@@ -7,7 +7,7 @@ gate.
 ## Veredito
 
 **PASS.** A história metodológica, os runners, os alvos congelados e os
-resultados finais descrevem o mesmo processo. O gate automatizado passou em 48
+resultados finais descrevem o mesmo processo. O gate automatizado passou em 49
 checks, sem falhas e sem avisos:
 
 ```powershell
@@ -22,8 +22,12 @@ limitações do desenho.
 
 1. O corpus aplicado original continha 1.584 chamados.
 2. Antes do Stage 1, uma regra exata sobre o `Customer Request Type` removeu
-   128 chamados de Sala de Sigilo. LLM e texto livre não participaram dessa
-   decisão. O universo analítico passou a ter 1.456 chamados.
+   128 chamados. Todos tinham o rótulo legado `Solicitação de Acesso a Bases de
+   Dados`, pertencente ao fluxo de dados confidenciais/Sala de Sigilo e
+   atendido fora da DTI Pesquisa pela equipe de Banco de Dados; os outros seis
+   rótulos da lista tiveram zero ocorrências. LLM e texto
+   livre não participaram dessa decisão. O universo analítico passou a ter
+   1.456 chamados. O serviço curado homônimo cobre acesso comum fora da Sala.
 3. Na formação histórica do portfólio, o Método Estatístico usou embeddings
    `bge-m3` e K-means no Stage 3; LLMs executaram os Stages 4–6. O commit
    histórico preservado contém o candidato automático de dez itens.
@@ -79,6 +83,13 @@ limitações do desenho.
   classificações automáticas, sem Sala de Sigilo, com agregado publicável e
   arquivo por chamado mantido fora do Git. Essa execução não altera o alvo nem
   os resultados do Job 90.
+- corrigida a descrição semântica do recorte: ela agora declara o único request
+  type que efetivamente casou, a colisão de nomes com o serviço curado e o
+  denominador de cada estatística; o validador privado passou a conferir também
+  as categorias efetivamente removidas no relatório de filtragem.
+- registrada a limitação temporal do pré-registro: a publicação consolidada
+  preserva proveniência interna, mas seu histórico Git não constitui atestação
+  independente de anterioridade das regras.
 
 ## Proveniência do código executado
 
