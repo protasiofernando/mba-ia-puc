@@ -1,0 +1,29 @@
+{
+  "schema_version": "stage2-comparison-input-manifest-v1",
+  "experiment_generation": "v6",
+  "scope_method": "deterministic_structured_request_type_prefilter",
+  "llm_used_for_scope": false,
+  "scope_manifest_sha256": "efecd0c9f4b790d37e37eef14cf32bc4507a6233da574951899039bcf0f78300",
+  "stage1_sha256": "17ea0b617a60f3a55f0270f06b5d2ac6d03e8873c1cde1e3e2b881aa6751dd74",
+  "stage2_sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+  "stage2_contract_version": "intent-blind-v2",
+  "stage2_model": "llama3.3:70b",
+  "stage2_model_digest": "a6eb4748fd2990ad2952b2335a95a7f952d1a06119a0aa6a2df6cd052a93a3fa",
+  "stage2_temperature": 0.0,
+  "stage2_script_sha256": "19c5c69b890a9a7e45923595411419b58785e32f568e9c99d6d7629cdaf99691",
+  "llm_client_sha256": "94b7bfa349ada5343820474f4b0bd0da63cfb1c28de3ac9cc14cb2bb10f6a0a4",
+  "config_portfolio_sha256": "2de574a9fb1fd3fad9be79e6d061a5c11250aeab05504ab85d2cf72d40ad82bd",
+  "projeto_sha256": "c2b3da8437f1947c9d1163be18fa6609d4f7cfdde3b4232e0837f5300514c4d9",
+  "stage1_count": 1456,
+  "stage2_count": 1456,
+  "required_fields": [
+    "chave",
+    "intencao",
+    "tema",
+    "tipo_pedido"
+  ],
+  "unique_keys": 1456,
+  "contains_ticket_keys": false,
+  "contains_ticket_text": false,
+  "checkpoint_policy": "isolated_v6_directory; reuse_only_when_per_ticket_source_hash_matches"
+}

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triagem Inteligente de Chamados - {{ portal_nome }}</title>
+  <link rel="stylesheet" href="/static/style.css?v=15">
+</head>
+<body>
+<div class="app-container">
+
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="header-inner">
+      <img src="/static/img/fgv-logo.png?v=1" alt="FGV" class="header-logo">
+      <div class="header-divider"></div>
+      <div>
+        <h1 class="header-title">Suporte Inteligente para Abertura de Chamados com IA</h1>
+        <p class="subtitle">{{ portal_nome }}</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar">
+    <div class="nav-items">
+      <button class="nav-btn active" onclick="switchTab('categorias',this)">Tipos de Chamado Sugeridos</button>
+      <button class="nav-btn" onclick="switchTab('dashboard',this)">Indicadores</button>
+      <button class="nav-btn" onclick="switchTab('simulacao',this)">Prévia do Portal</button>
+      <button class="nav-btn" onclick="switchTab('historico',this)">Histórico</button>
+    </div>
+  </nav>
+
+  <main class="content">
+
+    <!-- ══════════════ INDICADORES ══════════════ -->
+    <section id="dashboard" class="tab-content">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;margin-bottom:.5rem;">
+        <div>
+          <h2 style="margin:0;">Indicadores</h2>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem;">
+          <label style="font-size:.8rem;color:var(--text-muted);font-weight:600;">Filtrar por mês</label>
+          <select id="filtroMes" onchange="loadDash()" style="font-size:.82rem;padding:.35rem .75rem;border:1px solid rgba(0,58,121,.18);border-radius:8px;background:#fff;color:var(--navy);font-family:var(--font-body);cursor:pointer;">
+            <option value="">Todos os períodos</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- KPI Row 1 - Volume -->
+      <div class="kpi-row">
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbChamados">-</div>
+          <div class="kpi-label">Chamados no Período</div>
+        </div>
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbCategorias">-</div>
+          <div class="kpi-label">Tipos de Chamado Atuais</div>
+        </div>
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbFinalizados">-</div>
+          <div class="kpi-label">Finalizados</div>
+        </div>
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbBacklog">-</div>
+          <div class="kpi-label">Chamados em Aberto</div>
+        </div>
+      </div>
+
+      <!-- KPI Row 2 - Qualidade -->
+      <div class="kpi-row" style="margin-top:.75rem;">
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbTaxaResolucao">-</div>
+          <div class="kpi-label">Taxa de Resolução</div>
+        </div>
+        <div class="kpi-card kc-navy">
+          <div class="kpi-number" id="dbNovasCats">-</div>
+          <div class="kpi-label">Tipos de Chamado Sugeridos (IA)</div>
+        </div>
+      </div>
+
+      <!-- Gráficos linha 1 -->
+      <div class="dashboard-grid" style="margin-top:1.25rem;">
+        <div class="card">
+          <h3>Distribuição por Tipo de Chamado Atual <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">(top 8)</span></h3>
+          <canvas id="chartCategorias" height="200"></canvas>
+        </div>
+        <div class="card">
+          <h3>Tempo Médio de Resolução <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">horas por tipo de chamado atual</span></h3>
+          <canvas id="chartTempos" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- Tendência mensal -->
+      <div class="card" style="margin-top:1.25rem;">
+        <h3>Tendência Mensal <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">volume de abertura por mês</span></h3>
+        <canvas id="chartTendencia" height="100"></canvas>
+      </div>
+
+      <!-- Gráficos linha 2 -->
+      <div class="dashboard-grid" style="margin-top:1.25rem;">
+        <div class="card">
+          <h3>Top 10 Analistas <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">chamados atendidos</span></h3>
+          <canvas id="chartAnalistas" height="220"></canvas>
+        </div>
+        <div class="card">
+          <h3>Top 10 Solicitantes <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">chamados abertos</span></h3>
+          <canvas id="chartSolicitantes" height="220"></canvas>
+        </div>
+      </div>
+
+      <!-- Gráficos linha 3 -->
+      <div class="dashboard-grid" style="margin-top:1.25rem;">
+        <div class="card">
+          <h3>Por Departamento <span style="font-weight:400;color:var(--text-muted);font-size:.78rem;">volume por dpto solicitante</span></h3>
+          <canvas id="chartDepartamentos" height="200"></canvas>
+        </div>
+        <div class="card">
+          <h3>Situação dos Chamados</h3>
+          <canvas id="chartSituacoes" height="200"></canvas>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1.25rem;">
+        <h3>Dados dos Chamados por Tipo de Chamado Atual</h3>
+        <p style="color:var(--text-muted);font-size:.8rem;margin:.3rem 0 1rem;">Indicadores operacionais do catálogo atual: volume, interações, tempo de resolução e distribuição entre resolução direta e múltiplas interações.</p>
+        <div style="overflow-x:auto;">
+          <table class="rdf-table">
+            <thead>
+              <tr>
+                <th>Tipo de Chamado Atual</th>
+                <th style="text-align:right;">Chamados</th>
+                <th style="text-align:right;">Interações Médias</th>
+                <th style="text-align:right;">Tempo Médio (h)</th>
+                <th style="text-align:right;">Taxa Resolução</th>
+                <th style="text-align:right;">Resolução Direta</th>
+                <th style="text-align:right;">Múltiplas Interações</th>
+                <th style="text-align:right;">Tempo Médio Direto (h)</th>
+                <th style="text-align:right;">Tempo Médio Múltiplas (h)</th>
+                <th style="text-align:right;">% Redução Tempo</th>
+              </tr>
+            </thead>
+            <tbody id="iaInteracoesBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1.25rem;">
+        <h3>Critérios de Cálculo dos Indicadores</h3>
+        <div style="overflow-x:auto;margin-top:.8rem;">
+          <table class="rdf-table">
+            <thead>
+              <tr>
+                <th>Indicador</th>
+                <th>Cálculo</th>
+                <th>O que considera</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Filtro por mês</td>
+                <td><code>strftime('%Y-%m', data_criacao) = mês selecionado</code></td>
+                <td>Aplica-se aos KPIs e gráficos operacionais baseados em chamados. O total de tipos de chamado sugeridos pela IA não muda com o filtro mensal.</td>
+              </tr>
+              <tr>
+                <td>Chamados no Período</td>
+                <td><code>COUNT(*)</code></td>
+                <td>Todos os chamados da base, respeitando o filtro de mês quando selecionado.</td>
+              </tr>
+              <tr>
+                <td>Tipos de Chamado Atuais</td>
+                <td><code>COUNT(DISTINCT tipo_solicitacao)</code></td>
+                <td>Tipos de chamado atuais não vazios, excluindo <code>Não categorizado</code>; respeita o filtro mensal.</td>
+              </tr>
+              <tr>
+                <td>Finalizados</td>
+                <td><code>SUM(finalizado)</code></td>
+                <td>Chamados em situação terminal na base tratada, incluindo resolvidos e outros encerramentos finais.</td>
+              </tr>
+              <tr>
+                <td>Chamados em Aberto</td>
+                <td><code>COUNT(*) WHERE finalizado = 0</code></td>
+                <td>Chamados ainda não encerrados em situação terminal; respeita o filtro mensal.</td>
+              </tr>
+              <tr>
+                <td>Taxa de Resolução</td>
+                <td><code>SUM(resolvido) / COUNT(*) × 100</code></td>
+                <td>Conta apenas chamados marcados como resolvidos no numerador. Encerramentos não resolvidos entram no denominador.</td>
+              </tr>
+              <tr>
+                <td>Tipos de Chamado Sugeridos (IA)</td>
+                <td><code>len(portfolio_ativo)</code></td>
+                <td>Total de tipos de chamado sugeridos no portfólio ativo: Stage 7 curado quando existir; senão Stage 5 automático.</td>
+              </tr>
+              <tr>
+                <td>Distribuição por Tipo de Chamado Atual</td>
+                <td><code>COUNT(*) GROUP BY tipo_solicitacao</code></td>
+                <td>Top 8 tipos de chamado atuais por volume de chamados.</td>
+              </tr>
+              <tr>
+                <td>Tempo Médio de Resolução</td>
+                <td><code>AVG(tempo_total_horas)</code></td>
+                <td>Somente chamados com <code>tempo_total_horas &gt; 0</code>; chamados abertos não entram como tempo corrente.</td>
+              </tr>
+              <tr>
+                <td>Tendência Mensal</td>
+                <td><code>COUNT(*) GROUP BY mês(data_criacao)</code></td>
+                <td>Volume de abertura por mês, usando a data de criação do chamado.</td>
+              </tr>
+              <tr>
+                <td>Top Analistas</td>
+                <td><code>COUNT(*) GROUP BY responsavel</code></td>
+                <td>Chamados com responsável preenchido, ordenados por volume atendido.</td>
+              </tr>
+              <tr>
+                <td>Top Solicitantes</td>
+                <td><code>COUNT(*) GROUP BY solicitante</code></td>
+                <td>Chamados com solicitante preenchido; exibe o departamento mais frequente do solicitante quando disponível.</td>
+              </tr>
+              <tr>
+                <td>Por Departamento</td>
+                <td><code>COUNT(*) GROUP BY dpto_solicitante</code></td>
+                <td>Volume por área solicitante extraída dos dados do usuário.</td>
+              </tr>
+              <tr>
+                <td>Situação dos Chamados</td>
+                <td><code>COUNT(*) GROUP BY situacao</code></td>
+                <td>Distribuição por status original/consolidado do chamado.</td>
+              </tr>
+              <tr>
+                <td>Dados dos Chamados por Tipo de Chamado Atual</td>
+                <td>Volume, médias, taxas e segmentação direta/múltiplas interações por <code>tipo_solicitacao</code></td>
+                <td>Resolução direta: até 1 interação humana ou marcação IA equivalente. Múltiplas interações: 2 ou mais interações ou marcação IA equivalente.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ CLASSIFICAÇÃO SUGERIDA ══════════════ -->
+    <section id="categorias" class="tab-content active">
+      <h2>Tipos de Chamado Sugeridos</h2>
+
+      <div id="iaAguardando" style="display:none;">
+        <div class="card">
+          <div class="empty-state">
+            <p>Pipeline ainda não executado.<br>
+            Rode as etapas do pipeline com o Claude para gerar os arquivos em <code>pipeline_data/</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="iaResultado" style="display:none;">
+        <div id="iaHeroCards" style="display:none;" class="ia-hero-grid">
+          <div class="ia-kpi" style="border:1px solid var(--border);">
+            <div class="ia-kpi-num" style="color:var(--fgv-navy);" id="iaTickets">-</div>
+            <div class="ia-kpi-label">Chamados Analisados</div>
+          </div>
+          <div class="ia-kpi" style="border:1px solid var(--border);">
+            <div class="ia-kpi-num" style="color:var(--fgv-navy);" id="iaCatAtual">-</div>
+            <div class="ia-kpi-label">Tipos de Chamado Atuais</div>
+          </div>
+          <div class="ia-kpi" style="border:1px solid var(--border);">
+            <div class="ia-kpi-num" style="color:var(--fgv-navy);" id="iaCatNova">-</div>
+            <div class="ia-kpi-label" id="iaCatNovaLabel">Tipos de Chamado Sugeridos</div>
+          </div>
+          <div class="ia-kpi" style="border:1px solid var(--border);">
+            <div class="ia-kpi-num" style="color:var(--fgv-navy);" id="iaGrupos">-</div>
+            <div class="ia-kpi-label">Grupos de Chamados</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:1.4rem;border-left:3px solid var(--fgv-navy);">
+          <div class="diag-eyebrow">Diagnóstico &middot; Painel Executivo</div>
+          <h3 id="iaDiagLead" class="diag-lead"></h3>
+          <div id="iaDiagKpis" class="diag-kpis"></div>
+          <ul id="iaDiagAcoes" class="diag-acoes"></ul>
+        </div>
+
+        <div class="card" style="margin-bottom:1.4rem;">
+          <h3>Consolidação do Catálogo (Catálogo novo → Catálogo atual)</h3>
+          <p class="section-subtitle" style="margin:.35rem 0 0;max-width:none;">
+            Mapa de migração curado: cada tipo de chamado novo e os tipos atuais que ele substitui, sem repetição (cada tipo atual entra em um único tipo novo). Os volumes mostrados são a demanda histórica de cada tipo atual. A distribuição por conteúdo (classificação por chamado) está no Painel Executivo.
+          </p>
+          <div id="iaConsolidacao" style="margin-top:1rem;"></div>
+        </div>
+
+        <div class="card" style="margin-bottom:1.4rem;">
+          <h3>Comparativo de Catálogo (atual &times; sugerido)</h3>
+          <div class="portfolio-compare-grid" style="margin-top:1rem;">
+            <div>
+              <h4 style="color:var(--fgv-navy);">Catálogo atual - <span id="iaNAtual">?</span> tipos de chamado</h4>
+              <div id="iaCatAtualLista"></div>
+            </div>
+            <div>
+              <h4 style="color:var(--green);"><span id="iaPortfolioNovoTitulo">Catálogo sugerido</span> - <span id="iaNNova">?</span> tipos de chamado</h4>
+              <div id="iaPortfolioNovo"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Mapeamento dos Tipos de Chamado Sugeridos</h3>
+        <div style="overflow-x:auto;margin-top:1rem;">
+          <table class="rdf-table">
+            <thead>
+              <tr>
+                <th>Tipo de Chamado Sugerido</th>
+                <th>Tipos de Chamado Atuais Abrangidos</th>
+                <th style="text-align:center;">Chamados Mapeados</th>
+              </tr>
+            </thead>
+            <tbody id="catBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ SIMULAÇÃO ══════════════ -->
+    <section id="simulacao" class="tab-content">
+      <div class="pp">
+        <!-- Banner -->
+        <div class="pp-banner">
+          <div class="pp-shape s1"></div><div class="pp-shape s2"></div><div class="pp-shape s3"></div>
+          <h1>Bem-vindo(a) ao Portal {{ portal_nome }}</h1>
+        </div>
+
+        <!-- Assistente de IA: apoio à abertura de chamados -->
+        <div class="pp-assist-band">
+          <div class="pp-assist">
+            <div class="pp-assist-eyebrow">Assistente de Chamados &middot; IA</div>
+            <div class="pp-assist-title">{{ portal_nome }}</div>
+            <textarea id="simDescricao" class="pp-assist-input"
+              placeholder="Descreva com suas palavras o que você precisa, o assistente encontra o serviço certo."></textarea>
+            <div class="pp-assist-actions">
+              <button class="pp-btn-primary" onclick="executarSimulacao()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                Identificar Serviço
+              </button>
+              <button class="pp-btn-ghost" onclick="limparSimulacao()">Limpar</button>
+            </div>
+          </div>
+          <div class="pp-assist-status">
+            <span class="pp-dot" id="openaiStatusDot"></span>
+            <span id="openaiStatusText">Respostas geradas por IA com base no catálogo</span>
+          </div>
+          <div id="simResultado" class="pp-result"></div>
+          <div class="pp-divider"><span>ou explore por categoria abaixo &#8595;</span></div>
+        </div>
+
+        <!-- Catálogo: grupos (esquerda) e chamados como cards (direita) -->
+        <div class="pp-catalog">
+          <div class="pp-catalog-inner">
+            <div class="pp-side" id="ppSide"></div>
+            <div class="pp-grid" id="ppGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal do chamado: formulário estilo Jira -->
+      <div class="pp-overlay" id="ppOverlay">
+        <div class="pp-modal" id="ppModal"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════ HISTÓRICO ══════════════ -->
+    <section id="historico" class="tab-content">
+      <h2>Histórico de Chamados</h2>
+
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+        <input id="histBusca" class="sim-input" type="text" placeholder="Buscar por chave ou título…"
+          style="max-width:320px;" oninput="loadHistorico(1)">
+        <span id="histTotal" style="font-size:.82rem;color:var(--text-muted);"></span>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="overflow-x:auto;">
+          <table class="rdf-table">
+            <thead>
+              <tr>
+                <th style="width:110px;">Chamado</th>
+                <th>Título</th>
+                <th>Tipo de Chamado Atual</th>
+                <th>Grupo / Tipo de Chamado Sugerido (LLM)</th>
+                <th style="text-align:center;width:80px;">Confiança</th>
+              </tr>
+            </thead>
+            <tbody id="histBody">
+              <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted);">Carregando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Paginação -->
+      <div id="histPag" style="display:flex;justify-content:center;gap:.5rem;margin-top:1.25rem;flex-wrap:wrap;"></div>
+
+      <div class="card" style="margin-top:1.5rem;">
+        <h3>Grupos Identificados pela IA</h3>
+        <p style="color:var(--text-muted);font-size:.8rem;margin:.3rem 0 1rem;">Padrões descobertos no texto dos chamados pelo pipeline, sem partir dos tipos de chamado existentes. Uso interno para validação.</p>
+        <div id="gnResultado">
+          <div id="iaClusters"></div>
+        </div>
+        <div id="gnAguardando" style="display:none;">
+          <div class="empty-state">
+            <p>Pipeline ainda não executado.<br>Rode as etapas do pipeline com o Claude para gerar <code>pipeline_data/</code>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 - <span class="accent">Triagem Inteligente de Chamados</span> · DTI FGV · IA local · dados protegidos</p>
+  </footer>
+
+</div>
+
+<script src="/static/vendor/chart.umd.min.js?v=1"></script>
+<script src="/static/script.js?v=26"></script>
+</body>
+</html>

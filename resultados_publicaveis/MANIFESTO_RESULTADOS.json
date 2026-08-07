@@ -1,0 +1,30 @@
+{
+  "schema_version": "public-results-promotion-v1",
+  "source_public_tar": "comparacao_publicavel_20260804_131120.tar.gz",
+  "source_public_tar_sha256": "f476e4103044ee0cc578597523689cbafaf7b2b164fa720a5078808bc4545be6",
+  "source_job90": "2234.HPCGPU",
+  "validation_status": "PASS",
+  "validation_checks": 302,
+  "validation_failures": 0,
+  "privacy": {
+    "contains_ticket_keys": false,
+    "contains_ticket_text": false,
+    "contains_csv": false,
+    "contains_database": false,
+    "contains_checkpoints": false,
+    "contains_secrets": false
+  },
+  "files": {
+    "AMBIENTE_CONGELADO.json": {"bytes": 1238, "sha256": "bae80ea3be7b05bd8055f17f538c6f85e44d997aec0ca5887b5d31e9f57ded6b"},
+    "avaliacao/RESULTADO_CAMPOS_PORTFOLIO.md": {"bytes": 6477, "sha256": "047a49e80d6e4af876b046bc65060c38e6fbe013e6d694a669f2554af1a46a77"},
+    "avaliacao/RESULTADO_CAMPOS_PORTFOLIO.metrics.json": {"bytes": 206287, "sha256": "072bacf8e9e05d233765d93b3321fd82237dc745761f586808f595adfc7ded6c"},
+    "avaliacao/RESULTADO_COMPARACAO_ROBUSTA.md": {"bytes": 12411, "sha256": "fec75eb568cf2c9cd01e9fa8e5ad85cd47079420cc481ddf50c8b61c50d77233"},
+    "avaliacao/RESULTADO_COMPARACAO_ROBUSTA.metrics.json": {"bytes": 889372, "sha256": "2ec80b28fe8db496154adb722b3ff8cf8b6de70c4f5dadbbfe9667858930a798"},
+    "avaliacao/VALIDACAO_RESULTS.json": {"bytes": 36787, "sha256": "fd0c98e51b6330a7b5d42a0c92b517c2dc729b1d83acff2ae15bbe6f5f3b565a"},
+    "avaliacao/VALIDACAO_SETUP.json": {"bytes": 16381, "sha256": "66665c60db3a81a9d0693eb63cf2649ac585d91e4ade995b8492488717c491be"},
+    "manifesto_insumo_comum.json": {"bytes": 2932, "sha256": "bcd20b931478242d8be880f07a7a02720ae5b9888f0fb3a5fe862551fab8c342"},
+    "MANIFESTO_PACOTE.json": {"bytes": 10333, "sha256": "fc779fd608f44c161064f6e6df5eaaa1e85cc97e285b1b7a0f9338c31ee29d8f"},
+    "referencia/06_referencia_quality.json": {"bytes": 1646, "sha256": "48c297f289e620083d2f842992ca8825c10258188ae3da3e19d5ef4928fdb087"},
+    "requirements_frozen_hpc.txt": {"bytes": 949, "sha256": "b84966f9d4bb8eeba8960c4c9dda09c0dd203d8b213c679150f59b6ba86f9527"}
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "git-method-snapshot-v1",
+  "repository": "https://github.com/protasiofernando/mba-ia-masterbi-puc",
+  "commit": "a5576c83d47e9eda7e6087b59e57bac65c04e1b4",
+  "commit_date": "2026-07-03T18:04:48-03:00",
+  "selection": "Arquivos necessários para provar e compreender formação automática, curadoria humana e Stage 7; dashboard e dados de exemplo foram excluídos.",
+  "files": {
+    "README.md": {"bytes": 18447, "sha256": "daa9abfe319c35a19470edafee9c86958c5b416c7a2015ae417efb73a1c7e15d"},
+    "config_portfolio.json": {"bytes": 11120, "sha256": "5087e6fc59ee371d24b8d0307b133d1f8a049612bd642a8ebcd0120c103cee16"},
+    "docs/GUIA_PROJETO.md": {"bytes": 25250, "sha256": "28c3caa62dbaba929d671c0bb1547ce57c3d33484866ae8dfbe31a2a7a6652a5"},
+    "docs/README_TECNICO.md": {"bytes": 21217, "sha256": "471432f3122a9861c38f10e4109df53248a639e6f05b4320c32044a5c644cfc7"},
+    "feedback_portfolio.json": {"bytes": 9927, "sha256": "65459f55c229733fa29cfd837328a81c57e58d70d9ac0fa1751a36f5cc74d213"},
+    "hpc/run_on_gpu.sh": {"bytes": 5938, "sha256": "086e082b2713871bf7bbca81327026a22872771b72df3a00c77d4cc705bc179c"},
+    "hpc/run_stage7.sh": {"bytes": 2631, "sha256": "880a460d833fcca685b704d5135201f7364eecf12af139295126f0a16ef8a2be"},
+    "hpc/setup_env.sh": {"bytes": 4502, "sha256": "a9b4a9d5eedd9d19645aac3b830f996abed3ed639682b194352247426cd48e01"},
+    "hpc/stage7.sub": {"bytes": 978, "sha256": "fb0e771fbc946d616df790864233fda3c301d3d4ba0d8479f4b78fdaa49da8eb"},
+    "hpc/submit_pipeline.sub": {"bytes": 1342, "sha256": "1c08d7b360078b8dc34b68bee94ce27556b3fce7ca991b2858f97ba76c7fdd4b"},
+    "pipeline/__init__.py": {"bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    "pipeline/01_extract.py": {"bytes": 3647, "sha256": "334fb2e647e92dd37660dc5cc47e719a1fbd1615cf47e35eaff6c294a129dbe3"},
+    "pipeline/02_summarize.py": {"bytes": 11564, "sha256": "171ae22e2e26e6d9524d3fc5db9c2c3a72e4fd6437e45284ef135ec9da698159"},
+    "pipeline/03_cluster.py": {"bytes": 10741, "sha256": "126a803939962df70e1f662ffdc9ffe7a6834ae6b65f351ee7bc1aa6b31ee1ac"},
+    "pipeline/04_label_clusters.py": {"bytes": 6387, "sha256": "4406bd9ba9aecd7382b4adfeed0028d2975b1828fe937432405fd959aa7be836"},
+    "pipeline/05_compare_portfolio.py": {"bytes": 15393, "sha256": "2c11e6ff5486c547592d1a20846a7d8e367ff904283a2a95ee4476037a6cb553"},
+    "pipeline/06_classify_portfolio.py": {"bytes": 11632, "sha256": "9942d64508ba66dc0b77dbc540dd1d00fbaf4003d9014dbb5008ba1c66bc91eb"},
+    "pipeline/07_finalize_portfolio.py": {"bytes": 11357, "sha256": "3d26637b3dcd7f5bca0a405eb862a74ed536cb1394df7f7671fa22930e63c71e"},
+    "pipeline/llm_client.py": {"bytes": 5087, "sha256": "9d2b45871f9b6e59e00ee0a15f96616eddcd03f866fc3d4cfe0ddea36caea7e7"},
+    "pipeline_data/04_labels.json": {"bytes": 27881, "sha256": "4208bac348fc6bb0b0bae2a00aaccd4ef24c304c080db334b1de1a050b704bdf"},
+    "pipeline_data/05_portfolio_recommendation.json": {"bytes": 46817, "sha256": "4e950fcb1217544ff8c77c8c090fde7bdf799272569f480ff125f6a6f66e2176"},
+    "pipeline_data/07_portfolio_final.json": {"bytes": 10154, "sha256": "d33bdcf50b357ceafcc54a94716aab08db4b6a34e662e4009527af329b9dd6bd"},
+    "requirements.txt": {"bytes": 115, "sha256": "ede50382b877ae1e6f38ffad76e134203d16b23fbcf622191351c958c3c7ab0c"}
+  }
+}

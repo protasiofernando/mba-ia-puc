@@ -1,0 +1,180 @@
+{
+  "schema_version": "portfolio-curado-adotado-v2",
+  "metadata": {
+    "nome": "Portfólio operacional curado da DTI Pesquisa",
+    "natureza_metodologica": "alvo_operacional_adotado_ex_post",
+    "congelado_para_comparacao": true,
+    "nao_e_gabarito_humano_por_chamado": true,
+    "nota": "O desenho foi definido pela área após examinar as recomendações automáticas e aplicar decisões estratégicas de gestão, navegação, responsabilidade e visibilidade. A projeção dos chamados neste alvo é automática e deve ser avaliada por sensibilidade entre modelos.",
+    "pergunta_final": "Qual portfólio atende melhor às demandas reais e quais informações o usuário deve fornecer ao abrir cada chamado?"
+  },
+  "grupos_analiticos": [
+    {
+      "id": "infraestrutura_computacional",
+      "nome": "Infraestrutura Computacional"
+    },
+    {
+      "id": "nuvem_publica",
+      "nome": "Nuvem Pública"
+    },
+    {
+      "id": "softwares_licencas",
+      "nome": "Softwares e Licenças"
+    },
+    {
+      "id": "dados_governanca",
+      "nome": "Dados e Governança de Pesquisa"
+    },
+    {
+      "id": "triagem",
+      "nome": "Triagem"
+    }
+  ],
+  "categorias_analiticas": [
+    {
+      "id": "servidores_academicos",
+      "nome": "Servidores Acadêmicos Compartilhados",
+      "grupo_id": "infraestrutura_computacional",
+      "descricao": "Servidor acadêmico compartilhado para equipe ou projeto de pesquisa, incluindo criação de ambiente, acesso, suporte, manutenção, recursos, backup, restauração, arquivos e problemas de funcionamento.",
+      "quando_usar": "Escolha esta opção para criar ou usar um servidor acadêmico compartilhado, liberar acessos, alterar recursos, instalar componentes no ambiente ou resolver problemas de funcionamento, backup, restauração e arquivos.",
+      "informacoes_obrigatorias": [
+        "Lista de usuários que precisam de acesso",
+        "Título da pesquisa ou identificação do projeto",
+        "Classificação dos dados: públicos, restritos ou confidenciais",
+        "Identificação do servidor, quando já existir",
+        "Descrição da necessidade ou do problema"
+      ],
+      "papel_analise": "servico"
+    },
+    {
+      "id": "softwares_licencas",
+      "nome": "Softwares e Licenças Acadêmicas",
+      "grupo_id": "softwares_licencas",
+      "descricao": "Instalação, ativação, renovação, aquisição, acesso, dúvidas e problemas relacionados a softwares, ferramentas, pacotes, bibliotecas e licenças acadêmicas.",
+      "quando_usar": "Escolha esta opção quando o foco principal for instalar, ativar, renovar, adquirir, acessar ou resolver dúvida ou problema de software ou licença, e não o ambiente computacional.",
+      "informacoes_obrigatorias": [
+        "Nome e versão do software, ferramenta, pacote ou biblioteca",
+        "Tipo de demanda: instalação, ativação, renovação, acesso, aquisição, dúvida ou problema",
+        "Ambiente, servidor ou equipamento de uso",
+        "Usuários que precisam de acesso",
+        "Finalidade acadêmica ou de pesquisa"
+      ],
+      "papel_analise": "servico"
+    },
+    {
+      "id": "nuvem_publica",
+      "nome": "Nuvem Pública (AWS, Azure, GCP)",
+      "grupo_id": "nuvem_publica",
+      "descricao": "Criação, acesso, configuração, expansão, custos, orientação e suporte para recursos e projetos em AWS, Azure ou GCP.",
+      "quando_usar": "Escolha esta opção para contas, projetos, IAM, custos e serviços de AWS, Azure ou GCP.",
+      "informacoes_obrigatorias": [
+        "Provedor: AWS, Azure ou GCP",
+        "SI aprovada, orçamento ou centro de custo",
+        "Serviços e recursos desejados",
+        "Usuários que precisam de acesso",
+        "Prazo ou período de uso"
+      ],
+      "papel_analise": "servico"
+    },
+    {
+      "id": "hpc_gpu",
+      "nome": "HPC e Processamento de Alto Desempenho (GPU)",
+      "grupo_id": "infraestrutura_computacional",
+      "descricao": "Uso, acesso e suporte ao cluster HPC e a recursos de alto desempenho para GPU, CUDA, PBS, paralelização, simulações, ML, DL, LLMs locais e cargas científicas intensivas.",
+      "quando_usar": "Escolha esta opção quando a necessidade principal for processamento intensivo, GPU, CUDA, PBS, paralelização ou execução de cargas científicas no HPC.",
+      "informacoes_obrigatorias": [
+        "Finalidade do uso",
+        "Tipo de recurso necessário: GPU, CUDA, PBS, número de nós ou paralelização",
+        "Usuários que precisam de acesso",
+        "Necessidade de acesso externo ou VPN",
+        "Descrição e dimensão estimada da carga computacional"
+      ],
+      "papel_analise": "servico_estrategico",
+      "protecao_decisao": true
+    },
+    {
+      "id": "vm_portal_pesquisador",
+      "nome": "Máquinas Virtuais Individuais (Portal do Pesquisador)",
+      "grupo_id": "infraestrutura_computacional",
+      "descricao": "Solicitação, acesso, alteração e suporte para VM individual e temporária no Portal do Pesquisador ou VMware Aria.",
+      "quando_usar": "Escolha esta opção para VM individual e temporária destinada a teste, prova de conceito, validação ou experimento inicial.",
+      "informacoes_obrigatorias": [
+        "Sistema operacional desejado",
+        "Perfil da máquina: vCPU, RAM e disco",
+        "Finalidade do teste ou experimento",
+        "Usuário responsável",
+        "Prazo previsto de uso"
+      ],
+      "papel_analise": "servico_estrategico",
+      "protecao_decisao": true
+    },
+    {
+      "id": "pgd_pesquisa",
+      "nome": "Submissão do Plano de Gestão de Dados (PGD) de Pesquisa",
+      "grupo_id": "dados_governanca",
+      "descricao": "Elaboração, revisão, submissão e acompanhamento do Plano de Gestão de Dados, incluindo classificação de dados, governança e requisitos de fomento.",
+      "quando_usar": "Escolha esta opção para elaborar, revisar, submeter ou acompanhar o PGD e para dúvidas sobre classificação e governança dos dados.",
+      "informacoes_obrigatorias": [
+        "Título ou código do projeto de pesquisa",
+        "Pesquisador responsável",
+        "Agência de fomento, quando houver",
+        "Prazo para submissão ou revisão",
+        "Classificação conhecida ou prevista dos dados"
+      ],
+      "papel_analise": "servico_estrategico",
+      "protecao_decisao": true
+    },
+    {
+      "id": "acesso_bases_dados",
+      "nome": "Solicitação de Acesso a Bases de Dados",
+      "grupo_id": "dados_governanca",
+      "descricao": "Acesso a pastas e bases de pesquisa em servidores, bases externas ou licenciadas e apoio à ingestão ou ao pré-processamento, fora da Sala de Sigilo.",
+      "quando_usar": "Escolha esta opção para incluir, alterar ou excluir acesso a pastas ou bases de pesquisa, acessar bases externas ou licenciadas, ou solicitar ingestão e pré-processamento fora da Sala de Sigilo.",
+      "informacoes_obrigatorias": [
+        "Nome da base, pasta, sistema ou repositório",
+        "Tipo de demanda: incluir, alterar ou excluir acesso, ingestão ou pré-processamento",
+        "Usuários e identificadores que precisam de acesso",
+        "Projeto de pesquisa, finalidade e responsável",
+        "Nível de permissão necessário e prazo de acesso"
+      ],
+      "papel_analise": "servico_estrategico",
+      "protecao_decisao": true,
+      "nota_campos": "Campos aprovados na curadoria estratégica final."
+    },
+    {
+      "id": "nao_encontrou",
+      "nome": "Não encontrou o que procurava?",
+      "grupo_id": "triagem",
+      "descricao": "Categoria excepcional para demandas sem categoria adequada ou serviços fora do catálogo da DTI Pesquisa.",
+      "quando_usar": "Escolha esta opção somente quando nenhuma categoria adequada existir.",
+      "informacoes_obrigatorias": [
+        "Descrição detalhada da necessidade",
+        "Sistema, serviço ou recurso envolvido",
+        "Impacto e urgência",
+        "Unidade ou área relacionada, se conhecida"
+      ],
+      "papel_analise": "catch_all",
+      "entra_macro_f1_servicos": false
+    }
+  ],
+  "itens_fixos_fora_analise": [
+    {
+      "id": "sala_sigilo",
+      "nome": "Sala de Sigilo",
+      "grupo_id": "seguranca_informacao",
+      "descricao": "Ambiente seguro e isolado para tratamento de dados confidenciais ou sigilosos de pesquisa.",
+      "quando_usar": "Demandas operacionais da Sala de Sigilo, como acesso, agendamento, instalação de base ou software, upload de script e extração de resultados.",
+      "responsavel": "Equipe de Segurança da Informação",
+      "visivel_no_portal_dti_pesquisa": true,
+      "encaminhamento": true,
+      "imutavel": true,
+      "participa_descoberta": false,
+      "participa_otimizacao": false,
+      "participa_metricas": false,
+      "participa_ranking": false,
+      "informacoes_obrigatorias": [],
+      "gestao_do_formulario": "Equipe de Segurança da Informação",
+      "nota": "O item é mantido no portal por estratégia de navegação, mas não é modificado nem avaliado pelo experimento."
+    }
+  ]
+}

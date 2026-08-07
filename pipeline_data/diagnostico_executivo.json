@@ -1,0 +1,15 @@
+{
+  "_fonte": "Curadoria executiva do catalogo FINAL, com numeros MEDIDOS. 'Como era' vem de categorias_atuais do 05 (17 tipos sobre os 1.456 chamados analisados). 'Como ficou' vem da classificacao por chamado no catalogo curado (Stage 7: 07_classificados_final.json / 07_portfolio_final.json), executada sobre os mesmos 1.456. Todos os percentuais sao verificaveis nos artefatos. Sala de Sigilo e o servico de banco de dados, atendidos por outras equipes, ficam fora da analise. Separacao medicao x conclusao preservada.",
+  "analise_geral": "Como era: o portal reunia 17 tipos de requisicao definidos pela percepcao dos gestores, com baldes genericos disputando o mesmo pedido. 'Solicitar recursos computacionais para pesquisas' concentrava 392 chamados (26,9%) sem distinguir servidor compartilhado, VM, HPC ou nuvem; 'Atendimento de Incidentes' somava 219 (15,0%) sem apontar o servico afetado; e o item de escape 'Nao encontrou o que procurava?' era o terceiro mais acionado, com 203 (13,9%). Como ficou: classificando automaticamente os 1.456 chamados no catalogo curado (9 categorias em 6 grupos), a demanda se organizou por servico afetado - Servidores Academicos 455 (31,3%), Nuvem Publica 426 (29,3%), Softwares e Licencas 246 (16,9%), Maquinas Virtuais 98 (6,7%), HPC e GPU 95 (6,5%), Acesso a Bases de Pesquisa 65 (4,5%) e submissao de PGD 48 (3,3%). O escape caiu de 203 para 23 chamados (1,6%): pedidos que antes nao tinham casa passaram a ter. Dois grupos, Infraestrutura Computacional (44,5%) e Nuvem Publica (29,3%), concentram 73,8% do volume, o que orienta a prioridade de implantacao.",
+  "impacto_estimado": {
+    "cobertura": "100%",
+    "catch_all": "1,6%",
+    "revisao": "4,0%",
+    "justificativa": "O ganho e de clareza de triagem e de responsabilidade: cada pedido passou a ter uma casa pelo servico afetado, os baldes genericos deram lugar a servicos nomeados com responsavel e campos obrigatorios, e o escape deixou de acumular demanda por falta de opcao (de 203 para 23 chamados). A classificacao por chamado e automatica e auditavel, com justificativa e confianca por registro; 58 chamados (4,0%) foram sinalizados para revisao humana."
+  },
+  "acoes_prioritarias": [
+    "Priorizar a implantacao pelos dois maiores grupos, Infraestrutura Computacional e Nuvem Publica, que somam 73,8% do volume.",
+    "Revisar os 58 chamados (4,0%) sinalizados pela classificacao, concentrados onde a confianca foi baixa ou houve ambiguidade.",
+    "Padronizar os campos obrigatorios por categoria ja definidos na curadoria, atacando as idas e vindas que puxam o tempo de resolucao."
+  ]
+}

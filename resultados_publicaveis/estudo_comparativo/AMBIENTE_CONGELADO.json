@@ -1,0 +1,29 @@
+{
+  "version": "comparison-environment-lock-v1",
+  "models": {
+    "reasoning": {
+      "name": "llama3.3:70b",
+      "resolved_name": "llama3.3:70b",
+      "digest": "a6eb4748fd2990ad2952b2335a95a7f952d1a06119a0aa6a2df6cd052a93a3fa"
+    },
+    "structured_json": {
+      "name": "qwen3:30b-a3b-instruct-2507-q4_K_M",
+      "resolved_name": "qwen3:30b-a3b-instruct-2507-q4_K_M",
+      "digest": "19e422b0231392335cfc49cfd172de7034bb1aeabb08aa307cce745c60b272fe"
+    },
+    "embedding": {
+      "name": "bge-m3",
+      "resolved_name": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+    }
+  },
+  "ollama_version": "0.32.0",
+  "gpu_name": "NVIDIA A100 80GB PCIe",
+  "gpu_identity": "NVIDIA A100 80GB PCIe, 81920, 555.42.02",
+  "cpu_model": "AMD EPYC 7V13 64-Core Processor",
+  "python": "Python 3.10.12",
+  "pip_freeze_sha256": "b84966f9d4bb8eeba8960c4c9dda09c0dd203d8b213c679150f59b6ba86f9527",
+  "numpy_blas_config_sha256": "0770137cc78115e307c67f878dc9226c8e72a8b0a36f6a57f3f8cef0a8d50d79",
+  "code_provenance_sha256": "d485ba3bea8e5c59cb02ad0e527a056e6d8648812238830d8260d688605674f7",
+  "package_manifest_sha256": "fc779fd608f44c161064f6e6df5eaaa1e85cc97e285b1b7a0f9338c31ee29d8f"
+}

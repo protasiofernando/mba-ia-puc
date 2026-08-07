@@ -1,0 +1,108 @@
+# Dados sensíveis — nunca subir
+data/
+*.csv
+*.db
+*.jsonl
+
+# Pacotes/arquivos compactados podem conter dumps do pipeline. Nunca subir.
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.rar
+
+# CSVs de exemplo também ficam locais. A documentação explica como gerá-los,
+# mas nenhum CSV entra no repositório publicável.
+
+# Resultados do pipeline LLM — grandes, sensíveis ou derivados
+pipeline_data/01_tickets.json
+pipeline_data/02_checkpoint.json
+pipeline_data/02_summaries.json
+pipeline_data/03_clusters.json
+pipeline_data/06_classificados.json
+pipeline_data/06_checkpoint.json
+pipeline_data/07_classificados_final.json
+pipeline_data/07_checkpoint.json
+formacao_portfolio/execucao/
+formacao_portfolio/logs/
+# Checkpoints e intermediarios do metodo LLM (Llama+Qwen): _ckpt_*, _stage3_*, _stage5_*
+pipeline_data/_*
+
+# Ambiente Python
+venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Arquivos gerados/cacheados a partir dos CSVs
+analise_categorias.json
+
+# Lista de solicitantes (dados pessoais) gerada em plano_comunicacao/ — manter fora do git
+plano_comunicacao/solicitantes_historico.xlsx
+plano_comunicacao/solicitantes_historico.csv
+plano_comunicacao/solicitantes_emails_outlook.txt
+
+# Arquivos gerados pelo pipeline ETL antigo
+rdf_chamados.*
+portfolio_analysis.json
+exploratory_analysis.json
+generated_questions.json
+rlhf_dataset.jsonl
+
+# Snapshots de versões do pipeline (comparação local)
+pipeline_data_rev1/
+pipeline_data_rev2/
+
+# Workspace local de trabalho com o HPC (pacote/insumo/resultado) — pode conter
+# dados por chamado e tarballs privados; nunca subir.
+_hpc/
+# (nomes antigos, mantidos por segurança caso reapareçam)
+_envio_hpc/
+_hpc_res/
+_retorno_hpc/
+
+# Cópia local recuperável do repositório GitHub substituído. Nunca publicar.
+_local_git_backup/
+
+# Workspace executado da comparacao robusta: dados por chamado, ledgers,
+# segredos, checkpoints, telemetria e resultados trazidos do HPC.
+estudo_comparativo/source/*
+!estudo_comparativo/source/LEIA-ME.txt
+!estudo_comparativo/source/.gitkeep
+estudo_comparativo/referencia/*
+!estudo_comparativo/referencia/.gitkeep
+estudo_comparativo/runs/
+estudo_comparativo/metodo1_legado_llama/
+estudo_comparativo/avaliacao/
+estudo_comparativo/resultados/*
+!estudo_comparativo/resultados/.gitkeep
+estudo_comparativo/logs/*
+!estudo_comparativo/logs/.gitkeep
+estudo_comparativo/AMBIENTE_CONGELADO.json
+estudo_comparativo/manifesto_insumo_comum.json
+estudo_comparativo/preparacao_v6/
+
+# Arquivos avulsos que não pertencem ao repositório
+Logo FGV.png
+Suporte Chamados com IA - Resultados preliminares.pdf
+check_data.py
+guia_hpc/
+kit_identidade_visual/
+orientacoes/
+
+# IDE e OS
+.idea/
+.vscode/
+*.DS_Store
+Thumbs.db
+
+# Logs e outputs PBS
+*.log
+*.o[0-9]*
+*.e[0-9]*
+tmp/
+bin/

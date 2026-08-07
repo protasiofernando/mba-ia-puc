@@ -1,0 +1,142 @@
+{
+  "schema_version": "comparison-decision-rules-v1",
+  "frozen_before_new_results": true,
+  "primary_universe": "1456 chamados remanescentes após exclusão determinística por request type estruturado antes do Stage 1; Sala de Sigilo não participa dos métodos, métricas ou ranking",
+  "primary_layer": "final_request_types",
+  "primary_metric": "macro_best_match_f1_services",
+  "scope_mask": {
+    "policy": "deterministic_structured_request_type_prefilter_before_stage1",
+    "decision_field": "Customer Request Type",
+    "matching_policy": "exact_trimmed_case_sensitive",
+    "rows_before": 1584,
+    "rows_removed_before_stage1": 128,
+    "rows_after": 1456,
+    "analysis_exclusions": 0,
+    "analysis_indeterminate": 0,
+    "llm_used_for_scope": false,
+    "free_text_used_for_scope": false,
+    "manifest": "filtro_sala_sigilo_manifest_v6.json"
+  },
+  "secondary_metrics": [
+    "bcubed_f1",
+    "adjusted_rand_index",
+    "adjusted_mutual_information",
+    "minimum_reassignment_rate"
+  ],
+  "secondary_dominance": {
+    "minimum_material_wins": 2,
+    "require_zero_material_losses": true,
+    "metrics": {
+      "bcubed_f1": {
+        "better": "higher",
+        "margin": 0.03
+      },
+      "adjusted_rand_index": {
+        "better": "higher",
+        "margin": 0.03
+      },
+      "adjusted_mutual_information": {
+        "better": "higher",
+        "margin": 0.03
+      },
+      "minimum_reassignment_rate": {
+        "better": "lower",
+        "margin": 0.03
+      }
+    }
+  },
+  "practical_equivalence_margin": 0.03,
+  "practical_equivalence_margin_rationale": "0.03 e a menor diferenca media de aderencia considerada gerencialmente relevante; 0.02 e 0.05 sao apenas sensibilidades descritivas.",
+  "descriptive_margin_sensitivity": [
+    0.02,
+    0.05
+  ],
+  "equivalence_requires_confidence_interval_inside_margin": true,
+  "cost_tiebreaker": {
+    "primary": "wall_seconds_stages_3_6",
+    "requires_both_measurements": true,
+    "minimum_relative_difference": 0.1,
+    "fair_replicate_aggregation": "median",
+    "tokens_and_gpu_are_reported_separately": true,
+    "composite_score": false
+  },
+  "strategic_service_ids": [
+    "hpc_gpu",
+    "vm_portal_pesquisador",
+    "pgd_pesquisa",
+    "acesso_bases_dados"
+  ],
+  "maximum_strategic_service_loss": 0.1,
+  "maximum_strategic_service_loss_rationale": "0.10 e a maior perda toleravel de F1 em qualquer servico estrategico e deve ser verificada em 3 seeds x 4 referencias na camada principal.",
+  "minimum_strategic_service_support": 5,
+  "minimum_strategic_service_support_rationale": "Cada servico protegido precisa ter ao menos 5 chamados na visao avaliada; ausencia ou suporte menor torna o gate nao avaliavel e impede conclusao forte.",
+  "inference_scope": "retrospectiva_in_sample; bootstrap_condicional_ao_corpus; sem_generalizacao_populacional_ou_temporal",
+  "material_contingency_cell": {
+    "minimum_n": 5,
+    "minimum_row_share": 0.1,
+    "minimum_column_share": 0.1
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20260723,
+    "confidence": 0.95
+  },
+  "reference_robustness": {
+    "primary_view": "consensus_full",
+    "primary_view_rationale": "consensus_full preserva 100% do universo analitico; as outras tres visoes sao obrigatorias como robustez e recebem IC proprio.",
+    "views": [
+      "consensus_strict",
+      "consensus_full",
+      "model_a",
+      "model_b"
+    ],
+    "minimum_coverage": {
+      "consensus_strict": 0.5,
+      "consensus_full": 1.0,
+      "model_a": 1.0,
+      "model_b": 1.0
+    },
+    "require_same_direction_for_strong_claim": true
+  },
+  "decision_logic": [
+    "Se a diferenca da metrica primaria exceder 0.03, os quatro ICs bootstrap nao cruzarem zero, cada servico protegido tiver suporte minimo 5, nenhum deles perder mais de 0.10 e a direcao for igual nas visoes da referencia, declarar o metodo de maior macro-F1 superior em aderencia.",
+    "Dominancia secundaria exige pelo menos duas vantagens alem das margens declaradas e nenhuma perda material; se contradizer a metrica primaria ou romper sua equivalencia, declarar metricas conflitantes.",
+    "Equivalencia pratica exige que os quatro intervalos bootstrap da diferenca estejam contidos em [-0.03,+0.03], suporte estrategico minimo e ausencia de dominancia secundaria; so entao usar como desempate a mediana do tempo de parede dos Stages 3-6, exigindo diferenca relativa de pelo menos 10%. Tokens e GPU permanecem dimensoes separadas, sem escore composto.",
+    "Se qualidade e custo apontarem para metodos diferentes fora da equivalencia, declarar trade-off qualidade-custo e quantificar o custo incremental.",
+    "Se o ranking mudar por camada, seed ou classificador de referencia, declarar resultado sensivel e nao fabricar vencedor global.",
+    "O benchmark downstream da arquitetura legada reexecutada com Llama versus M2 nativo usa a mesma logica, mas sua conclusao e descritiva e condicional a uma execucao porque varios componentes dos Stages 3-6 mudam simultaneamente.",
+    "Aderencia e custo sao sintetizados separadamente; evidencia de custo ausente ou divergente entre estimandos deve permanecer explicita.",
+    "O portfolio curado permanece o resultado operacional adotado independentemente do vencedor metodologico."
+  ],
+  "possible_conclusions": [
+    "kmeans_superior_em_aderencia",
+    "llm_superior_em_aderencia",
+    "equivalentes_kmeans_mais_eficiente",
+    "equivalentes_llm_mais_eficiente",
+    "equivalentes_sem_diferenca_material_de_custo",
+    "equivalentes_custo_indisponivel",
+    "tradeoff_qualidade_custo",
+    "inconclusivo_dependente_da_referencia",
+    "inconclusivo_dependente_da_semente",
+    "inconclusivo_dependente_da_camada",
+    "inconclusivo_metricas_conflitantes",
+    "operacional_m1_maior_aderencia_descritiva",
+    "operacional_m2_maior_aderencia_descritiva",
+    "operacional_equivalentes_m1_mais_eficiente",
+    "operacional_equivalentes_m2_mais_eficiente",
+    "operacional_equivalentes_sem_diferenca_material_de_custo",
+    "operacional_equivalentes_custo_indisponivel",
+    "operacional_tradeoff_qualidade_custo",
+    "operacional_inconclusivo_dependente_da_referencia",
+    "operacional_inconclusivo_dependente_da_camada",
+    "operacional_inconclusivo_metricas_conflitantes"
+  ],
+  "possible_integrated_conclusions": [
+    "resultado_global_nao_unico",
+    "aderencia_convergente_com_tradeoff_de_custo",
+    "evidencia_convergente_favoravel_ao_metodo_llm",
+    "evidencia_convergente_favoravel_ao_metodo_estatistico",
+    "evidencia_convergente_de_equivalencia_pratica",
+    "resultados_distintos_por_estimando"
+  ]
+}

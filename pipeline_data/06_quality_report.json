@@ -1,0 +1,28 @@
+{
+  "total_classificados": 1456,
+  "categorias": {
+    "Acesso e Permissões": 671,
+    "Resolução de Incidentes em Servidores": 317,
+    "Instalacao de Software": 156,
+    "Desenvolvimento e Implementação": 64,
+    "Solicitações de Recursos": 56,
+    "Solicitações de Licenças e Certificados": 54,
+    "Gerenciamento de Dados": 39,
+    "Análise PGD": 26,
+    "Consultas Tecnicas": 24,
+    "Submissao PGD": 11,
+    "Aquisição e Gestão de Recursos": 9,
+    "Segurança e Conformidade": 9,
+    "Chamados sem Descricao": 7,
+    "Governanca de Dados": 6,
+    "Rede e Conectividade": 5,
+    "Testes e Validacao": 2
+  },
+  "confianca": {
+    "alta": 1407,
+    "media": 49
+  },
+  "revisao_recomendada": 35,
+  "percentual_revisao": 2.4,
+  "avisos": []
+}

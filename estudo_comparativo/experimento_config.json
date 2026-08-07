@@ -1,0 +1,131 @@
+{
+  "schema_version": "comparison-experiment-v3",
+  "experiment_id": "dti_pesquisa_comparacao_robusta_20260727_v6",
+  "objective": "Comparar arquiteturas downstream nos Stages 3-6 sobre o mesmo Stage 2 regenerado após exclusão determinística de Sala de Sigilo, isolar o motor de descoberta e medir aderência in-sample ao portfólio operacional curado ex post.",
+  "models": {
+    "reasoning": "llama3.3:70b",
+    "structured_json": "qwen3:30b-a3b-instruct-2507-q4_K_M",
+    "embedding": "bge-m3"
+  },
+  "input": {
+    "source_relpath": "source/02_summaries.json",
+    "expected_sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+    "expected_count": 1456,
+    "required_fields": [
+      "chave",
+      "intencao",
+      "tema",
+      "tipo_pedido"
+    ],
+    "reference_dir": "referencia",
+    "excluded_fixed_item_id": "sala_sigilo",
+    "scope_method": "deterministic_structured_request_type_prefilter",
+    "scope_filter_manifest": "filtro_sala_sigilo_manifest_v6.json",
+    "rows_before_scope_filter": 1584,
+    "rows_removed_before_stage1": 128,
+    "llm_used_for_scope": false,
+    "stage2_generation": {
+      "contract_version": "intent-blind-v2",
+      "model": "llama3.3:70b",
+      "model_digest": "a6eb4748fd2990ad2952b2335a95a7f952d1a06119a0aa6a2df6cd052a93a3fa",
+      "temperature": 0.0,
+      "stage2_script_sha256": "19c5c69b890a9a7e45923595411419b58785e32f568e9c99d6d7629cdaf99691",
+      "llm_client_sha256": "94b7bfa349ada5343820474f4b0bd0da63cfb1c28de3ac9cc14cb2bb10f6a0a4",
+      "config_portfolio_sha256": "2de574a9fb1fd3fad9be79e6d061a5c11250aeab05504ab85d2cf72d40ad82bd"
+    }
+  },
+  "native_m1": {
+    "id": "m1_legacy_llama",
+    "family": "native",
+    "discovery": "kmeans_legacy",
+    "pipeline_data": "metodo1_legado_llama/pipeline_data",
+    "description": "Arquitetura estatistica corrigida, reexecutada do zero com llama3.3:70b nos stages semanticos; nenhum resultado historico e reaproveitado."
+  },
+  "runs": [
+    {
+      "id": "m2_native",
+      "family": "native",
+      "discovery": "llm",
+      "common_interface": false,
+      "seed": 42,
+      "primary": true,
+      "pipeline_data": "runs/m2_native/pipeline_data"
+    },
+    {
+      "id": "llm_common_seed42",
+      "family": "ablation",
+      "discovery": "llm",
+      "common_interface": true,
+      "seed": 42,
+      "primary": true,
+      "pipeline_data": "runs/llm_common_seed42/pipeline_data"
+    },
+    {
+      "id": "kmeans_common_seed42",
+      "family": "ablation",
+      "discovery": "kmeans",
+      "common_interface": true,
+      "seed": 42,
+      "primary": true,
+      "pipeline_data": "runs/kmeans_common_seed42/pipeline_data"
+    },
+    {
+      "id": "llm_common_seed31415",
+      "family": "ablation_repeat",
+      "discovery": "llm",
+      "common_interface": true,
+      "seed": 31415,
+      "primary": false,
+      "pipeline_data": "runs/llm_common_seed31415/pipeline_data"
+    },
+    {
+      "id": "kmeans_common_seed31415",
+      "family": "ablation_repeat",
+      "discovery": "kmeans",
+      "common_interface": true,
+      "seed": 31415,
+      "primary": false,
+      "pipeline_data": "runs/kmeans_common_seed31415/pipeline_data"
+    },
+    {
+      "id": "llm_common_seed27182",
+      "family": "ablation_repeat",
+      "discovery": "llm",
+      "common_interface": true,
+      "seed": 27182,
+      "primary": false,
+      "pipeline_data": "runs/llm_common_seed27182/pipeline_data"
+    },
+    {
+      "id": "kmeans_common_seed27182",
+      "family": "ablation_repeat",
+      "discovery": "kmeans",
+      "common_interface": true,
+      "seed": 27182,
+      "primary": false,
+      "pipeline_data": "runs/kmeans_common_seed27182/pipeline_data"
+    }
+  ],
+  "comparisons": {
+    "operational": [
+      "m1_legacy_llama",
+      "m2_native"
+    ],
+    "fair_ablation_primary": [
+      "kmeans_common_seed42",
+      "llm_common_seed42"
+    ],
+    "fair_ablation_repeats": {
+      "kmeans": [
+        "kmeans_common_seed42",
+        "kmeans_common_seed31415",
+        "kmeans_common_seed27182"
+      ],
+      "llm": [
+        "llm_common_seed42",
+        "llm_common_seed31415",
+        "llm_common_seed27182"
+      ]
+    }
+  }
+}

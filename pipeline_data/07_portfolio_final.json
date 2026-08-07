@@ -1,0 +1,199 @@
+{
+  "schema_version": "portfolio-operacional-curado-v1",
+  "metadata": {
+    "decision_source": "feedback_portfolio.json",
+    "human_curated": true,
+    "automatic_candidate_source": "pipeline_data/05_portfolio_recommendation.json",
+    "classification_source": "pipeline_data/07_classificados_final.json",
+    "classification_status": "complete",
+    "total_classificados": 1456,
+    "base_portfolio": 1456
+  },
+  "portfolio_final": [
+    {
+      "id": "servidores_academicos",
+      "nome": "Servidores Acadêmicos Compartilhados",
+      "grupo": "Infraestrutura Computacional",
+      "descricao": "Servidor acadêmico compartilhado para equipe ou projeto de pesquisa, incluindo criação de ambiente, acesso, suporte, manutenção, recursos, backup, restauração, arquivos e problemas de funcionamento.",
+      "quando_usar": "Escolha esta opção para criar ou usar um servidor acadêmico compartilhado, liberar acessos, alterar recursos, instalar componentes no ambiente ou resolver problemas de funcionamento, backup, restauração e arquivos.",
+      "informacoes_obrigatorias": [
+        "Lista de usuários que precisam de acesso",
+        "Título da pesquisa ou identificação do projeto",
+        "Classificação dos dados: públicos, restritos ou confidenciais",
+        "Identificação do servidor, quando já existir",
+        "Descrição da necessidade ou do problema"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "média",
+      "volume": 455,
+      "percentual_portfolio": 31.2
+    },
+    {
+      "id": "softwares_licencas",
+      "nome": "Softwares e Licenças Acadêmicas",
+      "grupo": "Softwares e Licenças",
+      "descricao": "Instalação, ativação, renovação, aquisição, acesso, dúvidas e problemas relacionados a softwares, ferramentas, pacotes, bibliotecas e licenças acadêmicas.",
+      "quando_usar": "Escolha esta opção quando o foco principal for instalar, ativar, renovar, adquirir, acessar ou resolver dúvida ou problema de software ou licença, e não o ambiente computacional.",
+      "informacoes_obrigatorias": [
+        "Nome e versão do software, ferramenta, pacote ou biblioteca",
+        "Tipo de demanda: instalação, ativação, renovação, acesso, aquisição, dúvida ou problema",
+        "Ambiente, servidor ou equipamento de uso",
+        "Usuários que precisam de acesso",
+        "Finalidade acadêmica ou de pesquisa"
+      ],
+      "sla_sugerido": "3 dias úteis",
+      "complexidade": "baixa",
+      "volume": 246,
+      "percentual_portfolio": 16.9
+    },
+    {
+      "id": "nuvem_publica",
+      "nome": "Nuvem Pública (AWS, Azure, GCP)",
+      "grupo": "Nuvem Pública",
+      "descricao": "Criação, acesso, configuração, expansão, custos, orientação e suporte para recursos e projetos em AWS, Azure ou GCP.",
+      "quando_usar": "Escolha esta opção para contas, projetos, IAM, custos e serviços de AWS, Azure ou GCP.",
+      "informacoes_obrigatorias": [
+        "Provedor: AWS, Azure ou GCP",
+        "SI aprovada, orçamento ou centro de custo",
+        "Serviços e recursos desejados",
+        "Usuários que precisam de acesso",
+        "Prazo ou período de uso"
+      ],
+      "sla_sugerido": "3 dias úteis",
+      "complexidade": "alta",
+      "volume": 426,
+      "percentual_portfolio": 29.3
+    },
+    {
+      "id": "hpc_gpu",
+      "nome": "HPC e Processamento de Alto Desempenho (GPU)",
+      "grupo": "Infraestrutura Computacional",
+      "descricao": "Uso, acesso e suporte ao cluster HPC e a recursos de alto desempenho para GPU, CUDA, PBS, paralelização, simulações, ML, DL, LLMs locais e cargas científicas intensivas.",
+      "quando_usar": "Escolha esta opção quando a necessidade principal for processamento intensivo, GPU, CUDA, PBS, paralelização ou execução de cargas científicas no HPC.",
+      "informacoes_obrigatorias": [
+        "Finalidade do uso",
+        "Tipo de recurso necessário: GPU, CUDA, PBS, número de nós ou paralelização",
+        "Usuários que precisam de acesso",
+        "Necessidade de acesso externo ou VPN",
+        "Descrição e dimensão estimada da carga computacional"
+      ],
+      "sla_sugerido": "3 dias úteis",
+      "complexidade": "média",
+      "volume": 95,
+      "percentual_portfolio": 6.5
+    },
+    {
+      "id": "vm_portal_pesquisador",
+      "nome": "Máquinas Virtuais Individuais (Portal do Pesquisador)",
+      "grupo": "Infraestrutura Computacional",
+      "descricao": "Solicitação, acesso, alteração e suporte para VM individual e temporária no Portal do Pesquisador ou VMware Aria.",
+      "quando_usar": "Escolha esta opção para VM individual e temporária destinada a teste, prova de conceito, validação ou experimento inicial.",
+      "informacoes_obrigatorias": [
+        "Sistema operacional desejado",
+        "Perfil da máquina: vCPU, RAM e disco",
+        "Finalidade do teste ou experimento",
+        "Usuário responsável",
+        "Prazo previsto de uso"
+      ],
+      "sla_sugerido": "1 dia útil",
+      "complexidade": "baixa",
+      "volume": 98,
+      "percentual_portfolio": 6.7
+    },
+    {
+      "id": "pgd_pesquisa",
+      "nome": "Submissão do Plano de Gestão de Dados (PGD) de Pesquisa",
+      "grupo": "Dados e Governança de Pesquisa",
+      "descricao": "Elaboração, revisão, submissão e acompanhamento do Plano de Gestão de Dados, incluindo classificação de dados, governança e requisitos de fomento.",
+      "quando_usar": "Escolha esta opção para elaborar, revisar, submeter ou acompanhar o PGD e para dúvidas sobre classificação e governança dos dados.",
+      "informacoes_obrigatorias": [
+        "Título ou código do projeto de pesquisa",
+        "Pesquisador responsável",
+        "Agência de fomento, quando houver",
+        "Prazo para submissão ou revisão",
+        "Classificação conhecida ou prevista dos dados"
+      ],
+      "sla_sugerido": "5 dias úteis",
+      "complexidade": "média",
+      "volume": 48,
+      "percentual_portfolio": 3.3
+    },
+    {
+      "id": "acesso_bases_dados",
+      "nome": "Solicitação de Acesso a Bases de Dados",
+      "grupo": "Dados e Governança de Pesquisa",
+      "descricao": "Acesso a pastas e bases de pesquisa em servidores, bases externas ou licenciadas e apoio à ingestão ou ao pré-processamento, fora da Sala de Sigilo.",
+      "quando_usar": "Escolha esta opção para incluir, alterar ou excluir acesso a pastas ou bases de pesquisa, acessar bases externas ou licenciadas, ou solicitar ingestão e pré-processamento fora da Sala de Sigilo.",
+      "informacoes_obrigatorias": [
+        "Nome da base, pasta, sistema ou repositório",
+        "Tipo de demanda: incluir, alterar ou excluir acesso, ingestão ou pré-processamento",
+        "Usuários e identificadores que precisam de acesso",
+        "Projeto de pesquisa, finalidade e responsável",
+        "Nível de permissão necessário e prazo de acesso"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "média",
+      "nota_campos": "Campos aprovados na curadoria estratégica final.",
+      "volume": 65,
+      "percentual_portfolio": 4.5
+    },
+    {
+      "id": "nao_encontrou",
+      "nome": "Não encontrou o que procurava?",
+      "grupo": "Triagem",
+      "descricao": "Categoria excepcional para demandas sem categoria adequada ou serviços fora do catálogo da DTI Pesquisa.",
+      "quando_usar": "Escolha esta opção somente quando nenhuma categoria adequada existir.",
+      "informacoes_obrigatorias": [
+        "Descrição detalhada da necessidade",
+        "Sistema, serviço ou recurso envolvido",
+        "Impacto e urgência",
+        "Unidade ou área relacionada, se conhecida"
+      ],
+      "sla_sugerido": "1 dia útil para triagem",
+      "complexidade": "baixa",
+      "volume": 23,
+      "percentual_portfolio": 1.6
+    },
+    {
+      "id": "sala_sigilo",
+      "nome": "Sala de Sigilo",
+      "grupo": "Encaminhamentos",
+      "descricao": "Ambiente seguro e isolado para tratamento de dados confidenciais ou sigilosos de pesquisa.",
+      "quando_usar": "Demandas operacionais da Sala de Sigilo, como acesso, agendamento, instalação de base ou software, upload de script e extração de resultados.",
+      "informacoes_obrigatorias": [],
+      "encaminhamento": true,
+      "responsavel": "Equipe de Segurança da Informação",
+      "visivel_no_portal_dti_pesquisa": true,
+      "imutavel": true,
+      "fora_da_analise": true,
+      "gestao_do_formulario": "Equipe de Segurança da Informação",
+      "volume": 0,
+      "percentual_portfolio": null
+    }
+  ],
+  "diretrizes": [
+    "Classifique cada chamado em exatamente uma categoria do catálogo final.",
+    "Acesso, suporte, manutenção, incidente, armazenamento, backup e restauração classificam pelo serviço ou ambiente afetado.",
+    "HPC, VM individual, servidor acadêmico compartilhado e nuvem pública são serviços operacionalmente distintos.",
+    "PGD e classificação ou governança dos dados entram em Submissão do Plano de Gestão de Dados.",
+    "Acesso comum a pastas ou bases de pesquisa entra em Solicitação de Acesso a Bases de Dados.",
+    "Demandas operacionais da Sala de Sigilo permanecem em Sala de Sigilo e são encaminhadas à Segurança da Informação; não viram catch-all.",
+    "Use Não encontrou o que procurava? apenas quando nenhuma categoria servir."
+  ],
+  "fora_do_catalogo": [
+    {
+      "tema": "SharePoint, Microsoft 365, Teams, OneDrive, Outlook e sites de colaboração corporativa",
+      "acao": "Não encontrou o que procurava?",
+      "mensagem": "Este serviço é atendido por outra área e não faz parte do catálogo da DTI Pesquisa."
+    }
+  ],
+  "encaminhamentos": [
+    {
+      "categoria": "Sala de Sigilo",
+      "responsavel": "Equipe de Segurança da Informação",
+      "visivel_no_portal_dti_pesquisa": true,
+      "imutavel": true,
+      "fora_da_analise": true
+    }
+  ]
+}

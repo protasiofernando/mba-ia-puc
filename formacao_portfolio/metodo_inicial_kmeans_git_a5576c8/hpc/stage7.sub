@@ -1,0 +1,31 @@
+#!/bin/bash
+# =============================================================
+# stage7.sub — Job PBS do Stage 7 (finalizacao do portfolio, fila gpu).
+#
+# Rode DEPOIS dos Stages 1-6 (qsub hpc/submit_pipeline.sub) e da curadoria
+# humana (feedback_portfolio.json preenchido e transferido).
+#
+# Submeter (do head node):
+#   cd ~/triagem-chamados
+#   qsub hpc/stage7.sub
+#
+# Ver resultado:
+#   tail -f ~/triagem-chamados/pipeline_data/pipeline.log
+# =============================================================
+
+#PBS -N triagem-stage7
+#PBS -j oe
+#PBS -q gpu
+#PBS -l mem=128gb
+#PBS -l walltime=12:00:00
+
+PROJETO_DIR="$HOME/triagem-chamados"
+LOG="$PROJETO_DIR/pipeline_data/pipeline.log"
+
+cd ${PBS_O_WORKDIR}
+mkdir -p "$PROJETO_DIR/pipeline_data"
+
+echo "[PBS] Despachando Stage 7 (finalizacao) para no GPU via mpirun..." >> "$LOG"
+mpirun -np 1 --hostfile /home/nfsmpi/ngpu \
+    bash "$PROJETO_DIR/hpc/run_stage7.sh" >> "$LOG" 2>&1
+echo "[PBS] Stage 7 finalizado: $(date)" >> "$LOG"

@@ -1,0 +1,9 @@
+{
+  "_comentario": "Metadados do projeto. scripts/projeto.py resolve caminhos a partir da propria pasta. csv_glob define o padrao dos CSVs em data/.",
+  "nome": "DTI Pesquisa FGV",
+  "portal_nome": "DTI Pesquisa",
+  "slug": "dti-pesquisa",
+  "portal": "Jira Service Management",
+  "descricao": "Portal de atendimento da DTI Pesquisa FGV: infraestrutura e servicos para pesquisadores, docentes e equipes tecnicas (servidores academicos compartilhados, HPC/GPU, VMs do Portal do Pesquisador, nuvem publica AWS/Azure/GCP, softwares e licencas academicas, e submissao do Plano de Gestao de Dados de pesquisa).",
+  "csv_glob": "dti-pesquisa__*.csv"
+}

@@ -1,0 +1,1518 @@
+{
+  "version": "comparison-validator-v2",
+  "phase": "results",
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "package_manifest_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:DOSSIE_AUDITORIA.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:HISTORICO_V5_INVALIDADA.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:PROTOCOLO_METODOLOGICO.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:RUNBOOK_HPC.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:avaliacao/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/config_portfolio.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/contexto_catalogo.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/projeto.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/auditar_campos_portfolio.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/avaliar_comparacao_robusta.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/classificar_referencia_consenso.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/discovery_contract.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/llm_client.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/normalizar_stage3_comum.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/preparar_escopo_deterministico_v6.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/preparar_execucoes_comparacao.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/projeto.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/run_stage3_kmeans_fair.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/run_stage3_llm.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/run_stage4_llm.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/run_stage5_llm.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/run_stage6_llm.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/validar_ambiente_comparacao.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/validar_artefato_retomada.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/validar_comparacao_robusta.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/validar_insumo_comparacao.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/validar_pacote_comparacao.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:common/scripts/validar_portfolio.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:decision_rules_v1.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:experimento_config.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:feedback_portfolio.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:filtro_sala_sigilo_manifest_v6.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:hpc/job_00_referencia.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:hpc/job_10_m1_legado_llama.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:hpc/job_20_m2_nativo.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:hpc/job_30_ablacao.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:hpc/job_90_avaliacao.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:hpc/job_lib.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:logs/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:metodo1_legado_llama/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:metodo1_legado_llama/config_portfolio.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:metodo1_legado_llama/pipeline/03_cluster.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:metodo1_legado_llama/pipeline/04_label_clusters.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:metodo1_legado_llama/pipeline/05_compare_portfolio.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:metodo1_legado_llama/pipeline/06_classify_portfolio.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:metodo1_legado_llama/pipeline/__init__.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:metodo1_legado_llama/pipeline/llm_client.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:metodo1_legado_llama/pipeline_data/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:portfolio_referencia.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:provenance/stage2_code/run_stage2_llm.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:referencia/checkpoints/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:requirements_comparacao.txt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:resultados/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:runs/kmeans_common_seed27182/pipeline_data/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:runs/kmeans_common_seed31415/pipeline_data/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:runs/kmeans_common_seed42/pipeline_data/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:runs/llm_common_seed27182/pipeline_data/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:runs/llm_common_seed31415/pipeline_data/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:runs/llm_common_seed42/pipeline_data/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:runs/m2_native/pipeline_data/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:source/.gitkeep",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "package_file:source/LEIA-ME.txt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "comparison_target_matches_operational_feedback",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "sala_exists_as_fixed_item",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "sala_immutable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "sala_not_in_discovery",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "sala_not_in_metrics",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "sala_visible_in_portal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "scope_matches_filtered_input",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "analytic_sha_matches_manifest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_matches_analytic_sha",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_matches_scope",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_matches_portfolio",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_models_receive_only_opaque_ids",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_models_match_config",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "strategic_guard_matches_target_flags",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_and_strategic_gates_preregistered",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "scope_is_deterministic_and_preregistered",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "scope_has_no_second_filter_inside_analysis",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "upstream_scope_manifest_matches_preregistration",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "raw_source_matches_scope",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "analytic_input_is_byte_identical_to_prefiltered_stage2",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "raw_source_matches_preregistered_identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "manifest_matches_reference",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no_empty_or_duplicate_keys",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "excluded_keys_absent_from_analytic_input",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "common_config_has_no_sala",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "common_catalog_has_no_sala",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "legacy_config_has_no_sala",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:common/scripts/run_stage3_llm.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:common/scripts/run_stage3_kmeans_fair.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:common/scripts/normalizar_stage3_comum.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:common/scripts/run_stage4_llm.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:common/scripts/run_stage5_llm.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:common/scripts/run_stage6_llm.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:metodo1_legado_llama/pipeline/03_cluster.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:metodo1_legado_llama/pipeline/04_label_clusters.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:metodo1_legado_llama/pipeline/05_compare_portfolio.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:metodo1_legado_llama/pipeline/06_classify_portfolio.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:metodo1_legado_llama/pipeline/__init__.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method_code_has_no_sala:metodo1_legado_llama/pipeline/llm_client.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "environment_lock_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "published_pip_freeze_matches_environment",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "published_numpy_blas_matches_environment",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_model_digests_match_frozen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:input_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:same_input_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:same_key_order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:excluded_keys_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:environment_verified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:environment_matches_frozen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:telemetry_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "m1_legacy_llama:telemetry_calls_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "m1_legacy_llama:telemetry_gpu_samples_each_stage_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "m1_legacy_llama:stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:stage4_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:stage5_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:stage6_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:stage3_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:stage6_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:stage6_no_pending",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m1_legacy_llama:legacy_embedding_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:input_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:same_input_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:same_key_order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:excluded_keys_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:environment_verified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:environment_matches_frozen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:telemetry_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "m2_native:telemetry_calls_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "m2_native:telemetry_gpu_samples_each_stage_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "m2_native:stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:stage4_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:stage5_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:stage6_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:stage3_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:stage6_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:stage6_no_pending",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:declared_seed_matches_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:llm_discovery_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:llm_json_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:common_discovery_contract",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "m2_native:jira_key_not_exposed_to_llm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:input_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:same_input_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:same_key_order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:excluded_keys_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:environment_verified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:environment_matches_frozen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:telemetry_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "llm_common_seed42:telemetry_calls_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "llm_common_seed42:telemetry_gpu_samples_each_stage_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "llm_common_seed42:stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:stage4_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:stage5_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:stage6_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:stage3_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:stage6_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:stage6_no_pending",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:common_interface",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:definitions_stripped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:raw_stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:legacy_fields_removed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:declared_seed_matches_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:llm_discovery_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:llm_json_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:common_discovery_contract",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed42:jira_key_not_exposed_to_llm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:input_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:same_input_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:same_key_order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:excluded_keys_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:environment_verified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:environment_matches_frozen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:telemetry_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "kmeans_common_seed42:telemetry_calls_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "kmeans_common_seed42:telemetry_gpu_samples_each_stage_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "kmeans_common_seed42:stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:stage4_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:stage5_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:stage6_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:stage3_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:stage6_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:stage6_no_pending",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:common_interface",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:definitions_stripped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:raw_stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:legacy_fields_removed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:declared_seed_matches_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:common_discovery_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:embedding_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:embedding_digest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed42:kmeans_preregistered_parameters",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:input_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:same_input_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:same_key_order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:excluded_keys_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:environment_verified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:environment_matches_frozen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:telemetry_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "llm_common_seed31415:telemetry_calls_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "llm_common_seed31415:telemetry_gpu_samples_each_stage_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "llm_common_seed31415:stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:stage4_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:stage5_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:stage6_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:stage3_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:stage6_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:stage6_no_pending",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:common_interface",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:definitions_stripped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:raw_stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:legacy_fields_removed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:declared_seed_matches_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:llm_discovery_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:llm_json_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:common_discovery_contract",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed31415:jira_key_not_exposed_to_llm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:input_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:same_input_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:same_key_order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:excluded_keys_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:environment_verified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:environment_matches_frozen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:telemetry_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "kmeans_common_seed31415:telemetry_calls_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "kmeans_common_seed31415:telemetry_gpu_samples_each_stage_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "kmeans_common_seed31415:stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:stage4_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:stage5_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:stage6_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:stage3_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:stage6_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:stage6_no_pending",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:common_interface",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:definitions_stripped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:raw_stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:legacy_fields_removed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:declared_seed_matches_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:common_discovery_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:embedding_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:embedding_digest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed31415:kmeans_preregistered_parameters",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:input_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:same_input_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:same_key_order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:excluded_keys_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:environment_verified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:environment_matches_frozen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:telemetry_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "llm_common_seed27182:telemetry_calls_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "llm_common_seed27182:telemetry_gpu_samples_each_stage_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "llm_common_seed27182:stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:stage4_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:stage5_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:stage6_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:stage3_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:stage6_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:stage6_no_pending",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:common_interface",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:definitions_stripped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:raw_stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:legacy_fields_removed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:declared_seed_matches_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:llm_discovery_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:llm_json_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:common_discovery_contract",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "llm_common_seed27182:jira_key_not_exposed_to_llm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:input_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:same_input_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:same_key_order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:excluded_keys_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:environment_verified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:environment_matches_frozen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:telemetry_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "kmeans_common_seed27182:telemetry_calls_stages_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "kmeans_common_seed27182:telemetry_gpu_samples_each_stage_3_6",
+      "status": "PASS",
+      "detail": "{\"stage3\": true, \"stage4\": true, \"stage5\": true, \"stage6\": true}"
+    },
+    {
+      "check": "kmeans_common_seed27182:stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:stage4_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:stage5_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:stage6_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:stage3_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:stage6_complete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:stage6_no_pending",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:common_interface",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:definitions_stripped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:raw_stage3_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:legacy_fields_removed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:declared_seed_matches_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:common_discovery_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:embedding_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:embedding_digest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kmeans_common_seed27182:kmeans_preregistered_parameters",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "common_llm:source_fingerprint_stable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "common_kmeans:source_fingerprint_stable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "final_report_exists_when_required",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "final_report_has_all_three_replicates",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "final_report_has_complete_seed_reference_layer_cube",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "final_report_strategic_grid_has_all_cells",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "final_report_is_not_provisional_for_missing_replicates",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "failures": 0
+}

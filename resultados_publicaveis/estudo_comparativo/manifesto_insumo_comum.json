@@ -1,0 +1,72 @@
+{
+  "version": "prepare-comparison-inputs-v1",
+  "config_sha256": "6997cfb4f575e2d21c16f02d42b9212c32425287b3caa3d700152518f13702b5",
+  "portfolio_sha256": "5539b14497c851d3abc8a8356ef86a92318e811ee558c71bac3d53f5d0ca0d8b",
+  "reference_sha256": "895e522a153f59415cc8c66d330f185e780e8a12c8e2d95c7c785ed844317a3b",
+  "reference_fingerprint": "d2709a1c91211822f5c73a459dc0fb0c973a001123a7fe821a4538bfa80f8298",
+  "lineage_checks": {
+    "reference_analytic_hash": true,
+    "reference_raw_hash": true,
+    "reference_scope_hash": true,
+    "reference_portfolio_hash": true
+  },
+  "scope_fingerprint": "2c16b1d913fc8be79bf7f5bbd722d9fdea60bf39bfebcb72c028f5699efc8ced",
+  "raw_source_fingerprint": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+  "analytic_input_sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+  "n_analiticos": 1456,
+  "n_sala_excluidos": 0,
+  "n_indeterminados_excluidos": 0,
+  "n_sala_removed_upstream_before_stage1": 128,
+  "scope_method": "deterministic_structured_request_type_prefilter",
+  "llm_used_for_scope": false,
+  "destinos": [
+    {
+      "run_id": "m1_legacy_llama",
+      "arquivo": "metodo1_legado_llama/pipeline_data/02_summaries.json",
+      "sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+      "n": 1456
+    },
+    {
+      "run_id": "m2_native",
+      "arquivo": "runs/m2_native/pipeline_data/02_summaries.json",
+      "sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+      "n": 1456
+    },
+    {
+      "run_id": "llm_common_seed42",
+      "arquivo": "runs/llm_common_seed42/pipeline_data/02_summaries.json",
+      "sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+      "n": 1456
+    },
+    {
+      "run_id": "kmeans_common_seed42",
+      "arquivo": "runs/kmeans_common_seed42/pipeline_data/02_summaries.json",
+      "sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+      "n": 1456
+    },
+    {
+      "run_id": "llm_common_seed31415",
+      "arquivo": "runs/llm_common_seed31415/pipeline_data/02_summaries.json",
+      "sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+      "n": 1456
+    },
+    {
+      "run_id": "kmeans_common_seed31415",
+      "arquivo": "runs/kmeans_common_seed31415/pipeline_data/02_summaries.json",
+      "sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+      "n": 1456
+    },
+    {
+      "run_id": "llm_common_seed27182",
+      "arquivo": "runs/llm_common_seed27182/pipeline_data/02_summaries.json",
+      "sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+      "n": 1456
+    },
+    {
+      "run_id": "kmeans_common_seed27182",
+      "arquivo": "runs/kmeans_common_seed27182/pipeline_data/02_summaries.json",
+      "sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+      "n": 1456
+    }
+  ]
+}

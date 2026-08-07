@@ -1,0 +1,13 @@
+* text=auto
+*.sh text eol=lf
+*.py text eol=lf
+*.png binary
+
+# Artefatos cuja identidade byte a byte é verificada por SHA-256. Não aplicar
+# conversão de fim de linha em nenhum sistema operacional.
+formacao_portfolio/metodo_inicial_kmeans_git_a5576c8/** -text
+formacao_portfolio/decisao_curada/feedback_portfolio.json -text
+formacao_portfolio/decisao_curada/portfolio_referencia.json -text
+estudo_comparativo/proveniencia_execucao/feedback_portfolio_executado.json.b64 -text
+resultados_publicaveis/estudo_comparativo/** -text
+pipeline_data/07_portfolio_final.json -text

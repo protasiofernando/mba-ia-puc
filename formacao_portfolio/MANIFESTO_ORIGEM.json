@@ -1,0 +1,99 @@
+{
+  "schema_version": "portfolio-formation-lineage-v1",
+  "purpose": "Provar a separação temporal entre formação, curadoria e comparação.",
+  "public_repository": {
+    "url": "https://github.com/protasiofernando/mba-ia-masterbi-puc",
+    "verified_at": "2026-08-04",
+    "origin_main_observed": "9f01ce4fbc505bf392c8e48d2932ff861e5ebaae",
+    "historical_candidate_feedback_and_stage7_blobs_unchanged_on_origin_main": true
+  },
+  "historical_formation": {
+    "method": "embeddings bge-m3 + K-means, seguidos por rotulação, consolidação e classificação assistidas por LLM",
+    "git_repository": "https://github.com/protasiofernando/mba-ia-masterbi-puc",
+    "git_commit_evidence": "a5576c83d47e9eda7e6087b59e57bac65c04e1b4",
+    "git_commit_date": "2026-07-03",
+    "historical_llm_model": "gemma4:26b-q8",
+    "original_paths": [
+      "pipeline/03_cluster.py",
+      "pipeline/04_label_clusters.py",
+      "pipeline/05_compare_portfolio.py",
+      "pipeline/06_classify_portfolio.py",
+      "pipeline/07_finalize_portfolio.py"
+    ],
+    "audited_artifacts_in_commit": {
+      "automatic_candidate": {
+        "path": "pipeline_data/05_portfolio_recommendation.json",
+        "git_blob_sha1": "608af5889e5ac3181fe918c928a1f306b9ad1f38",
+        "total_tickets": 1575,
+        "current_catalog_categories": 18,
+        "natural_groups": 23,
+        "suggested_portfolio_items": 10
+      },
+      "human_feedback": {
+        "path": "feedback_portfolio.json",
+        "git_blob_sha1": "baba867d7d3c7292adb8a765d5336f1c88fdde18"
+      },
+      "materialized_stage7": {
+        "path": "pipeline_data/07_portfolio_final.json",
+        "git_blob_sha1": "878d72dbe6d05c636cabac816ea1a5d027c9af9a",
+        "total_classified": 1583,
+        "initial_curated_categories": 7
+      }
+    },
+    "maintained_implementation": "metodo_estatistico/pipeline/",
+    "reproduction_runner": "formacao_portfolio/hpc/job_formar_candidato_estatistico.sh",
+    "executed_artifact_evidence": {
+      "automatic_candidate": "pipeline_data/05_portfolio_recommendation.json",
+      "automatic_candidate_reported_tickets": 1575,
+      "automatic_candidate_items": 10,
+      "human_feedback": "feedback_portfolio.json",
+      "human_feedback_items": 7,
+      "materialized_stage7": "pipeline_data/07_portfolio_final.json",
+      "materialized_stage7_reported_tickets": 1583,
+      "materialized_stage7_items": 7,
+      "historical_count_mismatch_note": "The old snapshot proves process order but is not the numerical source of the final comparison."
+    },
+    "current_portfolio_evolution": {
+      "added_service": "Solicitação de Acesso a Bases de Dados",
+      "fixed_visible_referral": "Sala de Sigilo",
+      "current_visible_items": 9
+    },
+    "reproduction_note": "A implementação mantida corrige falhas operacionais e não promete respostas LLM byte a byte idênticas à execução histórica."
+  },
+  "curation": {
+    "automatic_candidate": "formacao_portfolio/metodo_inicial_kmeans_git_a5576c8/pipeline_data/05_portfolio_recommendation.json",
+    "human_decision": "formacao_portfolio/decisao_curada/feedback_portfolio.json",
+    "decision_level": "portfolio, not per-ticket labels",
+    "materialization_contract": "formacao_portfolio/contrato_curadoria.json",
+    "materializer": "scripts/materializar_portfolio_curado.py",
+    "automatic_operational_classifier": "scripts/run_stage7_curadoria.py",
+    "human_decision_frozen_before_comparison": true,
+    "evolution_note": "The commit proves the initial seven-category human curation. Before the robust comparison, strategic refinement added Solicitação de Acesso a Bases de Dados and preserved Sala de Sigilo as a visible fixed referral outside analysis, producing the final nine visible items."
+  },
+  "canonical_decision_document": {
+    "path": "formacao_portfolio/decisao_curada/feedback_portfolio.json",
+    "sha256": "0c18066c95f3e68a3825b0a566cc1b8568b532e032566e4aa5d7b6b39d2cd409",
+    "role": "current_human_readable_operational_decision",
+    "post_execution_enrichment_fields": [
+      "justificativa_consolidacao",
+      "substitui_categorias_atuais"
+    ],
+    "projects_to_frozen_reference": true,
+    "changes_job90_result": false
+  },
+  "frozen_experiment_inputs": {
+    "executed_feedback_portfolio_base64_path": "estudo_comparativo/proveniencia_execucao/feedback_portfolio_executado.json.b64",
+    "executed_feedback_portfolio_sha256": "7ffa42771809063994c2f37417306f264debbab137930a859520371bb6235f47",
+    "portfolio_referencia_path": "formacao_portfolio/decisao_curada/portfolio_referencia.json",
+    "portfolio_referencia_sha256": "5539b14497c851d3abc8a8356ef86a92318e811ee558c71bac3d53f5d0ca0d8b",
+    "stage2_sha256": "e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1",
+    "analytical_ticket_count": 1456
+  },
+  "comparison": {
+    "starts_after_target_freeze": true,
+    "statistical_method": "metodo_estatistico/ and kmeans_common_seed*",
+    "agentic_method": "LLM-native discovery and llm_common_seed*",
+    "purpose": "Compare adherence to the adopted portfolio, stability, cost and trade-offs; not create the target and not force a winner."
+  },
+  "methodological_limit": "The target is endogenous to the design process because the statistical candidate informed human curation. It is not an independent ground truth. The robust comparison therefore measures retrospective adherence/reconstruction, not universal accuracy."
+}

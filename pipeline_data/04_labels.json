@@ -1,0 +1,413 @@
+{
+  "optimal_k": 16,
+  "total_tickets": 1456,
+  "metadata": {
+    "clustering_fingerprint": "b0e74845390a5a44967ec3fdf5ae20520cfc96ae4dd28871585730f052c0a0ef",
+    "label_input_fingerprint": "6c3f728b5385fbbf76ad4f0bc7dfd9eeb9e0d750c26d4052fd452cffc152428d",
+    "stage4_fingerprint": "7e946d3b5c45accb0dc5296a234278081441ee4b07de84fd951d118925b021a4",
+    "stage3_method": "LLM hierarquica: lotes, reagrupamento iterativo de avulsos, taxonomia sem IDs de origem e atribuicao unitaria fechada",
+    "label_model": "ollama:llama3.3:70b"
+  },
+  "clusters": [
+    {
+      "cluster_id": 0,
+      "nome": "Acesso e Permissões",
+      "descricao": "Intenções relacionadas ao acesso a servidores, recursos e plataformas de nuvem.",
+      "quando_usar": "Quando o usuário necessita de acesso a um servidor, plataforma ou recurso de nuvem e precisa de permissão para utilizá-lo.",
+      "informacoes_necessarias": [
+        "tipo de acesso solicitado",
+        "recurso ou plataforma solicitada",
+        "justificativa para o acesso"
+      ],
+      "sla_sugerido": "4 horas",
+      "complexidade": "baixa",
+      "total_tickets": 581,
+      "volume_percentual": 39.9,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 263,
+        "Solicitar suporte para ambiente de pesquisa": 80,
+        "Não encontrou o que procurava?": 70,
+        "Persona de acesso a nuvem": 49,
+        "Acessar pastas de dados de pesquisa": 37,
+        "Tutoria em demandas computacionais para pesquisa": 28,
+        "Atendimento de Incidentes": 25,
+        "Solicitar suporte em software acadêmico": 11,
+        "Dúvidas sobre produtos da nuvem": 7,
+        "Solicitar Suporte Ético": 4,
+        "Reportar incidentes em plataformas tecnológicas": 2,
+        "Solicitar serviços em nuvem": 2,
+        "Acesso à plataforma de autosserviço do pesquisador (beta)": 2,
+        "Análise de custos de nuvem": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 1,
+      "nome": "Instalacao de Software",
+      "descricao": "Intenções relacionadas à instalação, configuração e atualização de software acadêmico.",
+      "quando_usar": "Quando necessário instalar ou configurar software para uso em pesquisas ou projetos acadêmicos.",
+      "informacoes_necessarias": [
+        "nome do software",
+        "versão do software",
+        "sistema operacional"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "media",
+      "total_tickets": 230,
+      "volume_percentual": 15.8,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte em software acadêmico": 55,
+        "Não encontrou o que procurava?": 47,
+        "Solicitar suporte para ambiente de pesquisa": 39,
+        "Solicitar recursos computacionais para pesquisas": 34,
+        "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)": 17,
+        "Tutoria em demandas computacionais para pesquisa": 11,
+        "Atendimento de Incidentes": 11,
+        "Solicitar Suporte Ético": 5,
+        "Acessar pastas de dados de pesquisa": 3,
+        "Análise de custos de nuvem": 3,
+        "Persona de acesso a nuvem": 2,
+        "Solicitar suporte para laboratório virtual": 1,
+        "Solicitar serviços em nuvem": 1,
+        "Dúvidas sobre produtos da nuvem": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 2,
+      "nome": "Resolução de Incidentes em Servidores",
+      "descricao": "Intenções relacionadas à resolução de incidentes e problemas técnicos em servidores acadêmicos.",
+      "quando_usar": "Quando houver um problema técnico ou incidente relacionado a servidores acadêmicos, como espaço em disco baixo, consumo de memória alto, servidor indisponível, etc.",
+      "informacoes_necessarias": [
+        "Descrição do problema",
+        "Servidor afetado",
+        "Data e hora do incidente"
+      ],
+      "sla_sugerido": "4 horas",
+      "complexidade": "media",
+      "total_tickets": 323,
+      "volume_percentual": 22.2,
+      "distribuicao_categorias_atuais": {
+        "Atendimento de Incidentes": 172,
+        "Reportar incidentes em plataformas tecnológicas": 34,
+        "Solicitar suporte para ambiente de pesquisa": 34,
+        "Solicitar suporte em software acadêmico": 26,
+        "Não encontrou o que procurava?": 18,
+        "Solicitar recursos computacionais para pesquisas": 14,
+        "Tutoria em demandas computacionais para pesquisa": 12,
+        "Acessar pastas de dados de pesquisa": 3,
+        "Dúvidas sobre produtos da nuvem": 2,
+        "Solicitar suporte para laboratório virtual": 2,
+        "Solicitar serviços em nuvem": 2,
+        "Solicitar Suporte Ético": 2,
+        "Análise de custos de nuvem": 1,
+        "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 3,
+      "nome": "Solicitações de Recursos",
+      "descricao": "Intenções relacionadas à solicitação de recursos, permissões ou acesso a dados.",
+      "quando_usar": "Quando o pesquisador necessitar de recursos adicionais, como acesso a dados, pastas compartilhadas, contas em serviços de nuvem ou aumento de cotas de armazenamento.",
+      "informacoes_necessarias": [
+        "tipo de recurso solicitado",
+        "justificativa para a solicitação",
+        "nome do projeto ou pesquisa"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "media",
+      "total_tickets": 34,
+      "volume_percentual": 2.3,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 8,
+        "Não encontrou o que procurava?": 7,
+        "Solicitar recursos computacionais para pesquisas": 6,
+        "Acessar pastas de dados de pesquisa": 4,
+        "Solicitar suporte para ambiente de pesquisa": 3,
+        "Solicitar suporte em software acadêmico": 2,
+        "Persona de acesso a nuvem": 2,
+        "Dúvidas sobre produtos da nuvem": 1,
+        "Solicitar Suporte Ético": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 4,
+      "nome": "Segurança e Conformidade",
+      "descricao": "Intenções relacionadas à segurança, conformidade e auditoria de sistemas e dados.",
+      "quando_usar": "Verificar a segurança e garantir a conformidade dos sistemas e dados.",
+      "informacoes_necessarias": [
+        "finalidade da solicitação",
+        "tipo de sistema ou dado envolvido"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "media",
+      "total_tickets": 4,
+      "volume_percentual": 0.3,
+      "distribuicao_categorias_atuais": {
+        "Não encontrou o que procurava?": 1,
+        "Tutoria em demandas computacionais para pesquisa": 1,
+        "Solicitar suporte para ambiente de pesquisa": 1,
+        "Solicitar recursos computacionais para pesquisas": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 5,
+      "nome": "Gerenciamento de Dados",
+      "descricao": "Intenções relacionadas ao gerenciamento de dados e armazenamento em servidores ou nuvem.",
+      "quando_usar": "Quando houver necessidade de gerenciar o armazenamento e os dados solicitados.",
+      "informacoes_necessarias": [
+        "tipo de armazenamento necessário",
+        "quantidade de espaço requerida",
+        "finalidade do armazenamento"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "media",
+      "total_tickets": 78,
+      "volume_percentual": 5.4,
+      "distribuicao_categorias_atuais": {
+        "Não encontrou o que procurava?": 28,
+        "Tutoria em demandas computacionais para pesquisa": 15,
+        "Solicitar recursos computacionais para pesquisas": 14,
+        "Acessar pastas de dados de pesquisa": 8,
+        "Solicitar suporte para ambiente de pesquisa": 7,
+        "Atendimento de Incidentes": 3,
+        "Dúvidas sobre produtos da nuvem": 2,
+        "Solicitar Suporte Ético": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 6,
+      "nome": "Análise PGD",
+      "descricao": "Análise do Plano de Gestão de Dados para pesquisas.",
+      "quando_usar": "Quando necessário avaliar ou submeter um Plano de Gestão de Dados de Pesquisa.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "prazo",
+        "necessidade de armazenamento em disco",
+        "e-mails dos usuários"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "media",
+      "total_tickets": 1,
+      "volume_percentual": 0.1,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 7,
+      "nome": "Desenvolvimento e Implementação",
+      "descricao": "Solicitações relacionadas ao desenvolvimento de soluções, implementação de projetos e execução de tarefas técnicas para pesquisa.",
+      "quando_usar": "Quando necessário análise técnica e acompanhamento para garantir a entrega de resultados de acordo com as necessidades do solicitante em projetos de pesquisa.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "tecnologias envolvidas",
+        "recursos necessários"
+      ],
+      "sla_sugerido": "5 dias úteis",
+      "complexidade": "media",
+      "total_tickets": 82,
+      "volume_percentual": 5.6,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 25,
+        "Tutoria em demandas computacionais para pesquisa": 20,
+        "Não encontrou o que procurava?": 20,
+        "Solicitar suporte para ambiente de pesquisa": 5,
+        "Acessar pastas de dados de pesquisa": 3,
+        "Solicitar serviços em nuvem": 2,
+        "Dúvidas sobre produtos da nuvem": 2,
+        "Atendimento de Incidentes": 2,
+        "Acesso à plataforma de autosserviço do pesquisador (beta)": 1,
+        "Criar site para Centro de Pesquisa": 1,
+        "Solicitar Suporte Ético": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 8,
+      "nome": "Aquisição e Gestão de Recursos",
+      "descricao": "Solicitações relacionadas à aquisição de créditos, recursos computacionais ou outros serviços para pesquisa acadêmica.",
+      "quando_usar": "Quando necessário adquirir ou gerenciar recursos como créditos, servidores, HPC, GPU, Qualtrics, Power BI Fabric, GCP Airflow, etc., para fins de pesquisa acadêmica.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "prazo",
+        "necessidade de armazenamento em disco",
+        "e-mails dos usuários",
+        "softwares a instalar"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "media",
+      "total_tickets": 53,
+      "volume_percentual": 3.6,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 27,
+        "Não encontrou o que procurava?": 6,
+        "Tutoria em demandas computacionais para pesquisa": 6,
+        "Solicitar suporte para ambiente de pesquisa": 5,
+        "Solicitar suporte em software acadêmico": 4,
+        "Dúvidas sobre produtos da nuvem": 2,
+        "Acessar pastas de dados de pesquisa": 1,
+        "Solicitar suporte para laboratório virtual": 1,
+        "Atendimento de Incidentes": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 9,
+      "nome": "Testes e Validacao",
+      "descricao": "Solicitações relacionadas à realização de testes, validação de resultados ou verificação de funcionalidades.",
+      "quando_usar": "Quando necessário realizar testes, validar resultados ou verificar funcionalidades em ambientes computacionais.",
+      "informacoes_necessarias": [
+        "Finalidade do teste",
+        "Ambiente de teste desejado",
+        "Recursos necessários"
+      ],
+      "sla_sugerido": "Prazo tipico de 3 dias úteis",
+      "complexidade": "baixa",
+      "total_tickets": 1,
+      "volume_percentual": 0.1,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 10,
+      "nome": "Governanca de Dados",
+      "descricao": "Análise e avaliação de governança de dados para projetos de pesquisa, incluindo PGD e exportações.",
+      "quando_usar": "Quando necessário análise detalhada de governança de dados por especialistas para projetos de pesquisa.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "prazo",
+        "necessidade de armazenamento em disco",
+        "e-mails dos usuários",
+        "softwares a instalar"
+      ],
+      "sla_sugerido": "5 dias úteis",
+      "complexidade": "media",
+      "total_tickets": 10,
+      "volume_percentual": 0.7,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 9,
+        "Solicitar recursos computacionais para pesquisas": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 11,
+      "nome": "Submissao PGD",
+      "descricao": "Submissao do Plano de Gestao de Dados de Pesquisa para avaliacao e aprovacao.",
+      "quando_usar": "Quando necessario submeter um plano de gestao de dados de pesquisa para avaliacao e aprovacao.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "prazo",
+        "necessidade de armazenamento em disco",
+        "e-mails dos usuarios"
+      ],
+      "sla_sugerido": "5 dias uteis",
+      "complexidade": "media",
+      "total_tickets": 13,
+      "volume_percentual": 0.9,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 11,
+        "Não encontrou o que procurava?": 1,
+        "Solicitar recursos computacionais para pesquisas": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 12,
+      "nome": "Chamados sem Descricao",
+      "descricao": "Intencoes que nao fornecem descricao clara da demanda.",
+      "quando_usar": "Requer contato adicional para esclarecer a solicitacao.",
+      "informacoes_necessarias": [
+        "descricao da demanda"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "baixa",
+      "total_tickets": 7,
+      "volume_percentual": 0.5,
+      "distribuicao_categorias_atuais": {
+        "Acessar pastas de dados de pesquisa": 2,
+        "Solicitar recursos computacionais para pesquisas": 2,
+        "Solicitar suporte para ambiente de pesquisa": 1,
+        "Persona de acesso a nuvem": 1,
+        "Tutoria em demandas computacionais para pesquisa": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 13,
+      "nome": "Rede e Conectividade",
+      "descricao": "Intenções relacionadas à rede e conectividade, incluindo solicitações de configuração, problemas de conexão e outros.",
+      "quando_usar": "Quando houver necessidade de configurar ou solucionar problemas de rede, incluindo acesso a servidores, pastas compartilhadas, VPN, Eduroam, etc.",
+      "informacoes_necessarias": [
+        "Descrição do problema",
+        "Detalhes da configuração atual",
+        "Informações de login e acesso"
+      ],
+      "sla_sugerido": "4 horas",
+      "complexidade": "media",
+      "total_tickets": 14,
+      "volume_percentual": 1.0,
+      "distribuicao_categorias_atuais": {
+        "Atendimento de Incidentes": 5,
+        "Solicitar recursos computacionais para pesquisas": 3,
+        "Solicitar suporte para ambiente de pesquisa": 2,
+        "Reportar incidentes em plataformas tecnológicas": 2,
+        "Dúvidas sobre produtos da nuvem": 1,
+        "Acessar pastas de dados de pesquisa": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 14,
+      "nome": "Consultas Tecnicas",
+      "descricao": "Dúvidas e consultas sobre tecnologias, softwares e serviços de pesquisa.",
+      "quando_usar": "Quando houver necessidade de esclarecimento ou orientação sobre uso de tecnologias, softwares ou serviços de pesquisa.",
+      "informacoes_necessarias": [
+        "Descrição da dúvida ou consulta",
+        "Tecnologia ou software relacionado"
+      ],
+      "sla_sugerido": "4 horas",
+      "complexidade": "baixa",
+      "total_tickets": 5,
+      "volume_percentual": 0.3,
+      "distribuicao_categorias_atuais": {
+        "Não encontrou o que procurava?": 4,
+        "Tutoria em demandas computacionais para pesquisa": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    },
+    {
+      "cluster_id": 15,
+      "nome": "Solicitações de Licenças e Certificados",
+      "descricao": "Intenções relacionadas a solicitações de licenças e certificados, como renovação de licença do Stata ou solicitação de certificado.",
+      "quando_usar": "Quando o pesquisador necessitar de uma licença ou certificado para utilizar um software acadêmico específico.",
+      "informacoes_necessarias": [
+        "nome do software",
+        "tipo de licença necessária",
+        "finalidade da solicitação"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "baixa",
+      "total_tickets": 20,
+      "volume_percentual": 1.4,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte em software acadêmico": 12,
+        "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)": 2,
+        "Solicitar suporte para ambiente de pesquisa": 2,
+        "Não encontrou o que procurava?": 1,
+        "Solicitar suporte para laboratório virtual": 1,
+        "Solicitar serviços em nuvem": 1,
+        "Solicitar recursos computacionais para pesquisas": 1
+      },
+      "rotulo_gerado_por_fallback": false
+    }
+  ]
+}

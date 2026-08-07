@@ -1,0 +1,62 @@
+{
+  "schema_version": "curation-materialization-contract-v1",
+  "reference_schema_version": "portfolio-curado-adotado-v2",
+  "reference_metadata": {
+    "nome": "Portfólio operacional curado da DTI Pesquisa",
+    "natureza_metodologica": "alvo_operacional_adotado_ex_post",
+    "congelado_para_comparacao": true,
+    "nao_e_gabarito_humano_por_chamado": true,
+    "nota": "O desenho foi definido pela área após examinar as recomendações automáticas e aplicar decisões estratégicas de gestão, navegação, responsabilidade e visibilidade. A projeção dos chamados neste alvo é automática e deve ser avaliada por sensibilidade entre modelos.",
+    "pergunta_final": "Qual portfólio atende melhor às demandas reais e quais informações o usuário deve fornecer ao abrir cada chamado?"
+  },
+  "group_ids": {
+    "Infraestrutura Computacional": "infraestrutura_computacional",
+    "Nuvem Pública": "nuvem_publica",
+    "Softwares e Licenças": "softwares_licencas",
+    "Dados e Governança de Pesquisa": "dados_governanca",
+    "Triagem": "triagem",
+    "Encaminhamentos": "seguranca_informacao"
+  },
+  "group_order": [
+    "infraestrutura_computacional",
+    "nuvem_publica",
+    "softwares_licencas",
+    "dados_governanca",
+    "triagem"
+  ],
+  "category_analysis": {
+    "servidores_academicos": {
+      "papel_analise": "servico"
+    },
+    "softwares_licencas": {
+      "papel_analise": "servico"
+    },
+    "nuvem_publica": {
+      "papel_analise": "servico"
+    },
+    "hpc_gpu": {
+      "papel_analise": "servico_estrategico",
+      "protecao_decisao": true
+    },
+    "vm_portal_pesquisador": {
+      "papel_analise": "servico_estrategico",
+      "protecao_decisao": true
+    },
+    "pgd_pesquisa": {
+      "papel_analise": "servico_estrategico",
+      "protecao_decisao": true
+    },
+    "acesso_bases_dados": {
+      "papel_analise": "servico_estrategico",
+      "protecao_decisao": true
+    },
+    "nao_encontrou": {
+      "papel_analise": "catch_all",
+      "entra_macro_f1_servicos": false
+    }
+  },
+  "fixed_outside_analysis": [
+    "sala_sigilo"
+  ],
+  "fixed_item_note": "O item é mantido no portal por estratégia de navegação, mas não é modificado nem avaliado pelo experimento."
+}

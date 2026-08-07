@@ -1,0 +1,55 @@
+{
+  "schema_version": "deterministic-request-type-exclusion-v1",
+  "experiment_generation": "v6",
+  "generated_at": "2026-07-27T12:33:22-03:00",
+  "decision_field": "Customer Request Type",
+  "key_field": "Chave do item",
+  "matching_policy": "exact_trimmed_case_sensitive",
+  "scope_rule": "Os request types listados foram removidos antes do Stage 1. Nenhum texto livre, resumo, descricao ou comentario participa da decisao de escopo.",
+  "excluded_request_types": [
+    "Extração de Resultados",
+    "Solicitação de Acesso a Bases de Dados",
+    "Solicitação de Instalação de Base de Dados / Upload de Script na Sala Sigilo",
+    "Solicitação de Instalação de Base de Dados, Upload de Script na Sala Sigilo",
+    "Solicitação de Instalação de Software",
+    "Solicitação para Agendamento",
+    "Solicitação para Compartilhamento de Pasta de Trabalho"
+  ],
+  "totals": {
+    "rows_before": 1584,
+    "rows_removed_before_stage1": 128,
+    "rows_after": 1456
+  },
+  "files": [
+    {
+      "name": "dti-pesquisa__2024-01__2024-12.csv",
+      "rows_before": 733,
+      "rows_removed": 21,
+      "rows_after": 712,
+      "sha256_before": "938d5a09826f5e97b6c79e6414d582e5936a3aad9d56c0dfae38c16f01296f4d",
+      "sha256_after": "b7f31a21358ce7f585bc92244fa19f6e3191b3d26c6cdc60965ef123b03d69ab"
+    },
+    {
+      "name": "dti-pesquisa__2025-01__2025-12.csv",
+      "rows_before": 638,
+      "rows_removed": 74,
+      "rows_after": 564,
+      "sha256_before": "5a6563ff4c45ec1567ff09d1e78cbc2d05d504542923b6116d4f16f6e42b8c17",
+      "sha256_after": "d7bafeb665a3b30b33e923a55dc25fd3ab8f872e2e149c1abea6ce9269aea7d5"
+    },
+    {
+      "name": "dti-pesquisa__2026-01__2026-05.csv",
+      "rows_before": 213,
+      "rows_removed": 33,
+      "rows_after": 180,
+      "sha256_before": "20b1bb6c473409034fbdc9dde5f3f2268d38f021e253e48603e68b073253ed05",
+      "sha256_after": "a979d7862a3a5603c07c07e5999bd7db8f50fa74dd2361ae42b4d2dd2112d03f"
+    }
+  ],
+  "privacy": {
+    "contains_ticket_keys": false,
+    "contains_ticket_text": false,
+    "private_full_report": "data/filtro_sala_sigilo_20260727.json",
+    "private_originals_backup": "_backup_dti_pesquisa_pre_filtro_sala_20260727"
+  }
+}

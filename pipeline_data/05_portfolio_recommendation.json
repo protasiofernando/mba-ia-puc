@@ -1,0 +1,2046 @@
+{
+  "metadata": {
+    "pipeline_version": "stage5-operational-reconciliation-v6.1",
+    "category_mapping_version": "closed-destination-stage4-evidence-v3",
+    "stage4_fingerprint": "7e946d3b5c45accb0dc5296a234278081441ee4b07de84fd951d118925b021a4",
+    "base_input_fingerprint": "1fd5e69259785e5e438a4102d800fdb6e63b53785974f6a829b10a67ae7f7459",
+    "base_fingerprint": "139d7dfacad2e66927f1da64a55e1de8f916ac3c62dce7df0592f92f4064b0dd",
+    "portfolio_fingerprint": "226965a7f06b057b02d393ef590a9a98147cd7bfbb59304f2a6ca268abda29bf",
+    "metodo": "candidatos_naturais_e_reconciliacao_operacional",
+    "modelo_semantico": "ollama:llama3.3:70b",
+    "modelo_compilador_json": "ollama:qwen3:30b-a3b-instruct-2507-q4_K_M",
+    "total_tickets": 1456,
+    "n_categorias_atuais": 17,
+    "n_grupos_naturais": 16,
+    "n_destinos_propostos_reconciliacao": 16,
+    "n_request_types_reconciliados": 16,
+    "n_grupos_para_divisao": 0,
+    "n_outliers_stage3": 0
+  },
+  "categorias_atuais": {
+    "Solicitar recursos computacionais para pesquisas": 392,
+    "Atendimento de Incidentes": 219,
+    "Não encontrou o que procurava?": 203,
+    "Solicitar suporte para ambiente de pesquisa": 179,
+    "Tutoria em demandas computacionais para pesquisa": 125,
+    "Solicitar suporte em software acadêmico": 110,
+    "Acessar pastas de dados de pesquisa": 62,
+    "Persona de acesso a nuvem": 54,
+    "Reportar incidentes em plataformas tecnológicas": 38,
+    "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)": 20,
+    "Dúvidas sobre produtos da nuvem": 18,
+    "Solicitar Suporte Ético": 14,
+    "Solicitar serviços em nuvem": 8,
+    "Solicitar suporte para laboratório virtual": 5,
+    "Análise de custos de nuvem": 5,
+    "Acesso à plataforma de autosserviço do pesquisador (beta)": 3,
+    "Criar site para Centro de Pesquisa": 1
+  },
+  "grupos_naturais": [
+    {
+      "cluster_id": 0,
+      "nome": "Acesso e Permissões",
+      "descricao": "Intenções relacionadas ao acesso a servidores, recursos e plataformas de nuvem.",
+      "quando_usar": "Quando o usuário necessita de acesso a um servidor, plataforma ou recurso de nuvem e precisa de permissão para utilizá-lo.",
+      "informacoes_necessarias": [
+        "tipo de acesso solicitado",
+        "recurso ou plataforma solicitada",
+        "justificativa para o acesso"
+      ],
+      "sla_sugerido": "4 horas",
+      "complexidade": "baixa",
+      "total_tickets": 581,
+      "volume_percentual": 39.9,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 263,
+        "Solicitar suporte para ambiente de pesquisa": 80,
+        "Não encontrou o que procurava?": 70,
+        "Persona de acesso a nuvem": 49,
+        "Acessar pastas de dados de pesquisa": 37,
+        "Tutoria em demandas computacionais para pesquisa": 28,
+        "Atendimento de Incidentes": 25,
+        "Solicitar suporte em software acadêmico": 11,
+        "Dúvidas sobre produtos da nuvem": 7,
+        "Solicitar Suporte Ético": 4,
+        "Reportar incidentes em plataformas tecnológicas": 2,
+        "Solicitar serviços em nuvem": 2,
+        "Acesso à plataforma de autosserviço do pesquisador (beta)": 2,
+        "Análise de custos de nuvem": 1
+      }
+    },
+    {
+      "cluster_id": 1,
+      "nome": "Instalacao de Software",
+      "descricao": "Intenções relacionadas à instalação, configuração e atualização de software acadêmico.",
+      "quando_usar": "Quando necessário instalar ou configurar software para uso em pesquisas ou projetos acadêmicos.",
+      "informacoes_necessarias": [
+        "nome do software",
+        "versão do software",
+        "sistema operacional"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "media",
+      "total_tickets": 230,
+      "volume_percentual": 15.8,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte em software acadêmico": 55,
+        "Não encontrou o que procurava?": 47,
+        "Solicitar suporte para ambiente de pesquisa": 39,
+        "Solicitar recursos computacionais para pesquisas": 34,
+        "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)": 17,
+        "Tutoria em demandas computacionais para pesquisa": 11,
+        "Atendimento de Incidentes": 11,
+        "Solicitar Suporte Ético": 5,
+        "Acessar pastas de dados de pesquisa": 3,
+        "Análise de custos de nuvem": 3,
+        "Persona de acesso a nuvem": 2,
+        "Solicitar suporte para laboratório virtual": 1,
+        "Solicitar serviços em nuvem": 1,
+        "Dúvidas sobre produtos da nuvem": 1
+      }
+    },
+    {
+      "cluster_id": 2,
+      "nome": "Resolução de Incidentes em Servidores",
+      "descricao": "Intenções relacionadas à resolução de incidentes e problemas técnicos em servidores acadêmicos.",
+      "quando_usar": "Quando houver um problema técnico ou incidente relacionado a servidores acadêmicos, como espaço em disco baixo, consumo de memória alto, servidor indisponível, etc.",
+      "informacoes_necessarias": [
+        "Descrição do problema",
+        "Servidor afetado",
+        "Data e hora do incidente"
+      ],
+      "sla_sugerido": "4 horas",
+      "complexidade": "media",
+      "total_tickets": 323,
+      "volume_percentual": 22.2,
+      "distribuicao_categorias_atuais": {
+        "Atendimento de Incidentes": 172,
+        "Reportar incidentes em plataformas tecnológicas": 34,
+        "Solicitar suporte para ambiente de pesquisa": 34,
+        "Solicitar suporte em software acadêmico": 26,
+        "Não encontrou o que procurava?": 18,
+        "Solicitar recursos computacionais para pesquisas": 14,
+        "Tutoria em demandas computacionais para pesquisa": 12,
+        "Acessar pastas de dados de pesquisa": 3,
+        "Dúvidas sobre produtos da nuvem": 2,
+        "Solicitar suporte para laboratório virtual": 2,
+        "Solicitar serviços em nuvem": 2,
+        "Solicitar Suporte Ético": 2,
+        "Análise de custos de nuvem": 1,
+        "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)": 1
+      }
+    },
+    {
+      "cluster_id": 3,
+      "nome": "Solicitações de Recursos",
+      "descricao": "Intenções relacionadas à solicitação de recursos, permissões ou acesso a dados.",
+      "quando_usar": "Quando o pesquisador necessitar de recursos adicionais, como acesso a dados, pastas compartilhadas, contas em serviços de nuvem ou aumento de cotas de armazenamento.",
+      "informacoes_necessarias": [
+        "tipo de recurso solicitado",
+        "justificativa para a solicitação",
+        "nome do projeto ou pesquisa"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "media",
+      "total_tickets": 34,
+      "volume_percentual": 2.3,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 8,
+        "Não encontrou o que procurava?": 7,
+        "Solicitar recursos computacionais para pesquisas": 6,
+        "Acessar pastas de dados de pesquisa": 4,
+        "Solicitar suporte para ambiente de pesquisa": 3,
+        "Solicitar suporte em software acadêmico": 2,
+        "Persona de acesso a nuvem": 2,
+        "Dúvidas sobre produtos da nuvem": 1,
+        "Solicitar Suporte Ético": 1
+      }
+    },
+    {
+      "cluster_id": 4,
+      "nome": "Segurança e Conformidade",
+      "descricao": "Intenções relacionadas à segurança, conformidade e auditoria de sistemas e dados.",
+      "quando_usar": "Verificar a segurança e garantir a conformidade dos sistemas e dados.",
+      "informacoes_necessarias": [
+        "finalidade da solicitação",
+        "tipo de sistema ou dado envolvido"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "media",
+      "total_tickets": 4,
+      "volume_percentual": 0.3,
+      "distribuicao_categorias_atuais": {
+        "Não encontrou o que procurava?": 1,
+        "Tutoria em demandas computacionais para pesquisa": 1,
+        "Solicitar suporte para ambiente de pesquisa": 1,
+        "Solicitar recursos computacionais para pesquisas": 1
+      }
+    },
+    {
+      "cluster_id": 5,
+      "nome": "Gerenciamento de Dados",
+      "descricao": "Intenções relacionadas ao gerenciamento de dados e armazenamento em servidores ou nuvem.",
+      "quando_usar": "Quando houver necessidade de gerenciar o armazenamento e os dados solicitados.",
+      "informacoes_necessarias": [
+        "tipo de armazenamento necessário",
+        "quantidade de espaço requerida",
+        "finalidade do armazenamento"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "media",
+      "total_tickets": 78,
+      "volume_percentual": 5.4,
+      "distribuicao_categorias_atuais": {
+        "Não encontrou o que procurava?": 28,
+        "Tutoria em demandas computacionais para pesquisa": 15,
+        "Solicitar recursos computacionais para pesquisas": 14,
+        "Acessar pastas de dados de pesquisa": 8,
+        "Solicitar suporte para ambiente de pesquisa": 7,
+        "Atendimento de Incidentes": 3,
+        "Dúvidas sobre produtos da nuvem": 2,
+        "Solicitar Suporte Ético": 1
+      }
+    },
+    {
+      "cluster_id": 6,
+      "nome": "Análise PGD",
+      "descricao": "Análise do Plano de Gestão de Dados para pesquisas.",
+      "quando_usar": "Quando necessário avaliar ou submeter um Plano de Gestão de Dados de Pesquisa.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "prazo",
+        "necessidade de armazenamento em disco",
+        "e-mails dos usuários"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "media",
+      "total_tickets": 1,
+      "volume_percentual": 0.1,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 1
+      }
+    },
+    {
+      "cluster_id": 7,
+      "nome": "Desenvolvimento e Implementação",
+      "descricao": "Solicitações relacionadas ao desenvolvimento de soluções, implementação de projetos e execução de tarefas técnicas para pesquisa.",
+      "quando_usar": "Quando necessário análise técnica e acompanhamento para garantir a entrega de resultados de acordo com as necessidades do solicitante em projetos de pesquisa.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "tecnologias envolvidas",
+        "recursos necessários"
+      ],
+      "sla_sugerido": "5 dias úteis",
+      "complexidade": "media",
+      "total_tickets": 82,
+      "volume_percentual": 5.6,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 25,
+        "Tutoria em demandas computacionais para pesquisa": 20,
+        "Não encontrou o que procurava?": 20,
+        "Solicitar suporte para ambiente de pesquisa": 5,
+        "Acessar pastas de dados de pesquisa": 3,
+        "Solicitar serviços em nuvem": 2,
+        "Dúvidas sobre produtos da nuvem": 2,
+        "Atendimento de Incidentes": 2,
+        "Acesso à plataforma de autosserviço do pesquisador (beta)": 1,
+        "Criar site para Centro de Pesquisa": 1,
+        "Solicitar Suporte Ético": 1
+      }
+    },
+    {
+      "cluster_id": 8,
+      "nome": "Aquisição e Gestão de Recursos",
+      "descricao": "Solicitações relacionadas à aquisição de créditos, recursos computacionais ou outros serviços para pesquisa acadêmica.",
+      "quando_usar": "Quando necessário adquirir ou gerenciar recursos como créditos, servidores, HPC, GPU, Qualtrics, Power BI Fabric, GCP Airflow, etc., para fins de pesquisa acadêmica.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "prazo",
+        "necessidade de armazenamento em disco",
+        "e-mails dos usuários",
+        "softwares a instalar"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "media",
+      "total_tickets": 53,
+      "volume_percentual": 3.6,
+      "distribuicao_categorias_atuais": {
+        "Solicitar recursos computacionais para pesquisas": 27,
+        "Não encontrou o que procurava?": 6,
+        "Tutoria em demandas computacionais para pesquisa": 6,
+        "Solicitar suporte para ambiente de pesquisa": 5,
+        "Solicitar suporte em software acadêmico": 4,
+        "Dúvidas sobre produtos da nuvem": 2,
+        "Acessar pastas de dados de pesquisa": 1,
+        "Solicitar suporte para laboratório virtual": 1,
+        "Atendimento de Incidentes": 1
+      }
+    },
+    {
+      "cluster_id": 9,
+      "nome": "Testes e Validacao",
+      "descricao": "Solicitações relacionadas à realização de testes, validação de resultados ou verificação de funcionalidades.",
+      "quando_usar": "Quando necessário realizar testes, validar resultados ou verificar funcionalidades em ambientes computacionais.",
+      "informacoes_necessarias": [
+        "Finalidade do teste",
+        "Ambiente de teste desejado",
+        "Recursos necessários"
+      ],
+      "sla_sugerido": "Prazo tipico de 3 dias úteis",
+      "complexidade": "baixa",
+      "total_tickets": 1,
+      "volume_percentual": 0.1,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 1
+      }
+    },
+    {
+      "cluster_id": 10,
+      "nome": "Governanca de Dados",
+      "descricao": "Análise e avaliação de governança de dados para projetos de pesquisa, incluindo PGD e exportações.",
+      "quando_usar": "Quando necessário análise detalhada de governança de dados por especialistas para projetos de pesquisa.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "prazo",
+        "necessidade de armazenamento em disco",
+        "e-mails dos usuários",
+        "softwares a instalar"
+      ],
+      "sla_sugerido": "5 dias úteis",
+      "complexidade": "media",
+      "total_tickets": 10,
+      "volume_percentual": 0.7,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 9,
+        "Solicitar recursos computacionais para pesquisas": 1
+      }
+    },
+    {
+      "cluster_id": 11,
+      "nome": "Submissao PGD",
+      "descricao": "Submissao do Plano de Gestao de Dados de Pesquisa para avaliacao e aprovacao.",
+      "quando_usar": "Quando necessario submeter um plano de gestao de dados de pesquisa para avaliacao e aprovacao.",
+      "informacoes_necessarias": [
+        "finalidade do projeto",
+        "prazo",
+        "necessidade de armazenamento em disco",
+        "e-mails dos usuarios"
+      ],
+      "sla_sugerido": "5 dias uteis",
+      "complexidade": "media",
+      "total_tickets": 13,
+      "volume_percentual": 0.9,
+      "distribuicao_categorias_atuais": {
+        "Tutoria em demandas computacionais para pesquisa": 11,
+        "Não encontrou o que procurava?": 1,
+        "Solicitar recursos computacionais para pesquisas": 1
+      }
+    },
+    {
+      "cluster_id": 12,
+      "nome": "Chamados sem Descricao",
+      "descricao": "Intencoes que nao fornecem descricao clara da demanda.",
+      "quando_usar": "Requer contato adicional para esclarecer a solicitacao.",
+      "informacoes_necessarias": [
+        "descricao da demanda"
+      ],
+      "sla_sugerido": "24 horas",
+      "complexidade": "baixa",
+      "total_tickets": 7,
+      "volume_percentual": 0.5,
+      "distribuicao_categorias_atuais": {
+        "Acessar pastas de dados de pesquisa": 2,
+        "Solicitar recursos computacionais para pesquisas": 2,
+        "Solicitar suporte para ambiente de pesquisa": 1,
+        "Persona de acesso a nuvem": 1,
+        "Tutoria em demandas computacionais para pesquisa": 1
+      }
+    },
+    {
+      "cluster_id": 13,
+      "nome": "Rede e Conectividade",
+      "descricao": "Intenções relacionadas à rede e conectividade, incluindo solicitações de configuração, problemas de conexão e outros.",
+      "quando_usar": "Quando houver necessidade de configurar ou solucionar problemas de rede, incluindo acesso a servidores, pastas compartilhadas, VPN, Eduroam, etc.",
+      "informacoes_necessarias": [
+        "Descrição do problema",
+        "Detalhes da configuração atual",
+        "Informações de login e acesso"
+      ],
+      "sla_sugerido": "4 horas",
+      "complexidade": "media",
+      "total_tickets": 14,
+      "volume_percentual": 1.0,
+      "distribuicao_categorias_atuais": {
+        "Atendimento de Incidentes": 5,
+        "Solicitar recursos computacionais para pesquisas": 3,
+        "Solicitar suporte para ambiente de pesquisa": 2,
+        "Reportar incidentes em plataformas tecnológicas": 2,
+        "Dúvidas sobre produtos da nuvem": 1,
+        "Acessar pastas de dados de pesquisa": 1
+      }
+    },
+    {
+      "cluster_id": 14,
+      "nome": "Consultas Tecnicas",
+      "descricao": "Dúvidas e consultas sobre tecnologias, softwares e serviços de pesquisa.",
+      "quando_usar": "Quando houver necessidade de esclarecimento ou orientação sobre uso de tecnologias, softwares ou serviços de pesquisa.",
+      "informacoes_necessarias": [
+        "Descrição da dúvida ou consulta",
+        "Tecnologia ou software relacionado"
+      ],
+      "sla_sugerido": "4 horas",
+      "complexidade": "baixa",
+      "total_tickets": 5,
+      "volume_percentual": 0.3,
+      "distribuicao_categorias_atuais": {
+        "Não encontrou o que procurava?": 4,
+        "Tutoria em demandas computacionais para pesquisa": 1
+      }
+    },
+    {
+      "cluster_id": 15,
+      "nome": "Solicitações de Licenças e Certificados",
+      "descricao": "Intenções relacionadas a solicitações de licenças e certificados, como renovação de licença do Stata ou solicitação de certificado.",
+      "quando_usar": "Quando o pesquisador necessitar de uma licença ou certificado para utilizar um software acadêmico específico.",
+      "informacoes_necessarias": [
+        "nome do software",
+        "tipo de licença necessária",
+        "finalidade da solicitação"
+      ],
+      "sla_sugerido": "2 dias úteis",
+      "complexidade": "baixa",
+      "total_tickets": 20,
+      "volume_percentual": 1.4,
+      "distribuicao_categorias_atuais": {
+        "Solicitar suporte em software acadêmico": 12,
+        "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)": 2,
+        "Solicitar suporte para ambiente de pesquisa": 2,
+        "Não encontrou o que procurava?": 1,
+        "Solicitar suporte para laboratório virtual": 1,
+        "Solicitar serviços em nuvem": 1,
+        "Solicitar recursos computacionais para pesquisas": 1
+      }
+    }
+  ],
+  "outliers_stage3": [],
+  "recomendacao": {
+    "analise_geral": "Foram avaliados 16 grupos naturais contra o contexto da area e o catalogo atual. A reconciliacao produziu 16 request types: 16 mantidos separadamente, 0 destinos com fusao, 0 candidatos que exigem divisao e revisao e 0 categorias obrigatorias sem grupo natural.",
+    "problemas_encontrados": [
+      {
+        "tipo": "lacuna",
+        "severidade": "media",
+        "descricao": "Dificuldade em encontrar o serviço correto",
+        "categorias_envolvidas": []
+      }
+    ],
+    "mapeamento_atual_vs_natural": [
+      {
+        "categoria_atual": "Solicitar recursos computacionais para pesquisas",
+        "volume_atual": 392,
+        "destino_id": "aquisicao_e_gestao_de_recursos_b3cc33de",
+        "destino_portfolio": "Aquisição e Gestão de Recursos",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 263
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 34
+          },
+          {
+            "nome": "Aquisição e Gestão de Recursos",
+            "volume": 27
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 25
+          },
+          {
+            "nome": "Gerenciamento de Dados",
+            "volume": 14
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 14
+          },
+          {
+            "nome": "Solicitações de Recursos",
+            "volume": 6
+          },
+          {
+            "nome": "Rede e Conectividade",
+            "volume": 3
+          },
+          {
+            "nome": "Chamados sem Descricao",
+            "volume": 2
+          },
+          {
+            "nome": "Governanca de Dados",
+            "volume": 1
+          },
+          {
+            "nome": "Segurança e Conformidade",
+            "volume": 1
+          },
+          {
+            "nome": "Solicitações de Licenças e Certificados",
+            "volume": 1
+          },
+          {
+            "nome": "Submissao PGD",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Solicitar recursos computacionais para pesquisas' se alinha com o objetivo de obter recursos computacionais para pesquisa acadêmica, que é o foco da category_id 'aquisicao_e_gestao_de_recursos_b3cc33de'."
+      },
+      {
+        "categoria_atual": "Atendimento de Incidentes",
+        "volume_atual": 219,
+        "destino_id": "resolucao_de_incidentes_em_servidore_dc4a1665",
+        "destino_portfolio": "Resolução de Incidentes em Servidores",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 172
+          },
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 25
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 11
+          },
+          {
+            "nome": "Rede e Conectividade",
+            "volume": 5
+          },
+          {
+            "nome": "Gerenciamento de Dados",
+            "volume": 3
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 2
+          },
+          {
+            "nome": "Aquisição e Gestão de Recursos",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "Maior volume de incidentes relacionados a servidores acadêmicos"
+      },
+      {
+        "categoria_atual": "Não encontrou o que procurava?",
+        "volume_atual": 203,
+        "destino_id": "acesso_e_permissoes_8b396ad2",
+        "destino_portfolio": "Acesso e Permissões",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 70
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 47
+          },
+          {
+            "nome": "Gerenciamento de Dados",
+            "volume": 28
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 20
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 18
+          },
+          {
+            "nome": "Solicitações de Recursos",
+            "volume": 7
+          },
+          {
+            "nome": "Aquisição e Gestão de Recursos",
+            "volume": 6
+          },
+          {
+            "nome": "Consultas Tecnicas",
+            "volume": 4
+          },
+          {
+            "nome": "Segurança e Conformidade",
+            "volume": 1
+          },
+          {
+            "nome": "Solicitações de Licenças e Certificados",
+            "volume": 1
+          },
+          {
+            "nome": "Submissao PGD",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Não encontrou o que procurava?' apresenta uma grande variedade de intenções, mas a maioria delas se relaciona com acesso e permissões, como visto nos grupos naturais observados, como 'Acesso e Permissões' com 70 ocorrências."
+      },
+      {
+        "categoria_atual": "Solicitar suporte para ambiente de pesquisa",
+        "volume_atual": 179,
+        "destino_id": "solicitacoes_de_recursos_56dddbd8",
+        "destino_portfolio": "Solicitações de Recursos",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 80
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 39
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 34
+          },
+          {
+            "nome": "Gerenciamento de Dados",
+            "volume": 7
+          },
+          {
+            "nome": "Aquisição e Gestão de Recursos",
+            "volume": 5
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 5
+          },
+          {
+            "nome": "Solicitações de Recursos",
+            "volume": 3
+          },
+          {
+            "nome": "Rede e Conectividade",
+            "volume": 2
+          },
+          {
+            "nome": "Solicitações de Licenças e Certificados",
+            "volume": 2
+          },
+          {
+            "nome": "Chamados sem Descricao",
+            "volume": 1
+          },
+          {
+            "nome": "Segurança e Conformidade",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Solicitar suporte para ambiente de pesquisa' se alinha com a categoria 'Solicitações de Recursos' do portfolio fechado, pois ambas lidam com solicitações de recursos adicionais para fins de pesquisa."
+      },
+      {
+        "categoria_atual": "Tutoria em demandas computacionais para pesquisa",
+        "volume_atual": 125,
+        "destino_id": "desenvolvimento_e_implementacao_64a44ca4",
+        "destino_portfolio": "Desenvolvimento e Implementação",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 28
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 20
+          },
+          {
+            "nome": "Gerenciamento de Dados",
+            "volume": 15
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 12
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 11
+          },
+          {
+            "nome": "Submissao PGD",
+            "volume": 11
+          },
+          {
+            "nome": "Governanca de Dados",
+            "volume": 9
+          },
+          {
+            "nome": "Solicitações de Recursos",
+            "volume": 8
+          },
+          {
+            "nome": "Aquisição e Gestão de Recursos",
+            "volume": 6
+          },
+          {
+            "nome": "Análise PGD",
+            "volume": 1
+          },
+          {
+            "nome": "Chamados sem Descricao",
+            "volume": 1
+          },
+          {
+            "nome": "Consultas Tecnicas",
+            "volume": 1
+          },
+          {
+            "nome": "Segurança e Conformidade",
+            "volume": 1
+          },
+          {
+            "nome": "Testes e Validacao",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Tutoria em demandas computacionais para pesquisa' apresenta uma aderência boa com a categoria 'Desenvolvimento e Implementação', pois ambas lidam com solicitações relacionadas ao desenvolvimento de soluções, implementação de projetos e execução de tarefas técnicas para pesquisa."
+      },
+      {
+        "categoria_atual": "Solicitar suporte em software acadêmico",
+        "volume_atual": 110,
+        "destino_id": "instalacao_de_software_19a8d0b3",
+        "destino_portfolio": "Instalacao de Software",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Instalacao de Software",
+            "volume": 55
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 26
+          },
+          {
+            "nome": "Solicitações de Licenças e Certificados",
+            "volume": 12
+          },
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 11
+          },
+          {
+            "nome": "Aquisição e Gestão de Recursos",
+            "volume": 4
+          },
+          {
+            "nome": "Solicitações de Recursos",
+            "volume": 2
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "O grupo mais volumoso é Instalacao de Software, com 55 ocorrências."
+      },
+      {
+        "categoria_atual": "Acessar pastas de dados de pesquisa",
+        "volume_atual": 62,
+        "destino_id": "solicitacoes_de_recursos_56dddbd8",
+        "destino_portfolio": "Solicitações de Recursos",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 37
+          },
+          {
+            "nome": "Gerenciamento de Dados",
+            "volume": 8
+          },
+          {
+            "nome": "Solicitações de Recursos",
+            "volume": 4
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 3
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 3
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 3
+          },
+          {
+            "nome": "Chamados sem Descricao",
+            "volume": 2
+          },
+          {
+            "nome": "Aquisição e Gestão de Recursos",
+            "volume": 1
+          },
+          {
+            "nome": "Rede e Conectividade",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Acessar pastas de dados de pesquisa' se alinha com a descricao da category_id 'solicitacoes_de_recursos_56dddbd8', que trata de solicitações de recursos adicionais, como acesso a dados e pastas compartilhadas."
+      },
+      {
+        "categoria_atual": "Persona de acesso a nuvem",
+        "volume_atual": 54,
+        "destino_id": "acesso_e_permissoes_8b396ad2",
+        "destino_portfolio": "Acesso e Permissões",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 49
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 2
+          },
+          {
+            "nome": "Solicitações de Recursos",
+            "volume": 2
+          },
+          {
+            "nome": "Chamados sem Descricao",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Persona de acesso a nuvem' se alinha principalmente com o category_id 'acesso_e_permissoes_8b396ad2', pois ambos lidam com acessos e permissões em servidores, recursos e plataformas de nuvem."
+      },
+      {
+        "categoria_atual": "Reportar incidentes em plataformas tecnológicas",
+        "volume_atual": 38,
+        "destino_id": "resolucao_de_incidentes_em_servidore_dc4a1665",
+        "destino_portfolio": "Resolução de Incidentes em Servidores",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 34
+          },
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 2
+          },
+          {
+            "nome": "Rede e Conectividade",
+            "volume": 2
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "O grupo 'Resolução de Incidentes em Servidores' tem o maior volume de incidentes (34) e está relacionado à resolução de problemas técnicos em servidores acadêmicos, o que se alinha com a categoria atual 'Reportar incidentes em plataformas tecnológicas'."
+      },
+      {
+        "categoria_atual": "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)",
+        "volume_atual": 20,
+        "destino_id": "instalacao_de_software_19a8d0b3",
+        "destino_portfolio": "Instalacao de Software",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Instalacao de Software",
+            "volume": 17
+          },
+          {
+            "nome": "Solicitações de Licenças e Certificados",
+            "volume": 2
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "O grupo mais representativo é Instalacao de Software, com 17 ocorrências."
+      },
+      {
+        "categoria_atual": "Dúvidas sobre produtos da nuvem",
+        "volume_atual": 18,
+        "destino_id": "consultas_tecnicas_e352cd40",
+        "destino_portfolio": "Consultas Tecnicas",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 7
+          },
+          {
+            "nome": "Aquisição e Gestão de Recursos",
+            "volume": 2
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 2
+          },
+          {
+            "nome": "Gerenciamento de Dados",
+            "volume": 2
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 2
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 1
+          },
+          {
+            "nome": "Rede e Conectividade",
+            "volume": 1
+          },
+          {
+            "nome": "Solicitações de Recursos",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Dúvidas sobre produtos da nuvem' se alinha com a natureza de consultas técnicas sobre tecnologias e serviços de pesquisa, incluindo produtos de nuvem."
+      },
+      {
+        "categoria_atual": "Solicitar Suporte Ético",
+        "volume_atual": 14,
+        "destino_id": "consultas_tecnicas_e352cd40",
+        "destino_portfolio": "Consultas Tecnicas",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Instalacao de Software",
+            "volume": 5
+          },
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 4
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 2
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 1
+          },
+          {
+            "nome": "Gerenciamento de Dados",
+            "volume": 1
+          },
+          {
+            "nome": "Solicitações de Recursos",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Solicitar Suporte Ético' se alinha com a natureza de consultas técnicas e dúvidas sobre tecnologias, softwares e serviços de pesquisa."
+      },
+      {
+        "categoria_atual": "Solicitar serviços em nuvem",
+        "volume_atual": 8,
+        "destino_id": "solicitacoes_de_recursos_56dddbd8",
+        "destino_portfolio": "Solicitações de Recursos",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 2
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 2
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 2
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 1
+          },
+          {
+            "nome": "Solicitações de Licenças e Certificados",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Solicitar serviços em nuvem' se alinha com o category_id 'solicitacoes_de_recursos_56dddbd8', que trata de solicitações de recursos adicionais, como acesso a dados, pastas compartilhadas, contas em serviços de nuvem ou aumento de cotas de armazenamento."
+      },
+      {
+        "categoria_atual": "Solicitar suporte para laboratório virtual",
+        "volume_atual": 5,
+        "destino_id": "aquisicao_e_gestao_de_recursos_b3cc33de",
+        "destino_portfolio": "Aquisição e Gestão de Recursos",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 2
+          },
+          {
+            "nome": "Aquisição e Gestão de Recursos",
+            "volume": 1
+          },
+          {
+            "nome": "Instalacao de Software",
+            "volume": 1
+          },
+          {
+            "nome": "Solicitações de Licenças e Certificados",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Solicitar suporte para laboratorio virtual' apresenta uma boa aderencia com a categoria 'Aquisicao e Gestao de Recursos', pois ambas lidam com solicitações relacionadas à obtenção de recursos computacionais ou serviços para pesquisa acadêmica."
+      },
+      {
+        "categoria_atual": "Análise de custos de nuvem",
+        "volume_atual": 5,
+        "destino_id": "aquisicao_e_gestao_de_recursos_b3cc33de",
+        "destino_portfolio": "Aquisição e Gestão de Recursos",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Instalacao de Software",
+            "volume": 3
+          },
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 1
+          },
+          {
+            "nome": "Resolução de Incidentes em Servidores",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria 'Análise de custos de nuvem' se alinha com a gestão de recursos para pesquisa acadêmica, incluindo a aquisição e gestão de créditos, recursos computacionais ou outros serviços."
+      },
+      {
+        "categoria_atual": "Acesso à plataforma de autosserviço do pesquisador (beta)",
+        "volume_atual": 3,
+        "destino_id": "acesso_e_permissoes_8b396ad2",
+        "destino_portfolio": "Acesso e Permissões",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Acesso e Permissões",
+            "volume": 2
+          },
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "Acesso à plataforma de autosserviço do pesquisador (beta) se alinha com Acesso e Permissões"
+      },
+      {
+        "categoria_atual": "Criar site para Centro de Pesquisa",
+        "volume_atual": 1,
+        "destino_id": "desenvolvimento_e_implementacao_64a44ca4",
+        "destino_portfolio": "Desenvolvimento e Implementação",
+        "grupos_naturais_observados": [
+          {
+            "nome": "Desenvolvimento e Implementação",
+            "volume": 1
+          }
+        ],
+        "aderencia": "boa",
+        "observacao": "A categoria atual 'Criar site para Centro de Pesquisa' se alinha com o tratamento dominante observado em 'Desenvolvimento e Implementação', que envolve desenvolvimento de soluções, implementação de projetos e execução de tarefas técnicas para pesquisa."
+      }
+    ],
+    "reconciliacao_grupos_naturais": [
+      {
+        "grupo_natural": "Acesso e Permissões",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "acesso_e_permissoes_8b396ad2",
+        "destino_nome": "Acesso e Permissões",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta um objetivo claro de acesso a recursos computacionais ou plataformas de nuvem para fins de pesquisa ou trabalho acadêmico, alinhado com o serviço e sistema de Servidores Acadêmicos e Recursos Computacionais. O tratamento, fluxo responsável, dados e aprovações também se alinham com as necessidades específicas desse tipo de solicitação."
+      },
+      {
+        "grupo_natural": "Análise PGD",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "analise_pgd_95491c46",
+        "destino_nome": "Análise PGD",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta um objetivo de usuário, serviço/sistema, ação/tratamento, fluxo responsável, dados/aprovações e SLA/segurança que são específicos e distintos dos demais, justificando a manutenção como uma categoria separada."
+      },
+      {
+        "grupo_natural": "Aquisição e Gestão de Recursos",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "aquisicao_e_gestao_de_recursos_b3cc33de",
+        "destino_nome": "Aquisição e Gestão de Recursos",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta características operacionais específicas que se alinham com o objetivo de obter recursos computacionais para pesquisa acadêmica, incluindo a avaliação da necessidade de recursos, provisionamento de ambiente, configuração de acesso e suporte. Além disso, os dados e aprovações necessários, como PGD e SI aprovada com orçamento definido, são compatíveis com o fluxo de trabalho existente."
+      },
+      {
+        "grupo_natural": "Chamados sem Descricao",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "chamados_sem_descricao_d00d8662",
+        "destino_nome": "Chamados sem Descricao",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato 'Chamados sem Descricao' tem um objetivo, servico, sistema, acao e tratamento bem definidos e distintos dos demais, justificando a manutenção como uma categoria separada."
+      },
+      {
+        "grupo_natural": "Consultas Tecnicas",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "consultas_tecnicas_e352cd40",
+        "destino_nome": "Consultas Tecnicas",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato 'Consultas Tecnicas' tem um objetivo claro de esclarecer dúvidas sobre tecnologias e serviços de pesquisa, o que se alinha com o serviço e sistema de 'Tecnologias, softwares e serviços de pesquisa'. O tratamento é consistente com a análise e resposta às consultas técnicas. Além disso, o fluxo responsável é a Equipe de Suporte Técnico, e os dados e aprovações necessários são coerentes com a categoria. Portanto, não há necessidade de fundir ou dividir este candidato."
+      },
+      {
+        "grupo_natural": "Desenvolvimento e Implementação",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "desenvolvimento_e_implementacao_64a44ca4",
+        "destino_nome": "Desenvolvimento e Implementação",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta um objetivo claro de desenvolvimento e implementação de soluções para pesquisa, com um serviço e sistema específico (Servidores Acadêmicos e Recursos Computacionais), tratamento técnico e acompanhamento, fluxo responsável pela Equipe de Desenvolvimento e Implementação, dados e aprovações necessários para a execução do projeto. Além disso, o SLA sugerido é de 5 dias úteis e a complexidade é média."
+      },
+      {
+        "grupo_natural": "Gerenciamento de Dados",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "gerenciamento_de_dados_d93b1607",
+        "destino_nome": "Gerenciamento de Dados",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta um objetivo claro de gerenciamento de dados e armazenamento em servidores ou nuvem, alinhado com o serviço e sistema de Servidores Acadêmicos ou Nuvem Pública, e compartilha os mesmos critérios de tratamento, fluxo responsável, dados e aprovações, SLA e segurança."
+      },
+      {
+        "grupo_natural": "Governanca de Dados",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "governanca_de_dados_08f7ca35",
+        "destino_nome": "Governanca de Dados",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta um objetivo de usuário, serviço e sistema alvo bem definidos, que se alinham com os critérios do portfolio reconciliado fechado. Além disso, o fluxo responsável e os dados necessários para aprovação também estão claros e compatíveis."
+      },
+      {
+        "grupo_natural": "Instalacao de Software",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "instalacao_de_software_19a8d0b3",
+        "destino_nome": "Instalacao de Software",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta características que se alinham com o objetivo, serviço, sistema, tratamento, fluxo e equipe do destino 'instalacao_de_software_19a8d0b3', indicando que pode ser atendido de forma integral por este destino sem perder diferenças operacionais."
+      },
+      {
+        "grupo_natural": "Rede e Conectividade",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "rede_e_conectividade_522dda72",
+        "destino_nome": "Rede e Conectividade",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato 'Rede e Conectividade' tem um objetivo, serviço, sistema, tratamento, fluxo responsável, dados, aprovações, SLA e segurança bem definidos e específicos, que não se misturam com os de outros candidatos. Portanto, é mais apropriado mantê-lo separado."
+      },
+      {
+        "grupo_natural": "Resolução de Incidentes em Servidores",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "resolucao_de_incidentes_em_servidore_dc4a1665",
+        "destino_nome": "Resolução de Incidentes em Servidores",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta um objetivo claro de resolução de incidentes em servidores acadêmicos, com um fluxo de responsabilidade bem definido e critérios de tratamento e dados aprovados que se alinham perfeitamente com o destino proposto."
+      },
+      {
+        "grupo_natural": "Segurança e Conformidade",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "seguranca_e_conformidade_dd76c789",
+        "destino_nome": "Segurança e Conformidade",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato natural apresenta características únicas que o tornam compatível com a categoria de Segurança e Conformidade, como objetivo de garantir a segurança e conformidade dos sistemas e dados, tratamento de solicitações de segurança e conformidade, e fluxo responsável pela Equipe de Segurança da Informação e DTI Pesquisa."
+      },
+      {
+        "grupo_natural": "Solicitações de Licenças e Certificados",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "solicitacoes_de_licencas_e_certifica_c0eaf67b",
+        "destino_nome": "Solicitações de Licenças e Certificados",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta um objetivo claro de obter licenças ou certificados para softwares acadêmicos específicos, o que está alinhado com o serviço e sistema de Softwares e Ferramentas Acadêmicas. O tratamento da solicitação envolve análise e processamento, e o fluxo responsável é a Equipe de Suporte à Pesquisa. Além disso, os dados necessários para a aprovação são claros e específicos."
+      },
+      {
+        "grupo_natural": "Solicitações de Recursos",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "solicitacoes_de_recursos_56dddbd8",
+        "destino_nome": "Solicitações de Recursos",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta características operacionais específicas que se alinham com o objetivo de obter recursos adicionais para realizar pesquisas e projetos, incluindo a necessidade de análise da solicitação e provisionamento de recursos, fluxo responsável pela DTI Pesquisa, e dados e aprovações específicos."
+      },
+      {
+        "grupo_natural": "Submissao PGD",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "submissao_pgd_064b4ec7",
+        "destino_nome": "Submissao PGD",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato natural apresenta características únicas que o tornam compatível com o destino 'Submissao PGD', como objetivo de obter aprovação para o Plano de Gestão de Dados de Pesquisa, serviço de sistema de gestão de dados de pesquisa e tratamento de avaliação e aprovação do plano."
+      },
+      {
+        "grupo_natural": "Testes e Validacao",
+        "decisao_llm": "manter_separado",
+        "decisao_final": "manter_separado",
+        "destino_id": "testes_e_validacao_ee5697df",
+        "destino_nome": "Testes e Validacao",
+        "criterios": {
+          "mesmo_objetivo_usuario": true,
+          "mesmo_servico_sistema": true,
+          "mesmo_tratamento": true,
+          "mesmo_fluxo_responsavel": true,
+          "mesmos_dados_aprovacoes": true,
+          "mesmos_sla_seguranca": true
+        },
+        "justificativa": "O candidato apresenta um objetivo claro de realizar testes, validação de resultados ou verificação de funcionalidades em ambientes computacionais, o que está alinhado com a categoria existente de 'Testes e Validacao'. Além disso, os serviços e sistemas envolvidos, como Servidores Acadêmicos, HPC, Portal do Pesquisador e Nuvem Pública, também estão dentro do escopo dessa categoria. Portanto, não há necessidade de criar uma nova categoria ou fundir com outra existente."
+      }
+    ],
+    "revisao_contexto_catalogo": {
+      "contexto_lido": true,
+      "principio": "Candidatos naturais preservados e reconciliados por equivalencia operacional contra contexto e catalogo atual. A quantidade de agrupadores atuais e referencia forte; novos grupos logicos devem ser excecao justificada.",
+      "agrupadores_atuais_considerados": [
+        "Nuvem Pública (AWS, Azure, GCP)",
+        "Servidores Acadêmicos e Recursos Computacionais",
+        "Laboratórios Virtuais e Autosserviço de VMs",
+        "Softwares e Ferramentas Acadêmicas",
+        "Suporte, Incidentes e Tutoria",
+        "Outros Serviços de Apoio à Pesquisa"
+      ],
+      "decisoes_de_agrupamento": [
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Acesso e Permissões"
+          ],
+          "destino": "Acesso e Permissões",
+          "grupo_logico": "Servidores Acadêmicos e Recursos Computacionais",
+          "justificativa": "O candidato apresenta um objetivo claro de acesso a recursos computacionais ou plataformas de nuvem para fins de pesquisa ou trabalho acadêmico, alinhado com o serviço e sistema de Servidores Acadêmicos e Recursos Computacionais. O tratamento, fluxo responsável, dados e aprovações também se alinham com as necessidades específicas desse tipo de solicitação."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Instalacao de Software"
+          ],
+          "destino": "Instalacao de Software",
+          "grupo_logico": "Softwares e Ferramentas Acadêmicas",
+          "justificativa": "O candidato apresenta características que se alinham com o objetivo, serviço, sistema, tratamento, fluxo e equipe do destino 'instalacao_de_software_19a8d0b3', indicando que pode ser atendido de forma integral por este destino sem perder diferenças operacionais."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Resolução de Incidentes em Servidores"
+          ],
+          "destino": "Resolução de Incidentes em Servidores",
+          "grupo_logico": "Servidores Acadêmicos e Recursos Computacionais",
+          "justificativa": "O candidato apresenta um objetivo claro de resolução de incidentes em servidores acadêmicos, com um fluxo de responsabilidade bem definido e critérios de tratamento e dados aprovados que se alinham perfeitamente com o destino proposto."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Solicitações de Recursos"
+          ],
+          "destino": "Solicitações de Recursos",
+          "grupo_logico": "Servidores Acadêmicos e Recursos Computacionais",
+          "justificativa": "O candidato apresenta características operacionais específicas que se alinham com o objetivo de obter recursos adicionais para realizar pesquisas e projetos, incluindo a necessidade de análise da solicitação e provisionamento de recursos, fluxo responsável pela DTI Pesquisa, e dados e aprovações específicos."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Segurança e Conformidade"
+          ],
+          "destino": "Segurança e Conformidade",
+          "grupo_logico": "Suporte, Incidentes e Tutoria",
+          "justificativa": "O candidato natural apresenta características únicas que o tornam compatível com a categoria de Segurança e Conformidade, como objetivo de garantir a segurança e conformidade dos sistemas e dados, tratamento de solicitações de segurança e conformidade, e fluxo responsável pela Equipe de Segurança da Informação e DTI Pesquisa."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Gerenciamento de Dados"
+          ],
+          "destino": "Gerenciamento de Dados",
+          "grupo_logico": "Servidores Acadêmicos e Recursos Computacionais",
+          "justificativa": "O candidato apresenta um objetivo claro de gerenciamento de dados e armazenamento em servidores ou nuvem, alinhado com o serviço e sistema de Servidores Acadêmicos ou Nuvem Pública, e compartilha os mesmos critérios de tratamento, fluxo responsável, dados e aprovações, SLA e segurança."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Análise PGD"
+          ],
+          "destino": "Análise PGD",
+          "grupo_logico": "Suporte, Incidentes e Tutoria",
+          "justificativa": "O candidato apresenta um objetivo de usuário, serviço/sistema, ação/tratamento, fluxo responsável, dados/aprovações e SLA/segurança que são específicos e distintos dos demais, justificando a manutenção como uma categoria separada."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Desenvolvimento e Implementação"
+          ],
+          "destino": "Desenvolvimento e Implementação",
+          "grupo_logico": "Servidores Acadêmicos e Recursos Computacionais",
+          "justificativa": "O candidato apresenta um objetivo claro de desenvolvimento e implementação de soluções para pesquisa, com um serviço e sistema específico (Servidores Acadêmicos e Recursos Computacionais), tratamento técnico e acompanhamento, fluxo responsável pela Equipe de Desenvolvimento e Implementação, dados e aprovações necessários para a execução do projeto. Além disso, o SLA sugerido é de 5 dias úteis e a complexidade é média."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Aquisição e Gestão de Recursos"
+          ],
+          "destino": "Aquisição e Gestão de Recursos",
+          "grupo_logico": "Servidores Acadêmicos e Recursos Computacionais",
+          "justificativa": "O candidato apresenta características operacionais específicas que se alinham com o objetivo de obter recursos computacionais para pesquisa acadêmica, incluindo a avaliação da necessidade de recursos, provisionamento de ambiente, configuração de acesso e suporte. Além disso, os dados e aprovações necessários, como PGD e SI aprovada com orçamento definido, são compatíveis com o fluxo de trabalho existente."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Testes e Validacao"
+          ],
+          "destino": "Testes e Validacao",
+          "grupo_logico": "Suporte, Incidentes e Tutoria",
+          "justificativa": "O candidato apresenta um objetivo claro de realizar testes, validação de resultados ou verificação de funcionalidades em ambientes computacionais, o que está alinhado com a categoria existente de 'Testes e Validacao'. Além disso, os serviços e sistemas envolvidos, como Servidores Acadêmicos, HPC, Portal do Pesquisador e Nuvem Pública, também estão dentro do escopo dessa categoria. Portanto, não há necessidade de criar uma nova categoria ou fundir com outra existente."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Governanca de Dados"
+          ],
+          "destino": "Governanca de Dados",
+          "grupo_logico": "Suporte, Incidentes e Tutoria",
+          "justificativa": "O candidato apresenta um objetivo de usuário, serviço e sistema alvo bem definidos, que se alinham com os critérios do portfolio reconciliado fechado. Além disso, o fluxo responsável e os dados necessários para aprovação também estão claros e compatíveis."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Submissao PGD"
+          ],
+          "destino": "Submissao PGD",
+          "grupo_logico": "Servidores Acadêmicos e Recursos Computacionais",
+          "justificativa": "O candidato natural apresenta características únicas que o tornam compatível com o destino 'Submissao PGD', como objetivo de obter aprovação para o Plano de Gestão de Dados de Pesquisa, serviço de sistema de gestão de dados de pesquisa e tratamento de avaliação e aprovação do plano."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Chamados sem Descricao"
+          ],
+          "destino": "Chamados sem Descricao",
+          "grupo_logico": "Suporte, Incidentes e Tutoria",
+          "justificativa": "O candidato 'Chamados sem Descricao' tem um objetivo, servico, sistema, acao e tratamento bem definidos e distintos dos demais, justificando a manutenção como uma categoria separada."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Rede e Conectividade"
+          ],
+          "destino": "Rede e Conectividade",
+          "grupo_logico": "Suporte, Incidentes e Tutoria",
+          "justificativa": "O candidato 'Rede e Conectividade' tem um objetivo, serviço, sistema, tratamento, fluxo responsável, dados, aprovações, SLA e segurança bem definidos e específicos, que não se misturam com os de outros candidatos. Portanto, é mais apropriado mantê-lo separado."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Consultas Tecnicas"
+          ],
+          "destino": "Consultas Tecnicas",
+          "grupo_logico": "Suporte, Incidentes e Tutoria",
+          "justificativa": "O candidato 'Consultas Tecnicas' tem um objetivo claro de esclarecer dúvidas sobre tecnologias e serviços de pesquisa, o que se alinha com o serviço e sistema de 'Tecnologias, softwares e serviços de pesquisa'. O tratamento é consistente com a análise e resposta às consultas técnicas. Além disso, o fluxo responsável é a Equipe de Suporte Técnico, e os dados e aprovações necessários são coerentes com a categoria. Portanto, não há necessidade de fundir ou dividir este candidato."
+        },
+        {
+          "decisao": "manter_separado",
+          "origem": [
+            "Solicitações de Licenças e Certificados"
+          ],
+          "destino": "Solicitações de Licenças e Certificados",
+          "grupo_logico": "Softwares e Ferramentas Acadêmicas",
+          "justificativa": "O candidato apresenta um objetivo claro de obter licenças ou certificados para softwares acadêmicos específicos, o que está alinhado com o serviço e sistema de Softwares e Ferramentas Acadêmicas. O tratamento da solicitação envolve análise e processamento, e o fluxo responsável é a Equipe de Suporte à Pesquisa. Além disso, os dados necessários para a aprovação são claros e específicos."
+        }
+      ],
+      "ajustes_pos_revisao": [
+        "Nenhum candidato exigiu divisao interna nesta execucao."
+      ]
+    },
+    "grupos_otimizados": [
+      {
+        "nome": "Servidores Acadêmicos e Recursos Computacionais",
+        "descricao": "Agrupador logico dos chamados: Acesso e Permissões, Resolução de Incidentes em Servidores, Solicitações de Recursos, Gerenciamento de Dados, Desenvolvimento e Implementação, Aquisição e Gestão de Recursos, Submissao PGD",
+        "volume_estimado": 1385,
+        "percentual_volume": 95.1,
+        "chamados": [
+          "Acesso e Permissões",
+          "Resolução de Incidentes em Servidores",
+          "Solicitações de Recursos",
+          "Gerenciamento de Dados",
+          "Desenvolvimento e Implementação",
+          "Aquisição e Gestão de Recursos",
+          "Submissao PGD"
+        ]
+      },
+      {
+        "nome": "Softwares e Ferramentas Acadêmicas",
+        "descricao": "Agrupador logico dos chamados: Instalacao de Software, Solicitações de Licenças e Certificados",
+        "volume_estimado": 150,
+        "percentual_volume": 10.3,
+        "chamados": [
+          "Instalacao de Software",
+          "Solicitações de Licenças e Certificados"
+        ]
+      },
+      {
+        "nome": "Suporte, Incidentes e Tutoria",
+        "descricao": "Agrupador logico dos chamados: Segurança e Conformidade, Análise PGD, Testes e Validacao, Governanca de Dados, Chamados sem Descricao, Rede e Conectividade, Consultas Tecnicas",
+        "volume_estimado": 69,
+        "percentual_volume": 4.7,
+        "chamados": [
+          "Segurança e Conformidade",
+          "Análise PGD",
+          "Testes e Validacao",
+          "Governanca de Dados",
+          "Chamados sem Descricao",
+          "Rede e Conectividade",
+          "Consultas Tecnicas"
+        ]
+      }
+    ],
+    "portfolio_otimizado": [
+      {
+        "id": "acesso_e_permissoes_8b396ad2",
+        "nome": "Acesso e Permissões",
+        "grupo": "Servidores Acadêmicos e Recursos Computacionais",
+        "descricao": "Solicitação de acesso a servidores, recursos e plataformas de nuvem para fins de pesquisa ou trabalho acadêmico.",
+        "volume_estimado": 260,
+        "percentual_volume": 17.9,
+        "substitui_categorias_atuais": [
+          "Não encontrou o que procurava?",
+          "Persona de acesso a nuvem",
+          "Acesso à plataforma de autosserviço do pesquisador (beta)"
+        ],
+        "baseado_nos_grupos": [
+          "Acesso e Permissões"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "tipo de acesso solicitado",
+          "recurso ou plataforma solicitada",
+          "justificativa para o acesso"
+        ],
+        "sla_sugerido": "4 horas",
+        "complexidade": "baixa",
+        "prioridade_implementacao": "alta",
+        "perfil_operacional": {
+          "objetivo_usuario": "Obter acesso a recursos computacionais ou plataformas de nuvem para realizar pesquisas ou trabalhos acadêmicos.",
+          "servico_sistema_alvo": "Servidores Acadêmicos, Recursos Computacionais, Plataformas de Nuvem",
+          "acao_tratamento": "Análise da solicitação e concessão de acesso ao recurso solicitado.",
+          "fluxo_responsavel": "Equipe de Suporte Técnico da DTI Pesquisa",
+          "dados_aprovacoes": "Informações de contato do usuário, justificativa para o acesso e aprovação da solicitação.",
+          "requisitos_seguranca": "Verificação de permissões e autorizações necessárias para o acesso ao recurso solicitado."
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta um objetivo claro de acesso a recursos computacionais ou plataformas de nuvem para fins de pesquisa ou trabalho acadêmico, alinhado com o serviço e sistema de Servidores Acadêmicos e Recursos Computacionais. O tratamento, fluxo responsável, dados e aprovações também se alinham com as necessidades específicas desse tipo de solicitação."
+      },
+      {
+        "id": "instalacao_de_software_19a8d0b3",
+        "nome": "Instalacao de Software",
+        "grupo": "Softwares e Ferramentas Acadêmicas",
+        "descricao": "Solicitação de instalação, configuração ou atualização de software acadêmico para uso em pesquisas ou projetos acadêmicos.",
+        "volume_estimado": 130,
+        "percentual_volume": 8.9,
+        "substitui_categorias_atuais": [
+          "Solicitar suporte em software acadêmico",
+          "Instalação de pacotes em servidores acadêmicos (bibliotecas compartilhadas)"
+        ],
+        "baseado_nos_grupos": [
+          "Instalacao de Software"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "nome do software",
+          "versão do software",
+          "sistema operacional"
+        ],
+        "sla_sugerido": "2 dias úteis",
+        "complexidade": "media",
+        "prioridade_implementacao": "media",
+        "perfil_operacional": {
+          "objetivo_usuario": "Obter acesso a software acadêmico para realizar pesquisas ou projetos.",
+          "servico_sistema_alvo": "Softwares e Ferramentas Acadêmicas",
+          "acao_tratamento": "Instalação, configuração ou atualização de software.",
+          "fluxo_responsavel": "Equipe de Suporte Técnico da DTI Pesquisa",
+          "dados_aprovacoes": "Informações necessárias para a instalação do software e aprovação da solicitação.",
+          "requisitos_seguranca": "Verificar se o software é compatível com as políticas de segurança da instituição."
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta características que se alinham com o objetivo, serviço, sistema, tratamento, fluxo e equipe do destino 'instalacao_de_software_19a8d0b3', indicando que pode ser atendido de forma integral por este destino sem perder diferenças operacionais."
+      },
+      {
+        "id": "resolucao_de_incidentes_em_servidore_dc4a1665",
+        "nome": "Resolução de Incidentes em Servidores",
+        "grupo": "Servidores Acadêmicos e Recursos Computacionais",
+        "descricao": "Resolução de incidentes técnicos em servidores acadêmicos, incluindo problemas de espaço em disco, consumo de memória alto, servidor indisponível, etc.",
+        "volume_estimado": 257,
+        "percentual_volume": 17.7,
+        "substitui_categorias_atuais": [
+          "Atendimento de Incidentes",
+          "Reportar incidentes em plataformas tecnológicas"
+        ],
+        "baseado_nos_grupos": [
+          "Resolução de Incidentes em Servidores"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "Descrição do problema",
+          "Servidor afetado",
+          "Data e hora do incidente"
+        ],
+        "sla_sugerido": "4 horas",
+        "complexidade": "media",
+        "prioridade_implementacao": "alta",
+        "perfil_operacional": {
+          "objetivo_usuario": "Resolver problemas técnicos em servidores acadêmicos para garantir a continuidade das atividades de pesquisa e ensino",
+          "servico_sistema_alvo": "Servidores acadêmicos",
+          "acao_tratamento": "Análise e resolução do incidente técnico",
+          "fluxo_responsavel": "Equipe de suporte técnico da DTI Pesquisa",
+          "dados_aprovacoes": "Não aplicável",
+          "requisitos_seguranca": "Acesso restrito aos servidores acadêmicos e dados sensíveis"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta um objetivo claro de resolução de incidentes em servidores acadêmicos, com um fluxo de responsabilidade bem definido e critérios de tratamento e dados aprovados que se alinham perfeitamente com o destino proposto."
+      },
+      {
+        "id": "solicitacoes_de_recursos_56dddbd8",
+        "nome": "Solicitações de Recursos",
+        "grupo": "Servidores Acadêmicos e Recursos Computacionais",
+        "descricao": "Solicitação de recursos adicionais, como acesso a dados, pastas compartilhadas, contas em serviços de nuvem ou aumento de cotas de armazenamento.",
+        "volume_estimado": 249,
+        "percentual_volume": 17.1,
+        "substitui_categorias_atuais": [
+          "Solicitar suporte para ambiente de pesquisa",
+          "Acessar pastas de dados de pesquisa",
+          "Solicitar serviços em nuvem"
+        ],
+        "baseado_nos_grupos": [
+          "Solicitações de Recursos"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "tipo de recurso solicitado",
+          "justificativa para a solicitação",
+          "nome do projeto ou pesquisa"
+        ],
+        "sla_sugerido": "2 dias úteis",
+        "complexidade": "media",
+        "prioridade_implementacao": "media",
+        "perfil_operacional": {
+          "objetivo_usuario": "Obter recursos adicionais para realizar pesquisas e projetos",
+          "servico_sistema_alvo": "Servidores Acadêmicos, HPC, Nuvem Pública, Softwares Acadêmicos",
+          "acao_tratamento": "Análise da solicitação e provisionamento de recursos",
+          "fluxo_responsavel": "DTI Pesquisa",
+          "dados_aprovacoes": "Aprovação do PGD e/ou orçamento aprovado",
+          "requisitos_seguranca": "Verificação de requisitos de segurança e conformidade"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta características operacionais específicas que se alinham com o objetivo de obter recursos adicionais para realizar pesquisas e projetos, incluindo a necessidade de análise da solicitação e provisionamento de recursos, fluxo responsável pela DTI Pesquisa, e dados e aprovações específicos."
+      },
+      {
+        "id": "seguranca_e_conformidade_dd76c789",
+        "nome": "Segurança e Conformidade",
+        "grupo": "Suporte, Incidentes e Tutoria",
+        "descricao": "Atendimento às intenções relacionadas à segurança, conformidade e auditoria de sistemas e dados.",
+        "volume_estimado": 4,
+        "percentual_volume": 0.3,
+        "substitui_categorias_atuais": [],
+        "baseado_nos_grupos": [
+          "Segurança e Conformidade"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "finalidade da solicitação | tipo de sistema ou dado envolvido"
+        ],
+        "sla_sugerido": "24 horas",
+        "complexidade": "media",
+        "prioridade_implementacao": "alta",
+        "perfil_operacional": {
+          "objetivo_usuario": "Garantir a segurança e conformidade dos sistemas e dados.",
+          "servico_sistema_alvo": "Sistemas e dados de pesquisa da FGV",
+          "acao_tratamento": "Análise e tratamento de solicitações de segurança e conformidade.",
+          "fluxo_responsavel": "Equipe de Segurança da Informação e DTI Pesquisa",
+          "dados_aprovacoes": "Aprovação da Direção da Unidade FGV e documentação necessária.",
+          "requisitos_seguranca": "Políticas de segurança específicas para dados sensíveis ou restritos."
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato natural apresenta características únicas que o tornam compatível com a categoria de Segurança e Conformidade, como objetivo de garantir a segurança e conformidade dos sistemas e dados, tratamento de solicitações de segurança e conformidade, e fluxo responsável pela Equipe de Segurança da Informação e DTI Pesquisa."
+      },
+      {
+        "id": "gerenciamento_de_dados_d93b1607",
+        "nome": "Gerenciamento de Dados",
+        "grupo": "Servidores Acadêmicos e Recursos Computacionais",
+        "descricao": "Intenções relacionadas ao gerenciamento de dados e armazenamento em servidores ou nuvem.",
+        "volume_estimado": 78,
+        "percentual_volume": 5.4,
+        "substitui_categorias_atuais": [],
+        "baseado_nos_grupos": [
+          "Gerenciamento de Dados"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "tipo de armazenamento necessário",
+          "quantidade de espaço requerida",
+          "finalidade do armazenamento"
+        ],
+        "sla_sugerido": "24 horas",
+        "complexidade": "media",
+        "prioridade_implementacao": "media",
+        "perfil_operacional": {
+          "objetivo_usuario": "Gerenciar o armazenamento e os dados solicitados.",
+          "servico_sistema_alvo": "Servidores Acadêmicos ou Nuvem Pública",
+          "acao_tratamento": "Avaliação e provisionamento de recursos de armazenamento",
+          "fluxo_responsavel": "Equipe de Servidores Acadêmicos e Recursos Computacionais",
+          "dados_aprovacoes": "Informações necessárias para o provisionamento de recursos",
+          "requisitos_seguranca": "Avaliação da Governança de Dados e Segurança da Informação"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta um objetivo claro de gerenciamento de dados e armazenamento em servidores ou nuvem, alinhado com o serviço e sistema de Servidores Acadêmicos ou Nuvem Pública, e compartilha os mesmos critérios de tratamento, fluxo responsável, dados e aprovações, SLA e segurança."
+      },
+      {
+        "id": "analise_pgd_95491c46",
+        "nome": "Análise PGD",
+        "grupo": "Suporte, Incidentes e Tutoria",
+        "descricao": "Análise do Plano de Gestão de Dados para pesquisas.",
+        "volume_estimado": 1,
+        "percentual_volume": 0.1,
+        "substitui_categorias_atuais": [],
+        "baseado_nos_grupos": [
+          "Análise PGD"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "finalidade do projeto",
+          "prazo",
+          "necessidade de armazenamento em disco",
+          "e-mails dos usuários"
+        ],
+        "sla_sugerido": "24 horas",
+        "complexidade": "media",
+        "prioridade_implementacao": "alta",
+        "perfil_operacional": {
+          "objetivo_usuario": "Avaliar ou submeter um Plano de Gestão de Dados de Pesquisa.",
+          "servico_sistema_alvo": "Plano de Gestão de Dados de Pesquisa",
+          "acao_tratamento": "Análise do Plano de Gestão de Dados",
+          "fluxo_responsavel": "Governança de Dados",
+          "dados_aprovacoes": "Aprovação da Governança de Dados",
+          "requisitos_seguranca": "Requisitos de segurança específicos para dados sensíveis"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta um objetivo de usuário, serviço/sistema, ação/tratamento, fluxo responsável, dados/aprovações e SLA/segurança que são específicos e distintos dos demais, justificando a manutenção como uma categoria separada."
+      },
+      {
+        "id": "desenvolvimento_e_implementacao_64a44ca4",
+        "nome": "Desenvolvimento e Implementação",
+        "grupo": "Servidores Acadêmicos e Recursos Computacionais",
+        "descricao": "Solicitações relacionadas ao desenvolvimento de soluções, implementação de projetos e execução de tarefas técnicas para pesquisa.",
+        "volume_estimado": 126,
+        "percentual_volume": 8.7,
+        "substitui_categorias_atuais": [
+          "Tutoria em demandas computacionais para pesquisa",
+          "Criar site para Centro de Pesquisa"
+        ],
+        "baseado_nos_grupos": [
+          "Desenvolvimento e Implementação"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "finalidade do projeto",
+          "tecnologias envolvidas",
+          "recursos necessários"
+        ],
+        "sla_sugerido": "5 dias úteis",
+        "complexidade": "media",
+        "prioridade_implementacao": "alta",
+        "perfil_operacional": {
+          "objetivo_usuario": "Desenvolver e implementar soluções para pesquisa",
+          "servico_sistema_alvo": "Servidores Acadêmicos e Recursos Computacionais",
+          "acao_tratamento": "Análise técnica e acompanhamento para garantir a entrega de resultados",
+          "fluxo_responsavel": "Equipe de Desenvolvimento e Implementação",
+          "dados_aprovacoes": "Aprovação do projeto e recursos necessários",
+          "requisitos_seguranca": "Segurança da Informação e Governança de Dados"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta um objetivo claro de desenvolvimento e implementação de soluções para pesquisa, com um serviço e sistema específico (Servidores Acadêmicos e Recursos Computacionais), tratamento técnico e acompanhamento, fluxo responsável pela Equipe de Desenvolvimento e Implementação, dados e aprovações necessários para a execução do projeto. Além disso, o SLA sugerido é de 5 dias úteis e a complexidade é média."
+      },
+      {
+        "id": "aquisicao_e_gestao_de_recursos_b3cc33de",
+        "nome": "Aquisição e Gestão de Recursos",
+        "grupo": "Servidores Acadêmicos e Recursos Computacionais",
+        "descricao": "Solicitações relacionadas à aquisição de créditos, recursos computacionais ou outros serviços para pesquisa acadêmica.",
+        "volume_estimado": 402,
+        "percentual_volume": 27.6,
+        "substitui_categorias_atuais": [
+          "Solicitar recursos computacionais para pesquisas",
+          "Solicitar suporte para laboratório virtual",
+          "Análise de custos de nuvem"
+        ],
+        "baseado_nos_grupos": [
+          "Aquisição e Gestão de Recursos"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "finalidade do projeto",
+          "prazo",
+          "necessidade de armazenamento em disco",
+          "e-mails dos usuários",
+          "softwares a instalar"
+        ],
+        "sla_sugerido": "24 horas",
+        "complexidade": "media",
+        "prioridade_implementacao": "alta",
+        "perfil_operacional": {
+          "objetivo_usuario": "Obter recursos computacionais para pesquisa acadêmica",
+          "servico_sistema_alvo": "Servidores Acadêmicos, HPC, Nuvem Pública, Softwares e Ferramentas Acadêmicas",
+          "acao_tratamento": "Avaliar necessidade de recursos, provisionar ambiente, configurar acesso e suporte",
+          "fluxo_responsavel": "Equipe de Suporte à Pesquisa da DTI",
+          "dados_aprovacoes": "PGD, SI aprovada com orçamento definido",
+          "requisitos_seguranca": "Avaliação da Governança de Dados e Segurança da Informação para dados sensíveis"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta características operacionais específicas que se alinham com o objetivo de obter recursos computacionais para pesquisa acadêmica, incluindo a avaliação da necessidade de recursos, provisionamento de ambiente, configuração de acesso e suporte. Além disso, os dados e aprovações necessários, como PGD e SI aprovada com orçamento definido, são compatíveis com o fluxo de trabalho existente."
+      },
+      {
+        "id": "testes_e_validacao_ee5697df",
+        "nome": "Testes e Validacao",
+        "grupo": "Suporte, Incidentes e Tutoria",
+        "descricao": "Solicitações relacionadas à realização de testes, validação de resultados ou verificação de funcionalidades em ambientes computacionais.",
+        "volume_estimado": 1,
+        "percentual_volume": 0.1,
+        "substitui_categorias_atuais": [],
+        "baseado_nos_grupos": [
+          "Testes e Validacao"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "Finalidade do teste",
+          "Ambiente de teste desejado",
+          "Recursos necessários"
+        ],
+        "sla_sugerido": "3 dias úteis",
+        "complexidade": "baixa",
+        "prioridade_implementacao": "media",
+        "perfil_operacional": {
+          "objetivo_usuario": "Realizar testes, validar resultados ou verificar funcionalidades em ambientes computacionais.",
+          "servico_sistema_alvo": "Ambientes computacionais da FGV (Servidores Acadêmicos, HPC, Portal do Pesquisador, Nuvem Pública)",
+          "acao_tratamento": "Realizar testes e validações de acordo com as necessidades do usuário.",
+          "fluxo_responsavel": "Equipe de Suporte e Tutoria da DTI Pesquisa",
+          "dados_aprovacoes": "Não informado",
+          "requisitos_seguranca": "Não informado"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta um objetivo claro de realizar testes, validação de resultados ou verificação de funcionalidades em ambientes computacionais, o que está alinhado com a categoria existente de 'Testes e Validacao'. Além disso, os serviços e sistemas envolvidos, como Servidores Acadêmicos, HPC, Portal do Pesquisador e Nuvem Pública, também estão dentro do escopo dessa categoria. Portanto, não há necessidade de criar uma nova categoria ou fundir com outra existente."
+      },
+      {
+        "id": "governanca_de_dados_08f7ca35",
+        "nome": "Governanca de Dados",
+        "grupo": "Suporte, Incidentes e Tutoria",
+        "descricao": "Análise e avaliação de governança de dados para projetos de pesquisa, incluindo PGD e exportações.",
+        "volume_estimado": 10,
+        "percentual_volume": 0.7,
+        "substitui_categorias_atuais": [],
+        "baseado_nos_grupos": [
+          "Governanca de Dados"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "finalidade do projeto",
+          "prazo",
+          "necessidade de armazenamento em disco",
+          "e-mails dos usuários",
+          "softwares a instalar"
+        ],
+        "sla_sugerido": "5 dias úteis",
+        "complexidade": "media",
+        "prioridade_implementacao": "alta",
+        "perfil_operacional": {
+          "objetivo_usuario": "Obter análise detalhada de governança de dados para projetos de pesquisa",
+          "servico_sistema_alvo": "Governança de Dados",
+          "acao_tratamento": "Análise e avaliação de governança de dados",
+          "fluxo_responsavel": "Equipe de Governança de Dados",
+          "dados_aprovacoes": "PGD aprovado, SI aprovada com orçamento definido",
+          "requisitos_seguranca": "Requisitos de conformidade e segurança da informação"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta um objetivo de usuário, serviço e sistema alvo bem definidos, que se alinham com os critérios do portfolio reconciliado fechado. Além disso, o fluxo responsável e os dados necessários para aprovação também estão claros e compatíveis."
+      },
+      {
+        "id": "submissao_pgd_064b4ec7",
+        "nome": "Submissao PGD",
+        "grupo": "Servidores Acadêmicos e Recursos Computacionais",
+        "descricao": "Submissão do Plano de Gestão de Dados de Pesquisa para avaliação e aprovação.",
+        "volume_estimado": 13,
+        "percentual_volume": 0.9,
+        "substitui_categorias_atuais": [],
+        "baseado_nos_grupos": [
+          "Submissao PGD"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "finalidade do projeto",
+          "prazo",
+          "necessidade de armazenamento em disco",
+          "e-mails dos usuários"
+        ],
+        "sla_sugerido": "5 dias úteis",
+        "complexidade": "media",
+        "prioridade_implementacao": "alta",
+        "perfil_operacional": {
+          "objetivo_usuario": "Obter aprovação para o Plano de Gestão de Dados de Pesquisa",
+          "servico_sistema_alvo": "Sistema de Gestão de Dados de Pesquisa",
+          "acao_tratamento": "Avaliação e aprovação do Plano de Gestão de Dados de Pesquisa",
+          "fluxo_responsavel": "Equipe de Governança de Dados",
+          "dados_aprovacoes": "Informações necessárias para a submissão do PGD, incluindo finalidade do projeto, prazo, necessidade de armazenamento em disco e e-mails dos usuários",
+          "requisitos_seguranca": "Requisitos de segurança específicos para o tratamento de dados sensíveis ou confidenciais"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato natural apresenta características únicas que o tornam compatível com o destino 'Submissao PGD', como objetivo de obter aprovação para o Plano de Gestão de Dados de Pesquisa, serviço de sistema de gestão de dados de pesquisa e tratamento de avaliação e aprovação do plano."
+      },
+      {
+        "id": "chamados_sem_descricao_d00d8662",
+        "nome": "Chamados sem Descricao",
+        "grupo": "Suporte, Incidentes e Tutoria",
+        "descricao": "Intenções que não fornecem descrição clara da demanda. Requer contato adicional para esclarecer a solicitação.",
+        "volume_estimado": 7,
+        "percentual_volume": 0.5,
+        "substitui_categorias_atuais": [],
+        "baseado_nos_grupos": [
+          "Chamados sem Descricao"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "descrição da demanda"
+        ],
+        "sla_sugerido": "24 horas",
+        "complexidade": "baixa",
+        "prioridade_implementacao": "media",
+        "perfil_operacional": {
+          "objetivo_usuario": "Obter esclarecimento sobre a solicitação",
+          "servico_sistema_alvo": "Suporte e atendimento ao usuário",
+          "acao_tratamento": "Contato adicional para esclarecer a solicitação",
+          "fluxo_responsavel": "Equipe de suporte da DTI Pesquisa",
+          "dados_aprovacoes": "Não aplicável",
+          "requisitos_seguranca": "Não aplicável"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato 'Chamados sem Descricao' tem um objetivo, servico, sistema, acao e tratamento bem definidos e distintos dos demais, justificando a manutenção como uma categoria separada."
+      },
+      {
+        "id": "rede_e_conectividade_522dda72",
+        "nome": "Rede e Conectividade",
+        "grupo": "Suporte, Incidentes e Tutoria",
+        "descricao": "Solicitações relacionadas à rede e conectividade, incluindo configuração, problemas de conexão e outros.",
+        "volume_estimado": 14,
+        "percentual_volume": 1.0,
+        "substitui_categorias_atuais": [],
+        "baseado_nos_grupos": [
+          "Rede e Conectividade"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "Descricao do problema",
+          "Detalhes da configuracao atual",
+          "Informacoes de login e acesso"
+        ],
+        "sla_sugerido": "4 horas",
+        "complexidade": "media",
+        "prioridade_implementacao": "alta",
+        "perfil_operacional": {
+          "objetivo_usuario": "Resolver problemas de rede ou configurar a conectividade",
+          "servico_sistema_alvo": "Rede e sistemas de conectividade",
+          "acao_tratamento": "Analise e resolucao do problema de rede ou configuracao da conectividade",
+          "fluxo_responsavel": "Equipe de suporte tecnico",
+          "dados_aprovacoes": "Nao informado",
+          "requisitos_seguranca": "Nao informado"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato 'Rede e Conectividade' tem um objetivo, serviço, sistema, tratamento, fluxo responsável, dados, aprovações, SLA e segurança bem definidos e específicos, que não se misturam com os de outros candidatos. Portanto, é mais apropriado mantê-lo separado."
+      },
+      {
+        "id": "consultas_tecnicas_e352cd40",
+        "nome": "Consultas Tecnicas",
+        "grupo": "Suporte, Incidentes e Tutoria",
+        "descricao": "Dúvidas e consultas sobre tecnologias, softwares e serviços de pesquisa.",
+        "volume_estimado": 32,
+        "percentual_volume": 2.2,
+        "substitui_categorias_atuais": [
+          "Dúvidas sobre produtos da nuvem",
+          "Solicitar Suporte Ético"
+        ],
+        "baseado_nos_grupos": [
+          "Consultas Tecnicas"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "Descricao da dúvida ou consulta",
+          "Tecnologia ou software relacionado"
+        ],
+        "sla_sugerido": "4 horas",
+        "complexidade": "baixa",
+        "prioridade_implementacao": "media",
+        "perfil_operacional": {
+          "objetivo_usuario": "Esclarecer dúvidas sobre tecnologias e serviços de pesquisa.",
+          "servico_sistema_alvo": "Tecnologias, softwares e serviços de pesquisa.",
+          "acao_tratamento": "Análise e resposta às consultas técnicas.",
+          "fluxo_responsavel": "Equipe de Suporte Técnico",
+          "dados_aprovacoes": "Não aplicável",
+          "requisitos_seguranca": "Não aplicável"
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato 'Consultas Tecnicas' tem um objetivo claro de esclarecer dúvidas sobre tecnologias e serviços de pesquisa, o que se alinha com o serviço e sistema de 'Tecnologias, softwares e serviços de pesquisa'. O tratamento é consistente com a análise e resposta às consultas técnicas. Além disso, o fluxo responsável é a Equipe de Suporte Técnico, e os dados e aprovações necessários são coerentes com a categoria. Portanto, não há necessidade de fundir ou dividir este candidato."
+      },
+      {
+        "id": "solicitacoes_de_licencas_e_certifica_c0eaf67b",
+        "nome": "Solicitações de Licenças e Certificados",
+        "grupo": "Softwares e Ferramentas Acadêmicas",
+        "descricao": "Solicitação de licenças ou certificados para softwares acadêmicos específicos, como renovação de licença do Stata ou solicitação de certificado.",
+        "volume_estimado": 20,
+        "percentual_volume": 1.4,
+        "substitui_categorias_atuais": [],
+        "baseado_nos_grupos": [
+          "Solicitações de Licenças e Certificados"
+        ],
+        "baseado_nos_outliers": [],
+        "informacoes_obrigatorias": [
+          "nome do software",
+          "tipo de licença necessária",
+          "finalidade da solicitação"
+        ],
+        "sla_sugerido": "2 dias úteis",
+        "complexidade": "baixa",
+        "prioridade_implementacao": "media",
+        "perfil_operacional": {
+          "objetivo_usuario": "Obter licenças ou certificados para utilizar softwares acadêmicos específicos.",
+          "servico_sistema_alvo": "Softwares e Ferramentas Acadêmicas",
+          "acao_tratamento": "Análise e processamento da solicitação de licença ou certificado.",
+          "fluxo_responsavel": "Equipe de Suporte à Pesquisa",
+          "dados_aprovacoes": "Informações necessárias para a solicitação, como nome do software e finalidade da solicitação.",
+          "requisitos_seguranca": "Verificação da autenticidade e autorização do solicitante."
+        },
+        "status_reconciliacao": "manter_separado",
+        "justificativa_reconciliacao": "O candidato apresenta um objetivo claro de obter licenças ou certificados para softwares acadêmicos específicos, o que está alinhado com o serviço e sistema de Softwares e Ferramentas Acadêmicas. O tratamento da solicitação envolve análise e processamento, e o fluxo responsável é a Equipe de Suporte à Pesquisa. Além disso, os dados necessários para a aprovação são claros e específicos."
+      }
+    ],
+    "avaliacao_outliers_stage3": [],
+    "acoes_prioritarias": [
+      {
+        "acao": "Revisar e atualizar as descrições dos request types",
+        "impacto": "Melhoria na experiência do usuário",
+        "prazo": "curto_prazo"
+      }
+    ],
+    "impacto_estimado": {
+      "reducao_vaievem": "Redução no tempo de resolução de incidentes devido à melhoria na navegação do portal.",
+      "melhoria_tempo_resolucao": "Redução no tempo de resposta para solicitações de serviços.",
+      "justificativa": "A revisão das descrições dos request types melhorará a experiência do usuário e reduzirá o tempo de resolução de incidentes, tornando o serviço mais eficiente."
+    }
+  }
+}

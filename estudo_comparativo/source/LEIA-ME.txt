@@ -1,0 +1,19 @@
+Coloque aqui, somente no HPC, o 02_summaries.json congelado da comparação.
+
+Destino dentro do workspace do estudo:
+  source/02_summaries.json
+
+Identidade da execução final:
+  registros: 1456
+  SHA-256: e4fb8e41c910f8f2ed6151d8e69515ae8fd1b01f1310d47fa680d4403fd54ff1
+
+O arquivo é copiado server-side a partir do workspace institucional que gerou
+os Stages 1-2. O código atual dessa preparação está em
+estudo_comparativo/hpc/job_preparar_insumo.sh.
+
+Nunca use o Stage 2 antigo de 1584 registros. O Job 00 aborta antes dos modelos
+se hash, cardinalidade, chaves ou schema divergirem.
+
+Este arquivo contém dados derivados por chamado e não entra no ZIP nem no Git.
+O Job 00 inclui exatamente os 1456 registros, sem LLM ou texto livre para
+escopo, e distribui cópias byte-idênticas aos braços.
