@@ -8,7 +8,7 @@ Privacidade / escopo:
     Os endpoints /api/dashboard, /api/meses e /api/interacoes-categorias NAO sao
     embutidos, entao esses dados nunca entram no HTML.
   - A aba Historico (dados por chamado) recebe payload vazio e uma nota.
-  - A simulacao ao vivo (Azure OpenAI) fica indisponivel.
+  - A simulacao ao vivo (Ollama local ou Azure OpenAI) fica indisponivel.
   - So agregados publicaveis sao embutidos.
 Fontes carregam do Google Fonts quando online (igual ao Flask), com fallback do
 sistema offline.
@@ -57,7 +57,7 @@ function R(o,ok){ok=ok!==false;return Promise.resolve({ok:ok,status:ok?200:404,j
 window.fetch=function(url,opts){try{
 var u=String(url);var path=u.split('?')[0].replace(/^https?:\/\/[^/]+/,'');
 if(path==='/api/historico'){return R({total:0,page:1,limit:50,tickets:[],tem_dados_pipeline:true,fonte:'snapshot'});}
-if(path==='/api/simular-openai'){return R({erro:'Simulacao ao vivo indisponivel neste registro estatico (requer Azure OpenAI).'});}
+if(path==='/api/simular'||path==='/api/simular-openai'){return R({erro:'Simulacao ao vivo indisponivel neste registro estatico; execute o dashboard Flask com Ollama local ou Azure OpenAI configurado.'});}
 if(Object.prototype.hasOwnProperty.call(BAKED,path)){return R(BAKED[path]);}
 return R({},false);
 }catch(e){return R({},false);}};
@@ -73,7 +73,14 @@ def build() -> str:
     with dash.app.test_client() as c:
         shell = c.get("/").get_data(as_text=True)
         baked = {ep: c.get(ep).get_json() for ep in AGREGADOS}
-        baked["/api/openai-status"] = {"disponivel": False, "modelo": None}
+        llm_offline = {
+            "disponivel": False,
+            "provedor": None,
+            "modelo": None,
+            "local": False,
+        }
+        baked["/api/llm-status"] = llm_offline
+        baked["/api/openai-status"] = llm_offline
 
     css = (STATIC / "style.css").read_text(encoding="utf-8")
     vendor = (STATIC / "vendor" / "chart.umd.min.js").read_text(encoding="utf-8")

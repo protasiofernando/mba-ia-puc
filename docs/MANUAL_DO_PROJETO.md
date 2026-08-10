@@ -77,9 +77,11 @@ Aparecem só no código/artefatos; a monografia usa sempre o nome formal.
 | `tests/` | Testes automatizados | Sim |
 | `_hpc/` | Trabalho local com o HPC: `pacote/`, `insumo/`, `resultado/` | **Nunca** (local; pode ter dados por-chamado) |
 
-Regra de privacidade: **texto ou classificação por chamado, `*.db`, qualquer
-`*.csv`, checkpoints e o `_hpc/` nunca entram no git.** Só entram agregados e
-código. `data_exemplo/` é uma saída local do gerador
+Regra de privacidade: **texto ou classificação por chamado, `*.db`, CSV real,
+checkpoints e o `_hpc/` nunca entram na `main` nem em refs futuras.** Só entram
+agregados e código. A tag histórica `formacao-a5576c8` preserva uma única base
+de 15 chamados inteiramente sintéticos, declarada e validada pelo gate;
+`data_exemplo/` é, no estado vigente, uma saída local do gerador
 `scripts/gerar_base_sintetica.py` e permanece ignorada.
 
 ---
@@ -87,7 +89,8 @@ código. `data_exemplo/` é uma saída local do gerador
 ## 4. O pipeline e o motivo de cada etapa
 
 O processamento pesado roda uma vez, na infraestrutura de HPC (GPU A100), com
-`llama3.3:70b` (raciocínio) e `qwen3:30b` (compilação de JSON), servidos por Ollama.
+`llama3.3:70b` (raciocínio) e `qwen3:30b-a3b-instruct-2507-q4_K_M`
+(compilação de JSON), servidos por Ollama.
 
 | Estágio | O que faz | **Por que existe** |
 |---|---|---|

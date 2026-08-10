@@ -14,5 +14,5 @@ Para auditoria: `ESTADO_COMPARACAO_ROBUSTA.json` e
 `APENDICE_TECNICO.md`. Para a auditoria específica de coerência entre narrativa,
 código e resultados: `AUDITORIA_COERENCIA_PROJETO.md`.
 
-Para concluir a consolidação e publicar com um único commit-raiz:
+Para auditar a consolidação inicial e manter a publicação atual:
 `PUBLICACAO_NOVO_REPOSITORIO.md`.

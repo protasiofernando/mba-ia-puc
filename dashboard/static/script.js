@@ -285,15 +285,17 @@ function _setBadge(el, disponivel) {
 }
 
 function atualizarModoSim() {
-  // Verifica o status do motor de simulação (Azure OpenAI) ao abrir a aba
-  fetch('/api/openai-status').then(function(r) { return r.json(); }).then(function(d) {
-    var dot = document.getElementById('openaiStatusDot');
-    var txt = document.getElementById('openaiStatusText');
+  // Verifica o status do motor de simulação (Ollama local ou Azure OpenAI).
+  fetch('/api/llm-status').then(function(r) { return r.json(); }).then(function(d) {
+    var dot = document.getElementById('llmStatusDot');
+    var txt = document.getElementById('llmStatusText');
     if (dot) dot.className = 'pp-dot' + (d.disponivel ? '' : ' off');
     if (txt) txt.textContent = d.disponivel
-      ? 'Respostas geradas por IA com base no catálogo'
+      ? 'Motor de IA ' + (d.local ? 'local' : 'em nuvem') + ' configurado'
       : 'Assistente de IA indisponível no momento';
-    if (d.modelo) window._openaiModelo = d.modelo;
+    window._llmProvider = d.provedor || '';
+    window._llmModelo = d.modelo || '';
+    window._llmLocal = Boolean(d.local);
   });
 }
 
@@ -308,15 +310,16 @@ function executarSimulacao() {
   var resEl     = document.getElementById('simResultado');
   if (!descricao) { alert('Descreva o chamado antes de classificar.'); return; }
 
-  var openaiModelo = window._openaiModelo || 'OpenAI';
+  var llmModelo = window._llmModelo || 'modelo configurado';
+  var llmNome = window._llmProvider === 'ollama' ? 'Ollama local' : 'Azure OpenAI';
 
   resEl.innerHTML =
     '<div class="sim-loading">' +
     '<div class="sim-dots"><span></span><span></span><span></span></div>' +
-    '<p>Consultando Azure OpenAI (' + openaiModelo + ')…</p>' +
+    '<p>Consultando ' + llmNome + ' (' + esc(llmModelo) + ')…</p>' +
     '</div>';
 
-  var endpoint = '/api/simular-openai';
+  var endpoint = '/api/simular';
 
   fetch(endpoint, {
     method: 'POST',
@@ -337,7 +340,13 @@ function executarSimulacao() {
     var bgCor = conf >= 65 ? 'rgba(59,174,150,.1)'  : conf >= 35 ? 'rgba(0,139,201,.1)'  : 'rgba(155,10,81,.1)';
     var bdCor = conf >= 65 ? 'rgba(59,174,150,.35)' : conf >= 35 ? 'rgba(0,139,201,.35)' : 'rgba(155,10,81,.35)';
 
-    var modoLabel = 'AZURE OPENAI · ' + (window._openaiModelo || 'OpenAI');
+    if (d.motor) {
+      window._llmProvider = d.motor.provedor || window._llmProvider;
+      window._llmModelo = d.motor.modelo || window._llmModelo;
+      window._llmLocal = Boolean(d.motor.local);
+    }
+    var provedorLabel = window._llmProvider === 'ollama' ? 'OLLAMA LOCAL' : 'AZURE OPENAI';
+    var modoLabel = provedorLabel + ' · ' + (window._llmModelo || 'modelo configurado');
 
     var infosHtml = (d.informacoes_necessarias || []).map(function(info, i) {
       return '<li class="sim-field" style="animation-delay:' + (i * 0.07) + 's">' +

@@ -1,6 +1,6 @@
 # Status do projeto
 
-Atualizado em 7 de agosto de 2026.
+Atualizado em 10 de agosto de 2026.
 
 ## Situação
 
@@ -19,8 +19,9 @@ Atualizado em 7 de agosto de 2026.
 | Estágio 7 operacional | concluído; 1.456 classificações automáticas, agregado publicável |
 | Jobs pendentes | nenhum |
 | Formação e curadoria | processo e runners formalizados em `formacao_portfolio/` |
-| Auditoria de coerência | `PASS`, 49 verificações, zero falhas ou avisos |
-| Gate integral pré-publicação | `PASS`, 163 arquivos, 39 testes |
+| Auditoria de coerência | `PASS`, 53 verificações, zero falhas ou avisos |
+| Gate integral de publicação | `PASS`, 165 arquivos, 2 refs Git, 39 testes |
+| Proveniência Git | `main` iniciada em commit-raiz consolidado; tag anotada `formacao-a5576c8`; nenhuma branch de arquivo |
 | Pré-registro público | proveniência interna disponível; anterioridade não atestada por timestamp externo |
 
 ## Entregáveis

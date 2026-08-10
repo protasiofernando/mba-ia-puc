@@ -113,14 +113,16 @@ os caminhos originais executados permanecem no estado JSON e no apêndice.
 
 ## Situação de encerramento
 
-O trabalho computacional e a publicação foram concluídos. O gate de coerência passou
-em 49 verificações, e o gate integral passou sobre 163 arquivos e 39 testes. A árvore
-code-only validada ocupa a `main` de
-`protasiofernando/mba-ia-puc` em um único commit-raiz. O repositório de entrega
-não possui histórico anterior, branch de arquivo ou tag; os repositórios
-reaproveitados permanecem separados e não integram a publicação final. Não há
-ação computacional pendente. Uma nova rodada só é necessária se dados, método,
-modelos ou pergunta de pesquisa mudarem.
+O trabalho computacional e a publicação foram concluídos. Após a revisão
+acadêmica de 10 de agosto, o gate de coerência passa em 53 verificações, e o
+gate integral cobre 165 arquivos, duas refs Git e 39 testes. A `main` de
+`protasiofernando/mba-ia-puc` nasceu de um commit-raiz consolidado e recebeu
+revisões posteriores, preservando uma história pública legível das correções.
+Há uma tag anotada de proveniência, `formacao-a5576c8`, e nenhuma branch de
+arquivo. Essa tag aponta para a formação histórica e contém somente uma base
+CSV declaradamente sintética de 15 exemplos; nenhum dado real integra qualquer
+ref publicada. Não há ação computacional pendente. Uma nova rodada só é
+necessária se dados, método, modelos ou pergunta de pesquisa mudarem.
 
 A precedência do alvo está formalizada em `../formacao_portfolio/README.md`:
 candidato estatístico, curadoria humana no catálogo, alvo congelado e só então

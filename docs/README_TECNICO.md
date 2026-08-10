@@ -138,7 +138,8 @@ catálogo agregado público; seus números serão próprios dessa base. Os resul
 - **GPU** classe NVIDIA A100 (ou equivalente com VRAM alta) com **Ollama** local.
 - Modelos: `llama3.3:70b` (~40 GB), `qwen3:30b-a3b-instruct-2507-q4_K_M` (~18 GB),
   `bge-m3`.
-- Python 3.10+ e `pip install -r requirements.txt`.
+- Python 3.10+ e `pip install -r requirements.txt`. Para executar os testes e o
+  gate completo, use `pip install -r requirements-dev.txt`.
 
 Os Estágios que usam LLM (2, 3, 4, 5, 6) exigem essa infra. Sem GPU ainda é
 possível: rodar o dashboard, a análise de tempo (metadados) e inspecionar os

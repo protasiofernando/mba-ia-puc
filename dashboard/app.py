@@ -10,7 +10,7 @@ localização deste arquivo, sem variável de ambiente.
 
 A análise (etapas 1-7 do pipeline) é produzida pelos scripts do projeto com
 modelos locais via Ollama. Este painel exibe os artefatos gerados e oferece uma
-simulação ao vivo opcional via Azure OpenAI.
+simulação ao vivo opcional via Ollama local ou Azure OpenAI.
 
   # a partir da pasta do projeto:
   python dashboard/app.py            # http://localhost:5000
@@ -25,7 +25,6 @@ from dotenv import load_dotenv
 from datetime import datetime
 from pathlib import Path
 
-import requests as _requests
 from flask import Flask, jsonify, render_template, request
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))  # <projeto>/scripts
@@ -37,6 +36,7 @@ from projeto import (
     feedback_path as _feedback_path,
     load_projeto_meta,
 )
+from llm_client import LLMClient, LLMError
 
 # Carrega o .env do PRÓPRIO projeto (independe do diretório de onde o app é iniciado).
 load_dotenv(projeto_dir() / ".env")
@@ -66,13 +66,6 @@ P_DIAG_EXEC   = PIPELINE_DATA / "diagnostico_executivo.json"
 CONFIG_PATH   = _cfg_path()
 CONTEXTO_CATALOGO_PATH = _contexto_catalogo_path()
 CATEGORIA_NAO_ANALISAVEL = "Não categorizado"
-
-# Azure OpenAI - motor da simulação ao vivo do painel
-AZURE_OPENAI_API_KEY     = os.getenv("AZURE_OPENAI_API_KEY", "")
-AZURE_OPENAI_ENDPOINT    = os.getenv("AZURE_OPENAI_ENDPOINT", "").rstrip("/")
-AZURE_OPENAI_DEPLOYMENT  = os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4.1")
-AZURE_OPENAI_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2025-01-01-preview")
-
 
 def _load_json(path: Path):
     """Carrega JSON aceitando UTF-8 com ou sem BOM."""
@@ -1177,24 +1170,71 @@ def _enriquecer_resultado(resultado: dict, portfolio: list) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# API: Simulação com Azure OpenAI
+# API: simulação com Ollama local ou Azure OpenAI
 # ---------------------------------------------------------------------------
 
-@app.route("/api/openai-status")
-def openai_status():
-    configurado = bool(AZURE_OPENAI_API_KEY and AZURE_OPENAI_ENDPOINT)
-    return jsonify({
-        "disponivel": configurado,
-        "modelo": AZURE_OPENAI_DEPLOYMENT if configurado else None,
-    })
+_DASHBOARD_LLM_PROVIDERS = {"ollama", "azure"}
 
 
-@app.route("/api/simular-openai", methods=["POST"])
-def simular_openai():
-    if not AZURE_OPENAI_API_KEY or not AZURE_OPENAI_ENDPOINT:
-        return jsonify({"erro": "Azure OpenAI não configurada. Verifique o .env e reinicie o servidor."}), 503
+def _dashboard_llm_status(provider_override: str | None = None) -> dict:
+    """Descreve o motor configurado sem realizar chamada de rede.
 
-    data = request.json or {}
+    Na seleção automática, o Ollama tem precedência para manter o texto do
+    chamado dentro da infraestrutura. O Azure é usado como fallback quando
+    estiver configurado.
+    """
+    requested = (
+        provider_override
+        or os.getenv("DASHBOARD_LLM_PROVIDER", "")
+        or ""
+    ).strip().lower()
+    if requested and requested not in _DASHBOARD_LLM_PROVIDERS:
+        return {
+            "disponivel": False,
+            "provedor": requested,
+            "modelo": None,
+            "local": False,
+            "erro": "DASHBOARD_LLM_PROVIDER deve ser ollama ou azure.",
+        }
+
+    ollama_model = os.getenv("OLLAMA_MODEL", "").strip()
+    azure_ready = bool(
+        os.getenv("AZURE_OPENAI_API_KEY", "").strip()
+        and os.getenv("AZURE_OPENAI_ENDPOINT", "").strip()
+    )
+    provider = requested or ("ollama" if ollama_model else ("azure" if azure_ready else ""))
+    if provider == "ollama":
+        return {
+            "disponivel": bool(ollama_model),
+            "provedor": "ollama",
+            "modelo": ollama_model or None,
+            "local": True,
+        }
+    if provider == "azure":
+        return {
+            "disponivel": azure_ready,
+            "provedor": "azure",
+            "modelo": os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4.1"),
+            "local": False,
+        }
+    return {
+        "disponivel": False,
+        "provedor": None,
+        "modelo": None,
+        "local": False,
+    }
+
+
+def _simular_com_llm(provider_override: str | None = None):
+    status = _dashboard_llm_status(provider_override)
+    if not status["disponivel"]:
+        detalhe = status.get("erro") or (
+            "Motor de simulação não configurado. Defina OLLAMA_MODEL para uso "
+            "local ou as credenciais AZURE_OPENAI_* no .env."
+        )
+        return jsonify({"erro": detalhe}), 503
+
+    data = request.get_json(silent=True) or {}
     descricao = data.get("descricao", "").strip()
     if not descricao:
         return jsonify({"erro": "Informe a descrição do chamado."}), 400
@@ -1209,29 +1249,46 @@ def simular_openai():
     user_msg = f"Descrição do chamado:\n{descricao}"
 
     try:
-        azure_url = (
-            f"{AZURE_OPENAI_ENDPOINT}/openai/deployments/{AZURE_OPENAI_DEPLOYMENT}"
-            f"/chat/completions?api-version={AZURE_OPENAI_API_VERSION}"
+        client = LLMClient(provider_override=status["provedor"])
+        timeout = int(os.getenv("DASHBOARD_LLM_TIMEOUT", str(client.timeout)))
+        resultado = client.chat_json(
+            system_msg,
+            user_msg,
+            temperature=0.1,
+            max_tokens=700,
+            max_retries=2,
+            timeout=timeout,
         )
-        resp = _requests.post(
-            azure_url,
-            headers={"api-key": AZURE_OPENAI_API_KEY, "Content-Type": "application/json"},
-            json={
-                "messages": [
-                    {"role": "system", "content": system_msg},
-                    {"role": "user", "content": user_msg},
-                ],
-                "temperature": 0.1,
-                "max_tokens": 700,
-                "response_format": {"type": "json_object"},
-            },
-            timeout=30,
-        )
-        resp.raise_for_status()
-        resultado = json.loads(resp.json()["choices"][0]["message"]["content"])
+        resultado["motor"] = {
+            "provedor": client.provider,
+            "modelo": client.model_label.split(":", 1)[-1],
+            "local": client.provider == "ollama",
+        }
         return jsonify(_norm(_enriquecer_resultado(resultado, portfolio)))
-    except Exception as e:
-        return jsonify({"erro": f"Erro ao chamar OpenAI: {str(e)}"}), 500
+    except (LLMError, OSError, TypeError, ValueError) as exc:
+        return jsonify({"erro": f"Erro no motor de simulação: {str(exc)}"}), 502
+
+
+@app.route("/api/llm-status")
+def llm_status():
+    return jsonify(_dashboard_llm_status())
+
+
+@app.route("/api/simular", methods=["POST"])
+def simular():
+    return _simular_com_llm()
+
+
+# Endpoints legados mantidos para clientes locais antigos; neles o provedor
+# continua explicitamente fixado em Azure.
+@app.route("/api/openai-status")
+def openai_status():
+    return jsonify(_dashboard_llm_status("azure"))
+
+
+@app.route("/api/simular-openai", methods=["POST"])
+def simular_openai():
+    return _simular_com_llm("azure")
 
 
 # ---------------------------------------------------------------------------

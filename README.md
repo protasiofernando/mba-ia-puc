@@ -32,7 +32,7 @@ Trabalho apresentado ao curso [BI MASTER](https://ica.puc-rio.ai/bi-master) como
 
 ---
 
-> **Estado final em 07/08/2026.** O estudo foi concluído no A100 sobre 1.456
+> **Estado final, revisado em 10/08/2026.** O estudo foi concluído no A100 sobre 1.456
 > chamados. O Job 90 terminou com `Exit_status=0` e a validação passou em 302
 > verificações, sem falhas. A evidência primária favorece K-means, especialmente em
 > custo, mas a aderência varia por semente, camada e referência; portanto, não
@@ -229,9 +229,11 @@ independentemente da categoria de abertura; (ii) identificar grupos naturais de
 demanda sem utilizar as categorias existentes como ponto de partida; (iii)
 diagnosticar sobreposições, lacunas e fragmentações do catálogo vigente; (iv)
 propor e consolidar, mediante curadoria humana, um portfólio com escopo, campos
-obrigatórios e SLA por categoria; e (v) disponibilizar um assistente de triagem
+obrigatórios e SLA por categoria; (v) disponibilizar um assistente de triagem
 capaz de classificar novos chamados nesse portfólio em tempo real e indicar as
-informações necessárias para o atendimento.
+informações necessárias para o atendimento; e (vi) comparar a descoberta por
+embeddings + K-means e a descoberta hierárquica por LLM, sob insumo e camada
+posterior comuns, quanto a aderência, robustez e custo.
 
 ### 2. Fundamentação teórica
 
@@ -267,6 +269,17 @@ avalia simultaneamente coesão interna e separação entre grupos (ROUSSEEUW,
 utilidade de negócio do catálogo. Por isso, o projeto separa a descoberta
 estatística do julgamento sobre escopo, governança e navegabilidade.
 
+Modelos de linguagem também podem orientar o agrupamento textual por meio de
+restrições semânticas e representações de grupos, em vez de atuar somente como
+classificadores posteriores. O ClusterLLM demonstrou o uso de preferências
+extraídas por LLM para melhorar representações e seleção de granularidade
+(ZHANG; WANG; SHANG, 2023). Em centrais de contato, representações multivisão
+guiadas por LLM foram aplicadas ao agrupamento hierárquico de motivos de
+interação (PATTNAIK et al., 2024). Esses trabalhos fundamentam o segundo motor,
+mas não tornam comparáveis, por si sós, soluções com números de grupos e
+processamentos posteriores distintos; por isso, o presente estudo explicita
+separadamente o benchmark completo e a comparação controlada.
+
 #### 2.3 Avaliação, robustez e decisão entre humanos e sistemas de IA
 
 A comparação entre partições requer métricas corrigidas para concordância ao
@@ -275,7 +288,9 @@ informacionais normalizadas ou ajustadas (VINH; EPPS; BAILEY, 2010). Além da
 aderência a uma referência, a estabilidade sob novas amostras ou reexecuções
 fornece evidência de reprodutibilidade das soluções de agrupamento (LANGE et
 al., 2004). Neste estudo, a sensibilidade às sementes de inicialização constitui
-uma verificação complementar. Essa literatura sustenta o uso conjunto de
+uma verificação complementar. O B-cubed contabiliza precisão e revocação por
+elemento e é particularmente útil quando as partições têm diferentes números
+de grupos (BAGGA; BALDWIN, 1998). Essa literatura sustenta o uso conjunto de
 Macro-F1 por serviço, B-cubed, ARI, AMI, reatribuição entre sementes e análise
 de custo, sem condensá-los em uma nota composta arbitrária.
 
@@ -342,13 +357,16 @@ base real, dentro da infraestrutura da FGV.
 O sistema separa o processamento pesado, executado uma única vez, do uso interativo:
 
 1. **Pipeline offline (HPC):** os Estágios 1 a 6 são executados no nó com GPU
-   NVIDIA A100 por meio do PBS. Os modelos `llama3.3:70b`, `qwen3:30b` e
+   NVIDIA A100 por meio do PBS. Os modelos `llama3.3:70b`,
+   `qwen3:30b-a3b-instruct-2507-q4_K_M` e
    `bge-m3` são servidos localmente pelo Ollama. O fluxo consome os CSVs do Jira
    e persiste os resultados em JSON.
 2. **Simulação de triagem:** novos chamados são classificados em tempo real por
    um LLM local, acessado por túnel SSH até o nó com GPU, ou opcionalmente pelo
-   Azure OpenAI. Neste último caso, apenas o texto inserido na simulação é
-   enviado; os dados históricos nunca são transmitidos.
+   Azure OpenAI. Neste último caso, são enviados o texto inserido, o catálogo
+   agregado e o contexto institucional configurado no prompt; os chamados
+   históricos não são transmitidos. O fallback em nuvem só deve ser habilitado
+   quando esse envio estiver autorizado pela política institucional.
 3. **Dashboard web:** a aplicação utiliza Flask, SQLite e Chart.js e apresenta
    as abas Tipos de Chamado Sugeridos, Indicadores, Prévia do Portal e Histórico.
 
@@ -471,8 +489,9 @@ definido assim:
 - **Interação humana:** comentário do chamado cujo autor não é o robô de
   automação do Jira, identificado como `automato`.
 - **Resolução direta:** chamado resolvido com até uma interação humana.
-- **Múltiplas interações:** chamado que exigiu duas ou mais trocas com o
-  solicitante.
+- **Múltiplas interações:** chamado com dois ou mais comentários humanos. A
+  métrica não distingue, nos comentários sucessivos, mensagens internas de
+  trocas efetivas com o solicitante.
 - **Tempo de resolução:** diferença, em dias, entre as datas de resolução e
   criação. São considerados apenas chamados com tempo válido, cuja resolução é
   posterior à criação.
@@ -512,11 +531,11 @@ Os números sintéticos servem somente para verificar a execução.
 
 **Ressalva metodológica:** trata-se de uma associação, não de uma relação causal
 isolada. Chamados intrinsecamente mais complexos tendem a exigir mais interações
-e também a apresentar maior tempo de resolução. Uma análise complementar com a
-marcação
-`descricao_insuficiente` mostra a mesma direção, com magnitude menor: 1,9x na
-média. Essas análises motivam a coleta de campos, mas não quantificam um ganho
-causal atribuível ao novo formulário.
+e também a apresentar maior tempo de resolução. O trabalho usa essa evidência
+para motivar a coleta de campos, mas não quantifica um ganho causal atribuível
+ao novo formulário. Uma análise exploratória baseada na marcação
+`descricao_insuficiente` não é reportada numericamente porque seu agregado e
+seus denominadores não integram o conjunto publicável atual.
 
 #### 4.4 Assistente de triagem
 
@@ -524,8 +543,16 @@ Com o portfólio final como contexto, o assistente classifica novos chamados em
 tempo real. O sistema recebe título e descrição e retorna a categoria sugerida,
 a justificativa e as informações ainda necessárias para o atendimento direto.
 No dashboard, a simulação utiliza o mesmo modelo local do pipeline ou,
-opcionalmente, o Azure OpenAI. Nesse segundo caso, somente o texto inserido na
-simulação é enviado; os dados históricos não são transmitidos.
+opcionalmente, o Azure OpenAI. Nesse segundo caso, são enviados o texto
+inserido, o catálogo agregado e o contexto institucional configurado; os
+chamados históricos não são transmitidos. Por isso, o modo Azure depende de
+autorização institucional explícita.
+
+O assistente é uma prova de conceito funcional. O teste automatizado verifica o
+contrato de resposta e o enriquecimento pelo catálogo, mas o trabalho não mede
+sua acurácia em novos chamados rotulados, sua latência em produção nem sua
+usabilidade com solicitantes. Essas três medidas permanecem como critérios de
+aceitação para uma implantação operacional.
 
 #### 4.5 Reprodutibilidade e demonstração
 
@@ -541,7 +568,9 @@ python dashboard/app.py   # http://localhost:5000
   reúne o diagnóstico executivo, o portfólio curado, a projeção agregada do
   Estágio 7 e a consolidação do catálogo.
 - As abas **Indicadores** e **Histórico** dependem de `dashboard/runtime/knowledge_base.db`. Qualquer pessoa pode gerar a base artificial com `python scripts/gerar_base_sintetica.py` e, depois, usar `$env:JIRA_DATA_DIR="data_exemplo"; python scripts/knowledge_base.py`. Esses indicadores são demonstrativos; os resultados oficiais são os agregados versionados.
-- A aba **Prévia do Portal** mostra o catálogo proposto; a simulação ao vivo exige credenciais Azure OpenAI em `.env`.
+- A aba **Prévia do Portal** mostra o catálogo proposto. A simulação ao vivo
+  usa Ollama local quando `OLLAMA_MODEL` está definido e Azure OpenAI como
+  fallback; `DASHBOARD_LLM_PROVIDER` permite escolher explicitamente o motor.
 - A associação entre tempo e interações (seção 4.3) pode rodar sobre a base
   sintética depois que ela for gerada; é observacional e não deve ser
   interpretada como efeito causal.
@@ -585,6 +614,29 @@ dependente da camada, sem recorrer a uma nota composta.
 O alvo é o portfólio operacional adotado, não uma referência externa
 independente. Assim, a comparação mede aderência à decisão da área e explicita a
 endogeneidade da curadoria. O custo dos Estágios 3 a 6 é medido separadamente.
+
+Os números centrais da comparação controlada são apresentados abaixo; valores
+negativos de Δ favorecem K-means:
+
+| Semente | Δ Macro-F1 (LLM − K-means) | Leitura |
+|---:|---:|---|
+| 42 | -0,124 | K-means |
+| 27.182 | -0,051 | K-means |
+| 31.415 | +0,002 | equivalentes |
+
+| Métrica secundária, semente 42 | K-means | LLM | Leitura material |
+|---|---:|---:|---|
+| B-cubed F1 | 0,424 | 0,417 | equivalente |
+| ARI | 0,282 | 0,238 | K-means |
+| AMI | 0,531 | 0,403 | K-means |
+| Reatribuição mínima | 18,1% | 32,4% | K-means |
+
+No custo comparável dos Estágios 3 a 6, as arquiteturas completas consumiram
+2,01 h no caminho estatístico e 4,60 h no agêntico, redução de 56,3%. Entre os
+motores controlados, as medianas foram 1,69 h e 4,41 h, respectivamente,
+redução de 61,6%. As tabelas completas, incluindo intervalos bootstrap,
+energia, tokens e as quatro visões da referência, permanecem no relatório de
+resultados.
 
 **Resultado:** a validação final passou em 302 verificações, sem falhas. A
 evidência primária favorece K-means e o custo estatístico, mas o benchmark e a
@@ -664,13 +716,20 @@ também o que a área decidiu e por quê.
 - **Validade de construto:** o portfólio curado é uma decisão operacional da
   própria área, não uma referência externa independente. O consenso entre Llama
   e Qwen reduz a dependência de um único modelo, mas a referência continua
-  automática. Estudos sobre
+  automática e não há amostra de rótulos humanos por chamado. Além disso, as
+  quatro visões derivam dos mesmos dois modelos, portanto seus erros podem ser
+  correlacionados e não equivalem a quatro referências independentes. Estudos
+  sobre
   avaliadores baseados em LLM demonstram a ocorrência de viés de posição nos
   julgamentos (SHI et al., 2025). Por isso, o trabalho interpreta as métricas
   como aderência ao alvo adotado, e não como acurácia absoluta.
 - **Validade interna:** as três sementes e a camada comum dos Estágios 4 a 6
   controlam
   parte da variabilidade, mas não eliminam a não determinação dos modelos. A
+  semente altera a inicialização do K-means, enquanto no motor agêntico altera a
+  ordem dos lotes; os pares são perturbações com o mesmo identificador, não
+  réplicas estocásticas perfeitamente equivalentes. O portfólio usado como alvo
+  também foi informado por um candidato inicial do Método Estatístico. A
   análise de interações e tempo é observacional e não controla todos os fatores
   de complexidade; nenhuma conclusão causal é formulada.
 - **Validade externa:** os dados pertencem a uma única área de serviços de TI,
@@ -679,13 +738,18 @@ também o que a área decidiu e por quê.
   generalizados sem nova execução e validação local.
 - **Validade de conclusão:** Macro-F1, B-cubed, ARI, AMI, reatribuição e custo
   reduzem a dependência de uma única métrica; três sementes, porém, não cobrem
-  toda
-  a variabilidade possível. A conclusão conservadora, que reconhece a ausência
+  toda a variabilidade possível. O pareamento de melhor correspondência usado
+  no Macro-F1 é permissivo e os métodos produziram cardinalidades diferentes
+  (K-means: 23, 27 e 28 grupos; LLM: 19, 19 e 20), sem uma análise de
+  sensibilidade com K fixo. Os intervalos bootstrap reamostram chamados como
+  observações independentes e são condicionais ao desenho executado. A
+  conclusão conservadora, que reconhece a ausência
   de um vencedor global único, respeita essa limitação.
 - **Reprodutibilidade e privacidade:** código, configurações, hashes, resultados
   agregados e 302 verificações são públicos. Textos e classificações por chamado não
   podem ser divulgados, o que limita a reprodução independente dos números
-  exatos, mas preserva a obrigação institucional de proteção dos dados.
+  exatos e a avaliação fora da amostra, mas preserva a obrigação institucional
+  de proteção dos dados.
 - **Auditabilidade temporal:** o repositório público foi consolidado depois da
   execução e publicou regras e resultados no mesmo commit-raiz. Assim, seu
   histórico Git não comprova de forma independente a anterioridade temporal do
@@ -712,7 +776,8 @@ se destacam:
    atribuiu 1,6% do histórico analítico à categoria residual. A participação
    futura em produção deverá ser medida após a implantação.
 2. **Modelos de linguagem abertos e locais mostraram-se viáveis.** Os modelos
-   `llama3.3:70b` e `qwen3:30b`, empregados respectivamente nas tarefas de
+   `llama3.3:70b` e `qwen3:30b-a3b-instruct-2507-q4_K_M`, empregados
+   respectivamente nas tarefas de
    raciocínio e de geração de JSON, foram executados em uma GPU A100 e
    sustentaram as etapas semânticas de sumarização, rotulação, diagnóstico e
    classificação. O processamento offline exigiu poucas horas, duração
@@ -748,7 +813,19 @@ pediram é, de fato, mais fácil de usar do que um catálogo desenhado a partir 
 percepção de quem opera o serviço. O histórico permitiu formular a hipótese.
 Apenas a produção pode testá-la.
 
-### 6. Referências
+### 6. Transparência sobre uso de IA
+
+Modelos locais foram parte do objeto técnico da pesquisa e executaram as etapas
+semânticas descritas no método. Claude e Codex também foram utilizados como
+apoio editorial e de engenharia na revisão de código, documentação, testes e
+clareza da redação. Esse apoio não substituiu a curadoria, a interpretação dos
+resultados nem a responsabilidade autoral: as decisões, verificações e
+conclusões foram revistas pelo autor. O uso editorial incidiu sobre código,
+documentação e resultados agregados; os textos históricos dos chamados não
+foram enviados a esses serviços externos. A declaração deve ser lida em
+conjunto com as regras institucionais e acadêmicas aplicáveis à entrega.
+
+### 7. Referências
 
 AL-HAWARI, F.; BARHAM, H. A machine learning based help desk system for IT
 service management. *Journal of King Saud University – Computer and Information
@@ -758,6 +835,11 @@ Sciences*, v. 33, n. 6, p. 702–718, 2021.
 AMERSHI, S. et al. Guidelines for human-AI interaction. In: *CHI Conference on
 Human Factors in Computing Systems Proceedings*. New York: ACM, 2019. p. 1–13.
 [https://doi.org/10.1145/3290605.3300233](https://doi.org/10.1145/3290605.3300233).
+
+BAGGA, A.; BALDWIN, B. Entity-based cross-document coreferencing using the
+vector space model. In: *Proceedings of COLING-ACL 1998*. Montreal: Association
+for Computational Linguistics, 1998. p. 79–85.
+[https://doi.org/10.3115/980845.980859](https://doi.org/10.3115/980845.980859).
 
 CHEN, J. et al. M3-Embedding: multi-linguality, multi-functionality,
 multi-granularity text embeddings through self-knowledge distillation. In:
@@ -787,6 +869,13 @@ Statistics and Probability*. Berkeley: University of California Press, 1967.
 v. 1, p. 281–297.
 [https://digicoll.lib.berkeley.edu/record/113015](https://digicoll.lib.berkeley.edu/record/113015).
 
+PATTNAIK, A.; GEORGE, C.; TRIPATHI, R. K.; VUTLA, S.; VEPA, J. Improving
+hierarchical text clustering with LLM-guided multi-view cluster representation.
+In: *Proceedings of the 2024 Conference on Empirical Methods in Natural
+Language Processing: Industry Track*. Miami: Association for Computational
+Linguistics, 2024. p. 719–727.
+[https://doi.org/10.18653/v1/2024.emnlp-industry.54](https://doi.org/10.18653/v1/2024.emnlp-industry.54).
+
 REIMERS, N.; GUREVYCH, I. Sentence-BERT: sentence embeddings using Siamese
 BERT-networks. In: *Proceedings of EMNLP-IJCNLP 2019*. Hong Kong: Association
 for Computational Linguistics, 2019. p. 3982–3992.
@@ -806,6 +895,12 @@ VINH, N. X.; EPPS, J.; BAILEY, J. Information theoretic measures for
 clusterings comparison: variants, properties, normalization and correction for
 chance. *Journal of Machine Learning Research*, v. 11, p. 2837–2854, 2010.
 [https://www.jmlr.org/papers/v11/vinh10a.html](https://www.jmlr.org/papers/v11/vinh10a.html).
+
+ZHANG, Y.; WANG, Z.; SHANG, J. ClusterLLM: large language models as a guide for
+text clustering. In: *Proceedings of the 2023 Conference on Empirical Methods
+in Natural Language Processing*. Singapore: Association for Computational
+Linguistics, 2023. p. 13903–13920.
+[https://doi.org/10.18653/v1/2023.emnlp-main.858](https://doi.org/10.18653/v1/2023.emnlp-main.858).
 
 ---
 

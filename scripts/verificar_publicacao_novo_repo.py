@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Gate local para preparar a publicação integral em um novo repositório.
+"""Gate local para preparar e manter a publicação integral do repositório.
 
 O script não cria commit, não altera remotes e não envia arquivos. Ele valida
-somente o conteúdo que o Git incluiria: arquivos já rastreados ou novos que não
-estejam cobertos pelo .gitignore.
+o conteúdo que o Git incluiria e as branches/tags locais alcançáveis. Assim, um
+artefato proibido não fica invisível ao gate apenas por estar fora da ``main``.
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ import os
 import re
 import subprocess
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from validar_coerencia_projeto import audit_project
 
@@ -80,14 +80,35 @@ FORBIDDEN_NAMES = {
 }
 FORBIDDEN_PARTS = {"_hpc", "_envio_hpc", "_hpc_res", "_retorno_hpc", "data"}
 MARKDOWN_LINK = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
+ALLOWED_HISTORICAL_FILES = {
+    ("refs/tags/formacao-a5576c8", "data_exemplo/Extracao_Jira_exemplo.csv")
+}
+EXPECTED_HISTORICAL_BLOBS = {
+    (
+        "refs/tags/formacao-a5576c8",
+        "data_exemplo/Extracao_Jira_exemplo.csv",
+    ): "fbf61012ff699be34ae2dc93656057446b7d164b"
+}
 
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _reject_duplicate_json_keys(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"chave JSON duplicada: {key}")
+        result[key] = value
+    return result
+
+
 def _json(path: Path):
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    return json.loads(
+        path.read_text(encoding="utf-8-sig"),
+        object_pairs_hook=_reject_duplicate_json_keys,
+    )
 
 
 def _git_publishable_files() -> list[Path]:
@@ -152,20 +173,95 @@ def _verify_markdown_links(files: list[Path], failures: list[str]) -> int:
     return checked
 
 
+def _verify_relative_publication_path(
+    relative: Path | PurePosixPath,
+    failures: list[str],
+    context: str = "publicação",
+) -> None:
+    relative_posix = relative.as_posix()
+    if (context, relative_posix) in ALLOWED_HISTORICAL_FILES:
+        return
+    lowered = relative_posix.lower()
+    parts = {part.lower() for part in relative.parts}
+    suffix_forbidden = any(lowered.endswith(suffix) for suffix in FORBIDDEN_SUFFIXES)
+    if suffix_forbidden and relative.name != ".env.example":
+        failures.append(f"{context}: extensão proibida {relative_posix}")
+    if relative.name.lower() in FORBIDDEN_NAMES:
+        failures.append(f"{context}: artefato por chamado proibido {relative_posix}")
+    if parts & FORBIDDEN_PARTS:
+        failures.append(f"{context}: diretório sensível proibido {relative_posix}")
+    if "checkpoint" in relative.name.lower():
+        failures.append(f"{context}: checkpoint proibido {relative_posix}")
+
+
 def _verify_publication_set(files: list[Path], failures: list[str]) -> None:
     for path in files:
-        relative = path.relative_to(ROOT)
-        lowered = relative.as_posix().lower()
-        parts = {part.lower() for part in relative.parts}
-        suffix_forbidden = any(lowered.endswith(suffix) for suffix in FORBIDDEN_SUFFIXES)
-        if suffix_forbidden and relative.name != ".env.example":
-            failures.append(f"publicação: extensão proibida {relative}")
-        if relative.name.lower() in FORBIDDEN_NAMES:
-            failures.append(f"publicação: artefato por chamado proibido {relative}")
-        if parts & FORBIDDEN_PARTS:
-            failures.append(f"publicação: diretório sensível proibido {relative}")
-        if "checkpoint" in relative.name.lower():
-            failures.append(f"publicação: checkpoint proibido {relative}")
+        _verify_relative_publication_path(path.relative_to(ROOT), failures)
+
+
+def _verify_git_refs(failures: list[str]) -> tuple[int, int]:
+    refs_proc = subprocess.run(
+        [
+            "git",
+            "for-each-ref",
+            "--format=%(refname)",
+            "refs/heads",
+            "refs/tags",
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    )
+    refs = [line.strip() for line in refs_proc.stdout.splitlines() if line.strip()]
+    files_checked = 0
+    for ref in refs:
+        tree_proc = subprocess.run(
+            ["git", "ls-tree", "-r", "--name-only", ref],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        for raw in tree_proc.stdout.splitlines():
+            if not raw.strip():
+                continue
+            files_checked += 1
+            _verify_relative_publication_path(
+                PurePosixPath(raw.strip()), failures, context=ref
+            )
+
+    historical_ref = "refs/tags/formacao-a5576c8"
+    if historical_ref in refs:
+        note_proc = subprocess.run(
+            ["git", "show", f"{historical_ref}:data_exemplo/README.md"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        note = note_proc.stdout.lower()
+        if "15 chamados fictícios" not in note or "nenhum dado real" not in note:
+            failures.append(
+                "tag de formação: exceção CSV não declarada como sintética e sem dado real"
+            )
+        for (ref, path), expected_blob in EXPECTED_HISTORICAL_BLOBS.items():
+            blob_proc = subprocess.run(
+                ["git", "rev-parse", f"{ref}:{path}"],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+            )
+            if blob_proc.stdout.strip() != expected_blob:
+                failures.append(
+                    f"tag de formação: conteúdo sintético inesperado em {path}"
+                )
+    return len(refs), files_checked
 
 
 def main() -> int:
@@ -184,6 +280,7 @@ def main() -> int:
 
     publishable = _git_publishable_files()
     _verify_publication_set(publishable, failures)
+    git_refs_checked, git_ref_files_checked = _verify_git_refs(failures)
 
     json_checked = 0
     for path in publishable:
@@ -192,7 +289,7 @@ def main() -> int:
         json_checked += 1
         try:
             _json(path)
-        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        except (OSError, UnicodeError, ValueError, json.JSONDecodeError) as exc:
             failures.append(f"JSON inválido: {path.relative_to(ROOT)}: {exc}")
 
     snapshot_files = _verify_manifest(SNAPSHOT, SNAPSHOT_MANIFEST, failures)
@@ -280,6 +377,9 @@ def main() -> int:
     report = {
         "status": status,
         "publishable_files_checked": len(publishable),
+        "git_refs_checked": git_refs_checked,
+        "git_ref_files_checked": git_ref_files_checked,
+        "historical_synthetic_csv_exceptions": len(ALLOWED_HISTORICAL_FILES),
         "json_checked": json_checked,
         "markdown_checked": markdown_checked,
         "historical_snapshot_files_checked": snapshot_files,

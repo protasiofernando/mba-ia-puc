@@ -551,7 +551,17 @@ def _check_narrative(audit: Audit) -> None:
     flow = _text("docs/FLUXO_COMPLETO_MBA.md")
     formation = _text("formacao_portfolio/README.md")
     pipeline_note = _text("pipeline_data/README.md")
-    unsupported = ["| 468 | 29,5% |", "| 435 | 27,5% |", "despenca para **1,3%**"]
+    dashboard_app = _text("dashboard/app.py")
+    dashboard_js = _text("dashboard/static/script.js")
+    dashboard_export = _text("scripts/exportar_dashboard_estatico.py")
+    env_example = _text(".env.example")
+    quality_workflow = _text(".github/workflows/quality.yml")
+    unsupported = [
+        "| 468 | 29,5% |",
+        "| 435 | 27,5% |",
+        "despenca para **1,3%**",
+        "magnitude menor: 1,9x",
+    ]
     audit.check(
         "narrative.no_unsupported_curated_volumes",
         not any(marker in readme for marker in unsupported),
@@ -572,13 +582,41 @@ def _check_narrative(audit: Audit) -> None:
         and "projeção automática" in pipeline_note
         and "retrospectiva" in pipeline_note,
     )
+    audit.check(
+        "narrative.dashboard_local_or_azure_matches_code",
+        'app.route("/api/llm-status")' in dashboard_app
+        and 'app.route("/api/simular"' in dashboard_app
+        and "LLMClient" in dashboard_app
+        and "/api/llm-status" in dashboard_js
+        and "/api/simular" in dashboard_js
+        and 'baked["/api/llm-status"]' in dashboard_export
+        and "path==='/api/simular'" in dashboard_export
+        and "DASHBOARD_LLM_PROVIDER" in env_example
+        and "Ollama local" in readme
+        and "Azure OpenAI" in readme,
+    )
+    audit.check(
+        "narrative.primary_clustering_references_present",
+        "BAGGA, A.; BALDWIN, B." in readme
+        and "ClusterLLM" in readme
+        and "PATTNAIK, A." in readme,
+    )
+    audit.check(
+        "engineering.ci_runs_full_publication_gate",
+        "scripts/verificar_publicacao_novo_repo.py --full" in quality_workflow
+        and "requirements-dev.txt" in quality_workflow
+        and "fetch-depth: 0" in quality_workflow,
+    )
     publication_note = _text("docs/00_LEIA_PRIMEIRO_IA.md").lower()
     audit.check(
         "narrative.git_publication_recorded",
         "protasiofernando/mba-ia-puc" in publication_note
-        and "único commit-raiz" in publication_note
-        and "não possui histórico anterior" in publication_note
-        and "branch de arquivo ou tag" in publication_note,
+        and "commit-raiz consolidado" in publication_note
+        and "revisões" in publication_note
+        and "posteriores" in publication_note
+        and "formacao-a5576c8" in publication_note
+        and "nenhuma branch" in publication_note
+        and "arquivo" in publication_note,
     )
 
     # O relatório do Job 90 é congelado por SHA-256 e mantém, na abertura, a
