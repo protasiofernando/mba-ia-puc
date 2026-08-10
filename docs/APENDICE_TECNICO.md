@@ -105,6 +105,27 @@ técnico legado `n_sala_*`. Esses nomes significam “remoção upstream do esco
 de Sala” e não afirmam que o texto literal “Sala” aparecia no request type. O
 manifesto e a narrativa mantida acima fornecem a interpretação semântica exata.
 
+A mesma decisão explica um resíduo mais visível. O parágrafo de abertura de
+`resultados_publicaveis/estudo_comparativo/avaliacao/RESULTADO_COMPARACAO_ROBUSTA.md`
+descreve a máscara de escopo como automática e conservadora, decidida por voto,
+ambiguidade ou confiança. É a descrição do procedimento invalidado no Job
+`2165.HPCGPU`, e não do filtro determinístico que efetivamente rodou. O texto é
+um literal fixo do gerador, herdado da geração anterior, que não acompanhou a
+mudança de método da v6.
+
+Corrigir esse literal exigiria editar `scripts/avaliar_comparacao_robusta.py`,
+cujo SHA-256 está registrado em `MANIFESTO_PACOTE.json` e cuja cópia neste
+repositório permanece byte-idêntica à que foi executada. A escolha foi preservar
+essa igualdade. Um rótulo herdado, documentado e contradito pelo próprio
+relatório custa menos à auditoria do que a perda da prova de que o código
+publicado é o código executado. Como o projeto não tem execução pendente, a
+correção do gerador só teria efeito numa reexecução que a política registrada em
+`STATUS_PROJETO.md` não autoriza.
+
+O leitor que encontrar o parágrafo antigo deve consultar a nota editorial em
+`../resultados_publicaveis/README.md`, que reúne a formulação legada, o
+procedimento canônico e a linha do próprio relatório que o confirma.
+
 ## 2. Insumo analítico congelado
 
 O Job `2166.HPCGPU` regenerou os Estágios 1 e 2 no universo corrigido e terminou
@@ -214,6 +235,29 @@ igualdade no código algorítmico, prompts, parâmetros e regras; as diferenças
 foram de documentação/nomenclatura e do manifesto derivado. Assim, a
 reprodutibilidade metodológica permanece, mas a reprodução binária exata exige
 o ZIP original em `_hpc/pacote/`.
+
+Essa igualdade é verificável arquivo a arquivo, e não apenas afirmada. Das
+entradas de `resultados_publicaveis/estudo_comparativo/MANIFESTO_PACOTE.json`,
+**29 continuam byte-idênticas às cópias versionadas neste repositório**:
+
+| Grupo | Arquivos |
+|---|---:|
+| Scripts do método, avaliador e validadores empacotados | 18 |
+| Jobs PBS do estudo | 6 |
+| Regras e configuração do experimento | 3 |
+| `configuracao/projeto.json` | 1 |
+| `estudo_comparativo/requirements_comparacao.txt` | 1 |
+
+Estão nesse conjunto `decision_rules_v1.json`, `experimento_config.json`,
+`filtro_sala_sigilo_manifest_v6.json`, os cinco jobs mais `job_lib.sh` e todo o
+caminho de código que produziu as métricas, incluindo
+`avaliar_comparacao_robusta.py`. Qualquer pessoa confirma calculando o SHA-256
+de cada arquivo e comparando com o manifesto. Os itens que divergem são
+documentos editados depois da execução, e nenhum deles participa do cálculo.
+
+Portanto, a afirmação defensável é mais forte do que “reprodutibilidade
+metodológica”: as regras de decisão, os parâmetros e o código que gerou os
+números publicados são, byte a byte, os que rodaram no Job 90.
 
 ## 8. Leitura metodológica das falhas
 

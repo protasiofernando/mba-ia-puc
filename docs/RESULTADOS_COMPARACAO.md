@@ -293,3 +293,14 @@ O pacote público contém somente configuração, proveniência, métricas agreg
 relatórios e validações. A varredura local não encontrou chaves Jira, texto ou
 classificações por chamado. O pacote privado permanece em `_hpc/` e não deve
 ser versionado ou enviado a serviços externos.
+
+Os artefatos promovidos foram preservados byte a byte e, por isso, o relatório
+automático mantém um parágrafo de abertura herdado que descreve o procedimento
+de escopo da geração anterior, não o filtro determinístico que efetivamente
+rodou. A discrepância, o procedimento canônico e a linha do próprio relatório
+que o confirma estão reunidos na nota editorial de
+[`resultados_publicaveis/README.md`](../resultados_publicaveis/README.md); a
+justificativa para não reescrever o gerador está em
+[`APENDICE_TECNICO.md`](APENDICE_TECNICO.md). Nenhuma métrica desta síntese
+depende daquele parágrafo: todas foram calculadas sobre o universo determinístico
+de 1.456 chamados.

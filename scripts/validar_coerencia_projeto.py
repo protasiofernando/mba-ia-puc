@@ -581,6 +581,35 @@ def _check_narrative(audit: Audit) -> None:
         and "branch de arquivo ou tag" in publication_note,
     )
 
+    # O relatório do Job 90 é congelado por SHA-256 e mantém, na abertura, a
+    # descrição do escopo da geração anterior, decidido por voto de LLM. O
+    # literal vive no gerador empacotado, que também é congelado. Enquanto essa
+    # formulação existir no artefato, a explicação precisa existir junto: o que
+    # a frase descreve, qual foi o procedimento real, onde o próprio relatório o
+    # confirma e por que o gerador não foi reescrito.
+    frozen_report = _text(
+        "resultados_publicaveis/estudo_comparativo/avaliacao/"
+        "RESULTADO_COMPARACAO_ROBUSTA.md"
+    )
+    legacy_wording = "máscara de Sala de Sigilo é automática e conservadora"
+    if legacy_wording in frozen_report:
+        editorial = _text("resultados_publicaveis/README.md")
+        appendix = _text("docs/APENDICE_TECNICO.md")
+        results = _text("docs/RESULTADOS_COMPARACAO.md")
+        audit.check(
+            "narrative.legacy_report_wording_documented",
+            # a nota nomeia a formulação, o procedimento real e a corroboração
+            "automática e conservadora" in editorial
+            and "correspondência exata do campo estruturado" in editorial
+            and "Sala removida deterministicamente antes do Stage 1: 128"
+            in editorial
+            # o apêndice justifica não reescrever o gerador
+            and "avaliar_comparacao_robusta.py" in appendix
+            and "byte-idêntica" in appendix
+            # a síntese de resultados encaminha o leitor para a nota
+            and "resultados_publicaveis/README.md" in results,
+        )
+
 
 def audit_project() -> dict:
     audit = Audit()
