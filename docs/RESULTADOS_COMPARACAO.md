@@ -236,20 +236,20 @@ gerencial e antecede o alvo congelado usado no experimento.
 | Encaminhamento | Sala de Sigilo | formulário gerido pela Equipe de Segurança da Informação; item visível, imutável e fora da análise |
 
 O confronto automático com o histórico ajuda a priorizar os campos, mas não os
-define sozinho. Os maiores sinais de informação faltante foram: descrição no
-categoria residual (53,8%), permissão e prazo em acesso a bases (30,2%), descrição em
-servidores compartilhados (23,2%), perfil de VM (22,4%), usuários em acesso a
-bases (18,6%) e usuários na nuvem (12,8%). Essas taxas são retrospectivas e
-dependem do alinhamento semântico automático; os campos finais são uma decisão
-curada.
+define sozinho. Os maiores sinais de informação faltante foram: descrição na
+categoria residual (53,8%), permissão e prazo em acesso a bases (30,2%),
+descrição em servidores compartilhados (23,2%), perfil de VM (22,4%), usuários
+em acesso a bases (18,6%) e usuários na nuvem (12,8%). Essas taxas são
+retrospectivas e dependem do alinhamento semântico automático; os campos finais
+são uma decisão curada.
 
 Após o encerramento do estudo, o Estágio 7 vigente projetou automaticamente os
 1.456 chamados no portfólio adotado. O agregado resultou em 455 chamados em
 Servidores Acadêmicos, 426 em Nuvem Pública, 246 em Softwares e Licenças, 98
-em Máquinas Virtuais, 95 em HPC, 65 em Acesso a Bases, 48 em PGD e 23 no
-categoria residual. Essa materialização é uma saída operacional posterior: não entrou
-nas métricas do Job 90, não altera a comparação e não equivale a uso observado
-depois da implantação do novo portal.
+em Máquinas Virtuais, 95 em HPC, 65 em Acesso a Bases, 48 em PGD e 23 na
+categoria residual. Essa materialização é uma saída operacional posterior: não
+entrou nas métricas do Job 90, não altera a comparação e não equivale a uso
+observado depois da implantação do novo portal.
 
 ## 9. Limitações
 

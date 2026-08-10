@@ -117,8 +117,9 @@ conforme a semente, a camada de avaliação e a referência. O resultado
 operacional consiste em um portfólio curado com sete serviços, uma categoria
 residual e Sala de Sigilo como encaminhamento fixo, todos com escopo e campos
 obrigatórios definidos. O que se transfere a outra instituição não é o catálogo,
-que é local, mas a demonstração de que a infraestrutura de HPC já instalada
-basta para conduzir a análise sem exportar dado sensível.
+que é local, mas o desenho metodológico e a demonstração de que, neste contexto,
+a infraestrutura de HPC disponível foi suficiente para conduzir a análise sem
+exportar dado sensível.
 
 **Palavras-chave:** gestão de serviços de TI; mineração de chamados; modelos de
 linguagem; agrupamento; apoio à decisão; catálogo de serviços.
@@ -181,10 +182,10 @@ terceira categoria mais acionada na base completa, com 203 dos 1.584 chamados
 (12,8%), o que sugeria dificuldade dos usuários para identificar o item correto.
 Segundo, havia categorias sobrepostas para solicitações semelhantes. Terceiro, e
 mais caro em termos operacionais, chamados abertos sem as informações
-necessárias exigiam idas e vindas de esclarecimento. Os chamados resolvidos em
-uma única interação levaram, em média, 2,6 dias. Os que exigiram duas ou mais
-levaram 13,4. A razão de 5,22 entre as médias no universo analítico, ou de 5,51
-na base anterior ao filtro, é essa mesma diferença expressa de outra forma
+necessárias exigiam idas e vindas de esclarecimento. Os chamados resolvidos com
+até uma interação humana levaram, em média, 2,6 dias. Os que exigiram duas ou
+mais levaram 13,4. A razão de 5,22 entre as médias no universo analítico, ou de
+5,51 na base anterior ao filtro, é essa mesma diferença expressa de outra forma
 (seção 4.3).
 
 As três evidências não têm a mesma força, e a distinção orienta o que se pode
@@ -399,23 +400,23 @@ operacionais estão em [docs/MANUAL_HPC.md](docs/MANUAL_HPC.md).
 
 #### 4.1 Diagnóstico do portfólio vigente
 
-O catálogo vigente oferecia 18 categorias. Toda tentativa de reconstruir a
-estrutura da demanda diretamente a partir dos chamados encontrou mais grupos do
-que isso, por qualquer método e em qualquer etapa do projeto. O recorte
-histórico que iniciou a formação do portfólio continha **23 grupos**; a execução
-comparativa final produziu **29 grupos** no Método Estatístico e **20 tipos de
-requisição** no Método Agêntico, antes da consolidação semântica. As três
-quantidades pertencem a etapas distintas e não devem ser interpretadas como
-resultados equivalentes, mas apontam na mesma direção: categorias excessivamente
-amplas, demandas recorrentes sem categoria própria e fragmentação de pedidos
-semelhantes.
+O catálogo vigente oferecia 18 categorias. Nas três configurações observadas, a
+reconstrução da estrutura da demanda diretamente a partir dos chamados encontrou
+mais grupos do que o catálogo vigente. O recorte histórico que iniciou a
+formação do portfólio continha **23 grupos**; a execução comparativa final
+produziu **29 grupos** no Método Estatístico e **20 tipos de requisição** no
+Método Agêntico, antes da consolidação semântica. As três quantidades pertencem
+a etapas distintas e não devem ser interpretadas como resultados equivalentes,
+mas apontam na mesma direção: categorias excessivamente amplas, demandas
+recorrentes sem categoria própria e fragmentação de pedidos semelhantes.
 
 O sintoma mais visível desse desalinhamento estava dentro do próprio catálogo.
 Na base completa de 1.584 chamados, o item “Não encontrou o que procurava?”
-reunia 203 casos (12,8%) e era a terceira categoria mais utilizada, o que
-significa que quase um em cada oito solicitantes não localizava onde abrir seu
-pedido. Esse percentual descreve o diagnóstico anterior ao filtro e não a
-distribuição do universo comparativo de 1.456 registros.
+reunia 203 casos (12,8%) e era a terceira categoria mais utilizada. Portanto,
+quase um em cada oito chamados foi aberto pelo item genérico. Esse uso pode
+indicar dificuldade de localização, mas também pode refletir a posição e a
+visibilidade do item na interface. O percentual descreve o diagnóstico anterior
+ao filtro e não a distribuição do universo comparativo de 1.456 registros.
 
 #### 4.2 Portfólio final
 
@@ -654,9 +655,9 @@ produzir evidência auditável sobre a demanda: grupos, volumes, sobreposições
 custo e tempo. Não foi suficiente para produzir a decisão, porque a decisão
 depende de responsabilidade, governança e visibilidade, critérios que não estão
 registrados no histórico de chamados e não poderiam ser inferidos dele. A
-pergunta que permanece aberta não é qual método descobre melhor, mas quanto
-dessa fronteira se desloca quando o histórico passar a registrar também o que a
-área decidiu e por quê.
+comparação entre os métodos não esgota a investigação. Permanece aberta a
+questão de quanto essa fronteira se desloca quando o histórico passar a registrar
+também o que a área decidiu e por quê.
 
 #### 4.8 Ameaças à validade
 
