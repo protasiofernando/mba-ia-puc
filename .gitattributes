@@ -5,9 +5,30 @@
 
 # Artefatos cuja identidade byte a byte é verificada por SHA-256. Não aplicar
 # conversão de fim de linha em nenhum sistema operacional.
+#
+# A regra é: se o SHA-256 do arquivo é conferido contra algum manifesto, ele
+# entra aqui. Sem isso, `* text=auto` normaliza o conteúdo na clonagem e o
+# arquivo deixa de bater com o hash registrado, fazendo um clone limpo falhar
+# na própria validação do projeto.
+
+# Snapshot histórico e decisão curada congelada
 formacao_portfolio/metodo_inicial_kmeans_git_a5576c8/** -text
 formacao_portfolio/decisao_curada/feedback_portfolio.json -text
 formacao_portfolio/decisao_curada/portfolio_referencia.json -text
 estudo_comparativo/proveniencia_execucao/feedback_portfolio_executado.json.b64 -text
+
+# Artefatos do Job 90, conferidos em MANIFESTO_RESULTADOS.json
 resultados_publicaveis/estudo_comparativo/** -text
 pipeline_data/07_portfolio_final.json -text
+
+# Código, regras, configuração e jobs conferidos em MANIFESTO_PACOTE.json
+scripts/** -text
+metodo_estatistico/** -text
+estudo_comparativo/hpc/** -text
+estudo_comparativo/decision_rules_v1.json -text
+estudo_comparativo/experimento_config.json -text
+estudo_comparativo/filtro_sala_sigilo_manifest_v6.json -text
+estudo_comparativo/requirements_comparacao.txt -text
+configuracao/projeto.json -text
+configuracao/config_portfolio.json -text
+configuracao/contexto_catalogo.md -text
