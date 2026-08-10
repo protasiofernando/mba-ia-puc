@@ -13,9 +13,12 @@ em `RESULTADOS_COMPARACAO.md`.
 
 ## 0. Formação do portfólio antes do experimento
 
-O snapshot público preservado do commit histórico `a5576c8` mostra que o alvo
-não foi criado a partir dos placares da comparação. Antes do estudo robusto, já
-existiam:
+O commit histórico `a5576c8`, de 3 de julho de 2026, mostra que o alvo não foi
+criado a partir dos placares da comparação. Ele não pertence ao histórico do
+`main`, que foi consolidado em raiz nova, mas está preservado no mesmo
+repositório público sob a tag anotada `formacao-a5576c8`. Um clone comum a traz,
+e `scripts/verificar_origem_formacao.py` é executável por qualquer pessoa, sem
+acesso privado. Antes do estudo robusto, já existiam:
 
 - `pipeline/03_cluster.py`, com embeddings `bge-m3`, K-means e seleção de K por
   silhueta;

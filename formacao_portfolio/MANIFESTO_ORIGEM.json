@@ -2,14 +2,19 @@
   "schema_version": "portfolio-formation-lineage-v1",
   "purpose": "Provar a separação temporal entre formação, curadoria e comparação.",
   "public_repository": {
-    "url": "https://github.com/protasiofernando/mba-ia-masterbi-puc",
-    "verified_at": "2026-08-04",
-    "origin_main_observed": "9f01ce4fbc505bf392c8e48d2932ff861e5ebaae",
-    "historical_candidate_feedback_and_stage7_blobs_unchanged_on_origin_main": true
+    "url": "https://github.com/protasiofernando/mba-ia-puc",
+    "verified_at": "2026-08-10",
+    "provenance_tag": "formacao-a5576c8",
+    "tag_note": "O commit de formação não pertence ao histórico do main, que foi consolidado em raiz nova. Ele é preservado como tag anotada no mesmo repositório público, de modo que um clone comum o traga e scripts/verificar_origem_formacao.py execute sem acesso privado.",
+    "historical_candidate_feedback_and_stage7_blobs_unchanged": true,
+    "superseded_private_repositories": [
+      "https://github.com/protasiofernando/mba-ia-masterbi-puc",
+      "https://github.com/protasiofernando/projeto-mba-puc-rio"
+    ]
   },
   "historical_formation": {
     "method": "embeddings bge-m3 + K-means, seguidos por rotulação, consolidação e classificação assistidas por LLM",
-    "git_repository": "https://github.com/protasiofernando/mba-ia-masterbi-puc",
+    "git_repository": "https://github.com/protasiofernando/mba-ia-puc",
     "git_commit_evidence": "a5576c83d47e9eda7e6087b59e57bac65c04e1b4",
     "git_commit_date": "2026-07-03",
     "historical_llm_model": "gemma4:26b-q8",

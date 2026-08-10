@@ -60,7 +60,8 @@ gabarito. O alvo é ex post em relação à formação e ex ante em relação ao
 
 ## Evidência histórica e implementação mantida
 
-O commit Git `a5576c8` (3 de julho de 2026) preserva o pipeline operacional que
+O commit Git `a5576c8` (3 de julho de 2026), acessível neste repositório pela
+tag anotada `formacao-a5576c8`, preserva o pipeline operacional que
 já continha:
 
 - `pipeline/03_cluster.py`: embeddings `bge-m3` + K-means e seleção de K por
