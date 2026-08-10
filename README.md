@@ -613,8 +613,8 @@ histórico na decisão congelada. Essa sequência materializa o princípio de
 um artefato pela relação entre problema organizacional, construção e utilidade
 (HEVNER et al., 2004).
 
-O segundo caso delimita a fronteira com mais nitidez. O diagnóstico de
-categorias sobrepostas e do uso elevado do item genérico é
+A fronteira aparece com mais nitidez no diagnóstico do catálogo vigente. A
+constatação de categorias sobrepostas e do uso elevado do item genérico é
 coerente com a literatura de classificação de chamados: uma taxonomia ambígua
 pode prejudicar o encaminhamento correto já na abertura (AL-HAWARI; BARHAM,
 2021). A projeção de apenas 1,6% do histórico analítico na categoria residual
@@ -623,8 +623,8 @@ o catálogo curado oferece cobertura retrospectiva mais específica. Esse númer
 entretanto, não prova que usuários futuros escolherão corretamente os novos
 itens; essa hipótese exige acompanhamento após a implantação.
 
-O terceiro caso é aquele em que a própria evidência recusa a conclusão mais
-simples. Quanto à questão metodológica, K-means recebeu o sinal mais favorável na
+Na questão metodológica, a própria evidência recusa a conclusão mais simples.
+K-means recebeu o sinal mais favorável na
 evidência primária e apresentou menor custo, mas sua vantagem não permaneceu
 invariante entre sementes, camadas e referências. A conclusão é compatível com
 a literatura de validação de agrupamentos: coesão, concordância externa e
@@ -634,7 +634,8 @@ estabilidade medem propriedades diferentes e não devem ser substituídas por um
 mas que o motor estatístico oferece o melhor compromisso observado na evidência
 primária e no custo deste domínio.
 
-O quarto caso é o que mais tenta o leitor a concluir além do que o dado sustenta.
+O resultado que mais tenta o leitor a concluir além do dado é o da associação
+entre interações e tempo.
 A razão entre as médias dos grupos com múltiplas interações e resolução direta
 foi de 5,22 no universo analítico e de 5,51 na base completa anterior ao filtro.
 Essa associação reforça a utilidade operacional de coletar campos obrigatórios.
