@@ -1,6 +1,7 @@
-# Documentação
+# Documentação (comece por aqui)
 
-Este é o índice canônico da pasta `docs/`. O experimento está concluído.
+Este é o índice único e canônico da pasta `docs/`; qualquer outro arquivo de
+índice apenas aponta para cá. O experimento está concluído.
 
 A síntese acadêmica, que reúne a questão de pesquisa, a fundamentação teórica,
 a modelagem, os resultados, a discussão, as ameaças à validade, as conclusões e

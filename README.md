@@ -11,44 +11,29 @@ Trabalho apresentado ao curso [BI MASTER](https://ica.puc-rio.ai/bi-master) como
 - Repositório definitivo:
   [protasiofernando/mba-ia-puc](https://github.com/protasiofernando/mba-ia-puc).
 
-- [Fluxo técnico e metodológico completo do MBA](docs/FLUXO_COMPLETO_MBA.md).
+- **Mapa da documentação:** [`docs/README.md`](docs/README.md) é o índice único
+  da pasta `docs/`, com a ordem de leitura e o papel de cada arquivo.
 
-- [Manual formal do projeto](docs/MANUAL_DO_PROJETO.md).
-
-- [Resultados do estudo comparativo](docs/RESULTADOS_COMPARACAO.md).
-
-- [Dashboard estático com os resultados públicos](resultados_publicaveis/RESULTADO_DASHBOARD.html).
-
-- [Documentação técnica e instruções de execução](docs/README_TECNICO.md).
-
-- [Síntese auditável do estado do projeto](docs/00_LEIA_PRIMEIRO_IA.md).
-
-- [Auditoria de coerência entre história, scripts e resultados](docs/AUDITORIA_COERENCIA_PROJETO.md).
-
-- [Gate e roteiro para o novo repositório](docs/PUBLICACAO_NOVO_REPOSITORIO.md).
+- Primeiros destinos: [resultados do estudo](docs/RESULTADOS_COMPARACAO.md),
+  [dashboard estático](resultados_publicaveis/RESULTADO_DASHBOARD.html),
+  [instruções de execução](docs/README_TECNICO.md) e
+  [fluxo completo do MBA](docs/FLUXO_COMPLETO_MBA.md).
 
 - Este `README.md` funciona como síntese acadêmica do trabalho; os documentos
   vinculados preservam o detalhamento metodológico, os resultados e a auditoria.
 
 ---
 
-> **Estado final, revisado em 10/08/2026.** O estudo foi concluído no A100 sobre 1.456
-> chamados. O Job 90 terminou com `Exit_status=0` e a validação passou em 302
-> verificações, sem falhas. A evidência primária favorece K-means, especialmente em
-> custo, mas a aderência varia por semente, camada e referência; portanto, não
-> há vencedor global único. O portfólio curado permanece a decisão operacional.
-> Depois do estudo, o Estágio 7 projetou automaticamente os 1.456 chamados nesse
-> portfólio; o agregado publicável está em `pipeline_data/07_portfolio_final.json`.
-> Veja [`docs/RESULTADOS_COMPARACAO.md`](docs/RESULTADOS_COMPARACAO.md).
+> **Estado final, revisado em 10/08/2026.** Estudo concluído no A100 sobre 1.456
+> chamados; Job 90 com `Exit_status=0` e validação em 302 verificações, sem falhas.
+> O resultado da comparação e o portfólio curado estão nas seções 4.2 e 4.6; o
+> agregado do Estágio 7 está em `pipeline_data/07_portfolio_final.json`. Detalhes em
+> [`docs/RESULTADOS_COMPARACAO.md`](docs/RESULTADOS_COMPARACAO.md).
 
-> Este repositório reúne duas contribuições. A **aplicada** é o redesenho do
-> portfólio da DTI Pesquisa, com dashboard e curadoria estratégica. A
-> **metodológica** é uma comparação entre descoberta estatística
-> (`bge-m3` + K-means) e descoberta hierárquica por LLM. O desenho separa um
-> benchmark descritivo das arquiteturas completas de uma comparação controlada
-> do Estágio 3, com três sementes, referência automática produzida por Llama e
-> Qwen,
-> métricas por serviço, custo separado e regra de decisão pré-registrada. O
+> Este repositório reúne duas contribuições: a **aplicada**, o redesenho do
+> portfólio da DTI Pesquisa com dashboard e curadoria estratégica, e a
+> **metodológica**, a comparação entre descoberta estatística (`bge-m3` + K-means)
+> e descoberta hierárquica por LLM, detalhada na seção 4.6. O
 > **[dossiê de auditoria](estudo_comparativo/DOSSIE_AUDITORIA.md)** consolida os
 > controles metodológicos.
 
@@ -514,11 +499,9 @@ ser publicada. Os valores descrevem os grupos históricos e
 não estimam quanto tempo seria economizado ao alterar o formulário.
 
 Como os dados reais do Jira não são publicados, `scripts/gerar_base_sintetica.py`
-pode gerar em `data_exemplo/` uma amostra inteiramente artificial para
-demonstrar o cálculo. O gerador lê somente o portfólio agregado público e cria
-textos, pessoas, datas, durações e interações fictícios. O script não acessa os
-Estágios 1 e 2 nem qualquer distribuição por chamado. O CSV gerado localmente permanece
-ignorado pelo Git.
+gera em `data_exemplo/` uma amostra inteiramente artificial para demonstrar o
+cálculo, nos termos descritos na seção 3.2. O CSV gerado permanece ignorado pelo
+Git.
 
 Depois de gerar a base sintética:
 
@@ -572,8 +555,7 @@ python dashboard/app.py   # http://localhost:5000
   usa Ollama local quando `OLLAMA_MODEL` está definido e Azure OpenAI como
   fallback; `DASHBOARD_LLM_PROVIDER` permite escolher explicitamente o motor.
 - A associação entre tempo e interações (seção 4.3) pode rodar sobre a base
-  sintética depois que ela for gerada; é observacional e não deve ser
-  interpretada como efeito causal.
+  sintética depois que ela for gerada.
 - **Comparação dos dois métodos:** desenho, status, linhagem e execução em
   [estudo_comparativo/DOSSIE_AUDITORIA.md](estudo_comparativo/DOSSIE_AUDITORIA.md).
 
@@ -596,13 +578,8 @@ A separação é necessária porque, no benchmark, vários componentes mudam ao 
 tempo, e nenhuma diferença observada pode ser atribuída isoladamente a um deles.
 
 Ambos os desenhos partem do mesmo Estágio 2 congelado, com 1.456 chamados,
-produzido depois da remoção determinística dos 128 registros do tipo de
-requisição legado homônimo
-“Solicitação de Acesso a Bases de Dados”, pertencente ao fluxo de dados
-confidenciais/Sala de Sigilo e atendido fora da DTI Pesquisa pela equipe de
-Banco de Dados. O serviço final de acesso comum a bases é outro objeto
-operacional e permanece no catálogo curado. Nenhuma LLM ou texto
-livre decide o escopo.
+produzido após a remoção determinística dos 128 registros descrita na seção 3.2.
+Nenhuma LLM ou texto livre decide o escopo.
 
 A comparação controlada tem três pares de sementes e é confrontada com o
 portfólio curado por uma referência automática produzida por Llama e Qwen em
@@ -653,18 +630,14 @@ um deles, a evidência automática estabelece algo com firmeza e para diante de
 uma segunda pergunta que não alcança. Percorrê-los por esse eixo mostra onde a
 decisão humana permanece necessária.
 
-O primeiro caso é o mais favorável à automação. Os resultados respondem
-afirmativamente à questão aplicada: foi possível
-transformar chamados históricos em evidência auditável para redesenhar o
-catálogo sem transferir dados sensíveis para serviços externos. Ainda assim, a
-descoberta não determinou isoladamente o portfólio. A etapa de descoberta
-revelou padrões
-de demanda, que foram convertidos pela área em serviços com responsabilidade,
-escopo e campos de abertura. Em seguida, o Estágio 7 projetou automaticamente o
-histórico na decisão congelada. Essa sequência materializa o princípio de
-*design science* de avaliar
-um artefato pela relação entre problema organizacional, construção e utilidade
-(HEVNER et al., 2004).
+O primeiro caso é o mais favorável à automação. Foi possível transformar
+chamados históricos em evidência auditável para redesenhar o catálogo sem
+transferir dados sensíveis para serviços externos. Ainda assim, a descoberta não
+determinou o portfólio sozinha: ela revelou padrões de demanda que a área
+converteu em serviços com responsabilidade, escopo e campos de abertura, e só
+então o Estágio 7 projetou o histórico na decisão congelada. Essa sequência
+materializa o princípio de *design science* de avaliar um artefato pela relação
+entre problema, construção e utilidade (HEVNER et al., 2004).
 
 A fronteira aparece com mais nitidez no diagnóstico do catálogo vigente. A
 constatação de categorias sobrepostas e do uso elevado do item genérico é
@@ -687,29 +660,24 @@ estabilidade medem propriedades diferentes e não devem ser substituídas por um
 mas que o motor estatístico oferece o melhor compromisso observado na evidência
 primária e no custo deste domínio.
 
-O resultado que mais tenta o leitor a concluir além do dado é o da associação
-entre interações e tempo.
-A razão entre as médias dos grupos com múltiplas interações e resolução direta
-foi de 5,22 no universo analítico e de 5,51 na base completa anterior ao filtro.
-Essa associação reforça a utilidade operacional de coletar campos obrigatórios.
-Ainda assim, complexidade do chamado, prioridade e disponibilidade da equipe
-podem afetar simultaneamente interações e duração. O projeto usa esse resultado
+O resultado que mais tenta o leitor a concluir além do dado é a associação entre
+interações e tempo (seção 4.3). Ela reforça a utilidade operacional de coletar
+campos obrigatórios, mas complexidade, prioridade e disponibilidade da equipe
+podem afetar ao mesmo tempo interações e duração. O projeto usa esse resultado
 para motivar o desenho do formulário, não para prometer redução causal de tempo.
 
 Os quatro casos explicam por que a curadoria humana não é um ajuste posterior.
 Manter a decisão com a área e tornar visíveis justificativa, confiança e
-informações faltantes evita tratar a IA como decisora autônoma. A arquitetura
-apoia a revisão e a correção, em consonância com as recomendações para interação
-entre humanos e sistemas de IA propostas por Amershi et al. (2019).
+informações faltantes evita tratar a IA como decisora autônoma, em consonância
+com as recomendações de Amershi et al. (2019).
 
 O padrão sustenta uma conclusão e recusa outra. A automação foi suficiente para
 produzir evidência auditável sobre a demanda: grupos, volumes, sobreposições,
-custo e tempo. Não foi suficiente para produzir a decisão, porque a decisão
-depende de responsabilidade, governança e visibilidade, critérios que não estão
-registrados no histórico de chamados e não poderiam ser inferidos dele. A
-comparação entre os métodos não esgota a investigação. Permanece aberta a
-questão de quanto essa fronteira se desloca quando o histórico passar a registrar
-também o que a área decidiu e por quê.
+custo e tempo. Não foi suficiente para produzir a decisão, que depende de
+responsabilidade, governança e visibilidade, critérios ausentes do histórico e
+não inferíveis dele. Permanece aberta a questão de quanto essa fronteira se
+desloca quando o histórico passar a registrar também o que a área decidiu e por
+quê.
 
 #### 4.8 Ameaças à validade
 
