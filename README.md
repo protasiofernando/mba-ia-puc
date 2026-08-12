@@ -8,9 +8,6 @@
 
 Trabalho apresentado ao curso [BI MASTER](https://ica.puc-rio.ai/bi-master) como pré-requisito para conclusão de curso e obtenção de crédito na disciplina "Projetos de Sistemas Inteligentes de Apoio à Decisão".
 
-- Repositório definitivo:
-  [protasiofernando/mba-ia-puc](https://github.com/protasiofernando/mba-ia-puc).
-
 - **Mapa da documentação:** [`docs/README.md`](docs/README.md) é o índice único
   da pasta `docs/`, com a ordem de leitura e o papel de cada arquivo.
 
@@ -24,7 +21,7 @@ Trabalho apresentado ao curso [BI MASTER](https://ica.puc-rio.ai/bi-master) como
 
 ---
 
-> **Estado final, revisado em 10/08/2026.** Estudo concluído no A100 sobre 1.456
+> **Estado final, revisado em 10/08/2026.** Estudo concluído em HPC com GPU A100 sobre 1.456
 > chamados; Job 90 com `Exit_status=0` e validação em 302 verificações, sem falhas.
 > O resultado da comparação e o portfólio curado estão nas seções 4.2 e 4.6; o
 > agregado do Estágio 7 está em `pipeline_data/07_portfolio_final.json`. Detalhes em
@@ -88,7 +85,7 @@ O pipeline foi executado integralmente na infraestrutura de computação de alto
 desempenho da instituição. Modelos de linguagem locais, `llama3.3:70b` para
 raciocínio e `qwen3:30b-a3b-instruct-2507-q4_K_M` para geração de saídas
 estruturadas, foram servidos pelo Ollama em uma GPU NVIDIA A100. Cada chamado
-teve sua intenção destilada; os pedidos foram agrupados por intenção, e não pela
+teve sua intenção identificada; os pedidos foram agrupados por intenção, e não pela
 categoria em que haviam sido abertos; desses grupos derivou-se um catálogo
 recomendado, no qual o histórico foi reclassificado. Como contribuição
 metodológica, compararam-se duas abordagens de descoberta sob o mesmo insumo e a
@@ -169,17 +166,11 @@ Segundo, havia categorias sobrepostas para solicitações semelhantes. Terceiro,
 mais caro em termos operacionais, chamados abertos sem as informações
 necessárias exigiam idas e vindas de esclarecimento. Os chamados resolvidos com
 até uma interação humana levaram, em média, 2,6 dias. Os que exigiram duas ou
-mais levaram 13,4. A razão de 5,22 entre as médias no universo analítico, ou de
-5,51 na base anterior ao filtro, é essa mesma diferença expressa de outra forma
-(seção 4.3).
+mais levaram 13,4. 
 
-As três evidências não têm a mesma força, e a distinção orienta o que se pode
-concluir delas. A sobreposição de categorias e o tempo adicional das múltiplas
-interações estão medidos diretamente no dado. O uso elevado do item genérico
-admite uma segunda leitura: ele pode refletir a posição do item no formulário, e
-não apenas a inadequação do catálogo. A diferença importa porque a primeira
-leitura pede redesenho do catálogo, enquanto a segunda pediria apenas redesenho
-da interface de abertura.
+A base original continha 1.584 chamados. Antes do Estágio 1 do pipeline, uma regra de escopo removeu 128 registros cujo campo estruturado Customer Request Type era "Solicitação de Acesso a Bases de Dados". Esse rótulo aparecia no portal de serviços de pesquisa avaliado neste trabalho, mas correspondia a um fluxo de dados atendido por outra equipe, a de Banco de Dados. Ele figurava ali por uma razão de uso. O pesquisador procura todos os serviços no mesmo portal, ainda que a execução de alguns caiba a outra área. A remoção não dependeu de texto livre nem de decisão de LLM. Foi feita pelo filtro filtro do campo estruturado, especificado pelo analista. Restaram 1.456 chamados no universo analítico.
+Nesse universo, os chamados com duas ou mais interações humanas levaram, em média, 5,22 vezes o tempo daqueles resolvidos com até uma interação. Na base original, antes da exclusão dos 128 registros, essa razão era de 5,51. Os valores foram calculados com as médias não arredondadas e representam uma associação histórica, não um efeito causal (seção 4.3).
+Os achados exigem interpretações distintas. A sobreposição de categorias e a associação entre múltiplas interações e maior tempo de resolução são observadas diretamente nos dados. Já o uso frequente do item “Não encontrou o que procurava?” admite duas explicações: o catálogo pode não oferecer uma opção adequada, ou a posição e a visibilidade do item no formulário podem incentivar sua escolha. A primeira hipótese justificaria rever as categorias; a segunda, reorganizar a interface. Os dados disponíveis não permitem separar completamente esses efeitos.
 
 A reavaliação é dificultada pela natureza do insumo. O texto livre de milhares
 de chamados contém títulos vagos, descrições incompletas e comentários de
@@ -192,18 +183,18 @@ pessoais e não podem deixar a infraestrutura da FGV.
 
 #### 1.2 Questão de pesquisa e objetivos
 
-A questão central é: **como um pipeline de inteligência artificial executado
+A questão central é: como um pipeline de inteligência artificial executado
 localmente pode apoiar, de forma auditável, o redesenho de um catálogo de
-serviços de TI a partir de chamados históricos?** A contribuição metodológica
-desdobra uma segunda questão: **sob o mesmo insumo e a mesma camada semântica
+serviços de TI a partir de chamados históricos? A contribuição metodológica
+desdobra uma segunda questão: sob o mesmo insumo e a mesma camada semântica
 posterior, como a descoberta por embeddings `bge-m3` + K-means e a descoberta
-hierárquica por LLM se comparam em aderência, robustez e custo?** A investigação
+hierárquica por LLM se comparam em aderência, robustez e custo? A investigação
 não pressupõe superioridade de um método e admite como resultado válido um
 compromisso entre critérios ou uma conclusão dependente da camada de avaliação.
 
 Este trabalho examina a viabilidade de executar modelos de linguagem abertos na
 infraestrutura de HPC já disponível na instituição. A solução combina
-sumarização estruturada por LLM, descoberta de grupos naturais de demanda por
+sumarização estruturada por LLM, descoberta de grupos naturais (clusters) de demanda por
 embeddings ou por LLM e classificação assistida por LLM. Essas técnicas integram
 um pipeline offline cujos resultados alimentam um sistema interativo de apoio à
 decisão.
@@ -615,8 +606,7 @@ redução de 61,6%. As tabelas completas, incluindo intervalos bootstrap,
 energia, tokens e as quatro visões da referência, permanecem no relatório de
 resultados.
 
-**Resultado:** a validação final passou em 302 verificações, sem falhas. A
-evidência primária favorece K-means e o custo estatístico, mas o benchmark e a
+**Resultado:** A evidência primária favorece K-means e o custo estatístico, mas o benchmark e a
 comparação controlada produziram resultados dependentes da camada. Portanto,
 não há vencedor global
 único de aderência. A linhagem de tentativas invalidadas está em
@@ -787,7 +777,7 @@ Modelos locais foram parte do objeto técnico da pesquisa e executaram as etapas
 semânticas descritas no método. Claude e Codex também foram utilizados como
 apoio editorial e de engenharia na revisão de código, documentação, testes e
 clareza da redação. Esse apoio não substituiu a curadoria, a interpretação dos
-resultados nem a responsabilidade autoral: as decisões, verificações e
+resultados. Porém, as decisões, verificações e
 conclusões foram revistas pelo autor. O uso editorial incidiu sobre código,
 documentação e resultados agregados; os textos históricos dos chamados não
 foram enviados a esses serviços externos. A declaração deve ser lida em
