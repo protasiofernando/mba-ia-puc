@@ -295,7 +295,7 @@ como verificação complementar de robustez algorítmica, pois mede dependência
 inicialização, e não generalização para outra amostra.
 
 O Macro-F1 com melhor correspondência por serviço, a taxa mínima de
-reatribuição entre sementes e o custo computacional são medidas operacionais
+reatribuição ao portfólio de referência e o custo computacional são medidas operacionais
 definidas no protocolo deste estudo, não métricas derivadas conjuntamente das
 referências anteriores. Todas são apresentadas separadamente, sem nota
 composta, para que compensações arbitrárias não ocultem divergências entre
@@ -500,6 +500,11 @@ comparativo, há dois denominadores legítimos. Eles são declarados separadamen
 |---|---:|---|---|---:|---:|
 | Base completa pré-filtro | 1.561 | 333; 2,5 dias; 0,4 dia | 1.228; 13,9 dias; 5,7 dias | 5,51x | 14,75x |
 | Universo analítico pós-filtro | 1.440 | 329; 2,6 dias; 0,4 dia | 1.111; 13,4 dias; 5,8 dias | 5,22x | 14,01x |
+
+As razões foram calculadas com as médias e as medianas sem arredondamento; por
+isso não reproduzem a divisão direta dos valores exibidos na tabela, que
+aparecem arredondados. Por exemplo, 13,4 / 2,6 dá 5,15, enquanto a razão real
+das médias é 5,22.
 
 No ambiente interno, o comando sem argumentos lê o diretório privado `data/`,
 que contém o universo analítico de 1.456 registros, e portanto reproduz
