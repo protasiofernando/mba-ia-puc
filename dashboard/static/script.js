@@ -850,7 +850,7 @@ function loadHistorico(page) {
       if (semDados) {
         var aviso = document.createElement('div');
         aviso.style.cssText = 'background:rgba(253,219,81,.12);border:1px solid rgba(253,219,81,.4);border-radius:8px;padding:.7rem 1rem;font-size:.82rem;color:var(--fgv-navy);margin-bottom:.75rem;';
-        aviso.textContent = 'Dados do pipeline (03_clusters.json) não disponíveis. Rode as etapas 1-3 do pipeline com o Claude para ver os grupos identificados pela IA.';
+        aviso.textContent = 'Dados do pipeline (03_clusters.json) não disponíveis. Execute as etapas 1 a 3 do pipeline para ver os grupos identificados pela IA.';
         tbody.parentElement.parentElement.insertAdjacentElement('beforebegin', aviso);
       }
 

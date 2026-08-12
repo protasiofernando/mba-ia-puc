@@ -10,7 +10,7 @@ dos métodos e estimandos, sem nomes de revisão ou `hotfixN`.
 
 Antes de agir, leia nesta ordem:
 
-1. `docs/00_LEIA_PRIMEIRO_IA.md` - contexto minimo, resultado e proxima acao;
+1. `docs/RESUMO_EXECUTIVO.md` - contexto minimo, resultado e proxima acao;
 2. `docs/ESTADO_COMPARACAO_ROBUSTA.json` - estado canonico estruturado;
 3. `docs/STATUS_PROJETO.md` - status humano curto;
 4. documentos longos somente se a tarefa exigir auditoria profunda.

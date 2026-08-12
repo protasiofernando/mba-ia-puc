@@ -39,15 +39,13 @@ Trabalho apresentado ao curso [BI MASTER](https://ica.puc-rio.ai/bi-master) como
 O repositório está organizado em três fases, que não devem ser misturadas:
 
 1. **Formação:** o Método Estatístico produz um candidato automático nos
-   Estágios 3 a 6; a implementação e a linhagem ficam em `formacao_portfolio/`.
-2. **Curadoria:** a área revisa o candidato no nível do catálogo e congela a
-   decisão em `formacao_portfolio/decisao_curada/feedback_portfolio.json`; não
-   rotula chamados manualmente. O Estágio 7 possui materializador, classificador
-   automático e job PBS; sua projeção operacional posterior ao estudo foi
-   concluída sobre os 1.456 chamados.
-3. **Comparação:** depois do congelamento, os métodos Estatístico e Agêntico
-   são reexecutados sobre o mesmo Estágio 2 de 1.456 chamados para medir
-   aderência, estabilidade e custo. O pacote de execução contém somente código.
+   Estágios 3 a 6, com implementação e linhagem em `formacao_portfolio/`.
+2. **Curadoria:** a área revisa o catálogo, sem rotular chamados, e congela a
+   decisão em `formacao_portfolio/decisao_curada/feedback_portfolio.json`. Depois
+   do estudo, o Estágio 7 projetou automaticamente os 1.456 chamados nessa decisão.
+3. **Comparação:** após o congelamento, os métodos Estatístico e Agêntico são
+   reexecutados sobre o mesmo Estágio 2 para medir aderência, estabilidade e
+   custo. O pacote executado contém somente código.
 
 Componentes principais:
 
@@ -63,11 +61,6 @@ Componentes principais:
 | `resultados_publicaveis/` | Relatórios, métricas e gates agregados do Job 90 |
 | `docs/` | Narrativa, resultado, estado e apêndice técnico |
 | `metodo_estatistico/` | Motor estatístico mantido, usado na formação e reexecutado na comparação |
-
-O estado resumido do projeto está documentado em
-[`docs/00_LEIA_PRIMEIRO_IA.md`](docs/00_LEIA_PRIMEIRO_IA.md), e sua versão
-estruturada está em
-[`docs/ESTADO_COMPARACAO_ROBUSTA.json`](docs/ESTADO_COMPARACAO_ROBUSTA.json).
 
 ### Resumo
 
@@ -166,11 +159,32 @@ Segundo, havia categorias sobrepostas para solicitações semelhantes. Terceiro,
 mais caro em termos operacionais, chamados abertos sem as informações
 necessárias exigiam idas e vindas de esclarecimento. Os chamados resolvidos com
 até uma interação humana levaram, em média, 2,6 dias. Os que exigiram duas ou
-mais levaram 13,4. 
+mais levaram 13,4.
 
-A base original continha 1.584 chamados. Antes do Estágio 1 do pipeline, uma regra de escopo removeu 128 registros cujo campo estruturado Customer Request Type era "Solicitação de Acesso a Bases de Dados". Esse rótulo aparecia no portal de serviços de pesquisa avaliado neste trabalho, mas correspondia a um fluxo de dados atendido por outra equipe, a de Banco de Dados. Ele figurava ali por uma razão de uso. O pesquisador procura todos os serviços no mesmo portal, ainda que a execução de alguns caiba a outra área. A remoção não dependeu de texto livre nem de decisão de LLM. Foi feita pelo filtro filtro do campo estruturado, especificado pelo analista. Restaram 1.456 chamados no universo analítico.
-Nesse universo, os chamados com duas ou mais interações humanas levaram, em média, 5,22 vezes o tempo daqueles resolvidos com até uma interação. Na base original, antes da exclusão dos 128 registros, essa razão era de 5,51. Os valores foram calculados com as médias não arredondadas e representam uma associação histórica, não um efeito causal (seção 4.3).
-Os achados exigem interpretações distintas. A sobreposição de categorias e a associação entre múltiplas interações e maior tempo de resolução são observadas diretamente nos dados. Já o uso frequente do item “Não encontrou o que procurava?” admite duas explicações: o catálogo pode não oferecer uma opção adequada, ou a posição e a visibilidade do item no formulário podem incentivar sua escolha. A primeira hipótese justificaria rever as categorias; a segunda, reorganizar a interface. Os dados disponíveis não permitem separar completamente esses efeitos.
+A base original continha 1.584 chamados. Antes do Estágio 1 do pipeline, uma
+regra de escopo removeu 128 registros cujo campo estruturado `Customer Request
+Type` era “Solicitação de Acesso a Bases de Dados”. Esse rótulo aparecia no
+portal de serviços de pesquisa avaliado neste trabalho, mas correspondia a um
+fluxo de dados atendido por outra equipe, a de Banco de Dados. Ele figurava ali
+por uma razão de uso: o pesquisador procura todos os serviços no mesmo portal,
+ainda que a execução de alguns caiba a outra área. A remoção não dependeu de
+texto livre nem de decisão de LLM. Foi feita pelo filtro do campo estruturado,
+especificado pelo analista. Restaram 1.456 chamados no universo analítico.
+
+Nesse universo, os chamados com duas ou mais interações humanas levaram, em
+média, 5,22 vezes o tempo daqueles resolvidos com até uma interação. Na base
+original, antes da exclusão dos 128 registros, essa razão era de 5,51. Os
+valores foram calculados com as médias não arredondadas e representam uma
+associação histórica, não um efeito causal (seção 4.3).
+
+Os achados exigem interpretações distintas. A sobreposição de categorias e a
+associação entre múltiplas interações e maior tempo de resolução são observadas
+diretamente nos dados. Já o uso frequente do item “Não encontrou o que
+procurava?” admite duas explicações: o catálogo pode não oferecer uma opção
+adequada, ou a posição e a visibilidade do item no formulário podem incentivar
+sua escolha. A primeira hipótese justificaria rever as categorias; a segunda,
+reorganizar a interface. Os dados disponíveis não permitem separar
+completamente esses efeitos.
 
 A reavaliação é dificultada pela natureza do insumo. O texto livre de milhares
 de chamados contém títulos vagos, descrições incompletas e comentários de
@@ -215,11 +229,16 @@ posterior comuns, quanto a aderência, robustez e custo.
 
 #### 2.1 Gestão de serviços e classificação de chamados
 
-A ISO/IEC 20000-1 situa planejamento, desenho, transição, entrega, medição e
-melhoria contínua dentro de um sistema de gestão de serviços (ISO; IEC, 2018).
-Para este projeto, essa perspectiva fundamenta duas escolhas: tratar o catálogo
-como artefato de gestão, e não apenas como taxonomia textual, e preservar na
-decisão final critérios de responsabilidade, governança e valor operacional.
+A ISO/IEC 20000-1 situa planejamento, desenho, transição, entrega e melhoria
+contínua dentro de um sistema de gestão de serviços e também exige seu
+monitoramento, medição e revisão (ISO; IEC, 2018). Em complemento, a ITIL 4
+trata a gestão do catálogo como prática destinada a manter informações
+consistentes sobre serviços e ofertas disponíveis ao público pertinente
+(AXELOS, 2019). A partir dessas referências, o projeto trata o catálogo como
+artefato de gestão, e não apenas como taxonomia textual, e preserva na decisão
+final critérios de responsabilidade, governança e valor operacional. Essa é
+uma aplicação das referências ao contexto estudado, não uma prescrição literal
+da norma.
 
 No domínio de *help desk*, Al-Hawari e Barham (2021) mostram que a classificação
 automática de chamados pode apoiar a escolha do serviço correto desde a
@@ -234,10 +253,14 @@ etapas relacionadas, porém distintas.
 Embeddings de sentenças permitem comparar textos pelo conteúdo semântico, em
 vez de depender apenas da coincidência de termos (REIMERS; GUREVYCH, 2019). O
 `bge-m3`, utilizado no método estatístico, oferece representação multilíngue e
-suporte a diferentes granularidades textuais (CHEN et al., 2024). Essa base
-justifica representar as intenções destiladas no Estágio 2 como vetores e
-aplicar K-means, método particional iterativo baseado na atribuição das
-observações a grupos representados por suas médias (MACQUEEN, 1967).
+suporte a diferentes granularidades textuais (CHEN et al., 2024). O artigo do
+modelo avalia recuperação de informação, não agrupamento; seu uso para
+representar as intenções destiladas no Estágio 2 é uma adaptação metodológica
+deste trabalho. Como precedente mais próximo, o IDAS produz resumos que retêm a
+intenção central, codifica-os como vetores e os agrupa para descobrir intenções
+latentes (DE RAEDT et al., 2023). Sobre essas representações, o K-means
+particiona as observações em K grupos buscando reduzir a variabilidade interna
+dos grupos (MACQUEEN, 1967).
 
 Não existe, contudo, um número de grupos naturalmente garantido. A silhueta
 avalia simultaneamente coesão interna e separação entre grupos (ROUSSEEUW,
@@ -251,31 +274,39 @@ classificadores posteriores. O ClusterLLM demonstrou o uso de preferências
 extraídas por LLM para melhorar representações e seleção de granularidade
 (ZHANG; WANG; SHANG, 2023). Em centrais de contato, representações multivisão
 guiadas por LLM foram aplicadas ao agrupamento hierárquico de motivos de
-interação (PATTNAIK et al., 2024). Esses trabalhos fundamentam o segundo motor,
-mas não tornam comparáveis, por si sós, soluções com números de grupos e
-processamentos posteriores distintos; por isso, o presente estudo explicita
-separadamente o benchmark completo e a comparação controlada.
+interação (PATTNAIK et al., 2024). Esses trabalhos documentam abordagens
+relacionadas de agrupamento guiado por LLM, mas não reproduzem o segundo motor
+deste estudo, que propõe grupos em lotes, atribui itens a identificadores
+fechados e realiza consolidação global. Também não tornam comparáveis, por si
+sós, soluções com números de grupos e processamentos posteriores distintos;
+por isso, o estudo explicita separadamente o benchmark completo e a comparação
+controlada.
 
 #### 2.3 Avaliação, robustez e decisão entre humanos e sistemas de IA
 
-A comparação entre partições requer métricas corrigidas para concordância ao
-acaso, como o índice de Rand ajustado (HUBERT; ARABIE, 1985), e medidas
-informacionais normalizadas ou ajustadas (VINH; EPPS; BAILEY, 2010). Além da
-aderência a uma referência, a estabilidade sob novas amostras ou reexecuções
-fornece evidência de reprodutibilidade das soluções de agrupamento (LANGE et
-al., 2004). Neste estudo, a sensibilidade às sementes de inicialização constitui
-uma verificação complementar. O B-cubed contabiliza precisão e revocação por
-elemento e é particularmente útil quando as partições têm diferentes números
-de grupos (BAGGA; BALDWIN, 1998). Essa literatura sustenta o uso conjunto de
-Macro-F1 por serviço, B-cubed, ARI, AMI, reatribuição entre sementes e análise
-de custo, sem condensá-los em uma nota composta arbitrária.
+Para reduzir a concordância atribuível ao acaso, o estudo utiliza o índice de
+Rand ajustado (HUBERT; ARABIE, 1985) e a informação mútua ajustada (VINH; EPPS;
+BAILEY, 2010). O B-cubed contabiliza precisão e revocação por elemento sem
+exigir correspondência biunívoca entre os grupos das duas partições (BAGGA;
+BALDWIN, 1998). Lange et al. (2004) definem estabilidade como a reprodução da
+estrutura de agrupamento em outra amostra; neste trabalho, essa propriedade é
+avaliada por reamostragem. A sensibilidade às sementes é tratada separadamente
+como verificação complementar de robustez algorítmica, pois mede dependência da
+inicialização, e não generalização para outra amostra.
+
+O Macro-F1 com melhor correspondência por serviço, a taxa mínima de
+reatribuição entre sementes e o custo computacional são medidas operacionais
+definidas no protocolo deste estudo, não métricas derivadas conjuntamente das
+referências anteriores. Todas são apresentadas separadamente, sem nota
+composta, para que compensações arbitrárias não ocultem divergências entre
+aderência, robustez e custo.
 
 O projeto também se enquadra em *design science*: constrói e avalia artefatos
 tecnológicos destinados a ampliar capacidades organizacionais (HEVNER et al.,
-2004). A curadoria no nível do catálogo preserva decisão e responsabilidade
-humanas, enquanto a IA oferece evidências, alternativas e projeções. Essa
-separação é coerente com recomendações para interação entre humanos e sistemas
-de IA que enfatizam explicitar capacidades, permitir correção e apoiar o usuário
+2004). Como escolha de governança deste projeto, a decisão final permanece sob
+responsabilidade humana, enquanto a IA oferece evidências, alternativas e
+projeções. No desenho da interação, essa separação é coerente com recomendações
+que enfatizam explicitar capacidades, permitir correção e apoiar o usuário
 quando o sistema estiver incerto (AMERSHI et al., 2019).
 
 ### 3. Modelagem
@@ -332,11 +363,8 @@ base real, dentro da infraestrutura da FGV.
 
 O sistema separa o processamento pesado, executado uma única vez, do uso interativo:
 
-1. **Pipeline offline (HPC):** os Estágios 1 a 6 são executados no nó com GPU
-   NVIDIA A100 por meio do PBS. Os modelos `llama3.3:70b`,
-   `qwen3:30b-a3b-instruct-2507-q4_K_M` e
-   `bge-m3` são servidos localmente pelo Ollama. O fluxo consome os CSVs do Jira
-   e persiste os resultados em JSON.
+1. **Pipeline offline (HPC):** os Estágios 1 a 6 processam os CSVs do Jira no nó
+   com GPU e persistem os resultados em JSON.
 2. **Simulação de triagem:** novos chamados são classificados em tempo real por
    um LLM local, acessado por túnel SSH até o nó com GPU, ou opcionalmente pelo
    Azure OpenAI. Neste último caso, são enviados o texto inserido, o catálogo
@@ -358,26 +386,17 @@ O sistema separa o processamento pesado, executado uma única vez, do uso intera
 | 6. Classificação | LLM | Reclassifica cada chamado histórico no portfólio recomendado, com justificativa e confiança |
 | 7. Finalização curada | curadoria humana e projeção automática | Congela a decisão em `formacao_portfolio/decisao_curada/feedback_portfolio.json`; `materializar_portfolio_curado.py` cria o agregado e `run_stage7_curadoria.py` classifica os chamados sem rótulos manuais |
 
-O princípio central da modelagem estabelece a seguinte sequência: **o LLM
-interpreta e destila cada chamado no Estágio 2; a descoberta agrupa os pedidos
-por intenção no Estágio 3, por estatística ou por LLM; os Estágios 4 a 6
-transformam os grupos em proposta e evidência operacional; a curadoria humana
-consolida o portfólio; e o Estágio 7 projeta automaticamente os chamados no
-catálogo congelado**. O fluxo
-detalhado, incluindo a diferença entre estágio do pipeline e job de execução, está em
-[`docs/FLUXO_COMPLETO_MBA.md`](docs/FLUXO_COMPLETO_MBA.md). Nenhum estágio usa
-TF-IDF ou contagem de termos: as palavras-chave dos grupos são os campos `tema`
-gerados pelo LLM.
+Essa sequência separa interpretação, descoberta, recomendação, decisão humana e
+projeção automática. O [fluxo completo](docs/FLUXO_COMPLETO_MBA.md) também
+distingue estágios do pipeline de jobs de execução. Nenhum estágio usa TF-IDF ou
+contagem de termos: as palavras-chave dos grupos são os campos `tema` gerados
+pelo LLM.
 
-Duas decisões de projeto merecem destaque. A primeira é a separação entre
-recomendação e decisão. O Estágio 5 produz um candidato, enquanto as categorias
-finais, diretrizes e encaminhamentos são registrados em
-`formacao_portfolio/decisao_curada/`. O materializador verifica, de forma
-determinística, se `portfolio_referencia.json` constitui o espelho analítico de
-`feedback_portfolio.json`. A projeção por chamado no Estágio 7 permanece
-automática. A segunda decisão é a resiliência operacional. A sumarização e as
-classificações utilizam pontos de controle vinculados ao conteúdo, e todas as
-chamadas aos modelos passam por novas tentativas controladas e validação de JSON.
+Duas decisões completam a modelagem. O Estágio 5 recomenda; a área decide em
+`formacao_portfolio/decisao_curada/`; e o materializador verifica se
+`portfolio_referencia.json` espelha `feedback_portfolio.json` antes da projeção
+automática. Para resiliência, sumarização e classificação usam pontos de controle
+vinculados ao conteúdo, tentativas controladas e validação de JSON.
 
 #### 3.5 Infraestrutura e privacidade
 
@@ -543,8 +562,11 @@ python dashboard/app.py   # http://localhost:5000
   Estágio 7 e a consolidação do catálogo.
 - As abas **Indicadores** e **Histórico** dependem de `dashboard/runtime/knowledge_base.db`. Qualquer pessoa pode gerar a base artificial com `python scripts/gerar_base_sintetica.py` e, depois, usar `$env:JIRA_DATA_DIR="data_exemplo"; python scripts/knowledge_base.py`. Esses indicadores são demonstrativos; os resultados oficiais são os agregados versionados.
 - A aba **Prévia do Portal** mostra o catálogo proposto. A simulação ao vivo
-  usa Ollama local quando `OLLAMA_MODEL` está definido e Azure OpenAI como
-  fallback; `DASHBOARD_LLM_PROVIDER` permite escolher explicitamente o motor.
+  usa Ollama local quando `OLLAMA_MODEL` está definido. O Azure OpenAI funciona
+  apenas como alternativa opcional quando endpoint e chave são fornecidos
+  localmente e existe um deployment compatível; nenhuma credencial é
+  distribuída no repositório.
+  `DASHBOARD_LLM_PROVIDER` permite escolher explicitamente o motor.
 - A associação entre tempo e interações (seção 4.3) pode rodar sobre a base
   sintética depois que ela for gerada.
 - **Comparação dos dois métodos:** desenho, status, linhagem e execução em
@@ -554,43 +576,51 @@ As instruções completas de instalação e execução estão em [docs/README_TE
 
 #### 4.6 Comparação robusta dos métodos de descoberta
 
-Comparar dois métodos de descoberta admite duas perguntas distintas, e responder
-a uma delas não responde à outra. A primeira é operacional: qual arquitetura
-completa produz o melhor resultado final? A segunda é controlada: mantendo
-constante tudo o que vem antes e depois da descoberta, qual motor adere melhor
-ao portfólio adotado? O estudo mantém os dois resultados separados:
+O estudo preserva dois estimandos:
 
-1. um benchmark descritivo das arquiteturas completas;
-2. uma comparação controlada do Estágio 3, na qual K-means e LLM utilizam o
-   mesmo insumo, os mesmos campos, a mesma interface canônica e os mesmos
-   Estágios 4 a 6.
+1. o benchmark descritivo das arquiteturas completas;
+2. a comparação controlada do Estágio 3, com insumo, campos, interface e
+   Estágios 4 a 6 comuns a K-means e LLM.
 
-A separação é necessária porque, no benchmark, vários componentes mudam ao mesmo
-tempo, e nenhuma diferença observada pode ser atribuída isoladamente a um deles.
+No benchmark, vários componentes mudam ao mesmo tempo; por isso, suas diferenças
+não podem ser atribuídas isoladamente ao motor de descoberta.
 
 Ambos os desenhos partem do mesmo Estágio 2 congelado, com 1.456 chamados,
 produzido após a remoção determinística dos 128 registros descrita na seção 3.2.
 Nenhuma LLM ou texto livre decide o escopo.
 
-A comparação controlada tem três pares de sementes e é confrontada com o
-portfólio curado por uma referência automática produzida por Llama e Qwen em
-quatro visões. A métrica principal dá o
-mesmo peso aos serviços; ARI e outras métricas são secundárias. A regra pode
-concluir superioridade, equivalência, compromisso entre critérios ou resultado
-dependente da camada, sem recorrer a uma nota composta.
+A comparação controlada usa três pares de sementes e uma referência automática
+produzida por Llama e Qwen em quatro visões. A métrica principal dá o mesmo peso
+aos serviços; ARI e outras métricas são secundárias, sem nota composta. Como o
+alvo é o portfólio adotado, a análise mede aderência à decisão da área, não
+acurácia ante uma referência externa independente. O custo dos Estágios 3 a 6 é
+medido separadamente.
 
-O alvo é o portfólio operacional adotado, não uma referência externa
-independente. Assim, a comparação mede aderência à decisão da área e explicita a
-endogeneidade da curadoria. O custo dos Estágios 3 a 6 é medido separadamente.
+O **Macro-F1 por serviço** mede quanto os grupos produzidos recuperam os sete
+serviços substantivos do portfólio. Para cada serviço, o F1 combina precisão
+(quanto do grupo correspondente pertence àquele serviço) e revocação (quanto
+daquele serviço foi recuperado pelo grupo). Em seguida, calcula-se a média dos
+sete F1, dando o mesmo peso a serviços grandes e pequenos; a categoria residual
+fica fora. O resultado varia de 0 a 1, e valores maiores indicam maior aderência.
+Por ser uma média por serviço com melhor correspondência entre grupos, não deve
+ser lido como percentual simples de chamados classificados corretamente.
 
-Os números centrais da comparação controlada são apresentados abaixo; valores
-negativos de Δ favorecem K-means:
+O símbolo **Δ** representa a subtração `Macro-F1 do LLM − Macro-F1 do K-means`.
+Assim, Δ negativo favorece K-means e Δ positivo favorece LLM. A margem prática
+pré-registrada foi 0,03: diferenças de até 0,03 em módulo são tratadas como
+materialmente equivalentes naquele recorte. As sementes são números usados para
+inicializar componentes pseudoaleatórios; o mesmo valor é aplicado aos dois
+métodos em cada par.
 
-| Semente | Δ Macro-F1 (LLM − K-means) | Leitura |
-|---:|---:|---|
-| 42 | -0,124 | K-means |
-| 27.182 | -0,051 | K-means |
-| 31.415 | +0,002 | equivalentes |
+| Semente | Macro-F1 K-means | Macro-F1 LLM | Δ (LLM − K-means) | Leitura pela margem de 0,03 |
+|---:|---:|---:|---:|---|
+| 42 | 0,642 | 0,518 | -0,124 | K-means, por 12,4 pontos de Macro-F1 |
+| 27.182 | 0,611 | 0,560 | -0,051 | K-means, por 5,1 pontos |
+| 31.415 | 0,554 | 0,556 | +0,002 | equivalentes; diferença de 0,2 ponto |
+
+Por exemplo, na semente 42, `0,518 − 0,642 = −0,124`: o sinal negativo mostra
+que o K-means teve o maior Macro-F1, e o módulo indica uma distância de 0,124 na
+escala de 0 a 1, ou 12,4 pontos na escala de 0 a 100.
 
 | Métrica secundária, semente 42 | K-means | LLM | Leitura material |
 |---|---:|---:|---|
@@ -599,6 +629,14 @@ negativos de Δ favorecem K-means:
 | AMI | 0,531 | 0,403 | K-means |
 | Reatribuição mínima | 18,1% | 32,4% | K-means |
 
+Essas métricas respondem a perguntas diferentes. O **B-cubed F1** avalia, por
+chamado, a pureza e a cobertura dos grupos; **ARI** mede a concordância global
+entre pares de chamados, corrigida pelo acaso; **AMI** mede a informação
+compartilhada entre as duas partições, também corrigida pelo acaso. Nessas três,
+valores maiores são melhores. A **reatribuição mínima** estima a menor parcela
+de chamados que precisaria mudar depois de cada grupo predito ser renomeado como
+seu serviço de referência mais frequente; nela, valores menores são melhores.
+
 No custo comparável dos Estágios 3 a 6, as arquiteturas completas consumiram
 2,01 h no caminho estatístico e 4,60 h no agêntico, redução de 56,3%. Entre os
 motores controlados, as medianas foram 1,69 h e 4,41 h, respectivamente,
@@ -606,68 +644,39 @@ redução de 61,6%. As tabelas completas, incluindo intervalos bootstrap,
 energia, tokens e as quatro visões da referência, permanecem no relatório de
 resultados.
 
-**Resultado:** A evidência primária favorece K-means e o custo estatístico, mas o benchmark e a
-comparação controlada produziram resultados dependentes da camada. Portanto,
-não há vencedor global
-único de aderência. A linhagem de tentativas invalidadas está em
-[`docs/APENDICE_TECNICO.md`](docs/APENDICE_TECNICO.md), e as tabelas completas
-estão em [`docs/RESULTADOS_COMPARACAO.md`](docs/RESULTADOS_COMPARACAO.md).
+**Resultado:** A evidência primária e o custo favorecem K-means, mas a
+dependência da camada impede declarar um vencedor global único de aderência.
+Consulte a
+[linhagem das tentativas](docs/APENDICE_TECNICO.md) e as
+[tabelas completas](docs/RESULTADOS_COMPARACAO.md).
 
 #### 4.7 Discussão integrada
 
-Os quatro resultados principais deste trabalho compartilham uma forma. Em cada
-um deles, a evidência automática estabelece algo com firmeza e para diante de
-uma segunda pergunta que não alcança. Percorrê-los por esse eixo mostra onde a
-decisão humana permanece necessária.
+O pipeline transformou chamados históricos em evidência auditável sem exportar
+dados sensíveis, mas não determinou sozinho o portfólio. A área converteu padrões
+de demanda em serviços com responsabilidade, escopo e campos de abertura; só
+então o Estágio 7 projetou o histórico na decisão congelada. Essa sequência liga
+problema, construção e utilidade, como propõe a *design science* (HEVNER et al.,
+2004), e mantém a decisão humana corrigível e explícita (AMERSHI et al., 2019).
 
-O primeiro caso é o mais favorável à automação. Foi possível transformar
-chamados históricos em evidência auditável para redesenhar o catálogo sem
-transferir dados sensíveis para serviços externos. Ainda assim, a descoberta não
-determinou o portfólio sozinha: ela revelou padrões de demanda que a área
-converteu em serviços com responsabilidade, escopo e campos de abertura, e só
-então o Estágio 7 projetou o histórico na decisão congelada. Essa sequência
-materializa o princípio de *design science* de avaliar um artefato pela relação
-entre problema, construção e utilidade (HEVNER et al., 2004).
+Categorias sobrepostas e o uso elevado do item genérico são coerentes com o
+risco de encaminhamento inadequado descrito por Al-Hawari e Barham (2021). A
+projeção de 1,6% do histórico na categoria residual indica cobertura
+retrospectiva mais específica, mas não prova que usuários futuros escolherão os
+novos itens corretamente.
 
-A fronteira aparece com mais nitidez no diagnóstico do catálogo vigente. A
-constatação de categorias sobrepostas e do uso elevado do item genérico é
-coerente com a literatura de classificação de chamados: uma taxonomia ambígua
-pode prejudicar o encaminhamento correto já na abertura (AL-HAWARI; BARHAM,
-2021). A projeção de apenas 1,6% do histórico analítico na categoria residual
-mostra que
-o catálogo curado oferece cobertura retrospectiva mais específica. Esse número,
-entretanto, não prova que usuários futuros escolherão corretamente os novos
-itens; essa hipótese exige acompanhamento após a implantação.
+Na comparação metodológica, K-means apresentou o melhor compromisso entre a
+evidência primária e o custo deste domínio, não superioridade universal. A
+variação entre sementes, camadas e referências confirma que coesão, concordância
+externa e estabilidade medem propriedades distintas (ROUSSEEUW, 1987; LANGE et
+al., 2004; VINH; EPPS; BAILEY, 2010).
 
-Na questão metodológica, a própria evidência recusa a conclusão mais simples.
-K-means recebeu o sinal mais favorável na
-evidência primária e apresentou menor custo, mas sua vantagem não permaneceu
-invariante entre sementes, camadas e referências. A conclusão é compatível com
-a literatura de validação de agrupamentos: coesão, concordância externa e
-estabilidade medem propriedades diferentes e não devem ser substituídas por um
-único indicador (ROUSSEEUW, 1987; LANGE et al., 2004; VINH; EPPS; BAILEY,
-2010). Portanto, o achado não é que um algoritmo seja universalmente superior,
-mas que o motor estatístico oferece o melhor compromisso observado na evidência
-primária e no custo deste domínio.
-
-O resultado que mais tenta o leitor a concluir além do dado é a associação entre
-interações e tempo (seção 4.3). Ela reforça a utilidade operacional de coletar
-campos obrigatórios, mas complexidade, prioridade e disponibilidade da equipe
-podem afetar ao mesmo tempo interações e duração. O projeto usa esse resultado
-para motivar o desenho do formulário, não para prometer redução causal de tempo.
-
-Os quatro casos explicam por que a curadoria humana não é um ajuste posterior.
-Manter a decisão com a área e tornar visíveis justificativa, confiança e
-informações faltantes evita tratar a IA como decisora autônoma, em consonância
-com as recomendações de Amershi et al. (2019).
-
-O padrão sustenta uma conclusão e recusa outra. A automação foi suficiente para
-produzir evidência auditável sobre a demanda: grupos, volumes, sobreposições,
-custo e tempo. Não foi suficiente para produzir a decisão, que depende de
-responsabilidade, governança e visibilidade, critérios ausentes do histórico e
-não inferíveis dele. Permanece aberta a questão de quanto essa fronteira se
-desloca quando o histórico passar a registrar também o que a área decidiu e por
-quê.
+A associação entre interações e duração sustenta a coleta de campos obrigatórios,
+mas não uma promessa causal de redução de tempo, pois complexidade, prioridade e
+disponibilidade da equipe podem afetar ambas. Em síntese, a automação produziu
+grupos, volumes, sobreposições e medidas de custo e tempo; a decisão continuou
+dependente de responsabilidade, governança e visibilidade, critérios ausentes do
+histórico.
 
 #### 4.8 Ameaças à validade
 
@@ -718,70 +727,39 @@ quê.
 
 ### 5. Conclusões
 
-O trabalho demonstrou a viabilidade técnica e institucional do uso de LLMs para
-redesenhar um portfólio de serviços a partir da demanda observada, sem transferir
-dados sensíveis para fora da infraestrutura da organização. Quatro conclusões
-se destacam:
+O trabalho demonstrou a viabilidade técnica e institucional de redesenhar o
+portfólio com LLMs locais e dados históricos protegidos. Quatro conclusões se
+destacam:
 
-1. **Dados qualificam a decisão gerencial no desenho de catálogos.** O portfólio
-   vigente, construído incrementalmente com base na percepção dos gestores,
-   divergia de forma mensurável da estrutura observada nos chamados. A formação
-   inicial identificou 23 grupos, enquanto a comparação final encontrou 29
-   grupos estatísticos e 20 tipos de requisição pelo Método Agêntico, diante de
-   18 categorias vigentes. O portfólio final converte essa evidência em sete
-   serviços com escopos mais claros, uma categoria residual e Sala de Sigilo
-   como encaminhamento fixo. A projeção automática posterior do Estágio 7
-   atribuiu 1,6% do histórico analítico à categoria residual. A participação
-   futura em produção deverá ser medida após a implantação.
-2. **Modelos de linguagem abertos e locais mostraram-se viáveis.** Os modelos
-   `llama3.3:70b` e `qwen3:30b-a3b-instruct-2507-q4_K_M`, empregados
-   respectivamente nas tarefas de
-   raciocínio e de geração de JSON, foram executados em uma GPU A100 e
-   sustentaram as etapas semânticas de sumarização, rotulação, diagnóstico e
-   classificação. O processamento offline exigiu poucas horas, duração
-   compatível com uma análise de periodicidade eventual.
-3. **A curadoria humana é parte do método, não um ajuste posterior.** A
-   separação entre recomendação automática e decisão de negócio, registrada em
-   `formacao_portfolio/decisao_curada/feedback_portfolio.json`, tornou o
-   resultado operacionalmente adotável. A área preserva serviços por critérios
-   de responsabilidade, governança e visibilidade, inclusive quando o volume é
-   reduzido. Sala de Sigilo é um encaminhamento fixo e não participa da
-   comparação.
-4. **A comparação metodológica precisa separar aderência, robustez e custo.** O
-   protocolo não seleciona um vencedor com base em uma única métrica. Serviços,
-   sementes, referências e camadas são confrontados, enquanto o custo é medido
-   separadamente. A evidência primária favorece K-means, mas a sensibilidade à
-   camada impede declarar um vencedor global único.
+1. **Dados qualificam a decisão gerencial.** Os 18 itens vigentes não refletiam
+   toda a estrutura observada nos chamados. A curadoria converteu essa evidência
+   em sete serviços, uma categoria residual e Sala de Sigilo como encaminhamento
+   fixo; o Estágio 7 projetou 1,6% do histórico na categoria residual, proporção
+   que ainda precisa ser medida em produção.
+2. **Modelos abertos e locais são viáveis neste contexto.** `llama3.3:70b` e
+   `qwen3:30b-a3b-instruct-2507-q4_K_M` foram executados na A100 e sustentaram
+   as etapas semânticas em duração compatível com análises periódicas.
+3. **A curadoria humana é parte do método.** A separação entre recomendação e
+   decisão permite considerar responsabilidade, governança e visibilidade, não
+   apenas volume. Sala de Sigilo permanece fixa e fora da comparação.
+4. **A comparação deve separar aderência, robustez e custo.** A evidência
+   primária e o custo favorecem K-means, mas a sensibilidade à camada impede
+   declarar vencedor global único.
 
-Cada limitação identificada aponta para um teste que este trabalho não pôde
-executar. O Método Estatístico produz grupos disjuntos e depende da escolha de
-um valor de K, enquanto o Método Agêntico apresenta maior consumo de tokens. A
-análise de tempo mede associação, e não causalidade; uma avaliação causal
-exigiria, por exemplo, a comparação de coortes anteriores e posteriores à adoção
-do novo portal. A validação abrange um único domínio, o de serviços de
-tecnologia para pesquisa, e apenas a replicação em outras áreas de atendimento
-da instituição separaria o que pertence ao método do que pertence a esta demanda
-específica.
-
-A continuidade recomendada é medir a adoção em produção, acompanhar o uso do
-item genérico e a taxa de resolução direta e reexecutar periodicamente o
-pipeline para detectar mudanças na demanda. Essa medição responde à pergunta que
-o trabalho deixa aberta: um catálogo desenhado a partir do que os usuários
-pediram é, de fato, mais fácil de usar do que um catálogo desenhado a partir da
-percepção de quem opera o serviço. O histórico permitiu formular a hipótese.
-Apenas a produção pode testá-la.
+As limitações da seção 4.8 orientam os próximos testes: comparar coortes antes e
+depois da implantação, replicar o estudo em outros domínios e monitorar adoção,
+uso do item genérico e resolução direta. Só a operação poderá mostrar se o
+catálogo baseado na demanda histórica é mais fácil de usar e quando o pipeline
+deve ser reexecutado para captar mudanças nessa demanda.
 
 ### 6. Transparência sobre uso de IA
 
-Modelos locais foram parte do objeto técnico da pesquisa e executaram as etapas
-semânticas descritas no método. Claude e Codex também foram utilizados como
-apoio editorial e de engenharia na revisão de código, documentação, testes e
-clareza da redação. Esse apoio não substituiu a curadoria, a interpretação dos
-resultados. Porém, as decisões, verificações e
-conclusões foram revistas pelo autor. O uso editorial incidiu sobre código,
-documentação e resultados agregados; os textos históricos dos chamados não
-foram enviados a esses serviços externos. A declaração deve ser lida em
-conjunto com as regras institucionais e acadêmicas aplicáveis à entrega.
+Modelos locais integram o objeto técnico da pesquisa e executaram as etapas
+semânticas descritas no método. Ferramentas de IA generativa foram utilizadas
+exclusivamente como apoio à revisão de código, documentação e redação. Todas as
+decisões metodológicas, interpretações, verificações e conclusões são de
+responsabilidade exclusiva do autor. Nenhum texto histórico de chamado foi
+enviado a esses serviços externos.
 
 ### 7. Referências
 
@@ -794,6 +772,9 @@ AMERSHI, S. et al. Guidelines for human-AI interaction. In: *CHI Conference on
 Human Factors in Computing Systems Proceedings*. New York: ACM, 2019. p. 1–13.
 [https://doi.org/10.1145/3290605.3300233](https://doi.org/10.1145/3290605.3300233).
 
+AXELOS. *ITIL Foundation: ITIL 4 Edition*. Norwich: The Stationery Office,
+2019. ISBN 978-0-11-331607-6.
+
 BAGGA, A.; BALDWIN, B. Entity-based cross-document coreferencing using the
 vector space model. In: *Proceedings of COLING-ACL 1998*. Montreal: Association
 for Computational Linguistics, 1998. p. 79–85.
@@ -804,6 +785,12 @@ multi-granularity text embeddings through self-knowledge distillation. In:
 *Findings of the Association for Computational Linguistics: ACL 2024*.
 Bangkok: Association for Computational Linguistics, 2024. p. 2318–2335.
 [https://doi.org/10.18653/v1/2024.findings-acl.137](https://doi.org/10.18653/v1/2024.findings-acl.137).
+
+DE RAEDT, M.; GODIN, F.; DEMEESTER, T.; DEVELDER, C. IDAS: intent discovery
+with abstractive summarization. In: *Proceedings of the 5th Workshop on NLP for
+Conversational AI*. Toronto: Association for Computational Linguistics, 2023.
+p. 71–88.
+[https://doi.org/10.18653/v1/2023.nlp4convai-1.7](https://doi.org/10.18653/v1/2023.nlp4convai-1.7).
 
 HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information
 systems research. *MIS Quarterly*, v. 28, n. 1, p. 75–105, 2004.

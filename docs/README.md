@@ -14,7 +14,7 @@ e as evidências sem duplicar essa narrativa.
 1. `MANUAL_DO_PROJETO.md`: visão formal, arquitetura e desenho;
 2. `RESULTADOS_COMPARACAO.md`: medições e conclusão;
 3. `FLUXO_COMPLETO_MBA.md`: fluxo técnico de ponta a ponta;
-4. `00_LEIA_PRIMEIRO_IA.md`: síntese do estado vigente;
+4. `RESUMO_EXECUTIVO.md`: síntese do estado vigente;
 5. `ESTADO_COMPARACAO_ROBUSTA.json`: estado estruturado;
 6. `AUDITORIA_COERENCIA_PROJETO.md`: confronto entre história, scripts,
    alvos e resultados;

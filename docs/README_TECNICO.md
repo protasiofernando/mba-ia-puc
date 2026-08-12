@@ -1,7 +1,7 @@
 # Guia técnico vigente
 
 Uma síntese do estado vigente está disponível em
-`docs/00_LEIA_PRIMEIRO_IA.md`. O índice completo da documentação encontra-se em
+`docs/RESUMO_EXECUTIVO.md`. O índice completo da documentação encontra-se em
 `docs/README.md`.
 
 A descrição integral do fluxo está em `docs/FLUXO_COMPLETO_MBA.md`. Este guia

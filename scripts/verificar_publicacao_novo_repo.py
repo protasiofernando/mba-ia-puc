@@ -35,7 +35,7 @@ ESSENTIAL = (
     "configuracao/config_portfolio.json",
     "configuracao/contexto_catalogo.md",
     "configuracao/projeto.json",
-    "docs/00_LEIA_PRIMEIRO_IA.md",
+    "docs/RESUMO_EXECUTIVO.md",
     "docs/MANUAL_DO_PROJETO.md",
     "docs/FLUXO_COMPLETO_MBA.md",
     "docs/RESULTADOS_COMPARACAO.md",

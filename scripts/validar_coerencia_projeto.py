@@ -607,7 +607,7 @@ def _check_narrative(audit: Audit) -> None:
         and "requirements-dev.txt" in quality_workflow
         and "fetch-depth: 0" in quality_workflow,
     )
-    publication_note = _text("docs/00_LEIA_PRIMEIRO_IA.md").lower()
+    publication_note = _text("docs/RESUMO_EXECUTIVO.md").lower()
     audit.check(
         "narrative.git_publication_recorded",
         "protasiofernando/mba-ia-puc" in publication_note

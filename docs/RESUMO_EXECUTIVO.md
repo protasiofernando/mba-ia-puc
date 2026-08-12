@@ -1,4 +1,4 @@
-# Estado resumido do projeto
+# Resumo executivo do projeto
 
 Este documento apresenta uma síntese do projeto `mba-ia-masterbi-puc`. O
 experimento está concluído e não há execução pendente. Uma nova execução somente
